@@ -12,7 +12,7 @@ import { AlertCircle, CheckCircle } from "lucide-react";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
-  email: z.email("Invalid email"),
+  email: z.string().email("Invalid email"),
   company: z.string().min(2, "Company name is required"),
   message: z.string().min(10, "Message must be at least 10 characters"),
   honeypot: z.string().optional(),

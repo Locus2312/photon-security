@@ -15,7 +15,7 @@ const quoteSchema = z.object({
   scope: z.string().optional(),
   assets: z.string().optional(),
   timeline: z.string().optional(),
-  email: z.email("Invalid email").optional(),
+  email: z.string().email("Invalid email").optional(),
 });
 
 type QuoteFormData = z.infer<typeof quoteSchema>;

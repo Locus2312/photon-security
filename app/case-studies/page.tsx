@@ -3,7 +3,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Link } from "next/link";
+import Link  from "next/link";
 import { ArrowRight, TrendingUp } from "lucide-react";
 import type { Metadata } from "next";
 
