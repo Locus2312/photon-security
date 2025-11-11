@@ -11,7 +11,23 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-const caseStudyDetails: Record<string, unknown> = {
+// Define the case study type
+type CaseStudy = {
+  title: string;
+  industry: string;
+  tags: string[];
+  challenge: string;
+  approach: string[];
+  findings: string;
+  remediation: string;
+  outcome: string[];
+  testimonial: {
+    text: string;
+    author: string;
+  };
+};
+
+const caseStudyDetails: Record<string, CaseStudy> = {
   "bfsi-api-audit": {
     title: "Comprehensive API Security Audit for Leading Bank",
     industry: "BFSI",

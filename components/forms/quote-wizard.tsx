@@ -19,8 +19,18 @@ const quoteSchema = z.object({
 });
 
 type QuoteFormData = z.infer<typeof quoteSchema>;
+type FormFieldKey = keyof Omit<QuoteFormData, "step">;
 
-const steps = [
+type Step = {
+  title: string;
+  description: string;
+  key: FormFieldKey;
+  options?: { label: string; value: string }[];
+  isInput?: boolean;
+  inputType?: string;
+};
+
+const steps: Step[] = [
   {
     title: "Company Size",
     description: "How many employees does your organization have?",
