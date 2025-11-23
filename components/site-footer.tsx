@@ -10,7 +10,7 @@ export function SiteFooter() {
           <div className="col-span-1">
             <h3 className="font-mono font-bold text-lg mb-2">{BRAND.name}</h3>
             <p className="text-sm text-foreground/60 mb-4">{BRAND.tagline}</p>
-            <p className="text-xs text-foreground/50">Bangalore, India</p>
+            <p className="text-xs text-foreground/50">GIFT City, India</p>
           </div>
 
           {/* Quick Links */}
@@ -51,9 +51,9 @@ export function SiteFooter() {
           <div>
             <h4 className="font-semibold text-sm mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li className="text-foreground/60">hello@photonsecurity.com</li>
-              <li className="text-foreground/60">+91 1234 567 890</li>
-              <li className="text-foreground/60">Bangalore, India</li>
+              <li className="text-foreground/60">vrajresearch7664@gmail.com</li>
+              <li className="text-foreground/60">+91 957473 7506</li>
+              <li className="text-foreground/60">GIFT City, India</li>
             </ul>
           </div>
         </div>

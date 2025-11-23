@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/site-header";
+import { Navbar } from "@/components/navbar";
 import { SiteFooter } from "@/components/site-footer";
 import type { Metadata } from "next";
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <SiteHeader />
+      <Navbar />
       <main className="flex flex-col min-h-screen">
         <article className="container max-w-4xl mx-auto px-4 py-20 prose prose-invert">
           <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>

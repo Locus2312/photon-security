@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/site-header";
+import { Navbar } from "@/components/navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { ServiceDetailView } from "@/components/services/service-detail-view";
 import { servicesData, getServiceBySlug } from "@/lib/services-data";
@@ -38,7 +38,7 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   return (
     <>
-      <SiteHeader />
+      <Navbar />
       <main className="flex flex-col min-h-screen">
         <ServiceDetailView service={service} />
       </main>

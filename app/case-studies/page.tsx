@@ -1,9 +1,9 @@
-import { SiteHeader } from "@/components/site-header";
+import { Navbar } from "@/components/navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import Link  from "next/link";
+import Link from "next/link";
 import { ArrowRight, TrendingUp } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -52,7 +52,7 @@ const caseStudies = [
 export default function CaseStudiesPage() {
   return (
     <>
-      <SiteHeader />
+      <Navbar />
       <main className="flex flex-col min-h-screen pt-8">
         <section className="w-full py-16 md:py-24 border-b border-border/40">
           <div className="container max-w-7xl mx-auto px-4">

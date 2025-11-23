@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/site-header";
+import { Navbar } from "@/components/navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { QuoteWizard } from "@/components/forms/quote-wizard";
 import type { Metadata } from "next";
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function QuotePage() {
   return (
     <>
-      <SiteHeader />
+      <Navbar />
       <main className="flex flex-col min-h-screen pt-8">
         <div className="container max-w-4xl mx-auto px-4 mb-12">
           <div className="text-center">

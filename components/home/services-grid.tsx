@@ -24,7 +24,7 @@ export function ServicesGrid() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {servicesData.map((category) => (
-            <Link key={category.id} href={`/services/${category.id}`}>
+            <Link key={category.id} href={`/services#${category.id}`}>
               <Card className="h-full glass hover:border-primary/50 transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-primary/20">
                 <CardHeader>
                   <Badge variant="secondary" className="w-fit">

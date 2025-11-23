@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BRAND, NAVIGATION } from "@/lib/constants";
 
-export function SiteHeader() {
+export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (

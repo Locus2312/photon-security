@@ -14,8 +14,8 @@ export const NAVIGATION = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Compliance", href: "/compliance" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Resources", href: "/resources" },
+// { label: "Case Studies", href: "/case-studies" },
+//  { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;

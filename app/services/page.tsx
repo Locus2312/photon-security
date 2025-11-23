@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/site-header";
+import { Navbar } from "@/components/navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { ServicesCategoryGrid } from "@/components/services/services-category-grid";
 import { servicesData } from "@/lib/services-data";
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      <SiteHeader />
+      <Navbar />
       <main className="flex flex-col min-h-screen pt-8">
         <div className="container max-w-7xl mx-auto px-4 mb-16">
           <div className="max-w-3xl mx-auto text-center">
@@ -29,7 +29,9 @@ export default function ServicesPage() {
 
         <div className="space-y-24 pb-20">
           {servicesData.map((category) => (
-            <ServicesCategoryGrid key={category.id} category={category} />
+            <section id={category.id} key={category.id}>
+              <ServicesCategoryGrid category={category} />
+            </section>
           ))}
         </div>
       </main>

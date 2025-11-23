@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/site-header";
+import { Navbar } from "@/components/navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { ContactForm } from "@/components/forms/contact-form";
 import { Card } from "@/components/ui/card";
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <SiteHeader />
+      <Navbar />
       <main className="flex flex-col min-h-screen pt-8">
         <section className="w-full py-16 md:py-24 border-b border-border/40">
           <div className="container max-w-7xl mx-auto px-4">
@@ -37,19 +37,19 @@ export default function ContactPage() {
               <Card className="glass p-6 flex flex-col items-center text-center">
                 <Mail className="text-primary mb-4" size={32} />
                 <h3 className="font-bold text-lg mb-2">Email</h3>
-                <p className="text-foreground/70">hello@photonsecurity.com</p>
+                <p className="text-foreground/70">vrajresearch7664@gmail.com</p>
               </Card>
 
               <Card className="glass p-6 flex flex-col items-center text-center">
                 <Phone className="text-primary mb-4" size={32} />
                 <h3 className="font-bold text-lg mb-2">Phone & WhatsApp</h3>
-                <p className="text-foreground/70">+91 1234 567 890</p>
+                <p className="text-foreground/70">+91 95747 37506</p>
               </Card>
 
               <Card className="glass p-6 flex flex-col items-center text-center">
                 <MapPin className="text-primary mb-4" size={32} />
                 <h3 className="font-bold text-lg mb-2">Office</h3>
-                <p className="text-foreground/70">Bangalore, India</p>
+                <p className="text-foreground/70">GIFT City, India</p>
               </Card>
             </div>
 

@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/site-header";
+import { Navbar } from "@/components/navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -90,7 +90,7 @@ export default function CompliancePage() {
 
   return (
     <>
-      <SiteHeader />
+      <Navbar />
       <main className="flex flex-col min-h-screen pt-8">
         <section className="w-full py-16 md:py-24 border-b border-border/40">
           <div className="container max-w-7xl mx-auto px-4">
@@ -122,7 +122,7 @@ export default function CompliancePage() {
                         {framework.name}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="flex-grow">
+                    <CardContent className="grow">
                       <p className="text-foreground/70 mb-4">
                         {framework.description}
                       </p>

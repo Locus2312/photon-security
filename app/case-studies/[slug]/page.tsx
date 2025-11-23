@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/site-header";
+import { Navbar } from "@/components/navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -152,7 +152,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
 
   return (
     <>
-      <SiteHeader />
+      <Navbar />
       <main className="flex flex-col min-h-screen">
         {/* Hero */}
         <section className="w-full py-16 md:py-24 border-b border-border/40">

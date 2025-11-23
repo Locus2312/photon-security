@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/site-header";
+import { Navbar } from "@/components/navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Learn about Photon Security, our mission, values, and leadership team.",
 };
 
-export default function AboutPage() {                                                                                                                                                                                                               
+export default function AboutPage() {
   const values = [
     {
       icon: Lightbulb,
@@ -37,25 +37,25 @@ export default function AboutPage() {
 
   const leaders = [
     {
-      name: "Rajesh Kumar",
-      role: "Founder & Chief Security Officer",
-      bio: "15+ years in cybersecurity, former CISO at major tech company.",
+      name: "Vraj Patel",
+      role: "Director",
+      bio: "1+ years in cybersecurity, former CISO at major tech company.",
     },
     {
-      name: "Priya Sharma",
-      role: "VP Engineering",
-      bio: "12 years building secure systems, AWS certified security specialist.",
+      name: "RP Kania",
+      role: "Director",
+      bio: "1+ years building secure systems, AWS certified security specialist.",
     },
     {
-      name: "Anil Desai",
-      role: "VP Compliance & Audits",
-      bio: "10 years in security audits, ISO 27001 lead auditor certified.",
+      name: "Het Patel",
+      role: "Director",
+      bio: "1+ years in security audits, ISO 27001 lead auditor certified.",
     },
   ];
 
   return (
     <>
-      <SiteHeader />
+      <Navbar />
       <main className="flex flex-col min-h-screen">
         {/* Hero */}
         <section className="w-full py-16 md:py-24 border-b border-border/40">
