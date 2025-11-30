@@ -107,6 +107,7 @@
 @theme inline {
   --font-sans: "Inter", "Inter Fallback", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
+  --font-farray: var(--font-farray);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -160,6 +161,7 @@
   body {
     @apply bg-background text-foreground;
   }
+
 
   /* Add glassmorphism and base animations */
   .glass {

@@ -15,7 +15,7 @@ export function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="font-mono font-bold text-xl tracking-tight hover:text-primary transition-colors"
+          className="font-farray font-bold text-xl tracking-tight hover:text-primary transition-colors"
         >
           {BRAND.name}
         </Link>
