@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/navbar";
-import { SiteFooter } from "@/components/site-footer";
+import { Footer } from "@/components/footer";
 import { HeroSection } from "@/components/home/hero-section";
 import { TrustBar } from "@/components/home/trust-bar";
 import { ServicesGrid } from "@/components/home/services-grid";
@@ -26,7 +26,7 @@ export default function Home() {
         <FaqAccordion />
         <LeadCaptureBanner />
       </main>
-      <SiteFooter />
+      <Footer />
     </>
   );
 }

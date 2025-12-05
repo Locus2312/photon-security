@@ -1,27 +1,56 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BRAND, NAVIGATION } from "@/lib/constants";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const current = window.scrollY;
+
+      if (current > lastScrollY && current > 80) {
+        setShowNavbar(false);
+      } 
+      else {
+        setShowNavbar(true);
+      }
+
+      setLastScrollY(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 glass">
+    <header
+      className={`
+        sticky top-0 z-50 w-full border-b border-border/40 glass
+        transition-transform duration-300 ease-in-out
+        ${showNavbar ? "translate-y-0" : "-translate-y-full"}
+      `}
+    >
       <nav className="container max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="font-farray font-bold text-xl tracking-tight hover:text-primary transition-colors"
-        >
-          {BRAND.name}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="Photon Security Logo"
+            width={150}        
+            height={60}
+            className="h-auto w-auto"
+            priority           
+          />
         </Link>
-
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        
+                <div className="hidden md:flex items-center gap-8">
           {NAVIGATION.map((item) => (
             <Link
               key={item.href}
@@ -64,11 +93,7 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border/40">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full bg-transparent"
-                >
+                <Button variant="outline" size="sm" className="w-full bg-transparent">
                   Book Consultation
                 </Button>
                 <Button size="sm" className="w-full">
@@ -82,3 +107,4 @@ export function Navbar() {
     </header>
   );
 }
+
