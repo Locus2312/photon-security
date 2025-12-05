@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/site-footer";
+import { Footer } from "@/components/footer";
 import { ContactForm } from "@/components/forms/contact-form";
 import { Card } from "@/components/ui/card";
 import { Phone, Mail, MapPin } from "lucide-react";

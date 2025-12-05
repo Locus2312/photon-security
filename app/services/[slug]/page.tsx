@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/site-footer";
+import { Footer } from "@/components/footer";
 import { ServiceDetailView } from "@/components/services/service-detail-view";
 import { servicesData, getServiceBySlug } from "@/lib/services-data";
 import { notFound } from "next/navigation";

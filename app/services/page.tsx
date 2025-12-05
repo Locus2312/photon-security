@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/site-footer";
+import { Footer } from "@/components/footer";
 import { ServicesCategoryGrid } from "@/components/services/services-category-grid";
 import { servicesData } from "@/lib/services-data";
 import type { Metadata } from "next";
