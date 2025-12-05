@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/navbar";
-import { SiteFooter } from "@/components/site-footer";
+import { Footer } from "@/components/site-footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
@@ -303,7 +303,7 @@ export default async function JobDetailPage({ params }: Props) {
           </div>
         </section>
       </main>
-      <SiteFooter />
+      <Footer />
     </>
   );
 }

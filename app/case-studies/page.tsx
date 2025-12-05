@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/navbar";
-import { SiteFooter } from "@/components/site-footer";
+import { Footer } from "@/components/site-footer";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -137,7 +137,7 @@ export default function CaseStudiesPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
+      <Footer />
     </>
   );
 }

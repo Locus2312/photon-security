@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/navbar";
-import { SiteFooter } from "@/components/site-footer";
+import { Footer } from "@/components/site-footer";
 import { ServicesCategoryGrid } from "@/components/services/services-category-grid";
 import { servicesData } from "@/lib/services-data";
 import type { Metadata } from "next";
@@ -35,7 +35,7 @@ export default function ServicesPage() {
           ))}
         </div>
       </main>
-      <SiteFooter />
+      <Footer />
     </>
   );
 }

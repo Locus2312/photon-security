@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/navbar";
-import { SiteFooter } from "@/components/site-footer";
+import { Footer } from "@/components/site-footer";
 import { QuoteWizard } from "@/components/forms/quote-wizard";
 import type { Metadata } from "next";
 
@@ -30,7 +30,7 @@ export default function QuotePage() {
           <QuoteWizard />
         </div>
       </main>
-      <SiteFooter />
+      <Footer />
     </>
   );
 }

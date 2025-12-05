@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/navbar";
-import { SiteFooter } from "@/components/site-footer";
+import { Footer } from "@/components/site-footer";
 import { ContactForm } from "@/components/forms/contact-form";
 import { Card } from "@/components/ui/card";
 import { Phone, Mail, MapPin } from "lucide-react";
@@ -70,7 +70,7 @@ export default function ContactPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
+      <Footer />
     </>
   );
 }
