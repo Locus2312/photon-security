@@ -1,11 +1,15 @@
 "use client";
 
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { ContactForm } from "@/components/forms/contact-form";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 export default function ContactPage() {
   return (
+    <>
+    <Navbar />
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative py-20 px-4 bg-gradient-to-br from-primary/10 via-background to-background">
@@ -141,5 +145,7 @@ export default function ContactPage() {
         </div>
       </section>
     </div>
+    <Footer />
+    </>
   );
 }
