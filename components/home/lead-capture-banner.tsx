@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
+import Link from "next/link";
 
 export function LeadCaptureBanner() {
   const [dismissed, setDismissed] = useState(false);
@@ -24,9 +25,11 @@ export function LeadCaptureBanner() {
         <p className="text-sm text-foreground/70 mb-4">
           Free 30-minute consultation with our security experts.
         </p>
-        <Button size="sm" className="w-full">
-          Schedule Now
-        </Button>
+        <Link href = "/contact">
+          <Button size="sm" className="w-full">
+            Schedule Now
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -58,7 +58,7 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-sm mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li className="text-foreground/60">vrajresearch7664@gmail.com</li>
+              <li className="text-foreground/60">admin@photonsecurity.in</li>
               <li className="text-foreground/60">+91 957473 7506</li>
               <li className="text-foreground/60">GIFT City, India</li>
             </ul>

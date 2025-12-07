@@ -1,76 +1,145 @@
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { ContactForm } from "@/components/forms/contact-form";
-import { Card } from "@/components/ui/card";
-import { Phone, Mail, MapPin } from "lucide-react";
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Photon Security",
-  description:
-    "Get in touch with our security experts. Available in Bangalore, serving Indian enterprises.",
-};
+import { ContactForm } from "@/components/forms/contact-form";
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 export default function ContactPage() {
   return (
-    <>
-      <Navbar />
-      <main className="flex flex-col min-h-screen pt-8">
-        <section className="w-full py-16 md:py-24 border-b border-border/40">
-          <div className="container max-w-7xl mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Get in Touch
-              </h1>
-              <p className="text-xl text-foreground/70">
-                Our security experts are ready to help. Reach out via email,
-                phone, or WhatsApp.
-              </p>
-            </div>
-          </div>
-        </section>
+    <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <section className="relative py-20 px-4 bg-gradient-to-br from-primary/10 via-background to-background">
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            Get in Touch
+          </h1>
+          <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+            Ready to secure your business? Contact us today for a free
+            consultation.
+          </p>
+        </div>
+      </section>
 
-        <section className="w-full py-20">
-          <div className="container max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-              {/* Contact Info Cards */}
-              <Card className="glass p-6 flex flex-col items-center text-center">
-                <Mail className="text-primary mb-4" size={32} />
-                <h3 className="font-bold text-lg mb-2">Email</h3>
-                <p className="text-foreground/70">vrajresearch7664@gmail.com</p>
-              </Card>
-
-              <Card className="glass p-6 flex flex-col items-center text-center">
-                <Phone className="text-primary mb-4" size={32} />
-                <h3 className="font-bold text-lg mb-2">Phone & WhatsApp</h3>
-                <p className="text-foreground/70">+91 95747 37506</p>
-              </Card>
-
-              <Card className="glass p-6 flex flex-col items-center text-center">
-                <MapPin className="text-primary mb-4" size={32} />
-                <h3 className="font-bold text-lg mb-2">Office</h3>
-                <p className="text-foreground/70">GIFT City, India</p>
-              </Card>
-            </div>
-
+      {/* Contact Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div className="max-w-2xl mx-auto">
+            <div>
+              <h2 className="text-3xl font-bold mb-6">Send us a Message</h2>
+              <p className="text-foreground/70 mb-8">
+                Fill out the form below and we'll get back to you within 24
+                hours.
+              </p>
               <ContactForm />
             </div>
-          </div>
-        </section>
 
-        <section className="w-full py-20 bg-card/20 border-t border-border/40">
-          <div className="container max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-2xl font-bold mb-4">Response Time</h2>
-            <p className="text-lg text-foreground/70">
-              We typically respond to inquiries within 24 hours during business
-              days.
-            </p>
+            {/* Contact Information */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-3xl font-bold mb-6">Contact Information</h2>
+                <p className="text-foreground/70 mb-8">
+                  Reach out to us through any of these channels.
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                <Card className="glass p-6 hover:border-primary/50 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-primary/10 rounded-lg">
+                      <Mail className="text-primary" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg mb-1">Email</h3>
+                      <a
+                        href="mailto:admin@photonsecurity.in"
+                        className="text-foreground/70 hover:text-primary transition-colors"
+                      >
+                        admin@photonsecurity.in
+                      </a>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="glass p-6 hover:border-primary/50 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-primary/10 rounded-lg">
+                      <Phone className="text-primary" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg mb-1">Phone</h3>
+                      <a
+                        href="tel:+919876543210"
+                        className="text-foreground/70 hover:text-primary transition-colors"
+                      >
+                        +91 98765 43210
+                      </a>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="glass p-6 hover:border-primary/50 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-primary/10 rounded-lg">
+                      <MapPin className="text-primary" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg mb-1">Location</h3>
+                      <p className="text-foreground/70">
+                        Surat, Gujarat, India
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="glass p-6 hover:border-primary/50 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-primary/10 rounded-lg">
+                      <Clock className="text-primary" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg mb-1">
+                        Business Hours
+                      </h3>
+                      <p className="text-foreground/70">
+                        Monday - Friday: 9:00 AM - 6:00 PM IST
+                      </p>
+                      <p className="text-foreground/70">
+                        Saturday: 10:00 AM - 4:00 PM IST
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+
+              {/* Map or Additional Info */}
+              <Card className="glass p-6 bg-gradient-to-br from-primary/5 to-transparent">
+                <h3 className="font-semibold text-lg mb-3">
+                  Why Choose Photon Security?
+                </h3>
+                <ul className="space-y-2 text-foreground/70">
+                  <li className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                    24/7 Emergency Response
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                    Certified Security Professionals
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                    Custom Security Solutions
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                    Proven Track Record
+                  </li>
+                </ul>
+              </Card>
+            </div>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+        </div>
+      </section>
+    </div>
   );
 }

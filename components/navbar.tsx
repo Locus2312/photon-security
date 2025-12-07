@@ -64,10 +64,14 @@ export function Navbar() {
 
         {/* CTA Buttons */}
         <div className="hidden md:flex items-center gap-3">
+        <Link href = "/contact">
           <Button variant="outline" size="sm">
             Book Consultation
           </Button>
+        </Link>
+        <Link href = "/contact">
           <Button size="sm">Request Audit</Button>
+        </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -93,12 +97,16 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border/40">
+              <Link href = "/contact">
                 <Button variant="outline" size="sm" className="w-full bg-transparent">
                   Book Consultation
                 </Button>
+              </Link>
+              <Link href = "/contact">
                 <Button size="sm" className="w-full">
                   Request Audit
                 </Button>
+              </Link>
               </div>
             </div>
           </div>

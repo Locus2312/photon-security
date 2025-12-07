@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { BRAND } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
+import Link  from "next/link";
 
 export function HeroSection() {
   return (
@@ -30,9 +31,12 @@ export function HeroSection() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <Link href = "/contact">
             <Button size="lg" className="w-full sm:w-auto gap-2">
               Request Audit <ArrowRight size={18} />
             </Button>
+          </Link>
+          <Link href = "/contact">
             <Button
               size="lg"
               variant="outline"
@@ -40,6 +44,7 @@ export function HeroSection() {
             >
               Book Consultation
             </Button>
+          </Link>
           </div>
 
           <p className="text-sm text-foreground/50 pt-4">
