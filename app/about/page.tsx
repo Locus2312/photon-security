@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, Lightbulb, Heart, Target } from "lucide-react";
@@ -55,7 +53,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <Navbar />
       <main className="flex flex-col min-h-screen">
         {/* Hero */}
         <section className="w-full py-16 md:py-24 border-b border-border/40">
@@ -129,7 +126,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {leaders.map((leader, idx) => (
                 <Card key={idx} className="glass p-8 text-center">
-                  <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full flex items-center justify-center">
+                  <div className="w-24 h-24 mx-auto mb-4 bg-linear-to-br from-primary/30 to-secondary/30 rounded-full flex items-center justify-center">
                     <Users className="text-primary" size={40} />
                   </div>
                   <h3 className="text-xl font-bold mb-1">{leader.name}</h3>
@@ -157,7 +154,6 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

@@ -21,7 +21,7 @@ export function CaseStudyCard() {
         <Link href="/case-studies">
           <Card className="glass max-w-3xl mx-auto hover:border-primary/50 transition-all cursor-pointer overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-              <div className="bg-gradient-to-br from-primary/20 to-secondary/20 p-8 flex items-center justify-center min-h-80 md:min-h-auto">
+              <div className="bg-linear-to-br from-primary/20 to-secondary/20 p-8 flex items-center justify-center min-h-80 md:min-h-auto">
                 <div className="text-center">
                   <TrendingUp size={48} className="text-primary mx-auto mb-4" />
                   <p className="text-sm text-foreground/60">

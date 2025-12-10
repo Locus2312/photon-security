@@ -66,7 +66,7 @@ export function ContactForm() {
       {/* Success State */}
       {submitted && (
         <Card className="glass border-primary/50 bg-primary/5 p-6 flex gap-4">
-          <CheckCircle className="text-primary flex-shrink-0" size={24} />
+          <CheckCircle className="text-primary shrink-0" size={24} />
           <div>
             <h3 className="font-bold text-lg">Message Sent!</h3>
             <p className="text-foreground/70">
@@ -79,7 +79,7 @@ export function ContactForm() {
       {/* Error State */}
       {error && (
         <Card className="glass border-destructive/50 bg-destructive/5 p-6 flex gap-4">
-          <AlertCircle className="text-destructive flex-shrink-0" size={24} />
+          <AlertCircle className="text-destructive shrink-0" size={24} />
           <div>
             <h3 className="font-bold text-lg">Error</h3>
             <p className="text-foreground/70">{error}</p>

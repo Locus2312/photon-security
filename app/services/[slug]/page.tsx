@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { ServiceDetailView } from "@/components/services/service-detail-view";
 import { servicesData, getServiceBySlug } from "@/lib/services-data";
 import { notFound } from "next/navigation";
@@ -38,11 +36,9 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   return (
     <>
-      <Navbar />
       <main className="flex flex-col min-h-screen">
         <ServiceDetailView service={service} />
       </main>
-      <Footer />
     </>
   );
 }

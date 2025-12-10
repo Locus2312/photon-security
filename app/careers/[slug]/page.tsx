@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
@@ -230,7 +228,6 @@ export default async function JobDetailPage({ params }: Props) {
 
   return (
     <>
-      <Navbar />
       <main className="flex flex-col min-h-screen">
         {/* Header */}
         <section className="w-full py-16 md:py-24 border-b border-border/40">
@@ -303,7 +300,6 @@ export default async function JobDetailPage({ params }: Props) {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,7 +8,6 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <>
-      <Navbar />
       <main className="flex flex-col min-h-screen">
         <article className="container max-w-4xl mx-auto px-4 py-20 prose prose-invert">
           <h1 className="text-4xl font-bold mb-8">Terms of Service</h1>
@@ -102,13 +99,12 @@ export default function TermsPage() {
               </h2>
               <p>
                 For inquiries regarding these terms, contact:
-                hello@photonsecurity.com
+                admin@photonsecurity.in
               </p>
             </section>
           </div>
         </article>
       </main>
-      <Footer />
     </>
   );
 }

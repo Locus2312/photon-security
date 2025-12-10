@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import "./globals.css";
 
 const farray = localFont({
@@ -23,24 +25,31 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Photon Security | Energy of a Photon. Strength of Security.",
+  title: "Photon Security",
   description:
     "Modern, research-driven cybersecurity services for Indian enterprises. VAPT, audits, MSS, and compliance advisory.",
+  themeColor: "#00E5FF",
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={`dark scroll-smooth ${farray.variable}`}>
-      <head>
-        <meta name="theme-color" content="#00E5FF" />
-      </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground`}
       >
+        <Navbar />
         {children}
+        <Footer />
         <Analytics />
       </body>
     </html>
   );
 }
-

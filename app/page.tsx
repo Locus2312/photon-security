@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { HeroSection } from "@/components/home/hero-section";
 import { TrustBar } from "@/components/home/trust-bar";
 import { ServicesGrid } from "@/components/home/services-grid";
@@ -15,7 +13,6 @@ import { organizationSchema } from "@/lib/schema";
 export default function Home() {
   return (
     <>
-      <Navbar />
       <main className="flex flex-col min-h-screen">
         <HeroSection />
         <TrustBar />
@@ -26,7 +23,6 @@ export default function Home() {
         <FaqAccordion />
         <LeadCaptureBanner />
       </main>
-      <Footer />
     </>
   );
 }

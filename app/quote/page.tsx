@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { QuoteWizard } from "@/components/forms/quote-wizard";
 import type { Metadata } from "next";
 
@@ -12,7 +10,6 @@ export const metadata: Metadata = {
 export default function QuotePage() {
   return (
     <>
-      <Navbar />
       <main className="flex flex-col min-h-screen pt-8">
         <div className="container max-w-4xl mx-auto px-4 mb-12">
           <div className="text-center">
@@ -30,7 +27,6 @@ export default function QuotePage() {
           <QuoteWizard />
         </div>
       </main>
-      <Footer />
     </>
   );
 }

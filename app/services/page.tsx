@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { ServicesCategoryGrid } from "@/components/services/services-category-grid";
 import { servicesData } from "@/lib/services-data";
 import type { Metadata } from "next";
@@ -13,7 +11,6 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      <Navbar />
       <main className="flex flex-col min-h-screen pt-8">
         <div className="container max-w-7xl mx-auto px-4 mb-16">
           <div className="max-w-3xl mx-auto text-center">
@@ -35,7 +32,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </main>
-      <Footer />
     </>
   );
 }

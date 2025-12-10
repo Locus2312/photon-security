@@ -98,7 +98,6 @@ export function QuoteWizard() {
 
   const handleNext = async () => {
     if (currentStep === steps.length - 1) {
-      // Submit
       setLoading(true);
       try {
         const response = await fetch("/api/quote", {

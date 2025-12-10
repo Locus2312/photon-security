@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -73,7 +71,6 @@ const jobs = [
 export default function CareersPage() {
   return (
     <>
-      <Navbar />
       <main className="flex flex-col min-h-screen pt-8">
         {/* Hero */}
         <section className="w-full py-16 md:py-24 border-b border-border/40">
@@ -193,7 +190,6 @@ export default function CareersPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

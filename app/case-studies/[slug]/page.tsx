@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -152,7 +150,6 @@ export default async function CaseStudyDetailPage({ params }: Props) {
 
   return (
     <>
-      <Navbar />
       <main className="flex flex-col min-h-screen">
         {/* Hero */}
         <section className="w-full py-16 md:py-24 border-b border-border/40">
@@ -191,7 +188,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
                     key={idx}
                     className="glass p-4 rounded-lg border border-border/40 flex gap-3"
                   >
-                    <div className="flex-shrink-0">
+                    <div className="shrink-0">
                       <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20">
                         <span className="text-sm font-bold text-primary">
                           {idx + 1}
@@ -225,10 +222,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
                     key={idx}
                     className="glass p-4 rounded-lg border border-primary/20 flex gap-3"
                   >
-                    <TrendingUp
-                      className="text-primary flex-shrink-0"
-                      size={20}
-                    />
+                    <TrendingUp className="text-primary shrink-0" size={20} />
                     <p className="text-foreground/80">{outcome}</p>
                   </div>
                 ))}
@@ -264,7 +258,6 @@ export default async function CaseStudyDetailPage({ params }: Props) {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }
