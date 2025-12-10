@@ -72,10 +72,10 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold text-lg mb-1">Phone</h3>
                         <a
-                          href="tel:+919876543210"
+                          href="tel:+919574737506"
                           className="text-foreground/70 hover:text-primary transition-colors"
                         >
-                          +91 98765 43210
+                          +91 95747 37506
                         </a>
                       </div>
                     </div>
@@ -89,7 +89,7 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold text-lg mb-1">Location</h3>
                         <p className="text-foreground/70">
-                          Surat, Gujarat, India
+                          GIFT City, Gujarat, India
                         </p>
                       </div>
                     </div>
@@ -115,30 +115,6 @@ export default function ContactPage() {
                   </Card>
                 </div>
 
-                {/* Map or Additional Info */}
-                <Card className="glass p-6 bg-linear-to-br from-primary/5 to-transparent">
-                  <h3 className="font-semibold text-lg mb-3">
-                    Why Choose Photon Security?
-                  </h3>
-                  <ul className="space-y-2 text-foreground/70">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      24/7 Emergency Response
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      Certified Security Professionals
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      Custom Security Solutions
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      Proven Track Record
-                    </li>
-                  </ul>
-                </Card>
               </div>
             </div>
           </div>

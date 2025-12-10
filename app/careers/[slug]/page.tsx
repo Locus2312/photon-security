@@ -229,7 +229,6 @@ export default async function JobDetailPage({ params }: Props) {
   return (
     <>
       <main className="flex flex-col min-h-screen">
-        {/* Header */}
         <section className="w-full py-16 md:py-24 border-b border-border/40">
           <div className="container max-w-4xl mx-auto px-4">
             <div className="mb-6">

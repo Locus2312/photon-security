@@ -87,49 +87,10 @@ export default function CareersPage() {
           </div>
         </section>
 
-        {/* Culture */}
-        <section className="w-full py-20">
-          <div className="container max-w-7xl mx-auto px-4">
-            <div className="max-w-3xl mx-auto space-y-8 text-center mb-16">
-              <div>
-                <h2 className="text-2xl font-bold mb-4">
-                  Why Join Photon Security?
-                </h2>
-                <p className="text-foreground/70 text-lg">
-                  Work on meaningful projects, grow your expertise, and
-                  contribute to India&apos;s cybersecurity landscape.
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
-              {[
-                {
-                  title: "Expert Team",
-                  desc: "Learn from seasoned security professionals.",
-                },
-                {
-                  title: "Growth Opportunities",
-                  desc: "Continuous learning and career advancement.",
-                },
-                {
-                  title: "Meaningful Work",
-                  desc: "Protect enterprises from real-world threats.",
-                },
-              ].map((item, idx) => (
-                <Card key={idx} className="glass p-6 text-center">
-                  <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-                  <p className="text-foreground/70">{item.desc}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Open Positions */}
         <section className="w-full py-20 bg-card/20 border-y border-border/40">
           <div className="container max-w-7xl mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-12">Open Positions</h2>
 
             <div className="grid grid-cols-1 gap-6">
               {jobs.map((job) => (

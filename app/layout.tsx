@@ -1,5 +1,5 @@
 import type React from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
@@ -28,11 +28,14 @@ export const metadata: Metadata = {
   title: "Photon Security",
   description:
     "Modern, research-driven cybersecurity services for Indian enterprises. VAPT, audits, MSS, and compliance advisory.",
-  themeColor: "#00E5FF",
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
+};
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#00E5FF" },
+    { media: "(prefers-color-scheme: dark)", color: "#00E5FF" },
+  ],
 };
 
 export default function RootLayout({

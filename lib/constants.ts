@@ -17,5 +17,6 @@ export const NAVIGATION = [
 // { label: "Case Studies", href: "/case-studies" },
 //  { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
+  { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
 ] as const;
