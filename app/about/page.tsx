@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, Lightbulb, Heart, Target } from "lucide-react";
+import  Link  from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -120,7 +121,8 @@ export default function AboutPage() {
         </section>
 
         {/* Leadership */}
-        <section className="w-full py-20">
+        {/*
+            <section className="w-full py-20">
           <div className="container max-w-7xl mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-16">Leadership</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -139,6 +141,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+        */}
 
         {/* CTA */}
         <section className="w-full py-20 bg-card/20 border-t border-border/40">
@@ -150,7 +153,9 @@ export default function AboutPage() {
               Partner with us to strengthen your security posture and achieve
               your compliance goals.
             </p>
-            <Button size="lg">Start Your Journey</Button>
+            <Link href = "/careers">
+              <Button size="lg">Start Your Journey</Button>
+            </Link>
           </div>
         </section>
       </main>
