@@ -62,6 +62,16 @@ export const servicesData: ServiceCategory[] = [
         description:
           "Comprehensive adversarial simulations to test detection, response, and remediation capabilities.",
       },
+      {
+        id: "vapt-remediation",
+        slug: "vapt-remediation-audit-closure-support",
+        name: "VAPT Remediation & Audit Closure Support",
+        category: "vapt",
+        shortDescription:
+          "Post-assessment remediation and verification support.",
+        description:
+          "Expert guidance on fixing identified vulnerabilities, implementing security controls, and achieving audit closure with re-testing validation.",
+      },
     ],
   },
   {
@@ -80,52 +90,14 @@ export const servicesData: ServiceCategory[] = [
           "Achieve ISO 27001 readiness through comprehensive gap analysis and implementation guidance.",
       },
       {
-        id: "soc2",
-        slug: "soc-2-soc-1-audits",
-        name: "SOC 2 / SOC 1 Audits",
+        id: "certin-rbi",
+        slug: "cert-in-rbi-cybersecurity-compliance",
+        name: "CERT-In & RBI Cybersecurity Compliance",
         category: "audits",
         shortDescription:
-          "Service Organization Control audits for SaaS and service providers.",
+          "Indian regulatory compliance for CERT-In and RBI frameworks.",
         description:
-          "Meet SOC 2 Type I/II or SOC 1 requirements with end-to-end audit and compliance support.",
-      },
-      {
-        id: "certin",
-        slug: "cert-in-guidelines-compliance",
-        name: "CERT-In Guidelines Compliance",
-        category: "audits",
-        shortDescription:
-          "Indian cybersecurity advisory aligned to CERT-In frameworks.",
-        description:
-          "CERT-In guidelines compliance advisory for organizations operating in India.",
-      },
-      {
-        id: "gdpr",
-        slug: "gdpr-pci-dss-compliance-assessment",
-        name: "GDPR / PCI-DSS Compliance Assessment",
-        category: "audits",
-        shortDescription:
-          "Data protection and payment card security compliance.",
-        description:
-          "Assess readiness for GDPR, PCI-DSS, and data residency requirements.",
-      },
-      {
-        id: "internal-audit",
-        slug: "internal-it-security-audits",
-        name: "Internal IT Security Audits",
-        category: "audits",
-        shortDescription: "Policy and procedure evaluation.",
-        description:
-          "Evaluate internal security policies, procedures, and technical controls.",
-      },
-      {
-        id: "rbi",
-        slug: "rbi-cybersecurity-it-compliance",
-        name: "RBI Cybersecurity & IT Compliance",
-        category: "audits",
-        shortDescription: "Reserve Bank of India framework compliance.",
-        description:
-          "Align with RBI cybersecurity and IT risk management guidelines.",
+          "Comprehensive compliance advisory for CERT-In guidelines and RBI cybersecurity frameworks. Align with Indian regulatory requirements for incident reporting, IT risk management, and data protection.",
       },
       {
         id: "sebi",
@@ -136,6 +108,15 @@ export const servicesData: ServiceCategory[] = [
           "Securities and Exchange Board of India requirements.",
         description:
           "SEBI-aligned cybersecurity and business continuity framework implementation.",
+      },
+      {
+        id: "cis-benchmark",
+        slug: "cis-benchmark-compliance-implementation",
+        name: "CIS Benchmark Compliance & Implementation Service",
+        category: "audits",
+        shortDescription: "Industry-standard security configuration baselines.",
+        description:
+          "Implement and maintain CIS Benchmark security configurations for servers, databases, and network devices with continuous compliance monitoring.",
       },
     ],
   },
@@ -180,6 +161,25 @@ export const servicesData: ServiceCategory[] = [
           "Ongoing vulnerability scanning and remediation tracking.",
         description:
           "Continuous vulnerability assessment, prioritization, and remediation tracking.",
+      },
+      {
+        id: "ad-managed",
+        slug: "active-directory-managed-security-support",
+        name: "Active Directory Managed Security & Support",
+        category: "mss",
+        shortDescription: "Secure and optimize your AD infrastructure.",
+        description:
+          "Comprehensive Active Directory security monitoring, hardening, GPO management, and 24/7 support to prevent unauthorized access and privilege escalation.",
+      },
+      {
+        id: "patch-mgmt",
+        slug: "managed-security-patch-operations",
+        name: "Managed Security Patch Operations",
+        category: "mss",
+        shortDescription:
+          "Automated patch management and vulnerability closure.",
+        description:
+          "Proactive patch deployment, testing, and rollback procedures for operating systems, applications, and infrastructure with minimal downtime.",
       },
     ],
   },
