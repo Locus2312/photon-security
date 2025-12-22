@@ -102,7 +102,9 @@ export default function CareersPage() {
           <p className="text-foreground/70 mb-6">
             We&apos;re always looking for talented security professionals.
           </p>
-          <Button size="lg">Send Your Resume</Button>
+          <a href="mailto:admin@photonsecurity.in">
+            <Button size="lg">Send Your Resume</Button>
+          </a>
         </div>
       </section>
     </main>
