@@ -26,6 +26,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Photon Security",
+  icons: {
+    icon: "/favicon.ico",
+  },
   description:
     "Modern, research-driven cybersecurity services for Indian enterprises. VAPT, audits, MSS, and compliance advisory.",
   robots: { index: true, follow: true },
