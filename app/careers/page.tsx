@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Briefcase, ArrowRight } from "lucide-react";
+import { MapPin, Clock, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -13,144 +13,98 @@ export const metadata: Metadata = {
 
 const jobs = [
   {
-    slug: "senior-penetration-tester",
-    title: "Senior Penetration Tester",
-    department: "Security",
-    location: "Bangalore",
-    experience: "5+ years",
+    slug: "graphic-designer",
+    title: "Graphic Designer",
+    department: "Design",
+    location: "Remote",
+    type: "Part-time",
     description:
-      "Lead VAPT engagements, mentor junior testers, and develop testing methodologies.",
-  },
-  {
-    slug: "cloud-security-architect",
-    title: "Cloud Security Architect",
-    department: "Architecture",
-    location: "Bangalore",
-    experience: "6+ years",
-    description:
-      "Design cloud security assessments, lead compliance audits, and advise on secure architecture.",
-  },
-  {
-    slug: "security-analyst",
-    title: "Security Analyst",
-    department: "Analysis",
-    location: "Bangalore",
-    experience: "2-4 years",
-    description:
-      "Conduct vulnerability assessments, analyze findings, and support compliance efforts.",
-  },
-  {
-    slug: "incident-response-specialist",
-    title: "Incident Response Specialist",
-    department: "Operations",
-    location: "Bangalore",
-    experience: "3-5 years",
-    description:
-      "Lead incident investigations, develop IR playbooks, and provide 24/7 SOC support.",
-  },
-  {
-    slug: "compliance-consultant",
-    title: "Compliance Consultant",
-    department: "Compliance",
-    location: "Bangalore",
-    experience: "4+ years",
-    description:
-      "Guide clients through compliance frameworks (ISO, SOC 2, GDPR, RBI, SEBI).",
-  },
-  {
-    slug: "business-development-executive",
-    title: "Business Development Executive",
-    department: "Sales",
-    location: "Bangalore",
-    experience: "2-3 years",
-    description:
-      "Build relationships with enterprise clients, identify opportunities, and drive revenue.",
+      "Design emails, brochures, invoices, and website graphics. Move fast and deliver clean work.",
+    featured: true,
   },
 ];
 
 export default function CareersPage() {
   return (
-    <>
-      <main className="flex flex-col min-h-screen pt-8">
-        {/* Hero */}
-        <section className="w-full py-16 md:py-24 border-b border-border/40">
-          <div className="container max-w-7xl mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Join Our Team
-              </h1>
-              <p className="text-xl text-foreground/70">
-                Build a career in cybersecurity with a team of passionate
-                experts protecting Indian enterprises.
-              </p>
-            </div>
-          </div>
-        </section>
+    <main className="flex flex-col min-h-screen pt-8">
+      {/* Hero */}
+      <section className="w-full py-16 md:py-20 border-b border-border/40">
+        <div className="container max-w-4xl mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Join Our Team
+          </h1>
+          <p className="text-lg text-foreground/70">
+            Build a career in cybersecurity protecting Indian enterprises.
+          </p>
+        </div>
+      </section>
 
-
-        {/* Open Positions */}
-        <section className="w-full py-20 bg-card/20 border-y border-border/40">
-          <div className="container max-w-7xl mx-auto px-4">
-
-            <div className="grid grid-cols-1 gap-6">
-              {jobs.map((job) => (
-                <Link key={job.slug} href={`/careers/${job.slug}`}>
-                  <Card className="glass hover:border-primary/50 transition-all cursor-pointer">
-                    <CardHeader>
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <CardTitle className="text-xl mb-2">
+      {/* Open Positions */}
+      <section className="w-full py-16">
+        <div className="container max-w-4xl mx-auto px-4">
+          <h2 className="text-2xl font-bold mb-6">Open Positions</h2>
+          <div className="space-y-4">
+            {jobs.map((job) => (
+              <Link key={job.slug} href={`/careers/${job.slug}`}>
+                <Card
+                  className={`hover:border-primary/50 transition-all cursor-pointer ${
+                    job.featured ? "border-primary/30 bg-primary/5" : ""
+                  }`}
+                >
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <div className="flex items-center gap-2 mb-2">
+                          <CardTitle className="text-xl">
                             {job.title}
                           </CardTitle>
-                          <div className="flex flex-wrap gap-2">
-                            <Badge variant="secondary">{job.department}</Badge>
-                            <Badge
-                              variant="outline"
-                              className="flex items-center gap-1"
-                            >
-                              <MapPin size={14} />
-                              {job.location}
+                          {job.featured && (
+                            <Badge variant="default" className="text-xs">
+                              New
                             </Badge>
-                            <Badge
-                              variant="outline"
-                              className="flex items-center gap-1"
-                            >
-                              <Briefcase size={14} />
-                              {job.experience}
-                            </Badge>
-                          </div>
+                          )}
+                        </div>
+                        <div className="flex flex-wrap gap-2 text-sm">
+                          <Badge variant="secondary">{job.department}</Badge>
+                          <Badge variant="outline" className="flex items-center gap-1">
+                            <MapPin size={12} />
+                            {job.location}
+                          </Badge>
+                          <Badge variant="outline" className="flex items-center gap-1">
+                            <Clock size={12} />
+                            {job.type}
+                          </Badge>
                         </div>
                       </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-foreground/70 mb-4">
-                        {job.description}
-                      </p>
-                      <div className="flex items-center gap-2 text-primary font-semibold">
-                        View Details <ArrowRight size={16} />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <p className="text-foreground/70 text-sm mb-3">
+                      {job.description}
+                    </p>
+                    <div className="flex items-center gap-2 text-primary font-semibold text-sm">
+                      View Details <ArrowRight size={14} />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Application CTA */}
-        <section className="w-full py-20">
-          <div className="container max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              Don&apos;t see your fit?
-            </h2>
-            <p className="text-lg text-foreground/70 mb-8">
-              We&apos;re always looking for talented security professionals.
-              Send us your resume.
-            </p>
-            <Button size="lg">Send Your Resume</Button>
-          </div>
-        </section>
-      </main>
-    </>
+      {/* CTA */}
+      <section className="w-full py-16 bg-card/20 border-t border-border/40">
+        <div className="container max-w-2xl mx-auto px-4 text-center">
+          <h2 className="text-2xl font-bold mb-3">
+            Don&apos;t see your fit?
+          </h2>
+          <p className="text-foreground/70 mb-6">
+            We&apos;re always looking for talented security professionals.
+          </p>
+          <Button size="lg">Send Your Resume</Button>
+        </div>
+      </section>
+    </main>
   );
 }
