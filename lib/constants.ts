@@ -1,6 +1,6 @@
 export const BRAND = {
   name: "Photon Security",
-  tagline: "Energy of a Photon. Strength of Security.",
+  tagline: "Energy of a Photon Strength of Security",
   description:
     "Modern, research-driven cybersecurity services for Indian enterprises.",
 } as const;
@@ -14,8 +14,8 @@ export const NAVIGATION = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Compliance", href: "/compliance" },
-// { label: "Case Studies", href: "/case-studies" },
-//  { label: "Resources", href: "/resources" },
+  // { label: "Case Studies", href: "/case-studies" },
+  //  { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { BRAND } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
-import Link  from "next/link";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -25,26 +25,17 @@ export function HeroSection() {
               {BRAND.tagline}
             </h1>
             <p className="text-lg md:text-xl text-foreground/70 text-balance">
-              Modern cybersecurity services for Indian SMBs, enterprises, BFSI,
+              Modern cybersecurity services for Indian SMBs, Enterprises, BFSI,
               SaaS, and Government organizations.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-          <Link href = "/contact">
-            <Button size="lg" className="w-full sm:w-auto gap-2">
-              Request Audit <ArrowRight size={18} />
-            </Button>
-          </Link>
-          <Link href = "/contact">
-            <Button
-              size="lg"
-              variant="outline"
-              className="w-full sm:w-auto bg-transparent"
-            >
-              Book Consultation
-            </Button>
-          </Link>
+            <Link href="mailto:sales@photonsecurity.in">
+              <Button size="lg" className="w-full sm:w-auto gap-2">
+                Request Audit <ArrowRight size={18} />
+              </Button>
+            </Link>
           </div>
 
           <p className="text-sm text-foreground/50 pt-4">

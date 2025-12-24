@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Shield, FileCheck } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Compliance | Photon Security",
@@ -25,62 +26,49 @@ export default function CompliancePage() {
       icon: Shield,
     },
     {
-      name: "SOC 2 / SOC 1 Audits",
+      name: "CERT-In & RBI Compliance",
       description:
-        "Service Organization Control audits for SaaS, cloud, and service providers.",
+        "Indian regulatory compliance for CERT-In guidelines and RBI cybersecurity frameworks.",
       features: [
-        "Type I assessments",
-        "Type II audits",
-        "Control design review",
-        "Remediation support",
+        "CERT-In guidelines advisory",
+        "RBI framework alignment",
+        "Incident reporting readiness",
+        "IT risk management",
       ],
       icon: CheckCircle,
     },
     {
-      name: "GDPR Compliance",
+      name: "SEBI Compliance",
       description:
-        "Data protection framework for organizations handling EU resident data.",
+        "Securities and Exchange Board of India cybersecurity and IT governance requirements.",
       features: [
-        "Data mapping",
-        "Privacy impact assessment",
-        "DPA guidance",
-        "Consent management",
+        "SEBI requirements alignment",
+        "IT governance framework",
+        "Business continuity planning",
+        "Cyber resilience implementation",
       ],
       icon: FileCheck,
     },
     {
-      name: "PCI-DSS Compliance",
+      name: "CIS Benchmark Compliance",
       description:
-        "Payment Card Industry Data Security Standard implementation and validation.",
+        "Industry-standard security configuration baselines for servers, databases, and network devices.",
       features: [
-        "Network assessment",
-        "Vulnerability scanning",
-        "Security testing",
-        "Compliance validation",
+        "Security configuration implementation",
+        "Baseline hardening",
+        "Continuous compliance monitoring",
+        "Remediation guidance",
       ],
       icon: Shield,
     },
     {
-      name: "CERT-In Guidelines",
-      description:
-        "Alignment with Indian Computer Emergency Response Team frameworks.",
+      name: "VAPT Remediation & Audit Closure Support",
+      description: "Post-assessment remediation and verification support.",
       features: [
-        "Guidelines advisory",
-        "Readiness assessment",
-        "Implementation support",
-        "Incident preparedness",
-      ],
-      icon: CheckCircle,
-    },
-    {
-      name: "RBI & SEBI Compliance",
-      description:
-        "Reserve Bank and Securities Board cyber and IT governance requirements.",
-      features: [
-        "RBI framework alignment",
-        "SEBI requirements",
-        "IT governance",
-        "Business continuity",
+        "Expert guidance on fixing vulnerabilities",
+        "Security controls implementation",
+        "Re-testing validation",
+        "Audit closure support",
       ],
       icon: FileCheck,
     },
@@ -151,7 +139,9 @@ export default function CompliancePage() {
               Our compliance experts will help you navigate the regulatory
               landscape specific to your industry.
             </p>
-            <Button size="lg">Schedule Compliance Consultation</Button>
+            <Link href="mailto:sales@photonsecurity.in">
+              <Button size="lg">Schedule Compliance Consultation</Button>
+            </Link>
           </div>
         </section>
       </main>

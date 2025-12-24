@@ -62,64 +62,9 @@ export const servicesData: ServiceCategory[] = [
         description:
           "Comprehensive adversarial simulations to test detection, response, and remediation capabilities.",
       },
-      {
-        id: "vapt-remediation",
-        slug: "vapt-remediation-audit-closure-support",
-        name: "VAPT Remediation & Audit Closure Support",
-        category: "vapt",
-        shortDescription:
-          "Post-assessment remediation and verification support.",
-        description:
-          "Expert guidance on fixing identified vulnerabilities, implementing security controls, and achieving audit closure with re-testing validation.",
-      },
     ],
   },
-  {
-    id: "audits",
-    name: "Security Audits & Compliance",
-    description:
-      "Align your organization with industry standards and regulatory frameworks.",
-    services: [
-      {
-        id: "iso27001",
-        slug: "iso-27001-audit-consulting",
-        name: "ISO 27001 Audit & Consulting",
-        category: "audits",
-        shortDescription: "Information security management system readiness.",
-        description:
-          "Achieve ISO 27001 readiness through comprehensive gap analysis and implementation guidance.",
-      },
-      {
-        id: "certin-rbi",
-        slug: "cert-in-rbi-cybersecurity-compliance",
-        name: "CERT-In & RBI Cybersecurity Compliance",
-        category: "audits",
-        shortDescription:
-          "Indian regulatory compliance for CERT-In and RBI frameworks.",
-        description:
-          "Comprehensive compliance advisory for CERT-In guidelines and RBI cybersecurity frameworks. Align with Indian regulatory requirements for incident reporting, IT risk management, and data protection.",
-      },
-      {
-        id: "sebi",
-        slug: "sebi-compliance",
-        name: "SEBI Compliance",
-        category: "audits",
-        shortDescription:
-          "Securities and Exchange Board of India requirements.",
-        description:
-          "SEBI-aligned cybersecurity and business continuity framework implementation.",
-      },
-      {
-        id: "cis-benchmark",
-        slug: "cis-benchmark-compliance-implementation",
-        name: "CIS Benchmark Compliance & Implementation Service",
-        category: "audits",
-        shortDescription: "Industry-standard security configuration baselines.",
-        description:
-          "Implement and maintain CIS Benchmark security configurations for servers, databases, and network devices with continuous compliance monitoring.",
-      },
-    ],
-  },
+
   {
     id: "mss",
     name: "Managed Security Services",

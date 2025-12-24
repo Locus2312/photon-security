@@ -25,7 +25,7 @@ export function LeadCaptureBanner() {
         <p className="text-sm text-foreground/70 mb-4">
           Free 30-minute consultation with our security experts.
         </p>
-        <Link href = "/contact">
+        <Link href="mailto:sales@photonsecurity.in">
           <Button size="sm" className="w-full">
             Schedule Now
           </Button>

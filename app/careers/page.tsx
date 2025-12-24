@@ -30,9 +30,7 @@ export default function CareersPage() {
       {/* Hero */}
       <section className="w-full py-16 md:py-20 border-b border-border/40">
         <div className="container max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Join Our Team
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Join Our Team</h1>
           <p className="text-lg text-foreground/70">
             Build a career in cybersecurity protecting Indian enterprises.
           </p>
@@ -55,9 +53,7 @@ export default function CareersPage() {
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <CardTitle className="text-xl">
-                            {job.title}
-                          </CardTitle>
+                          <CardTitle className="text-xl">{job.title}</CardTitle>
                           {job.featured && (
                             <Badge variant="default" className="text-xs">
                               New
@@ -66,11 +62,17 @@ export default function CareersPage() {
                         </div>
                         <div className="flex flex-wrap gap-2 text-sm">
                           <Badge variant="secondary">{job.department}</Badge>
-                          <Badge variant="outline" className="flex items-center gap-1">
+                          <Badge
+                            variant="outline"
+                            className="flex items-center gap-1"
+                          >
                             <MapPin size={12} />
                             {job.location}
                           </Badge>
-                          <Badge variant="outline" className="flex items-center gap-1">
+                          <Badge
+                            variant="outline"
+                            className="flex items-center gap-1"
+                          >
                             <Clock size={12} />
                             {job.type}
                           </Badge>
@@ -96,13 +98,11 @@ export default function CareersPage() {
       {/* CTA */}
       <section className="w-full py-16 bg-card/20 border-t border-border/40">
         <div className="container max-w-2xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-3">
-            Don&apos;t see your fit?
-          </h2>
+          <h2 className="text-2xl font-bold mb-3">Don&apos;t see your fit?</h2>
           <p className="text-foreground/70 mb-6">
             We&apos;re always looking for talented security professionals.
           </p>
-          <a href="mailto:admin@photonsecurity.in">
+          <a href="mailto:careers@photonsecurity.in">
             <Button size="lg">Send Your Resume</Button>
           </a>
         </div>

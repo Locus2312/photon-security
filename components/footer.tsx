@@ -7,13 +7,12 @@ export function Footer() {
     <footer className="border-t border-border/40 bg-card/30 py-12">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-
           <div className="col-span-1">
             <Link href="/" className="inline-block mb-4">
               <Image
                 src="/footer.png"
                 alt="Photon Security Logo"
-                width={150}      
+                width={150}
                 height={80}
                 className="h-auto w-auto"
               />
@@ -58,8 +57,23 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-sm mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li className="text-foreground/60">admin@photonsecurity.in</li>
-              <li className="text-foreground/60">+91 957473 7506</li>
+              <li>
+                <Link
+                  href="mailto:info@photonsecurity.in"
+                  className="text-sm text-foreground/60 hover:text-primary transition-colors"
+                >
+                  info@photonsecurity.in
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="tel:+919574737506"
+                  className="text-sm text-foreground/60 hover:text-primary transition-colors"
+                >
+                  +91 957473 7506
+                </Link>
+              </li>
+
               <li className="text-foreground/60"> GIFT City, India</li>
             </ul>
           </div>
@@ -88,4 +102,3 @@ export function Footer() {
     </footer>
   );
 }
-

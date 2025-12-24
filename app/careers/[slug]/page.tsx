@@ -39,7 +39,7 @@ const jobDetails: Record<string, any> = {
     ],
     applicationNote:
       "If design is your weapon, join Photon Security. We're building something serious.",
-    contactEmail: "admin@photonsecurity.in",
+    contactEmail: "careers@photonsecurity.in",
   },
 };
 

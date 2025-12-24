@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BRAND, NAVIGATION } from "@/lib/constants";
+import { NAVIGATION } from "@/lib/constants";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -18,8 +18,7 @@ export function Navbar() {
 
       if (current > lastScrollY && current > 80) {
         setShowNavbar(false);
-      } 
-      else {
+      } else {
         setShowNavbar(true);
       }
 
@@ -43,14 +42,14 @@ export function Navbar() {
           <Image
             src="/logo.png"
             alt="Photon Security Logo"
-            width={150}        
+            width={150}
             height={60}
             className="h-auto w-auto"
-            priority           
+            priority
           />
         </Link>
-        
-                <div className="hidden md:flex items-center gap-8">
+
+        <div className="hidden md:flex items-center gap-8">
           {NAVIGATION.map((item) => (
             <Link
               key={item.href}
@@ -64,14 +63,9 @@ export function Navbar() {
 
         {/* CTA Buttons */}
         <div className="hidden md:flex items-center gap-3">
-        <Link href = "/contact">
-          <Button variant="outline" size="sm">
-            Book Consultation
-          </Button>
-        </Link>
-        <Link href = "/contact">
-          <Button size="sm">Request Audit</Button>
-        </Link>
+          <Link href="mailto:sales@photonsecurity.in">
+            <Button size="sm">Request Audit</Button>
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -97,16 +91,11 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border/40">
-              <Link href = "/contact">
-                <Button variant="outline" size="sm" className="w-full bg-transparent">
-                  Book Consultation
-                </Button>
-              </Link>
-              <Link href = "/contact">
-                <Button size="sm" className="w-full">
-                  Request Audit
-                </Button>
-              </Link>
+                <Link href="mailto:sales@photonsecurity.in">
+                  <Button size="sm" className="w-full">
+                    Request Audit
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -115,4 +104,3 @@ export function Navbar() {
     </header>
   );
 }
-

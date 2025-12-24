@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Photon Security",
@@ -11,7 +12,7 @@ export default function PrivacyPage() {
       <main className="flex flex-col min-h-screen">
         <article className="container max-w-4xl mx-auto px-4 py-20 prose prose-invert">
           <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
-          <p className="text-foreground/70 mb-8">Last updated: January 2025</p>
+          <p className="text-foreground/70 mb-8">Last updated: December 2025</p>
 
           <div className="space-y-8 text-foreground/80">
             <section>
@@ -106,7 +107,15 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-bold mb-4 text-foreground">
                 8. Contact
               </h2>
-              <p>For privacy inquiries, contact: hello@photonsecurity.com</p>
+              <p>
+                For privacy inquiries, contact:{" "}
+                <Link
+                  href="mailto:info@photonsecurity.in"
+                  className="text-sm text-foreground/60 hover:text-primary transition-colors"
+                >
+                  info@photonsecurity.in
+                </Link>
+              </p>
             </section>
           </div>
         </article>

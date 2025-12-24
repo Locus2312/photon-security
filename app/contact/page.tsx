@@ -55,10 +55,10 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold text-lg mb-1">Email</h3>
                         <a
-                          href="mailto:admin@photonsecurity.in"
+                          href="mailto:sales@photonsecurity.in"
                           className="text-foreground/70 hover:text-primary transition-colors"
                         >
-                          admin@photonsecurity.in
+                          info@photonsecurity.in
                         </a>
                       </div>
                     </div>
@@ -114,7 +114,6 @@ export default function ContactPage() {
                     </div>
                   </Card>
                 </div>
-
               </div>
             </div>
           </div>

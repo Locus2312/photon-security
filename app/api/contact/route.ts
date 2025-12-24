@@ -58,14 +58,14 @@ function sanitizeInput(input: string, maxLength = 5000): string {
     .slice(0, maxLength)
     .replace(/[<>'"&\r\n\t]/g, (char) => {
       const entities: Record<string, string> = {
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#x27;',
-        '&': '&amp;',
-        '\r': '',
-        '\n': ' ',
-        '\t': ' '
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#x27;",
+        "&": "&amp;",
+        "\r": "",
+        "\n": " ",
+        "\t": " ",
       };
       return entities[char] || char;
     });
@@ -89,7 +89,7 @@ function detectSpam(data: {
     "free money",
     "bitcoin",
     "crypto",
-    "investment opportunity"
+    "investment opportunity",
   ];
 
   const combinedText =
@@ -116,17 +116,18 @@ function detectSpam(data: {
     "mailinator",
     "trashmail",
     "fakeinbox",
-    "yopmail"
+    "yopmail",
   ];
   const emailDomain = data.email.split("@")[1]?.toLowerCase() || "";
   if (disposableDomains.some((d) => emailDomain.includes(d))) return true;
 
   const suspiciousPatterns = [
-    /\b\d{10,}\b/, 
-    /[A-Z]{20,}/, 
-    /(dear|hello)\s+(sir|madam)/i, 
+    /\b\d{10,}\b/,
+    /[A-Z]{20,}/,
+    /(dear|hello)\s+(sir|madam)/i,
   ];
-  if (suspiciousPatterns.some(pattern => pattern.test(data.message))) return true;
+  if (suspiciousPatterns.some((pattern) => pattern.test(data.message)))
+    return true;
 
   return false;
 }
@@ -140,12 +141,12 @@ export async function POST(request: Request) {
           success: false,
           error: "Too many requests. Please try again in a minute.",
         }),
-        { 
-          status: 429, 
-          headers: { 
+        {
+          status: 429,
+          headers: {
             "Content-Type": "application/json",
-            "Retry-After": "60"
-          } 
+            "Retry-After": "60",
+          },
         }
       );
     }
@@ -154,9 +155,9 @@ export async function POST(request: Request) {
     const { name, email, company, message, honeypot, phone } = body;
 
     if (honeypot) {
-      console.log("[SPAM BLOCKED] Honeypot triggered:", { 
-        email: email?.substring(0, 10) + "...", 
-        ip: clientIP 
+      console.log("[SPAM BLOCKED] Honeypot triggered:", {
+        email: email?.substring(0, 10) + "...",
+        ip: clientIP,
       });
       return new Response(
         JSON.stringify({ success: false, error: "Invalid request" }),
@@ -223,15 +224,15 @@ export async function POST(request: Request) {
       company: sanitizedData.company,
       messageLength: sanitizedData.message.length,
       ip: clientIP,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     if (process.env.RESEND_API_KEY) {
       try {
         const { data, error } = await resend.emails.send({
-          from: "Photon Security <noreply@photonsecurity.in>", 
-          to: "admin@photonsecurity.in", 
-          replyTo: sanitizedData.email.replace(/[\r\n]/g, ''), 
+          from: "Photon Security <noreply@photonsecurity.in>",
+          to: "info@photonsecurity.in",
+          replyTo: sanitizedData.email.replace(/[\r\n]/g, ""),
           subject: `New Contact: ${sanitizedData.name} from ${sanitizedData.company}`,
           html: `
             <!DOCTYPE html>
@@ -243,80 +244,149 @@ export async function POST(request: Request) {
                 body { 
                   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
                   line-height: 1.6; 
-                  color: #333; 
+                  color: #f5f5f5; 
                   margin: 0;
                   padding: 0;
-                  background-color: #f5f5f5;
+                  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
                 }
                 .container { 
                   max-width: 600px; 
-                  margin: 20px auto; 
-                  background: white;
-                  border-radius: 8px;
+                  margin: 40px auto; 
+                  background: rgba(32, 32, 32, 0.95);
+                  border-radius: 12px;
                   overflow: hidden;
-                  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+                  border: 1px solid rgba(100, 200, 255, 0.1);
+                  backdrop-filter: blur(10px);
                 }
                 .header { 
-                  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+                  background: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
                   color: white; 
-                  padding: 30px 20px; 
+                  padding: 35px 25px; 
                   text-align: center;
+                  position: relative;
+                  overflow: hidden;
+                }
+                .header::before {
+                  content: '';
+                  position: absolute;
+                  top: -50%;
+                  left: -50%;
+                  width: 200%;
+                  height: 200%;
+                  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+                  animation: pulse 3s ease-in-out infinite;
+                }
+                @keyframes pulse {
+                  0%, 100% { opacity: 0.5; }
+                  50% { opacity: 1; }
                 }
                 .header h2 {
                   margin: 0;
-                  font-size: 24px;
+                  font-size: 26px;
+                  font-weight: 700;
+                  position: relative;
+                  z-index: 1;
+                  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+                }
+                .status-badge {
+                  display: inline-block;
+                  margin-top: 12px;
+                  padding: 6px 16px;
+                  background: rgba(16, 185, 129, 0.2);
+                  border: 1px solid rgba(16, 185, 129, 0.5);
+                  border-radius: 20px;
+                  font-size: 12px;
                   font-weight: 600;
+                  color: #10b981;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  position: relative;
+                  z-index: 1;
                 }
                 .content { 
-                  padding: 30px 20px; 
+                  padding: 30px 25px; 
                 }
                 .field { 
                   margin-bottom: 20px; 
                 }
                 .label { 
                   font-weight: 600; 
-                  color: #4b5563;
-                  font-size: 12px;
+                  color: #0ea5e9;
+                  font-size: 11px;
                   text-transform: uppercase;
-                  letter-spacing: 0.5px;
+                  letter-spacing: 1px;
                   margin-bottom: 8px;
+                  display: flex;
+                  align-items: center;
+                  gap: 6px;
+                }
+                .label::before {
+                  content: '▹';
+                  color: #8b5cf6;
+                  font-size: 14px;
                 }
                 .value { 
-                  padding: 12px; 
-                  background: #f9fafb; 
-                  border-radius: 6px;
-                  border: 1px solid #e5e7eb;
-                  color: #1f2937;
+                  padding: 14px 16px; 
+                  background: rgba(255, 255, 255, 0.03); 
+                  border-radius: 8px;
+                  border: 1px solid rgba(100, 200, 255, 0.15);
+                  color: #e5e7eb;
+                  transition: all 0.3s ease;
+                }
+                .value:hover {
+                  background: rgba(255, 255, 255, 0.05);
+                  border-color: rgba(100, 200, 255, 0.3);
                 }
                 .value a {
-                  color: #2563eb;
+                  color: #0ea5e9;
                   text-decoration: none;
+                  font-weight: 500;
                 }
                 .value a:hover {
+                  color: #38bdf8;
                   text-decoration: underline;
                 }
                 .footer { 
-                  background: #f3f4f6; 
-                  padding: 20px; 
+                  background: rgba(0, 0, 0, 0.3); 
+                  padding: 20px 25px; 
                   font-size: 12px; 
-                  color: #6b7280;
-                  border-top: 1px solid #e5e7eb;
+                  color: #9ca3af;
+                  border-top: 1px solid rgba(100, 200, 255, 0.1);
                 }
                 .footer p {
-                  margin: 5px 0;
+                  margin: 8px 0;
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                }
+                .footer strong {
+                  color: #8b5cf6;
+                  font-weight: 600;
                 }
                 .message-box {
                   white-space: pre-wrap;
                   word-wrap: break-word;
-                  font-family: 'Courier New', monospace;
+                  font-family: 'Courier New', 'Consolas', monospace;
                   font-size: 13px;
+                  line-height: 1.7;
+                }
+                .security-notice {
+                  margin-top: 15px;
+                  padding: 12px;
+                  background: rgba(139, 92, 246, 0.1);
+                  border-left: 3px solid #8b5cf6;
+                  border-radius: 4px;
+                  font-size: 11px;
+                  color: #c4b5fd;
                 }
               </style>
             </head>
             <body>
               <div class="container">
                 <div class="header">
-                  <h2>🔒 New Contact Form Submission</h2>
+                  <h2>New Contact Form Submission</h2>
+                  <div class="status-badge">Verified Submission</div>
                 </div>
                 <div class="content">
                   <div class="field">
@@ -326,30 +396,44 @@ export async function POST(request: Request) {
                   <div class="field">
                     <div class="label">Email</div>
                     <div class="value">
-                      <a href="mailto:${sanitizedData.email}">${sanitizedData.email}</a>
+                      <a href="mailto:${sanitizedData.email}">${
+            sanitizedData.email
+          }</a>
                     </div>
                   </div>
                   <div class="field">
                     <div class="label">Company</div>
                     <div class="value">${sanitizedData.company}</div>
                   </div>
-                  ${sanitizedData.phone ? `
+                  ${
+                    sanitizedData.phone
+                      ? `
                   <div class="field">
                     <div class="label">Phone</div>
                     <div class="value">${sanitizedData.phone}</div>
                   </div>
-                  ` : ''}
+                  `
+                      : ""
+                  }
                   <div class="field">
                     <div class="label">Message</div>
-                    <div class="value message-box">${sanitizedData.message}</div>
+                    <div class="value message-box">${
+                      sanitizedData.message
+                    }</div>
                   </div>
                 </div>
                 <div class="footer">
                   <p><strong>Submitted from IP:</strong> ${clientIP}</p>
-                  <p><strong>Timestamp:</strong> ${new Date().toLocaleString('en-US', { 
-                    dateStyle: 'full', 
-                    timeStyle: 'long' 
-                  })}</p>
+                  <p><strong>Timestamp:</strong> ${new Date().toLocaleString(
+                    "en-US",
+                    {
+                      dateStyle: "full",
+                      timeStyle: "long",
+                    }
+                  )}</p>
+                  <div class="security-notice">
+                    ✓ Spam filters passed • Rate limit validated • Input sanitized
+                  </div>
                 </div>
               </div>
             </body>
@@ -370,32 +454,32 @@ export async function POST(request: Request) {
     }
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
-        message: "Message sent successfully" 
+      JSON.stringify({
+        success: true,
+        message: "Message sent successfully",
       }),
       {
         status: 200,
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
-          "X-Content-Type-Options": "nosniff"
+          "X-Content-Type-Options": "nosniff",
         },
       }
     );
   } catch (error) {
     console.error("[CONTACT FORM ERROR]", {
-      error: error instanceof Error ? error.message : 'Unknown error',
-      timestamp: new Date().toISOString()
+      error: error instanceof Error ? error.message : "Unknown error",
+      timestamp: new Date().toISOString(),
     });
-    
+
     return new Response(
-      JSON.stringify({ 
-        success: false, 
-        error: "Internal server error" 
+      JSON.stringify({
+        success: false,
+        error: "Internal server error",
       }),
-      { 
-        status: 500, 
-        headers: { "Content-Type": "application/json" } 
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
       }
     );
   }
