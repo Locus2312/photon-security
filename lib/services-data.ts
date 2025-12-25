@@ -172,6 +172,62 @@ export const servicesData: ServiceCategory[] = [
     ],
   },
   {
+    id: "compliance",
+    name: "Compliance & Frameworks",
+    description: "Regulatory compliance and security framework implementation.",
+    services: [
+      {
+        id: "iso-27001",
+        slug: "iso-27001-readiness",
+        name: "ISO 27001 Readiness",
+        category: "compliance",
+        shortDescription:
+          "Information security management system implementation and audit readiness.",
+        description:
+          "Comprehensive ISO 27001 implementation support including gap assessment, policy development, control implementation, and audit preparation to achieve certification readiness.",
+        features: [
+          "Gap assessment",
+          "Policy development",
+          "Control implementation",
+          "Audit preparation",
+        ],
+      },
+
+      {
+        id: "cis-benchmark",
+        slug: "cis-benchmark-compliance",
+        name: "CIS Benchmark Compliance",
+        category: "compliance",
+        shortDescription:
+          "Industry-standard security configuration baselines for servers, databases, and network devices.",
+        description:
+          "Implement and maintain CIS benchmark compliance through security configuration implementation, baseline hardening, continuous compliance monitoring, and remediation guidance.",
+        features: [
+          "Security configuration implementation",
+          "Baseline hardening",
+          "Continuous compliance monitoring",
+          "Remediation guidance",
+        ],
+      },
+      {
+        id: "vapt-remediation",
+        slug: "vapt-remediation-audit-closure-support",
+        name: "VAPT Remediation & Audit Closure Support",
+        category: "compliance",
+        shortDescription:
+          "Post-assessment remediation and verification support.",
+        description:
+          "Expert support for vulnerability remediation and audit closure including guidance on fixing vulnerabilities, security controls implementation, re-testing validation, and audit closure support.",
+        features: [
+          "Expert guidance on fixing vulnerabilities",
+          "Security controls implementation",
+          "Re-testing validation",
+          "Audit closure support",
+        ],
+      },
+    ],
+  },
+  {
     id: "awareness",
     name: "Security Awareness & Training",
     description: "Build a security-conscious organization.",

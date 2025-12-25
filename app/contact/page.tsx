@@ -72,10 +72,10 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold text-lg mb-1">Phone</h3>
                         <a
-                          href="tel:+919574737506"
+                          href="tel:+917990282583"
                           className="text-foreground/70 hover:text-primary transition-colors"
                         >
-                          +91 95747 37506
+                          +91 79902 82583
                         </a>
                       </div>
                     </div>
@@ -88,9 +88,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-lg mb-1">Location</h3>
-                        <p className="text-foreground/70">
-                          GIFT City, Gujarat, India
-                        </p>
+                        <p className="text-foreground/70">GIFT City, India</p>
                       </div>
                     </div>
                   </Card>

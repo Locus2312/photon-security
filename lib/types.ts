@@ -7,6 +7,7 @@ export interface Service {
   description: string;
   icon?: string;
   tags?: string[];
+  features?: string[];
 }
 
 export interface ServiceCategory {

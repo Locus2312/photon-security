@@ -13,7 +13,6 @@ export const COLORS = {
 export const NAVIGATION = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Compliance", href: "/compliance" },
   // { label: "Case Studies", href: "/case-studies" },
   //  { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },

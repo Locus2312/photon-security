@@ -1,14 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Service } from "@/lib/types";
-import { Check, Clock, FileText, TrendingUp } from "lucide-react";
+import { Check, FileText, TrendingUp } from "lucide-react";
+import Link from "next/link";
 
 interface ServiceDetailViewProps {
   service: Service;
@@ -31,10 +26,9 @@ export function ServiceDetailView({ service }: ServiceDetailViewProps) {
               {service.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg">Request Quote</Button>
-              <Button size="lg" variant="outline">
-                Schedule Consultation
-              </Button>
+              <Link href="mailto:sales@photonsecurity.in">
+                <Button size="lg">Request Quote</Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -131,52 +125,6 @@ export function ServiceDetailView({ service }: ServiceDetailViewProps) {
                     <span>Re-test certificate</span>
                   </li>
                 </ul>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Timeline & Pricing */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <Card className="glass">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Clock className="text-primary" size={20} />
-                  Typical Timeline
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <p className="font-semibold mb-1">Small Engagement (S)</p>
-                  <p className="text-sm text-foreground/70">2–4 weeks</p>
-                </div>
-                <div>
-                  <p className="font-semibold mb-1">Medium Engagement (M)</p>
-                  <p className="text-sm text-foreground/70">4–8 weeks</p>
-                </div>
-                <div>
-                  <p className="font-semibold mb-1">Large Engagement (L)</p>
-                  <p className="text-sm text-foreground/70">8–12 weeks</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="glass">
-              <CardHeader>
-                <CardTitle>Pricing</CardTitle>
-                <CardDescription>
-                  Transparent pricing based on scope
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex gap-2 flex-wrap">
-                  <Badge variant="outline">₹2–5L (S)</Badge>
-                  <Badge variant="outline">₹5–15L (M)</Badge>
-                  <Badge variant="outline">₹15–50L+ (L)</Badge>
-                </div>
-                <p className="text-sm text-foreground/70">
-                  Final pricing determined after discovery call. Custom quotes
-                  for enterprise engagements.
-                </p>
               </CardContent>
             </Card>
           </div>
