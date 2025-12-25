@@ -19,16 +19,16 @@ export function HeroSection() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-accent border border-primary/30 pointer-events-auto">
             <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="text-xs font-medium text-primary">
-              Powering Indian Cybersecurity
+              Trusted by Indian Enterprises
             </span>
           </div>
 
           <div className="space-y-4">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-balance leading-tight">
-              Enterprise Security,
+              Energy of a Photon
               <br />
               <span className="bg-linear-to-r from-primary to-primary bg-clip-text text-transparent">
-                Photon Speed
+                Strength of Security
               </span>
             </h1>
             <p className="text-lg md:text-xl text-foreground/70 text-balance max-w-2xl mx-auto">

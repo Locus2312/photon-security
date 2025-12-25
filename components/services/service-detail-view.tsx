@@ -175,9 +175,11 @@ export function ServiceDetailView({ service }: ServiceDetailViewProps) {
           <p className="text-lg text-foreground/70 mb-8">
             Contact our team for a detailed discussion of your security needs.
           </p>
-          <Button size="lg" className="gap-2">
-            Get in Touch
-          </Button>
+          <Link href="mailto:sales@photonsecurity.in">
+            <Button size="lg" className="gap-2">
+              Get in Touch
+            </Button>
+          </Link>
         </div>
       </section>
     </>
