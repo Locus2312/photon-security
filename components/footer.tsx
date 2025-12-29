@@ -10,7 +10,7 @@ export function Footer() {
           <div className="col-span-1">
             <Link href="/" className="inline-block mb-4">
               <Image
-                src="/footer.png"
+                src="/assets/footer.png"
                 alt="Photon Security Logo"
                 width={150}
                 height={80}

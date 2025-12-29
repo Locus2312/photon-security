@@ -40,7 +40,7 @@ export function Navbar() {
       <nav className="container max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo.png"
+            src="/assets/logo.png"
             alt="Photon Security Logo"
             width={150}
             height={60}
