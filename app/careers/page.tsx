@@ -4,25 +4,13 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Clock, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { jobs } from "@/lib/jobs";
 
 export const metadata: Metadata = {
   title: "Careers | Photon Security",
   description:
     "Join our team of security experts. We're hiring across multiple roles.",
 };
-
-const jobs = [
-  {
-    slug: "graphic-designer",
-    title: "Graphic Designer",
-    department: "Design",
-    location: "Remote",
-    type: "Part-time",
-    description:
-      "Design emails, brochures, invoices, and website graphics. Move fast and deliver clean work.",
-    featured: true,
-  },
-];
 
 export default function CareersPage() {
   return (
@@ -43,7 +31,7 @@ export default function CareersPage() {
           <h2 className="text-2xl font-bold mb-6">Open Positions</h2>
           <div className="space-y-4">
             {jobs.map((job) => (
-              <Link key={job.slug} href={`/careers/${job.slug}`}>
+              <Link key={job.id} href={`/careers/${job.slug}`}>
                 <Card
                   className={`hover:border-primary/50 transition-all cursor-pointer ${
                     job.featured ? "border-primary/30 bg-primary/5" : ""
@@ -110,3 +98,4 @@ export default function CareersPage() {
     </main>
   );
 }
+
