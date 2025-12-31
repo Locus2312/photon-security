@@ -47,13 +47,15 @@ export default async function JobDetailPage({ params }: Props) {
             <Badge variant="outline">{job.type}</Badge>
           </div>
 
-          <p className="text-sm text-foreground/50 mb-2">
-            Job ID: {job.id}
-          </p>
+          <p className="text-sm text-foreground/50 mb-2">Job ID: {job.id}</p>
+          {job.lastDateToApply && (
+            <p className="text-sm text-foreground/60 mb-4">
+              Last date to apply:{" "}
+              <span className="font-semibold">{job.lastDateToApply}</span>
+            </p>
+          )}
 
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            {job.title}
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{job.title}</h1>
           <p className="text-lg text-foreground/70">{job.description}</p>
         </div>
       </section>
@@ -137,4 +139,3 @@ export default async function JobDetailPage({ params }: Props) {
     </main>
   );
 }
-

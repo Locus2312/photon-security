@@ -12,6 +12,7 @@ export type Job = {
   benefits?: string[];
   applicationNote?: string;
   contactEmail?: string;
+  lastDateToApply?: string;
 };
 
 export const jobs: Job[] = [
@@ -25,6 +26,7 @@ export const jobs: Job[] = [
     description:
       "We're hiring a part-time Graphic Designer for email design, brochure design, invoices, website graphics, and other misc design work.",
     featured: true,
+    lastDateToApply: "31st December 2025", // ✅ NEW
     requirements: [
       "Portfolio demonstrating professional design work (emails, brochures, web graphics)",
       "Experience with email design and HTML email templates",

@@ -72,6 +72,12 @@ export default function CareersPage() {
                     <p className="text-foreground/70 text-sm mb-3">
                       {job.description}
                     </p>
+                    {job.lastDateToApply && (
+                      <p className="text-xs text-foreground/60 mb-3">
+                        Last date to apply: {job.lastDateToApply}
+                      </p>
+                    )}
+
                     <div className="flex items-center gap-2 text-primary font-semibold text-sm">
                       View Details <ArrowRight size={14} />
                     </div>
@@ -98,4 +104,3 @@ export default function CareersPage() {
     </main>
   );
 }
-
