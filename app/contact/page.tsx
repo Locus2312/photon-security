@@ -1,8 +1,8 @@
-"use client";
-
 import { ContactForm } from "@/components/forms/contact-form";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import type { Metadata } from "next";
+
 
 export const metadata: Metadata = {
   title: "Contact Us | Photon Security",

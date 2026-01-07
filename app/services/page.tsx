@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Our comprehensive cybersecurity services including VA&PT, audits, compliance, and managed security.",
   alternates: {
-    canonical: `https://www.photonsecurity.in/services/${slug}`,
+    canonical: `https://www.photonsecurity.in/services`,
   },
 
 };

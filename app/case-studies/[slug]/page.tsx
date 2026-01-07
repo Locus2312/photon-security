@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 import { TrendingUp, Users } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 type Props = {
   params: { slug: string };
