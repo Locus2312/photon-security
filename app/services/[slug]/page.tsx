@@ -4,11 +4,11 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
   const service = getServiceBySlug(slug);
 
   if (!service) return { title: "Service Not Found" };
@@ -16,6 +16,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${service.name} | Photon Security`,
     description: service.description,
+    alternates: {
+      canonical: `https://www.photonsecurity.in/services/${slug}`,
+    },
   };
 }
 
@@ -27,7 +30,7 @@ export async function generateStaticParams() {
 }
 
 export default async function ServiceDetailPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug } = params;
   const service = getServiceBySlug(slug);
 
   if (!service) {

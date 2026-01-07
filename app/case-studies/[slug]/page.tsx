@@ -6,7 +6,7 @@ import { TrendingUp, Users } from "lucide-react";
 import type { Metadata } from "next";
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 };
 
 // Define the case study type
@@ -129,7 +129,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
   const study = caseStudyDetails[slug];
 
   if (!study) return { title: "Case Study Not Found" };
@@ -137,11 +137,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${study.title} | Photon Security`,
     description: study.challenge,
+    alternates: {
+      canonical: `https://www.photonsecurity.in/case-studies/${slug}`,
+    },
+
   };
 }
 
 export default async function CaseStudyDetailPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug } = params;
   const study = caseStudyDetails[slug];
 
   if (!study) {
@@ -254,7 +258,9 @@ export default async function CaseStudyDetailPage({ params }: Props) {
             <p className="text-lg text-foreground/70 mb-8">
               Get a customized security assessment from our expert team.
             </p>
-            <Button size="lg">Request a Consultation</Button>
+            <Link href="mailto:sales@photonsecurity.in">
+              <Button size="lg">Request a Consultation</Button>
+            </Link>
           </div>
         </section>
       </main>

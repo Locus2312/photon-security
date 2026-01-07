@@ -26,12 +26,17 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://photonsecurity.in"),
   title: "Photon Security",
   icons: {
     icon: "/favicon.ico",
   },
   description:
     "Modern, research-driven cybersecurity services for Indian enterprises. VAPT, audits, MSS, and compliance advisory.",
+  alternates: {
+    canonical: "https://www.photonsecurity.in/",
+  },
+
   robots: { index: true, follow: true },
 };
 

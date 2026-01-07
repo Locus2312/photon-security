@@ -4,6 +4,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Cookie Policy | Photon Security",
   description: "Cookie policy explaining how Photon Security uses cookies.",
+  alternates: {
+    canonical: "https://www.photonsecurity.in/legal/cookies",
+  },
 };
 
 export default function CookiePolicyPage() {

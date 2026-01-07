@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "About | Photon Security",
   description:
     "Learn about Photon Security, our mission, values, and leadership team.",
+  alternates: {
+    canonical: "https://photonsecurity.in/about",
+  },
 };
 
 export default function AboutPage() {

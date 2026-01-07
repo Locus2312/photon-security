@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Get a Quote | Photon Security",
   description:
     "Receive a customized security assessment quote based on your organization's needs.",
+  alternates: {
+    canonical: "https://www.photonsecurity.in/quote",
+  },
 };
 
 export default function QuotePage() {

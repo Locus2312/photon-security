@@ -4,6 +4,15 @@ import { ContactForm } from "@/components/forms/contact-form";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
+export const metadata: Metadata = {
+  title: "Contact Us | Photon Security",
+  description: "Reach out to Photon Security",
+  alternates: {
+    canonical: "https://photonsecurity.in/contact",
+  },
+};
+
+
 export default function ContactPage() {
   return (
     <>

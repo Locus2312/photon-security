@@ -4,6 +4,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Privacy Policy | Photon Security",
   description: "Privacy policy for Photon Security.",
+  alternates: {
+    canonical: "https://www.photonsecurity.in/legal/privacy",
+  },
 };
 
 export default function PrivacyPage() {

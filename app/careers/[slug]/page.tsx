@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { jobs } from "@/lib/jobs";
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 };
 
 function getJobBySlug(slug: string) {
@@ -19,19 +19,27 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
   const job = getJobBySlug(slug);
 
-  if (!job) return { title: "Job Not Found" };
+  if (!job) {
+    return {
+      title: "Job Not Found | Photon Security",
+      robots: { index: false },
+    };
+  }
 
   return {
     title: `${job.title} | Photon Security Careers`,
     description: job.description,
+    alternates: {
+      canonical: "https://photonsecurity.in/careers/${slug}",
+    },
   };
 }
 
 export default async function JobDetailPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug } = params;
   const job = getJobBySlug(slug);
 
   if (!job) notFound();

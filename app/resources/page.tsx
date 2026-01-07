@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Resources | Photon Security",
   description:
     "Security guides, playbooks, checklists, and runbooks for Indian enterprises.",
+  alternates: {
+    canonical: "https://www.photonsecurity.in/resources",
+  },
 };
 
 const resources = [

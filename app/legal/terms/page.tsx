@@ -4,6 +4,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Terms of Service | Photon Security",
   description: "Terms of service for Photon Security.",
+  alternates: {
+    canonical: "https://www.photonsecurity.in/terms",
+  },
 };
 
 export default function TermsPage() {

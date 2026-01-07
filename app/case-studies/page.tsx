@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Case Studies | Photon Security",
   description:
     "Real-world examples of how we helped organizations secure their infrastructure.",
+  alternates: {
+    canonical: "https://www.photonsecurity.in/case-studies",
+  },
 };
 
 const caseStudies = [

@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: "Services | Photon Security",
   description:
     "Our comprehensive cybersecurity services including VA&PT, audits, compliance, and managed security.",
+  alternates: {
+    canonical: `https://www.photonsecurity.in/services/${slug}`,
+  },
+
 };
 
 export default function ServicesPage() {
