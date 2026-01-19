@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { BackToTop } from "@/components/back-to-top";
 import "./globals.css";
 
 const farray = localFont({
@@ -55,10 +56,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark scroll-smooth ${farray.variable}`}>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen bg-background text-foreground`}
       >
         <Navbar />
-        {children}
+        <main className="pt-20">{children}</main>
+        <BackToTop />
+        <SpeedInsights />
         <Footer />
         <Analytics />
       </body>

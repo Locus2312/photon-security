@@ -1,7 +1,8 @@
+import { PageHero } from "@/components/layout/page-hero";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, Lightbulb, Heart, Target } from "lucide-react";
-import  Link  from "next/link";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -59,19 +60,10 @@ export default function AboutPage() {
     <>
       <main className="flex flex-col min-h-screen">
         {/* Hero */}
-        <section className="w-full py-16 md:py-24 border-b border-border/40">
-          <div className="container max-w-7xl mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                About Photon Security
-              </h1>
-              <p className="text-xl text-foreground/70">
-                Research-driven cybersecurity firm dedicated to protecting
-                Indian enterprises from evolving threats.
-              </p>
-            </div>
-          </div>
-        </section>
+        <PageHero
+          title="About Photon Security"
+          description="Research-driven cybersecurity firm dedicated to protecting Indian enterprises from evolving threats."
+        />
 
         {/* Mission & Vision */}
         <section className="w-full py-20">
@@ -156,7 +148,7 @@ export default function AboutPage() {
               Partner with us to strengthen your security posture and achieve
               your compliance goals.
             </p>
-            <Link href = "/careers">
+            <Link href="/careers">
               <Button size="lg">Start Your Journey</Button>
             </Link>
           </div>

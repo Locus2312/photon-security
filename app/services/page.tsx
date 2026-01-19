@@ -1,4 +1,5 @@
 import { ServicesCategoryGrid } from "@/components/services/services-category-grid";
+import { PageHero } from "@/components/layout/page-hero";
 import { servicesData } from "@/lib/services-data";
 import type { Metadata } from "next";
 
@@ -9,24 +10,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `https://www.photonsecurity.in/services`,
   },
-
 };
 
 export default function ServicesPage() {
   return (
     <>
-      <main className="flex flex-col min-h-screen pt-8">
-        <div className="container max-w-7xl mx-auto px-4 mb-16">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Our Services
-            </h1>
-            <p className="text-lg text-foreground/70">
-              Comprehensive security solutions tailored to protect your
-              organization from evolving threats.
-            </p>
-          </div>
-        </div>
+      <main className="flex flex-col min-h-screen">
+        <PageHero
+          title="Our Services"
+          description="Comprehensive security solutions tailored to protect your organization from evolving threats."
+        />
 
         <div className="space-y-24 pb-20">
           {servicesData.map((category) => (

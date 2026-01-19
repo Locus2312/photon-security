@@ -2,7 +2,7 @@ import { ContactForm } from "@/components/forms/contact-form";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import type { Metadata } from "next";
-
+import { PageHero } from "@/components/layout/page-hero";
 
 export const metadata: Metadata = {
   title: "Contact Us | Photon Security",
@@ -12,25 +12,16 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function ContactPage() {
   return (
     <>
-      <div className="min-h-screen bg-background">
+      <main className="flex flex-col min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="relative py-20 px-4 bg-linear-to-br from-primary/10 via-background to-background">
-          <div className="max-w-7xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Get in Touch
-            </h1>
-            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-              Ready to secure your business? Contact us today for a free
-              consultation.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          title="Get in Touch"
+          description="Ready to secure your business? Contact us today for a free consultation."
+        />
 
-        {/* Contact Section */}
         <section className="py-20 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12">
@@ -125,7 +116,7 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
-      </div>
+      </main>
     </>
   );
 }

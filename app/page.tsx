@@ -4,7 +4,6 @@ import { ProcessTimeline } from "@/components/home/process-timeline";
 import { IndustriesSection } from "@/components/home/industries-section";
 import { TestimonialCarousel } from "@/components/home/testimonial-carousel";
 import { FaqAccordion } from "@/components/home/faq-accordion";
-import { LeadCaptureBanner } from "@/components/home/lead-capture-banner";
 
 export default function Home() {
   return (
@@ -16,7 +15,6 @@ export default function Home() {
         <IndustriesSection />
         <TestimonialCarousel />
         <FaqAccordion />
-        <LeadCaptureBanner />
       </main>
     </>
   );

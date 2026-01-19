@@ -13,11 +13,12 @@ export function TestimonialCarousel() {
       rating: 5,
     },
     {
-      text: "Their expertise in cloud security was instrumental in achieving SOC 2 compliance ahead of schedule.",
+      text: "Their expertise in offensive security was instrumental in uncovering critical vulnerabilities and strengthening our defenses ahead of launch.",
       author: "Priya Sharma",
       role: "Security Lead, SaaS Startup",
       rating: 5,
     },
+
     {
       text: "Professional, thorough, and tailored to our specific business needs. Highly recommended.",
       author: "Anil Desai",

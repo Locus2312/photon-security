@@ -1,7 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { PageHero } from "@/components/layout/page-hero";
 import { Button } from "@/components/ui/button";
-import { MapPin, Clock, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { jobs } from "@/lib/jobs";
@@ -17,16 +15,12 @@ export const metadata: Metadata = {
 
 export default function CareersPage() {
   return (
-    <main className="flex flex-col min-h-screen pt-8">
+    <main className="flex flex-col min-h-screen">
       {/* Hero */}
-      <section className="w-full py-16 md:py-20 border-b border-border/40">
-        <div className="container max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Join Our Team</h1>
-          <p className="text-lg text-foreground/70">
-            Build a career in cybersecurity protecting Indian enterprises.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title="Join Our Team"
+        description="Build a career in cybersecurity protecting Indian enterprises."
+      />
 
       {/* Open Positions */}
       <section className="w-full py-16">

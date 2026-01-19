@@ -29,6 +29,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    scroll
                     className="text-sm text-foreground/60 hover:text-primary transition-colors"
                   >
                     {item.label}
@@ -45,6 +46,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    scroll
                     className="text-sm text-foreground/60 hover:text-primary transition-colors"
                   >
                     {item.label}
@@ -86,18 +88,21 @@ export function Footer() {
           <div className="flex gap-6">
             <Link
               href="/legal/privacy"
+              scroll
               className="text-xs text-foreground/50 hover:text-primary transition-colors"
             >
               Privacy
             </Link>
             <Link
               href="/legal/terms"
+              scroll
               className="text-xs text-foreground/50 hover:text-primary transition-colors"
             >
               Terms
             </Link>
             <Link
               href="/legal/cookies"
+              scroll
               className="text-xs text-foreground/50 hover:text-primary transition-colors"
             >
               Cookies

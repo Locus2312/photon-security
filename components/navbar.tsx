@@ -1,106 +1,196 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { NAVIGATION } from "@/lib/constants";
+
+const NAVIGATION = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Careers", href: "/careers" },
+  { label: "Contact", href: "/contact" },
+];
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const current = window.scrollY;
 
-      if (current > lastScrollY && current > 80) {
-        setShowNavbar(false);
-      } else {
-        setShowNavbar(true);
-      }
+      // Check if user has scrolled down
+      setIsScrolled(current > 50);
 
-      setLastScrollY(current);
+      // Calculate scroll progress (0 to 100)
+      const windowHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const progress = (current / windowHeight) * 100;
+      setScrollProgress(Math.min(progress, 100));
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   return (
-    <header
-      className={`
-        sticky top-0 z-50 w-full border-b border-border/40 glass
-        transition-transform duration-300 ease-in-out
-        ${showNavbar ? "translate-y-0" : "-translate-y-full"}
-      `}
-    >
-      <nav className="container max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/assets/logo.png"
-            alt="Photon Security Logo"
-            width={150}
-            height={60}
-            className="h-auto w-auto"
-            priority
-          />
-        </Link>
+    <>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40 transition-all duration-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            className={`flex items-center transition-all duration-500 ${"justify-between h-20"}`}
+          >
+            {/* Left: Logo */}
+            <div className="flex items-center">
+              <Link href="/" className="relative z-10">
+                <Image
+                  src="/assets/logo.png"
+                  alt="Photon Security"
+                  width={192}
+                  height={48}
+                  priority
+                  className={`transition-all duration-500 ${
+                    isScrolled ? "opacity-0 scale-95" : "opacity-100 scale-100"
+                  }`}
+                />
+              </Link>
+            </div>
 
-        <div className="hidden md:flex items-center gap-8">
-          {NAVIGATION.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            {/* Center: Eagle (absolute, no layout influence) */}
+            <div
+              className={`pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+    transition-all duration-500
+    ${isScrolled ? "opacity-100 scale-100" : "opacity-0 scale-90 pointer-events-none"}
+  `}
             >
-              {item.label}
-            </Link>
-          ))}
-        </div>
+              <Link href="/">
+                <div className="relative w-20 h-20">
+                  <div className="absolute inset-0 rounded-full blur-xl bg-white/20 animate-pulse scale-125" />
+                  <Image
+                    src="/assets/eagle_no_bg.png"
+                    alt="Photon Security Eagle"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+              </Link>
+            </div>
 
-        {/* CTA Buttons */}
-        <div className="hidden md:flex items-center gap-3">
-          <Link href="mailto:sales@photonsecurity.in">
-            <Button size="sm">Request Audit</Button>
-          </Link>
-        </div>
-
-        {/* Mobile Menu Toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 hover:bg-card rounded-md transition-colors"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-
-        {/* Mobile Menu */}
-        {mobileOpen && (
-          <div className="absolute top-full left-0 right-0 bg-card border-b border-border/40 md:hidden">
-            <div className="container max-w-7xl mx-auto px-4 py-4 flex flex-col gap-4">
+            {/* Desktop Navigation - Hidden when scrolled */}
+            <div
+              className={`hidden md:flex items-center space-x-8 transition-all duration-500 ${
+                isScrolled
+                  ? "opacity-0 pointer-events-none absolute"
+                  : "opacity-100"
+              }`}
+            >
               {NAVIGATION.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+                  className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors relative group"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                </Link>
+              ))}
+            </div>
+
+            {/* CTA Button - Hidden when scrolled */}
+            <div
+              className={`hidden md:block transition-all duration-500 ${
+                isScrolled
+                  ? "opacity-0 pointer-events-none absolute"
+                  : "opacity-100"
+              }`}
+            >
+              <Link href="mailto:sales@photonsecurity.in">
+                <button className="px-6 py-2.5 bg-white text-black font-medium rounded-md hover:bg-white/90 transition-all duration-300 hover:shadow-lg hover:shadow-white/20">
+                  Request Assessment
+                </button>
+              </Link>
+            </div>
+
+            {/* Mobile Menu Toggle - Always visible on mobile */}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className={`md:hidden p-2 hover:bg-card rounded-md transition-all duration-500 ${
+                isScrolled ? "absolute right-4" : ""
+              }`}
+            >
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+
+        {/* Progress Bar Container - Only visible when scrolled */}
+        <div
+          className={`absolute bottom-0 left-0 right-0 h-1 bg-transparent overflow-visible transition-opacity duration-500 ${
+            isScrolled ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {/* Left Progress Line */}
+          <div
+            className="absolute left-0 bottom-0 h-0.5 bg-linear-to-r from-white via-white to-transparent"
+            style={{
+              width: `${scrollProgress / 2}%`,
+              transition: "width 0.1s ease-out",
+              boxShadow:
+                "0 0 15px rgba(255,255,255,0.9), 0 0 30px rgba(255,255,255,0.5)",
+            }}
+          />
+
+          {/* Right Progress Line */}
+          <div
+            className="absolute right-0 bottom-0 h-0.5 bg-linear-to-l from-white via-white to-transparent"
+            style={{
+              width: `${scrollProgress / 2}%`,
+              transition: "width 0.1s ease-out",
+              boxShadow:
+                "0 0 15px rgba(255,255,255,0.9), 0 0 30px rgba(255,255,255,0.5)",
+            }}
+          />
+
+          {/* Center glow effect when lines are close */}
+          <div
+            className="absolute left-1/2 -top-8 -translate-x-1/2 w-24 h-24 pointer-events-none transition-opacity duration-500"
+            style={{
+              opacity: scrollProgress > 80 ? 0.4 : 0,
+              background:
+                "radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%)",
+            }}
+          />
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border/40 shadow-xl">
+            <div className="px-4 py-6 space-y-4">
+              {NAVIGATION.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
                   onClick={() => setMobileOpen(false)}
+                  className="block text-base font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
                 >
                   {item.label}
                 </Link>
               ))}
-              <div className="flex flex-col gap-2 pt-4 border-t border-border/40">
-                <Link href="mailto:sales@photonsecurity.in">
-                  <Button size="sm" className="w-full">
+              <div className="pt-4">
+                <Link href="/audit" onClick={() => setMobileOpen(false)}>
+                  <button className="w-full px-6 py-3 bg-white text-black font-medium rounded-md hover:bg-white/90 transition-all duration-300">
                     Request Audit
-                  </Button>
+                  </button>
                 </Link>
               </div>
             </div>
           </div>
         )}
       </nav>
-    </header>
+    </>
   );
 }

@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -30,34 +33,42 @@ export function FaqAccordion() {
   ];
 
   return (
-    <section className="w-full py-20">
-      <div className="container max-w-3xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-foreground/70">
-            Common questions about our services and engagement model.
-          </p>
-        </div>
+    <motion.section
+      className="w-full py-20"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <section className="w-full py-20">
+        <div className="container max-w-3xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-foreground/70">
+              Common questions about our services and engagement model.
+            </p>
+          </div>
 
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, idx) => (
-            <AccordionItem
-              key={idx}
-              value={`item-${idx}`}
-              className="border-border/40"
-            >
-              <AccordionTrigger className="hover:text-primary transition-colors">
-                {faq.q}
-              </AccordionTrigger>
-              <AccordionContent className="text-foreground/70">
-                {faq.a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-    </section>
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, idx) => (
+              <AccordionItem
+                key={idx}
+                value={`item-${idx}`}
+                className="border-border/40"
+              >
+                <AccordionTrigger className="hover:text-primary transition-colors">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-foreground/70">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+    </motion.section>
   );
 }
