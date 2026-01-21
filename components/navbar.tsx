@@ -181,9 +181,12 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="pt-4">
-                <Link href="/audit" onClick={() => setMobileOpen(false)}>
+                <Link
+                  href="mailto:sales@photonsecurity.in"
+                  onClick={() => setMobileOpen(false)}
+                >
                   <button className="w-full px-6 py-3 bg-white text-black font-medium rounded-md hover:bg-white/90 transition-all duration-300">
-                    Request Audit
+                    Request Assessment
                   </button>
                 </Link>
               </div>
