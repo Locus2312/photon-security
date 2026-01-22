@@ -12,7 +12,7 @@ export function Footer() {
               <Image
                 src="/assets/footer.png"
                 alt="Photon Security Logo"
-                width={150}
+                width={120}
                 height={80}
                 className="h-auto w-auto"
               />
@@ -83,7 +83,7 @@ export function Footer() {
 
         <div className="border-t border-border/40 pt-8 flex flex-col md:flex-row items-center justify-between">
           <p className="text-xs text-foreground/50 mb-4 md:mb-0">
-            © 2025 Photon Security. All rights reserved.
+            © 2026 Photon Security. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link

@@ -1,6 +1,6 @@
 export const BRAND = {
   name: "Photon Security",
-  tagline: "Energy of a Photon Strength of Security",
+  tagline: "Energy of a Photon, Strength of Security",
   description:
     "Modern, research-driven cybersecurity services for Indian enterprises.",
 } as const;

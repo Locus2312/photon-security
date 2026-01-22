@@ -21,10 +21,8 @@ export function Navbar() {
     const handleScroll = () => {
       const current = window.scrollY;
 
-      // Check if user has scrolled down
       setIsScrolled(current > 50);
 
-      // Calculate scroll progress (0 to 100)
       const windowHeight =
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
@@ -43,7 +41,6 @@ export function Navbar() {
           <div
             className={`flex items-center transition-all duration-500 ${"justify-between h-20"}`}
           >
-            {/* Left: Logo */}
             <div className="flex items-center">
               <Link href="/" className="relative z-10">
                 <Image
@@ -59,7 +56,6 @@ export function Navbar() {
               </Link>
             </div>
 
-            {/* Center: Eagle (absolute, no layout influence) */}
             <div
               className={`pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
     transition-all duration-500
@@ -80,7 +76,6 @@ export function Navbar() {
               </Link>
             </div>
 
-            {/* Desktop Navigation - Hidden when scrolled */}
             <div
               className={`hidden md:flex items-center space-x-8 transition-all duration-500 ${
                 isScrolled
@@ -100,7 +95,6 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* CTA Button - Hidden when scrolled */}
             <div
               className={`hidden md:block transition-all duration-500 ${
                 isScrolled
@@ -109,7 +103,7 @@ export function Navbar() {
               }`}
             >
               <Link href="mailto:sales@photonsecurity.in">
-                <button className="px-6 py-2.5 bg-white text-black font-medium rounded-md hover:bg-white/90 transition-all duration-300 hover:shadow-lg hover:shadow-white/20">
+                <button className="px-4 py-2 text-sm bg-white text-black font-medium rounded-md hover:bg-white/90 transition-all duration-300 hover:shadow-lg hover:shadow-white/20">
                   Request Assessment
                 </button>
               </Link>
@@ -185,7 +179,7 @@ export function Navbar() {
                   href="mailto:sales@photonsecurity.in"
                   onClick={() => setMobileOpen(false)}
                 >
-                  <button className="w-full px-6 py-3 bg-white text-black font-medium rounded-md hover:bg-white/90 transition-all duration-300">
+                  <button className="w-full px-4 py-2.5 text-sm bg-white text-black font-medium rounded-md hover:bg-white/90 transition-all duration-300">
                     Request Assessment
                   </button>
                 </Link>
