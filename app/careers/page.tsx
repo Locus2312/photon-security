@@ -1,28 +1,28 @@
 import { PageHero } from "@/components/layout/page-hero";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { jobs } from "@/lib/jobs";
+import { JobCard } from "@/components/careers/job-cards";
+import { JobDetailWrapper } from "@/components/careers/job-detail-wrapper";
 
 export const metadata: Metadata = {
   title: "Careers | Photon Security",
   description:
     "Join our team of security experts. We're hiring across multiple roles.",
   alternates: {
-    canonical: "https://photonsecurity.in/careers",
+    canonical: `https://photonsecurity.in/careers`,
   },
 };
 
 export default function CareersPage() {
   return (
-    <main className="flex flex-col min-h-screen">
+    <JobDetailWrapper>
       {/* Hero */}
       <PageHero
         title="Join Our Team"
         description="Build a career in cybersecurity protecting Indian enterprises."
       />
 
-      {/* Open Positions */}
       <section className="w-full py-16">
         <div className="container max-w-4xl mx-auto px-4">
           <h2 className="text-2xl font-bold mb-6">Open Positions</h2>
@@ -32,11 +32,11 @@ export default function CareersPage() {
                 No open positions at the moment. Please check back soon.
               </p>
             ) : (
-              jobs.map((job) => (
-                <Link key={job.id} href={`/careers/${job.slug}`}>
-                  {/* existing job card code stays exactly the same */}
-                </Link>
-              ))
+              <div className="space-y-5">
+                {jobs.map((job) => (
+                  <JobCard key={job.id} job={job} />
+                ))}
+              </div>
             )}
           </div>
         </div>
@@ -54,6 +54,6 @@ export default function CareersPage() {
           </a>
         </div>
       </section>
-    </main>
+    </JobDetailWrapper>
   );
 }
