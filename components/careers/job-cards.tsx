@@ -15,19 +15,24 @@ export function JobCard({ job }: { job: any }) {
       className="group"
     >
       <Link href={`/careers/${job.slug}`} className="block">
-        <div className="rounded-xl border border-border/40 bg-card/30 p-6 transition group-hover:border-primary/60 group-hover:shadow-lg">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <h3 className="text-lg font-semibold group-hover:text-primary transition">
-                {job.title}
-              </h3>
-              <p className="text-sm text-foreground/60 mt-1">
-                {job.department} · {job.location}
-              </p>
-            </div>
+        <div
+          className="rounded-xl border border-border/40 bg-card/30 p-5 sm:p-6 transition
+                group-hover:border-primary/60 group-hover:shadow-lg
+                active:scale-[0.99]"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <h3 className="text-lg font-semibold leading-snug group-hover:text-primary transition">
+              {job.title}
+            </h3>
 
-            <Badge variant="outline">{job.type}</Badge>
+            <Badge variant="outline" className="shrink-0 text-xs">
+              {job.location}
+            </Badge>
           </div>
+
+          <p className="text-sm text-foreground/60 mt-2">
+            {job.employmentType}
+          </p>
         </div>
       </Link>
     </motion.div>

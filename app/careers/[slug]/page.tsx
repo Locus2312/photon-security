@@ -57,14 +57,14 @@ export default async function JobDetailPage({ params }: Props) {
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge variant="secondary">{job.department}</Badge>
             <Badge variant="outline">{job.location}</Badge>
-            <Badge variant="outline">{job.type}</Badge>
+            <Badge variant="outline">{job.employmentType}</Badge>
           </div>
 
           <p className="text-sm text-foreground/50 mb-2">Job ID: {job.id}</p>
-          {job.lastDateToApply && (
-            <p className="text-sm text-foreground/60 mb-4">
-              Last date to apply:{" "}
-              <span className="font-semibold">{job.lastDateToApply}</span>
+          {job.compensationType && (
+            <p className="text-sm text-foreground/60 mt-2">
+              Compensation:{" "}
+              <span className="font-medium">{job.compensationType}</span>
             </p>
           )}
 
