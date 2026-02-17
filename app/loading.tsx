@@ -7,7 +7,7 @@ export default function Loading() {
     <div className="min-h-screen bg-background flex items-center justify-center overflow-hidden">
       {/* Ambient gradient */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-125 h-125 bg-primary/15 rounded-full blur-3xl animate-pulse" />
       </div>
 
       <motion.div
