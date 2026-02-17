@@ -20,7 +20,9 @@ export function Footer() {
 
             <p className="text-sm text-foreground/60 mb-4">{BRAND.tagline}</p>
 
-            <p className="text-xs text-foreground/50">GIFT City, India</p>
+            <div className="text-xs text-foreground/40 pt-1">
+              GSTIN: 24ABIFP6524D1ZE
+            </div>
           </div>
 
           <div>
@@ -75,16 +77,9 @@ export function Footer() {
               </a>
 
               <address className="not-italic leading-relaxed pt-2">
-                <div className="font-medium text-foreground/80">
-                  Photon Security
-                </div>
                 <div>Lavarpur Road, GIFT City, Gandhinagar</div>
                 <div>Gujarat, India</div>
               </address>
-
-              <div className="text-xs text-foreground/40 pt-1">
-                GSTIN: 24ABIFP6524D1ZE
-              </div>
             </div>
           </div>
         </div>
