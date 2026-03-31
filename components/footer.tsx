@@ -18,10 +18,13 @@ export function Footer() {
               />
             </Link>
 
-            <p className="text-sm text-foreground/60 mb-4">{BRAND.tagline}</p>
+            <p className="text-sm text-foreground/60 mb-2">{BRAND.tagline}</p>
 
             <div className="text-xs text-foreground/40 pt-1">
-              GSTIN: 24ABIFP6524D1ZE
+              <address className="not-italic leading-relaxed">
+                <div>Lavarpur Road, GIFT City, Gandhinagar</div>
+                <div>Gujarat, India</div>
+              </address>
             </div>
           </div>
 
@@ -75,11 +78,6 @@ export function Footer() {
               >
                 +91 79902 82583
               </a>
-
-              <address className="not-italic leading-relaxed pt-2">
-                <div>Lavarpur Road, GIFT City, Gandhinagar</div>
-                <div>Gujarat, India</div>
-              </address>
             </div>
           </div>
         </div>

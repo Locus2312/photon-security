@@ -7,7 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { BackToTop } from "@/components/back-to-top";
-import { ChatBot } from "@/components/ChatBot";
+import { ChatBot } from "@/components/chatBot";
 import "./globals.css";
 
 const farray = localFont({

@@ -43,7 +43,7 @@ export function ChatBot() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-[380px] h-[600px] max-h-[80vh] flex flex-col bg-background border border-border rounded-2xl shadow-2xl z-50 overflow-hidden animate-in slide-in-from-bottom-5 fade-in duration-300">
+        <div className="fixed bottom-6 right-6 w-95 h-150 max-h-[80vh] flex flex-col bg-background border border-border rounded-2xl shadow-2xl z-50 overflow-hidden animate-in slide-in-from-bottom-5 fade-in duration-300">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b bg-card">
             <div className="flex items-center gap-2">
@@ -96,7 +96,7 @@ export function ChatBot() {
                           : "");
 
                       return (
-                        <div className="prose prose-sm dark:prose-invert max-w-none break-words">
+                        <div className="prose prose-sm dark:prose-invert max-w-none wrap-break-word">
                           <ReactMarkdown
                             components={{
                               p: ({ children }: { children?: React.ReactNode }) => <p className="mb-2 last:mb-0">{children}</p>,
