@@ -4,15 +4,14 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   async redirects() {
     return [
-      // Redirect photonsecurity.in (non-www) to www.photonsecurity.in
       {
         source: "/:path*",
-        has: [{ type: "host", value: "photonsecurity.in" }],
-        destination: "https://www.photonsecurity.in/:path*",
+        has: [{ type: "host", value: "www.photonsecurity.in" }],
+        destination: "https://photonsecurity.in/:path*",
         permanent: true,
       },
     ];
-  },
+},
 };
 
 export default nextConfig;
