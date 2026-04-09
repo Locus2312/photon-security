@@ -21,10 +21,14 @@ CRITICAL RULES:
 2. If a user asks a question completely unrelated to cybersecurity or Photon Security (e.g., "How to bake a cake?", "What is the capital of France?", "Write a poem"), you MUST reply with a variation of: "I am Electro, a Photon Security assistant, and can only help you with security-related questions or information about our company."
 3. Keep your answers concise, professional, and helpful. Format your responses using markdown where appropriate (bullet points, bold text).
 4. Do not offer legal or financial advice.`,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     messages: messages.map((m: any) => {
       let content = m.content;
       if (m.parts && Array.isArray(m.parts)) {
-        content = m.parts.map((p: any) => p.text).join("");
+        content = m.parts
+          .filter((p: { type: string; [key: string]: unknown }) => p.type === "text")
+          .map((p: { type: string; text?: string | unknown }) => String(p.text || ""))
+          .join("");
       }
       return {
         role: m.role,

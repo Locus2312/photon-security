@@ -1,6 +1,13 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
+
+interface LocalMessage {
+  id: string;
+  role: string;
+  content?: string;
+  parts?: Array<{ type: string; text?: string | unknown; [key: string]: unknown }>;
+}
 import { Bot, Send, X, MessageSquare } from "lucide-react";
 import ReactMarkdown from 'react-markdown';
 import { useState, useEffect, useRef } from "react";
@@ -69,11 +76,11 @@ export function ChatBot() {
               <div className="flex flex-col items-center justify-center h-full text-center space-y-3 opacity-70">
                 <Bot size={48} className="text-muted-foreground opacity-50" />
                 <p className="text-sm text-muted-foreground px-4">
-                  Hello! I'm Electro, your AI Assistant. How can I help you?
+                  Hello! I&apos;m Electro, your AI Assistant. How can I help you?
                 </p>
               </div>
             ) : (
-              messages.map((m: any) => (
+              (messages as unknown as LocalMessage[]).map((m: LocalMessage) => (
                 <div
                   key={m.id}
                   className={`flex w-full ${m.role === "user" ? "justify-end" : "justify-start"}`}
@@ -90,8 +97,8 @@ export function ChatBot() {
                         m.content ||
                         (m.parts
                           ? m.parts
-                              .filter((p: any) => p.type === "text")
-                              .map((p: any) => p.text)
+                              .filter((p) => p.type === "text")
+                              .map((p) => (p as { text: string }).text)
                               .join("\n")
                           : "");
 

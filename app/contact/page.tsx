@@ -29,7 +29,7 @@ export default function ContactPage() {
               <div>
                 <h2 className="text-3xl font-bold mb-6">Send us a Message</h2>
                 <p className="text-foreground/70 mb-8">
-                  Fill out the form below and we'll get back to you within 24
+                  Fill out the form below and we&apos;ll get back to you within 24
                   hours.
                 </p>
                 <ContactForm />

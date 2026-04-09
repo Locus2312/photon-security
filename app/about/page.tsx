@@ -38,23 +38,6 @@ export default function AboutPage() {
     },
   ];
 
-  const leaders = [
-    {
-      name: "Vraj Patel",
-      role: "Director",
-      bio: "1+ years in cybersecurity, former CISO at major tech company.",
-    },
-    {
-      name: "RP Kania",
-      role: "Director",
-      bio: "1+ years building secure systems, AWS certified security specialist.",
-    },
-    {
-      name: "Het Patel",
-      role: "Director",
-      bio: "1+ years in security audits, ISO 27001 lead auditor certified.",
-    },
-  ];
 
   return (
     <>

@@ -43,7 +43,7 @@ export function ServiceDetailView({ service }: ServiceDetailViewProps) {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="text-primary" size={20} />
-                  Who It's For
+                  Who It&apos;s For
                 </CardTitle>
               </CardHeader>
               <CardContent>

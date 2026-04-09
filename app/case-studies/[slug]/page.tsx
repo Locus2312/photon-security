@@ -241,7 +241,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
                   <div key={i} className="w-5 h-5 rounded-full bg-primary/20" />
                 ))}
               </div>
-              <p className="text-lg mb-6 italic">"{study.testimonial.text}"</p>
+              <p className="text-lg mb-6 italic">&quot;{study.testimonial.text}&quot;</p>
               <div className="flex items-center gap-2">
                 <Users className="text-primary" size={18} />
                 <p className="font-semibold">{study.testimonial.author}</p>

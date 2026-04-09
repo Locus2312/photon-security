@@ -54,7 +54,7 @@ export function ContactForm() {
       } else {
         setError(result.error || "Failed to send message");
       }
-    } catch (err) {
+    } catch {
       setError("An error occurred. Please try again.");
     } finally {
       setLoading(false);
@@ -70,7 +70,7 @@ export function ContactForm() {
           <div>
             <h3 className="font-bold text-lg">Message Sent!</h3>
             <p className="text-foreground/70">
-              We'll get back to you within 24 hours.
+              We&apos;ll get back to you within 24 hours.
             </p>
           </div>
         </Card>

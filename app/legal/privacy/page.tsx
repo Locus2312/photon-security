@@ -23,14 +23,14 @@ export default function PrivacyPage() {
                 1. Information We Collect
               </h2>
               <p>
-                Photon Security ("we", "us", or "our") collects information you
+                Photon Security (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects information you
                 provide directly, such as:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>
                   Name, email, company, and contact information from forms
                 </li>
-                <li>Information about your organization's security needs</li>
+                <li>Information about your organization&apos;s security needs</li>
                 <li>Communication preferences and inquiry details</li>
               </ul>
             </section>

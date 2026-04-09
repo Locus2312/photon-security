@@ -71,7 +71,7 @@ export default function CaseStudiesPage() {
         <section className="w-full py-20">
           <div className="container max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-1 gap-6">
-              {caseStudies.map((study, idx) => (
+              {caseStudies.map((study) => (
                 <Link key={study.slug} href={`/case-studies/${study.slug}`}>
                   <Card className="glass hover:border-primary/50 transition-all cursor-pointer overflow-hidden">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-0">

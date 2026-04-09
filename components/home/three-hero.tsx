@@ -5,15 +5,18 @@ import { PerspectiveCamera, Points, PointMaterial } from "@react-three/drei";
 import { useRef, useMemo } from "react";
 
 function ParticleField() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>(null);
   const particleCount = 2000;
 
   const particles = useMemo(() => {
     const temp = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
+       /* eslint-disable react-hooks/purity */
       temp[i * 3] = (Math.random() - 0.5) * 40;
       temp[i * 3 + 1] = (Math.random() - 0.5) * 40;
       temp[i * 3 + 2] = (Math.random() - 0.5) * 40;
+       /* eslint-enable react-hooks/purity */
     }
     return temp;
   }, []);

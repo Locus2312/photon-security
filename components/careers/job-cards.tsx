@@ -2,9 +2,10 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import type { Job } from "@/lib/jobs";
 import { Badge } from "@/components/ui/badge";
 
-export function JobCard({ job }: { job: any }) {
+export function JobCard({ job }: { job: Job }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}

@@ -46,14 +46,14 @@ export const ThankYouEmail = ({ name, company }: ThankYouEmailProps) => {
               <Text style={greeting}>Hello {name},</Text>
 
               <Text style={paragraph}>
-                Thank you for contacting <strong>Photon Security</strong>. We've
+                Thank you for contacting <strong>Photon Security</strong>. We&apos;ve
                 received your message and appreciate you taking the time to
                 reach out to us.
               </Text>
 
               <Text style={paragraph}>
                 Our team is reviewing your inquiry and will get back to you
-                within <strong>24-48 hours</strong>. We're excited to learn more
+                within <strong>24-48 hours</strong>. We&apos;re excited to learn more
                 about how we can help secure {company}.
               </Text>
 
@@ -70,7 +70,7 @@ export const ThankYouEmail = ({ name, company }: ThankYouEmailProps) => {
               </Text>
 
               <Text style={paragraph}>
-                If you have any urgent questions, don't hesitate to reach us
+                If you have any urgent questions, don&apos;t hesitate to reach us
                 directly at{" "}
                 <Link href="mailto:info@photonsecurity.in" style={link}>
                   info@photonsecurity.in
@@ -203,27 +203,6 @@ const paragraph = {
   margin: "0 0 20px 0",
 };
 
-const highlightBox = {
-  backgroundColor: "#f0f9ff",
-  border: "2px solid #0ea5e9",
-  borderRadius: "8px",
-  padding: "20px",
-  margin: "30px 0",
-};
-
-const highlightText = {
-  color: "#0369a1",
-  fontSize: "16px",
-  fontWeight: "700",
-  margin: "0 0 12px 0",
-};
-
-const highlightContent = {
-  color: "#334155",
-  fontSize: "15px",
-  lineHeight: "1.8",
-  margin: "0",
-};
 
 const link = {
   color: "#0ea5e9",
