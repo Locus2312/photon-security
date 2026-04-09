@@ -2,8 +2,6 @@ import type React from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/next";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { BackToTop } from "@/components/back-to-top";
@@ -28,17 +26,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://photonsecurity.in"),
+  metadataBase: new URL("https://www.photonsecurity.in"),
   title: "Photon Security",
   icons: {
     icon: "/favicon.ico",
   },
   description:
     "Modern, research-driven cybersecurity services for Indian enterprises. VAPT, audits, MSS, and compliance advisory.",
-  alternates: {
-    canonical: "https://www.photonsecurity.in/",
-  },
-
   robots: { index: true, follow: true },
 };
 
@@ -63,9 +57,7 @@ export default function RootLayout({
         <main className="pt-20">{children}</main>
         <BackToTop />
         <ChatBot />
-        <SpeedInsights />
         <Footer />
-        <Analytics />
       </body>
     </html>
   );

@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 export default function Loading() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center overflow-hidden">
-      {/* Ambient gradient */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-125 h-125 bg-primary/15 rounded-full blur-3xl animate-pulse" />
       </div>
@@ -16,7 +15,6 @@ export default function Loading() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="text-center space-y-6 px-4"
       >
-        {/* Brand line */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -29,7 +27,6 @@ export default function Loading() {
           </span>
         </motion.div>
 
-        {/* Title shimmer */}
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -39,7 +36,6 @@ export default function Loading() {
           Securing your digital perimeter
         </motion.h1>
 
-        {/* Subtle loading bar */}
         <div className="w-56 h-1.5 mx-auto rounded-full bg-border overflow-hidden">
           <motion.div
             className="h-full bg-primary"

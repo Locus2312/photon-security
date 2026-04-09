@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Join our team of security experts. We're hiring across multiple roles.",
   alternates: {
-    canonical: `https://photonsecurity.in/careers`,
+    canonical: "/careers",
   },
 };
 
