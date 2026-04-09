@@ -3,10 +3,9 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PerspectiveCamera, Points, PointMaterial } from "@react-three/drei";
 import { useRef, useMemo } from "react";
-import type * as THREE from "three";
 
 function ParticleField() {
-  const ref = useRef<THREE.Points>(null);
+  const ref = useRef<any>(null);
   const particleCount = 2000;
 
   const particles = useMemo(() => {
