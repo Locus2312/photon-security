@@ -1,7 +1,17 @@
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { companySize, scope, assets, timeline, email } = body;
+    const { companySize, scope, assets, timeline, email, honeypot } = body;
+
+    if (honeypot) {
+      console.log("[SPAM BLOCKED] Honeypot triggered in Quote API:", {
+        email: email?.substring(0, 10) + "...",
+      });
+      return new Response(
+        JSON.stringify({ success: false, error: "Invalid request" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
 
     if (!companySize || !scope || !assets || !timeline || !email) {
       return new Response(

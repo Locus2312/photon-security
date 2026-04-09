@@ -16,6 +16,7 @@ const quoteSchema = z.object({
   assets: z.string().optional(),
   timeline: z.string().optional(),
   email: z.string().email("Invalid email").optional(),
+  honeypot: z.string().optional(),
 });
 
 type QuoteFormData = z.infer<typeof quoteSchema>;
@@ -109,6 +110,7 @@ export function QuoteWizard() {
             assets: Number.parseInt(formData.assets || "0"),
             timeline: formData.timeline,
             email: formData.email,
+            honeypot: formData.honeypot,
           }),
         });
 
@@ -166,6 +168,13 @@ export function QuoteWizard() {
   return (
     <div className="container max-w-2xl mx-auto px-4">
       <Card className="glass p-8 md:p-12">
+        <input
+          type="text"
+          className="hidden"
+          autoComplete="off"
+          tabIndex={-1}
+          {...register("honeypot")}
+        />
         {/* Progress */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-4">

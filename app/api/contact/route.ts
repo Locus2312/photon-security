@@ -5,33 +5,7 @@ import { ThankYouEmail } from "@/emails/thank-you-email";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
-function rateLimit(identifier: string, limit = 3, windowMs = 60000): boolean {
-  const now = Date.now();
-  const record = rateLimitMap.get(identifier);
-
-  if (!record || now > record.resetTime) {
-    rateLimitMap.set(identifier, { count: 1, resetTime: now + windowMs });
-    return true;
-  }
-
-  if (record.count >= limit) {
-    return false;
-  }
-
-  record.count++;
-  return true;
-}
-
-setInterval(() => {
-  const now = Date.now();
-  for (const [key, value] of rateLimitMap.entries()) {
-    if (now > value.resetTime) {
-      rateLimitMap.delete(key);
-    }
-  }
-}, 60000);
 
 function getClientIP(request: NextRequest): string {
   const realIp = request.headers.get("x-real-ip");
@@ -131,21 +105,7 @@ function detectSpam(data: {
 export async function POST(request: Request) {
   try {
     const clientIP = getClientIP(request as NextRequest);
-    if (!rateLimit(clientIP, 3, 60000)) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "Too many requests. Please try again in a minute.",
-        }),
-        {
-          status: 429,
-          headers: {
-            "Content-Type": "application/json",
-            "Retry-After": "60",
-          },
-        }
-      );
-    }
+
 
     const body = await request.json();
     const { name, email, company, message, honeypot, phone } = body;
