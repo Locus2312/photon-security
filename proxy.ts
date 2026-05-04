@@ -6,7 +6,7 @@ const RATE_LIMITS = {
   api: { limit: 60, windowMs: 60000 },
   auth: { limit: 5, windowMs: 60000 },
   chat: { limit: 10, windowMs: 60000 },
-  page: { limit: 100, windowMs: 60000 }, // Generous limit for standard page browsing
+  page: { limit: 100, windowMs: 60000 },
 };
 
 export function proxy(request: NextRequest) {

@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "env:encrypt": "./scripts/encrypt-env.sh",
+    "env:decrypt": "./scripts/decrypt-env.sh",
+    "env:setup": "./scripts/setup-hooks.sh"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.37",
