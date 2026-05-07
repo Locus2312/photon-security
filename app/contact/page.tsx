@@ -1,122 +1,16 @@
-import { ContactForm } from "@/components/forms/contact-form";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import type { Metadata } from "next";
-import { PageHero } from "@/components/layout/page-hero";
+import { Metadata } from "next";
+import ContactContent from "./contact-content";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Photon Security",
-  description: "Reach out to Photon Security",
-  alternates: {
-    canonical: "https://photonsecurity.in/contact",
+  title: "Contact Us | Connect with Photon Security",
+  description: "Get in touch with Photon Security for cybersecurity assessments, VAPT services, or research partnerships. We're here to help protect your enterprise.",
+  openGraph: {
+    title: "Contact Photon Security | Secure Your Perimeter",
+    description: "Connect with our elite security team.",
+    type: "website",
   },
 };
 
 export default function ContactPage() {
-  return (
-    <>
-      <main className="flex flex-col min-h-screen bg-background">
-        {/* Hero Section */}
-        <PageHero
-          title="Get in Touch"
-          description="Ready to secure your business? Contact us today for a free consultation."
-        />
-
-        <section className="py-20 px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* Contact Form */}
-              <div>
-                <h2 className="text-3xl font-bold mb-6">Send us a Message</h2>
-                <p className="text-foreground/70 mb-8">
-                  Fill out the form below and we&apos;ll get back to you within 24
-                  hours.
-                </p>
-                <ContactForm />
-              </div>
-
-              {/* Contact Information */}
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6">
-                    Contact Information
-                  </h2>
-                  <p className="text-foreground/70 mb-8">
-                    Reach out to us through any of these channels.
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  <Card className="glass p-6 hover:border-primary/50 transition-colors">
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-primary/10 rounded-lg">
-                        <Mail className="text-primary" size={24} />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-lg mb-1">Email</h3>
-                        <a
-                          href="mailto:sales@photonsecurity.in"
-                          className="text-foreground/70 hover:text-primary transition-colors"
-                        >
-                          info@photonsecurity.in
-                        </a>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <Card className="glass p-6 hover:border-primary/50 transition-colors">
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-primary/10 rounded-lg">
-                        <Phone className="text-primary" size={24} />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-lg mb-1">Phone</h3>
-                        <a
-                          href="tel:+917990282583"
-                          className="text-foreground/70 hover:text-primary transition-colors"
-                        >
-                          +91 79902 82583
-                        </a>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <Card className="glass p-6 hover:border-primary/50 transition-colors">
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-primary/10 rounded-lg">
-                        <MapPin className="text-primary" size={24} />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-lg mb-1">Location</h3>
-                        <p className="text-foreground/70">GIFT City, India</p>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <Card className="glass p-6 hover:border-primary/50 transition-colors">
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-primary/10 rounded-lg">
-                        <Clock className="text-primary" size={24} />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-lg mb-1">
-                          Business Hours
-                        </h3>
-                        <p className="text-foreground/70">
-                          Monday - Friday: 9:00 AM - 6:00 PM IST
-                        </p>
-                        <p className="text-foreground/70">
-                          Saturday: 10:00 AM - 4:00 PM IST
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </>
-  );
+  return <ContactContent />;
 }

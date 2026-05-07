@@ -1,62 +1,105 @@
 "use client";
-import { motion } from "framer-motion";
+
+import { useEffect, useRef } from "react";
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowUpRight } from "@phosphor-icons/react";
 import { servicesData } from "@/lib/services-data";
-import { ArrowRight } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function ServicesGrid() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const cardsRef   = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Heading
+      if (headingRef.current) {
+        gsap.set(headingRef.current, { opacity: 0, y: 30 });
+        ScrollTrigger.create({
+          trigger: headingRef.current,
+          start: "top 85%",
+          once: true,
+          onEnter: () =>
+            gsap.to(headingRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }),
+        });
+      }
+
+      // Cards
+      const cards = cardsRef.current?.querySelectorAll(".svc-card");
+      if (cards?.length) {
+        gsap.set(cards, { opacity: 0, y: 50 });
+        ScrollTrigger.create({
+          trigger: cardsRef.current,
+          start: "top 80%",
+          once: true,
+          onEnter: () =>
+            gsap.to(cards, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.1 }),
+        });
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <motion.section
-      className="w-full py-20"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <section className="w-full py-20">
-        <div className="container max-w-7xl mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+    <section ref={sectionRef} className="w-full py-28" style={{ background: "#0a0a0a" }}>
+      <div className="max-w-7xl mx-auto px-8 lg:px-12">
+        {/* Section header */}
+        <div ref={headingRef} className="flex items-end justify-between mb-16 border-b border-white/8 pb-8">
+          <div>
+            <p className="text-[11px] font-mono text-white/30 tracking-[0.3em] uppercase mb-3">
+              What we offer
+            </p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
               Our Services
             </h2>
-            <p className="text-foreground/70">
-              Comprehensive security solutions tailored to your
-              organization&apos;s needs.
-            </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {servicesData.map((category) => (
-              <Link key={category.id} href={`/services#${category.id}`}>
-                <Card className="h-full glass hover:border-primary/50 transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-primary/20">
-                  <CardHeader>
-                    <Badge variant="secondary" className="w-fit">
-                      {category.services.length} services
-                    </Badge>
-                    <CardTitle className="text-xl">{category.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <CardDescription className="text-base">
-                      {category.description}
-                    </CardDescription>
-                    <div className="flex items-center gap-2 text-primary font-semibold text-sm">
-                      Explore <ArrowRight size={16} />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
+          <p className="hidden md:block text-sm text-white/35 max-w-xs text-right leading-relaxed font-light">
+            Comprehensive security solutions tailored to your organisation&apos;s needs.
+          </p>
         </div>
-      </section>
-    </motion.section>
+
+        {/* Cards */}
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/6">
+          {servicesData.map((cat, idx) => (
+            <Link key={cat.id} href={`/services#${cat.id}`} className="svc-card block">
+              <div
+                className="group h-full bg-[#0a0a0a] p-8 flex flex-col justify-between gap-8 transition-colors duration-200 hover:bg-white/4"
+                style={{ minHeight: 240 }}
+              >
+                {/* Top row */}
+                <div className="flex items-start justify-between">
+                  <span className="text-[11px] font-mono text-white/25 tracking-widest">
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <ArrowUpRight
+                    size={18}
+                    className="text-white/20 group-hover:text-white/60 transition-colors duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transform"
+                    weight="bold"
+                  />
+                </div>
+
+                {/* Content */}
+                <div>
+                  <div className="inline-block px-2.5 py-1 border border-white/12 text-[10px] font-mono text-white/35 tracking-widest uppercase mb-4">
+                    {cat.services.length} services
+                  </div>
+                  <h3 className="text-xl font-semibold text-white/85 mb-3 leading-snug group-hover:text-white transition-colors duration-200">
+                    {cat.name}
+                  </h3>
+                  <p className="text-sm text-white/35 leading-relaxed font-light">
+                    {cat.description}
+                  </p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

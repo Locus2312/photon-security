@@ -1,193 +1,172 @@
 "use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import {
+  List,
+  X,
+  House,
+  Gear,
+  ChatCircleDots,
+  Info,
+  Briefcase,
+} from "@phosphor-icons/react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { useMagneticEffect } from "@/lib/gsap-hooks";
 
 const NAVIGATION = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "About", href: "/about" },
-  { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "/", Icon: House },
+  { label: "About", href: "/about", Icon: Info },
+  { label: "Services", href: "/services", Icon: Gear },
+  { label: "Careers", href: "/careers", Icon: Briefcase },
+  { label: "Contact", href: "/contact", Icon: ChatCircleDots },
 ];
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  
+  const logoRef = useMagneticEffect<HTMLAnchorElement>(0.2);
+  const ctaRef = useMagneticEffect<HTMLDivElement>(0.3);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const current = window.scrollY;
-
-      setIsScrolled(current > 50);
-
-      const windowHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const progress = (current / windowHeight) * 100;
-      setScrollProgress(Math.min(progress, 100));
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
     };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40 transition-all duration-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className={`flex items-center transition-all duration-500 ${"justify-between h-20"}`}
-          >
-            <div className="flex items-center">
-              <Link href="/" className="relative z-10">
-                <Image
-                  src="/assets/logo.png"
-                  alt="Photon Security"
-                  width={192}
-                  height={48}
-                  priority
-                  className={`transition-all duration-500 ${
-                    isScrolled ? "opacity-0 scale-95" : "opacity-100 scale-100"
-                  }`}
-                />
-              </Link>
-            </div>
-
-            <div
-              className={`pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-    transition-all duration-500
-    ${isScrolled ? "opacity-100 scale-100" : "opacity-0 scale-90 pointer-events-none"}
-  `}
-            >
-              <Link href="/">
-                <div className="relative w-20 h-20">
-                  <div className="absolute inset-0 rounded-full blur-xl bg-white/20 animate-pulse scale-125" />
-                  <Image
-                    src="/assets/eagle_no_bg.png"
-                    alt="Photon Security Eagle"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-              </Link>
-            </div>
-
-            <div
-              className={`hidden md:flex items-center space-x-8 transition-all duration-500 ${
-                isScrolled
-                  ? "opacity-0 pointer-events-none absolute"
-                  : "opacity-100"
-              }`}
-            >
-              {NAVIGATION.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors relative group"
-                >
-                  {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-                </Link>
-              ))}
-            </div>
-
-            <div
-              className={`hidden md:block transition-all duration-500 ${
-                isScrolled
-                  ? "opacity-0 pointer-events-none absolute"
-                  : "opacity-100"
-              }`}
-            >
-              <Link href="mailto:sales@photonsecurity.in">
-                <button className="px-4 py-2 text-sm bg-white text-black font-medium rounded-md hover:bg-white/90 transition-all duration-300 hover:shadow-lg hover:shadow-white/20">
-                  Request Assessment
-                </button>
-              </Link>
-            </div>
-
-            {/* Mobile Menu Toggle - Always visible on mobile */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className={`md:hidden p-2 hover:bg-card rounded-md transition-all duration-500 ${
-                isScrolled ? "absolute right-4" : ""
-              }`}
-            >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Progress Bar Container - Only visible when scrolled */}
-        <div
-          className={`absolute bottom-0 left-0 right-0 h-1 bg-transparent overflow-visible transition-opacity duration-500 ${
-            isScrolled ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          {/* Left Progress Line */}
-          <div
-            className="absolute left-0 bottom-0 h-0.5 bg-linear-to-r from-white via-white to-transparent"
-            style={{
-              width: `${scrollProgress / 2}%`,
-              transition: "width 0.1s ease-out",
-              boxShadow:
-                "0 0 15px rgba(255,255,255,0.9), 0 0 30px rgba(255,255,255,0.5)",
-            }}
-          />
-
-          {/* Right Progress Line */}
-          <div
-            className="absolute right-0 bottom-0 h-0.5 bg-linear-to-l from-white via-white to-transparent"
-            style={{
-              width: `${scrollProgress / 2}%`,
-              transition: "width 0.1s ease-out",
-              boxShadow:
-                "0 0 15px rgba(255,255,255,0.9), 0 0 30px rgba(255,255,255,0.5)",
-            }}
-          />
-
-          {/* Center glow effect when lines are close */}
-          <div
-            className="absolute left-1/2 -top-8 -translate-x-1/2 w-24 h-24 pointer-events-none transition-opacity duration-500"
-            style={{
-              opacity: scrollProgress > 80 ? 0.4 : 0,
-              background:
-                "radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%)",
-            }}
-          />
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border/40 shadow-xl">
-            <div className="px-4 py-6 space-y-4">
-              {NAVIGATION.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block text-base font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="pt-4">
-                <Link
-                  href="mailto:sales@photonsecurity.in"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  <button className="w-full px-4 py-2.5 text-sm bg-white text-black font-medium rounded-md hover:bg-white/90 transition-all duration-300">
-                    Request Assessment
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
+    <nav className="fixed top-6 left-0 right-0 z-50 flex justify-center px-6">
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className={cn(
+          "flex items-center justify-between w-full max-w-5xl h-16 px-4 md:px-6 rounded-full transition-all duration-500",
+          "bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]",
+          scrolled ? "max-w-4xl border-white/15" : "max-w-5xl",
         )}
-      </nav>
-    </>
+      >
+        {/* Left: Logo */}
+        <Link 
+          ref={logoRef}
+          href="/" 
+          className="flex items-center pl-2"
+        >
+          <div className="relative w-12 h-12 md:w-16 md:h-16 flex items-center justify-center transition-transform hover:scale-110">
+            <Image
+              src="/assets/eagle_no_bg.png"
+              alt="Logo"
+              width={110}
+              height={110}
+              className="object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
+            />
+          </div>
+        </Link>
+
+        {/* Center: Navigation Icons */}
+        <div className="hidden lg:flex items-center gap-1 bg-white/[0.03] rounded-full p-1 border border-white/5">
+          {NAVIGATION.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "relative group flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300",
+                  isActive ? "bg-white text-black" : "text-white/40 hover:text-white hover:bg-white/10"
+                )}
+              >
+                <item.Icon size={20} weight={isActive ? "bold" : "light"} />
+                <span className="absolute -bottom-10 opacity-0 group-hover:opacity-100 transition-opacity text-[9px] uppercase tracking-[0.3em] font-mono text-white/40 whitespace-nowrap pointer-events-none">
+                  {item.label}
+                </span>
+                {isActive && (
+                  <motion.div
+                    layoutId="nav-active"
+                    className="absolute inset-0 bg-white rounded-full -z-10"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Right: CTA */}
+        <div className="flex items-center gap-3">
+          <div ref={ctaRef}>
+            <Link
+              href="mailto:sales@photonsecurity.in"
+              className="hidden md:flex items-center gap-3 px-6 py-2.5 rounded-full text-[12px] font-bold uppercase tracking-widest text-white bg-white/10 hover:bg-white/20 border border-white/10 hover:border-white/30 transition-all duration-300 group shadow-lg relative overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+              </span>
+              Request Assessment
+            </Link>
+          </div>
+
+          {/* Mobile Toggle */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-white/5 text-white/50 hover:text-white transition-all"
+          >
+            {mobileOpen ? <X size={20} /> : <List size={20} />}
+          </button>
+        </div>
+      </motion.div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            className="absolute top-24 left-6 right-6 p-6 rounded-3xl bg-[#0a0a0a]/98 backdrop-blur-2xl border border-white/10 z-40 lg:hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          >
+            <div className="flex flex-col gap-4">
+              {NAVIGATION.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      "flex items-center gap-4 p-4 rounded-2xl transition-all",
+                      isActive ? "bg-white/10 text-white" : "text-white/50 hover:bg-white/5"
+                    )}
+                  >
+                    <item.Icon size={24} weight={isActive ? "bold" : "light"} />
+                    <span className="text-lg font-light tracking-wide">
+                      {item.label}
+                    </span>
+                  </Link>
+                );
+              })}
+              <hr className="border-white/5 my-2" />
+              <Link
+                href="mailto:sales@photonsecurity.in"
+                onClick={() => setMobileOpen(false)}
+                className="relative flex items-center justify-center gap-3 w-full py-4 rounded-2xl bg-white text-black font-bold text-xs uppercase tracking-widest overflow-hidden group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
+                Request Assessment
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 }
+

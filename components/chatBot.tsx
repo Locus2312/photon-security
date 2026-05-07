@@ -1,6 +1,11 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
+import { Bot, Send, X, MessageSquare, Terminal } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { cn } from "@/lib/utils";
 
 interface LocalMessage {
   id: string;
@@ -8,15 +13,16 @@ interface LocalMessage {
   content?: string;
   parts?: Array<{ type: string; text?: string | unknown; [key: string]: unknown }>;
 }
-import { Bot, Send, X, MessageSquare } from "lucide-react";
-import ReactMarkdown from 'react-markdown';
-import { useState, useEffect, useRef } from "react";
 
 export function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const { messages, sendMessage, status } = useChat();
   const [input, setInput] = useState("");
   const isLoading = status === "streaming" || status === "submitted";
+
+  const chatRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -28,9 +34,42 @@ export function ChatBot() {
     sendMessage({ text: input });
     setInput("");
   };
-  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom of messages
+  // Open/Close Animation
+  useEffect(() => {
+    if (isOpen) {
+      gsap.fromTo(
+        chatRef.current,
+        { opacity: 0, scale: 0.9, y: 20, pointerEvents: "none" },
+        { opacity: 1, scale: 1, y: 0, pointerEvents: "all", duration: 0.5, ease: "back.out(1.4)" }
+      );
+    }
+  }, [isOpen]);
+
+  // Magnetic trigger effect
+  useEffect(() => {
+    const trigger = triggerRef.current;
+    if (!trigger) return;
+
+    const onMove = (e: MouseEvent) => {
+      const rect = trigger.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
+      const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
+      gsap.to(trigger, { x, y, duration: 0.3 });
+    };
+
+    const onLeave = () => {
+      gsap.to(trigger, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+    };
+
+    trigger.addEventListener("mousemove", onMove);
+    trigger.addEventListener("mouseleave", onLeave);
+    return () => {
+      trigger.removeEventListener("mousemove", onMove);
+      trigger.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -40,147 +79,155 @@ export function ChatBot() {
       {/* Floating Action Button */}
       {!isOpen && (
         <button
+          ref={triggerRef}
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 p-4 rounded-full bg-primary text-primary-foreground shadow-xl hover:scale-105 transition-transform z-50 flex items-center justify-center"
-          aria-label="Open Photon Security AI Chat"
+          className="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-white text-black shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_50px_rgba(255,255,255,0.4)] transition-shadow z-50 flex items-center justify-center group overflow-hidden"
+          aria-label="Open AI Assistant"
         >
-          <MessageSquare size={24} />
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
+          <MessageSquare size={24} className="relative z-10" />
         </button>
       )}
 
       {/* Chat Window */}
-      {isOpen && (
-        <div className="fixed bottom-6 right-6 w-95 h-150 max-h-[80vh] flex flex-col bg-background border border-border rounded-2xl shadow-2xl z-50 overflow-hidden animate-in slide-in-from-bottom-5 fade-in duration-300">
-          {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b bg-card">
-            <div className="flex items-center gap-2">
-              <div className="p-2 bg-primary/10 rounded-full">
-                <Bot size={20} className="text-primary" />
+      <div
+        ref={chatRef}
+        className={cn(
+          "fixed bottom-8 right-8 w-[400px] h-[600px] max-h-[85vh] flex flex-col z-50 overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]/90 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]",
+          !isOpen && "hidden opacity-0"
+        )}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between p-5 border-b border-white/5 bg-white/[0.02]">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="p-2.5 bg-white/5 rounded-xl border border-white/10">
+                <Terminal size={18} className="text-white/80" />
               </div>
-              <div>
-                <h3 className="font-semibold text-sm">Electro</h3>
-                <p className="text-xs text-muted-foreground">AI Assistant</p>
+              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-[#0a0a0a] rounded-full animate-pulse" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="font-bold text-sm text-white tracking-wide">ELECTRO</h3>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-white/40 uppercase tracking-tighter">v2.0</span>
+              </div>
+              <p className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em]">Security Protocol Active</p>
+            </div>
+          </div>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="p-2 hover:bg-white/10 rounded-full transition-colors text-white/40 hover:text-white"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        {/* Messages Area */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
+          {messages.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-full text-center space-y-4">
+              <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/10">
+                <Bot size={32} />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm text-white/60 font-medium">Encrypted Session Initialized</p>
+                <p className="text-[11px] text-white/25 font-mono uppercase tracking-widest">Awaiting Command...</p>
               </div>
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-2 hover:bg-muted rounded-full transition-colors"
-            >
-              <X size={18} className="text-muted-foreground" />
-            </button>
-          </div>
-
-          {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-center space-y-3 opacity-70">
-                <Bot size={48} className="text-muted-foreground opacity-50" />
-                <p className="text-sm text-muted-foreground px-4">
-                  Hello! I&apos;m Electro, your AI Assistant. How can I help you?
-                </p>
-              </div>
-            ) : (
-              (messages as unknown as LocalMessage[]).map((m: LocalMessage) => (
-                <div
-                  key={m.id}
-                  className={`flex w-full ${m.role === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  <div
-                    className={`p-3 rounded-2xl max-w-[85%] text-sm ${
-                      m.role === "user"
-                        ? "bg-primary text-primary-foreground rounded-br-sm"
-                        : "bg-muted rounded-bl-sm space-y-2"
-                    }`}
-                  >
-                    {(() => {
-                      const contentStr: string =
-                        m.content ||
-                        (m.parts
-                          ? m.parts
-                              .filter((p) => p.type === "text")
-                              .map((p) => (p as { text: string }).text)
-                              .join("\n")
-                          : "");
-
-                      return (
-                        <div className="prose prose-sm dark:prose-invert max-w-none wrap-break-word">
-                          <ReactMarkdown
-                            components={{
-                              p: ({ children }: { children?: React.ReactNode }) => <p className="mb-2 last:mb-0">{children}</p>,
-                              ul: ({ children }: { children?: React.ReactNode }) => <ul className="list-disc ml-4 mb-2">{children}</ul>,
-                              ol: ({ children }: { children?: React.ReactNode }) => <ol className="list-decimal ml-4 mb-2">{children}</ol>,
-                              li: ({ children }: { children?: React.ReactNode }) => <li className="mb-1">{children}</li>,
-                              strong: ({ children }: { children?: React.ReactNode }) => <strong className="font-bold">{children}</strong>,
-                            }}
-                          >
-                            {contentStr}
-                          </ReactMarkdown>
-                        </div>
-                      );
-                    })()}
-                  </div>
-                </div>
-              ))
-            )}
-            {/* Loading indicator */}
-            {isLoading && (
-              <div className="flex justify-start animate-pulse">
-                <div className="p-3 rounded-2xl bg-muted rounded-bl-sm max-w-[85%]">
-                  <div className="flex gap-1">
-                    <span
-                      className="w-1.5 h-1.5 bg-foreground/30 rounded-full animate-bounce"
-                      style={{ animationDelay: "0ms" }}
-                    ></span>
-                    <span
-                      className="w-1.5 h-1.5 bg-foreground/30 rounded-full animate-bounce"
-                      style={{ animationDelay: "150ms" }}
-                    ></span>
-                    <span
-                      className="w-1.5 h-1.5 bg-foreground/30 rounded-full animate-bounce"
-                      style={{ animationDelay: "300ms" }}
-                    ></span>
-                  </div>
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Input Area */}
-          <div className="p-3 border-t bg-card">
-            <form
-              onSubmit={handleSubmit}
-              className="flex items-center gap-2 bg-muted/50 rounded-full p-1 pl-4 border border-border focus-within:ring-2 focus-within:ring-primary focus-within:border-primary transition-all"
-            >
-              <input
-                value={input}
-                onChange={handleInputChange}
-                placeholder="Ask about Photon Security..."
-                className="flex-1 bg-transparent border-none outline-none text-sm py-2 disabled:opacity-50"
-                disabled={isLoading}
-              />
-              <button
-                type="submit"
-                disabled={isLoading || !input.trim()}
-                className="p-2 rounded-full bg-primary text-primary-foreground disabled:opacity-50 hover:opacity-90 transition-opacity"
+          ) : (
+            (messages as unknown as LocalMessage[]).map((m: LocalMessage) => (
+              <div
+                key={m.id}
+                className={cn("flex w-full", m.role === "user" ? "justify-end" : "justify-start")}
               >
-                <Send size={16} className={isLoading ? "opacity-0" : ""} />
-                {isLoading && (
-                  <Bot
-                    size={16}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin duration-3000"
-                  />
-                )}
-              </button>
-            </form>
-            <div className="text-center mt-2">
-              <span className="text-[10px] text-muted-foreground">
-                AI can make mistakes. Verify critical security information.
-              </span>
+                <div
+                  className={cn(
+                    "relative p-4 rounded-xl max-w-[85%] text-[13px] leading-relaxed transition-all",
+                    m.role === "user"
+                      ? "bg-white text-black font-semibold rounded-tr-none shadow-xl"
+                      : "bg-white/5 border border-white/10 text-white/80 rounded-tl-none font-light"
+                  )}
+                >
+                  <div className="absolute top-0 opacity-20 pointer-events-none -translate-y-full mb-1">
+                     <span className="text-[9px] font-mono uppercase tracking-widest">{m.role}</span>
+                  </div>
+                  {(() => {
+                    const contentStr: string =
+                      m.content ||
+                      (m.parts
+                        ? m.parts
+                            .filter((p) => p.type === "text")
+                            .map((p) => (p as { text: string }).text)
+                            .join("\n")
+                        : "");
+
+                    return (
+                      <div className="prose prose-sm dark:prose-invert max-w-none wrap-break-word">
+                        <ReactMarkdown
+                          components={{
+                            p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                            ul: ({ children }) => <ul className="list-disc ml-4 mb-2">{children}</ul>,
+                            ol: ({ children }) => <ol className="list-decimal ml-4 mb-2">{children}</ol>,
+                            li: ({ children }) => <li className="mb-1">{children}</li>,
+                            strong: ({ children }) => <strong className="font-bold text-white">{children}</strong>,
+                          }}
+                        >
+                          {contentStr}
+                        </ReactMarkdown>
+                      </div>
+                    );
+                  })()}
+                </div>
+              </div>
+            ))
+          )}
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10 rounded-tl-none">
+                <div className="flex gap-1.5">
+                  {[0, 150, 300].map((delay) => (
+                    <span
+                      key={delay}
+                      className="w-1 h-1 bg-white/40 rounded-full animate-bounce"
+                      style={{ animationDelay: `${delay}ms` }}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+
+        {/* Input Area */}
+        <div className="p-5 border-t border-white/5 bg-white/[0.01]">
+          <form
+            onSubmit={handleSubmit}
+            className="flex items-center gap-3 bg-white/5 rounded-xl p-1.5 pl-4 border border-white/10 focus-within:border-white/30 transition-all shadow-inner"
+          >
+            <input
+              value={input}
+              onChange={handleInputChange}
+              placeholder="Query Photon Intelligence..."
+              className="flex-1 bg-transparent border-none outline-none text-xs py-2.5 text-white placeholder:text-white/20 disabled:opacity-50"
+              disabled={isLoading}
+            />
+            <button
+              type="submit"
+              disabled={isLoading || !input.trim()}
+              className="p-2.5 rounded-lg bg-white text-black disabled:opacity-50 hover:bg-white/90 transition-all flex items-center justify-center"
+            >
+              <Send size={14} strokeWidth={2.5} />
+            </button>
+          </form>
+          <div className="flex items-center justify-center gap-2 mt-3 opacity-20 group">
+             <div className="h-px flex-1 bg-white/20" />
+             <span className="text-[9px] font-mono uppercase tracking-[0.3em]">End-to-End Encrypted</span>
+             <div className="h-px flex-1 bg-white/20" />
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 }
+

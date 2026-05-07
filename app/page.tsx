@@ -3,6 +3,7 @@ import { ServicesGrid } from "@/components/home/services-grid";
 import { ProcessTimeline } from "@/components/home/process-timeline";
 import { IndustriesSection } from "@/components/home/industries-section";
 import { TestimonialCarousel } from "@/components/home/testimonial-carousel";
+import { MarqueeCta } from "@/components/home/marquee-cta";
 import { FaqAccordion } from "@/components/home/faq-accordion";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <ProcessTimeline />
         <IndustriesSection />
         <TestimonialCarousel />
+        <MarqueeCta />
         <FaqAccordion />
       </main>
     </>

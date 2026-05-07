@@ -1,86 +1,151 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Star, Quotes } from "@phosphor-icons/react";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const TESTIMONIALS = [
+  {
+    text: "Photon Security provided actionable recommendations that significantly strengthened our security posture. Their team understood our regulated environment from day one.",
+    author: "Rajesh Kumar",
+    role: "CISO",
+    company: "Leading Technology Firm",
+    rating: 5,
+  },
+  {
+    text: "Their offensive security expertise uncovered critical vulnerabilities our internal team had missed for years. The final report was board-ready and highly actionable.",
+    author: "Priya Sharma",
+    role: "Security Lead",
+    company: "SaaS Startup",
+    rating: 5,
+  },
+  {
+    text: "Professional, thorough, and tailored to our industry-specific compliance requirements. The re-test process was seamless. Highly recommended for any BFSI organisation.",
+    author: "Anil Desai",
+    role: "VP Engineering",
+    company: "Manufacturing Conglomerate",
+    rating: 5,
+  },
+];
 
 export function TestimonialCarousel() {
-  const testimonials = [
-    {
-      text: "Photon Security provided actionable recommendations that helped us strengthen our security posture significantly.",
-      author: "Rajesh Kumar",
-      role: "CISO, Tech Company",
-      rating: 5,
-    },
-    {
-      text: "Their expertise in offensive security was instrumental in uncovering critical vulnerabilities and strengthening our defenses ahead of launch.",
-      author: "Priya Sharma",
-      role: "Security Lead, SaaS Startup",
-      rating: 5,
-    },
+  const sectionRef  = useRef<HTMLElement>(null);
+  const revealRef   = useRef<HTMLDivElement>(null);
+  const cardRef     = useRef<HTMLDivElement>(null);
+  const [idx, setIdx]   = useState(0);
+  const [busy, setBusy] = useState(false);
 
-    {
-      text: "Professional, thorough, and tailored to our specific business needs. Highly recommended.",
-      author: "Anil Desai",
-      role: "VP Engineering, Manufacturing",
-      rating: 5,
-    },
-  ];
+  const navigate = useCallback((next: number) => {
+    if (busy || !cardRef.current) return;
+    setBusy(true);
+    gsap.to(cardRef.current, {
+      opacity: 0, y: -18, duration: 0.3, ease: "power2.in",
+      onComplete: () => {
+        setIdx(next);
+        if (cardRef.current) {
+          gsap.fromTo(cardRef.current,
+            { opacity: 0, y: 24 },
+            { opacity: 1, y: 0, duration: 0.45, ease: "power3.out", onComplete: () => setBusy(false) }
+          );
+        } else {
+          setBusy(false);
+        }
+      },
+    });
+  }, [busy]);
 
-  const [idx, setIdx] = useState(0);
-  const current = testimonials[idx];
+  // Auto-advance
+  useEffect(() => {
+    const id = setInterval(() => navigate((idx + 1) % TESTIMONIALS.length), 6000);
+    return () => clearInterval(id);
+  }, [idx, navigate]);
+
+  // Section reveal
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (revealRef.current) {
+        gsap.set(revealRef.current, { opacity: 0, y: 30 });
+        ScrollTrigger.create({
+          trigger: revealRef.current, start: "top 82%", once: true,
+          onEnter: () => gsap.to(revealRef.current, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }),
+        });
+      }
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
+  const t = TESTIMONIALS[idx];
 
   return (
-    <section className="w-full py-20">
-      <div className="container max-w-7xl mx-auto px-4">
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            What Clients Say
-          </h2>
+    <section ref={sectionRef} className="w-full py-28" style={{ background: "#060606" }}>
+      <div className="max-w-7xl mx-auto px-8 lg:px-12">
+        {/* Header */}
+        <div className="flex items-end justify-between mb-16 border-b border-white/8 pb-8">
+          <div>
+            <p className="text-[11px] font-mono text-white/30 tracking-[0.3em] uppercase mb-3">Testimonials</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">What Clients Say</h2>
+          </div>
         </div>
 
-        <div className="max-w-2xl mx-auto">
-          <Card className="glass p-8 md:p-12">
+        <div ref={revealRef} className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/6">
+          {/* Main card — 2 cols */}
+          <div ref={cardRef} className="md:col-span-2 bg-[#060606] p-10 md:p-14">
+            <Quotes size={32} weight="fill" className="text-white/10 mb-6" />
+            <p className="text-xl md:text-2xl text-white/65 leading-relaxed font-light mb-10">
+              &ldquo;{t.text}&rdquo;
+            </p>
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-sm bg-white/8 border border-white/12 flex items-center justify-center text-sm font-bold text-white/60">
+                {t.author[0]}
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-white/70">{t.author}</p>
+                <p className="text-xs text-white/30 font-mono">{t.role} · {t.company}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Side panel — navigation */}
+          <div className="bg-[#060606] p-10 flex flex-col justify-between">
+            {/* Stars */}
             <div className="flex gap-1 mb-6">
-              {Array.from({ length: current.rating }).map((_, i) => (
-                <Star key={i} size={18} className="fill-primary text-primary" />
+              {Array.from({ length: t.rating }).map((_, i) => (
+                <Star key={i} size={14} weight="fill" className="text-white/50" />
               ))}
             </div>
-            <p className="text-lg md:text-xl mb-8 italic text-foreground/80">
-              &quot;{current.text}&quot;
-            </p>
-            <div className="border-t border-border/40 pt-6">
-              <p className="font-semibold">{current.author}</p>
-              <p className="text-sm text-foreground/60">{current.role}</p>
-            </div>
-          </Card>
 
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <button
-              onClick={() =>
-                setIdx((idx - 1 + testimonials.length) % testimonials.length)
-              }
-              className="p-2 hover:bg-card rounded-md transition-colors"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <div className="flex gap-2">
-              {testimonials.map((_, i) => (
+            {/* Testimonial list */}
+            <div className="flex flex-col gap-4 mb-10">
+              {TESTIMONIALS.map((item, i) => (
                 <button
                   key={i}
-                  onClick={() => setIdx(i)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    i === idx ? "bg-primary" : "bg-border"
+                  onClick={() => navigate(i)}
+                  className={`text-left text-xs font-mono tracking-wide transition-all duration-200 ${
+                    i === idx ? "text-white/70" : "text-white/20 hover:text-white/40"
                   }`}
-                />
+                >
+                  <span className="mr-2 text-white/15">{String(i + 1).padStart(2, "0")}</span>
+                  {item.author}
+                </button>
               ))}
             </div>
-            <button
-              onClick={() => setIdx((idx + 1) % testimonials.length)}
-              className="p-2 hover:bg-card rounded-md transition-colors"
-            >
-              <ChevronRight size={20} />
-            </button>
+
+            {/* Progress bars */}
+            <div className="flex flex-col gap-2">
+              {TESTIMONIALS.map((_, i) => (
+                <div key={i} className="h-px bg-white/8 w-full overflow-hidden">
+                  {i === idx && (
+                    <div
+                      className="h-full bg-white/40 animate-[slideProgress_6s_linear_forwards]"
+                      key={`${i}-${idx}`}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

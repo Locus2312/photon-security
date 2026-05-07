@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Scales, Gavel, Globe } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = {
   title: "Terms of Service | Photon Security",
-  description: "Terms of service for Photon Security.",
+  description: "Official terms of service and engagement protocols for Photon Security.",
   alternates: {
     canonical: "https://www.photonsecurity.in/terms",
   },
@@ -11,157 +12,92 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main className="flex flex-col min-h-screen">
-      <article className="container max-w-4xl mx-auto px-4 py-20 prose prose-invert">
-        <h1 className="text-4xl font-bold mb-8">Terms of Service</h1>
-        <p className="text-foreground/70 mb-8">Last updated: December 2025</p>
-
-        <div className="space-y-8 text-foreground/80">
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              1. Acceptance of Terms
-            </h2>
-            <p>
-              By accessing and using this website, you agree to be bound by
-              these Terms of Service. If you do not agree with any part of these
-              terms, you must discontinue use of this website.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              2. Use of Website
-            </h2>
-            <p>
-              This website is provided for informational purposes only. You
-              agree not to misuse, copy, reproduce, distribute, modify, publish,
-              or exploit any content from this website without prior written
-              consent from Photon Security.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              3. License
-            </h2>
-            <p>
-              Photon Security grants you a limited, non-exclusive,
-              non-transferable license to access and use this website solely for
-              personal or business informational purposes.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              4. No Security Guarantee
-            </h2>
-            <p>
-              Use of this website does not constitute or imply any form of
-              security assessment, protection, monitoring, or assurance. All
-              cybersecurity services, including VAPT, remediation, or audit
-              support, are provided only under a separately executed Service
-              Agreement.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              5. Disclaimer of Warranties
-            </h2>
-            <p>
-              This website and its contents are provided on an &quot;as is&quot;
-              and &quot;as available&quot; basis. Photon Security makes no
-              warranties, express or implied, including but not limited to
-              warranties of accuracy, reliability, or fitness for a particular
-              purpose.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              6. Limitation of Liability
-            </h2>
-            <p>
-              In no event shall Photon Security be liable for any indirect,
-              incidental, special, consequential, or punitive damages arising
-              out of or related to the use of this website.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              7. Service Engagement
-            </h2>
-            <p>
-              Any professional engagement with Photon Security shall be governed
-              by a separate Service Agreement defining the scope of work,
-              deliverables, timelines, responsibilities, and commercial terms
-              specific to that engagement.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              8. Confidentiality
-            </h2>
-            <p>
-              Photon Security maintains strict confidentiality of client
-              information, security findings, and engagement-related data,
-              except where disclosure is required by applicable law, regulation,
-              or legal process.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              9. Third-Party Links
-            </h2>
-            <p>
-              This website may contain links to third-party websites or
-              resources. Photon Security does not control and is not responsible
-              for the content, security, availability, or privacy practices of
-              any third-party sites.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              10. Changes to Terms
-            </h2>
-            <p>
-              Photon Security reserves the right to update or modify these Terms
-              of Service at any time. Continued use of the website after such
-              changes constitutes acceptance of the revised terms.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              11. Governing Law
-            </h2>
-            <p>
-              These Terms of Service shall be governed by and construed in
-              accordance with the laws of India.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4 text-foreground">
-              12. Contact Information
-            </h2>
-            <p>
-              For any questions regarding these Terms of Service, please contact{" "}
-              <Link
-                href="mailto:info@photonsecurity.in"
-                className="text-sm text-foreground/60 hover:text-primary transition-colors"
-              >
-                info@photonsecurity.in
-              </Link>
-              .
-            </p>
-          </section>
+    <main className="bg-[#050505] min-h-screen pt-32 pb-24 px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header Metadata */}
+        <div className="mb-20">
+          <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-8">
+            <Gavel size={14} weight="bold" className="text-white/40" />
+            <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/40">Engagement_Protocols</span>
+          </div>
+          <h1 className="text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
+            TERMS OF<br />
+            <span className="text-white/30 italic">SERVICE.</span>
+          </h1>
+          <div className="flex items-center gap-6 text-[10px] font-mono uppercase tracking-widest text-white/20">
+             <span>Effective Date: December 2025</span>
+             <div className="w-1 h-1 rounded-full bg-white/20" />
+             <span>Ref: TOS_v4.2</span>
+          </div>
         </div>
-      </article>
+
+        {/* Content Matrix */}
+        <div className="bg-white/[0.02] border border-white/5 rounded-3xl p-10 md:p-16 backdrop-blur-3xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-10 opacity-10">
+             <Scales size={120} weight="thin" className="text-white" />
+          </div>
+
+          <div className="relative z-10 space-y-16">
+            <section className="space-y-6">
+              <h2 className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/20 flex items-center gap-4">
+                 <div className="w-8 h-px bg-white/10" />
+                 01. Agreement_Acceptance
+              </h2>
+              <p className="text-lg text-white/50 leading-relaxed font-light">
+                By accessing the Photon Security matrix, you agree to be bound by these Engagement Protocols. 
+                Failure to comply with these terms will result in immediate termination of access.
+              </p>
+            </section>
+
+            <section className="space-y-6">
+              <h2 className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/20 flex items-center gap-4">
+                 <div className="w-8 h-px bg-white/10" />
+                 02. Platform_License
+              </h2>
+              <p className="text-lg text-white/50 leading-relaxed font-light">
+                Photon Security grants a limited, non-transferable license to utilize this portal for informational 
+                and communication purposes. Any attempt to scrape, reverse-engineer, or breach this platform 
+                is strictly prohibited.
+              </p>
+            </section>
+
+            <section className="space-y-6">
+              <h2 className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/20 flex items-center gap-4">
+                 <div className="w-8 h-px bg-white/10" />
+                 03. Service_Exclusion
+              </h2>
+              <p className="text-lg text-white/50 leading-relaxed font-light">
+                The content of this website does not constitute a formal security audit. Full VAPT, MSS, 
+                and offensive research services are only provided under a separate, fully-executed Service Agreement.
+              </p>
+            </section>
+
+            <section className="space-y-6">
+              <h2 className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/20 flex items-center gap-4">
+                 <div className="w-8 h-px bg-white/10" />
+                 04. Jurisdictional_Control
+              </h2>
+              <p className="text-lg text-white/50 leading-relaxed font-light">
+                These terms are governed by the laws of India. Any disputes shall be settled within the 
+                jurisdiction of Gujarat courts, aligning with our GIFT City headquarters.
+              </p>
+            </section>
+          </div>
+        </div>
+
+        {/* Footer Support */}
+        <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-8 py-8 border-t border-white/5">
+           <div className="flex items-center gap-4 text-[10px] font-mono text-white/10 uppercase tracking-widest">
+             <Globe size={14} />
+             <span>Global_Compliance_Node</span>
+           </div>
+           <div className="flex gap-8">
+             <Link href="/legal/privacy" className="text-[10px] font-mono text-white/20 hover:text-white transition-colors uppercase tracking-widest">Privacy</Link>
+             <Link href="/legal/cookies" className="text-[10px] font-mono text-white/20 hover:text-white transition-colors uppercase tracking-widest">Cookies</Link>
+           </div>
+        </div>
+      </div>
     </main>
   );
 }
+

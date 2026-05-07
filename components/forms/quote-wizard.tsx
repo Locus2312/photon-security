@@ -90,7 +90,7 @@ export function QuoteWizard() {
     mode: "onChange",
   });
 
-  const formData = watch();
+  const formData = watch(); // eslint-disable-line react-hooks/incompatible-library
   const step = steps[currentStep];
 
   const handleOptionSelect = (value: string) => {

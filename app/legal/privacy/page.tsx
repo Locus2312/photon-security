@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Lock, ShieldCheck } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Photon Security",
-  description: "Privacy policy for Photon Security.",
+  description: "Privacy policy and data protection protocols for Photon Security.",
   alternates: {
     canonical: "https://www.photonsecurity.in/legal/privacy",
   },
@@ -11,118 +12,112 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <>
-      <main className="flex flex-col min-h-screen">
-        <article className="container max-w-4xl mx-auto px-4 py-20 prose prose-invert">
-          <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
-          <p className="text-foreground/70 mb-8">Last updated: December 2025</p>
+    <main className="bg-[#050505] min-h-screen pt-32 pb-24 px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header Metadata */}
+        <div className="mb-20">
+          <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-8">
+            <ShieldCheck size={14} weight="bold" className="text-white/40" />
+            <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/40">Data_Protection_Protocol</span>
+          </div>
+          <h1 className="text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
+            PRIVACY<br />
+            <span className="text-white/30 italic">POLICY.</span>
+          </h1>
+          <div className="flex items-center gap-6 text-[10px] font-mono uppercase tracking-widest text-white/20">
+             <span>Last Updated: December 2025</span>
+             <div className="w-1 h-1 rounded-full bg-white/20" />
+             <span>Version: 2.1.0</span>
+          </div>
+        </div>
 
-          <div className="space-y-8 text-foreground/80">
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground">
-                1. Information We Collect
+        {/* Content Matrix */}
+        <div className="bg-white/[0.02] border border-white/5 rounded-3xl p-10 md:p-16 backdrop-blur-3xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-10 opacity-10">
+             <Lock size={120} weight="thin" className="text-white" />
+          </div>
+
+          <div className="relative z-10 space-y-16">
+            <section className="space-y-6">
+              <h2 className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/20 flex items-center gap-4">
+                 <div className="w-8 h-px bg-white/10" />
+                 01. Information_Collection
               </h2>
-              <p>
-                Photon Security (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects information you
-                provide directly, such as:
+              <p className="text-lg text-white/50 leading-relaxed font-light">
+                Photon Security collects information you provide directly through our secure portals, such as:
               </p>
-              <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>
-                  Name, email, company, and contact information from forms
-                </li>
-                <li>Information about your organization&apos;s security needs</li>
-                <li>Communication preferences and inquiry details</li>
+              <ul className="space-y-4">
+                {[
+                  "Entity identity, email, and structural metadata",
+                  "Organization security infrastructure details",
+                  "Communication telemetry and inquiry logs"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-4 text-white/40 group">
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-white/40 transition-colors" />
+                    <span className="text-sm tracking-wide">{item}</span>
+                  </li>
+                ))}
               </ul>
             </section>
 
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground">
-                2. How We Use Information
+            <section className="space-y-6">
+              <h2 className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/20 flex items-center gap-4">
+                 <div className="w-8 h-px bg-white/10" />
+                 02. Data_Utilization
               </h2>
-              <p>We use collected information to:</p>
-              <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Respond to inquiries and provide quotes</li>
-                <li>Deliver our services and support</li>
-                <li>Send newsletters and updates (with your consent)</li>
-                <li>Improve our website and services</li>
-                <li>Comply with legal obligations</li>
-              </ul>
+              <p className="text-lg text-white/50 leading-relaxed font-light">
+                We utilize collected telemetry to:
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  "Respond to assessment inquiries",
+                  "Deliver offensive security support",
+                  "Refine our platform research",
+                  "Maintain compliance integrity"
+                ].map((item, i) => (
+                  <div key={i} className="p-4 rounded-xl bg-white/[0.03] border border-white/5 text-sm text-white/40 font-light">
+                    {item}
+                  </div>
+                ))}
+              </div>
             </section>
 
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground">
-                3. Data Security
+            <section className="space-y-6">
+              <h2 className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/20 flex items-center gap-4">
+                 <div className="w-8 h-px bg-white/10" />
+                 03. Security_Framework
               </h2>
-              <p>
-                We implement industry-standard security measures to protect your
-                information. However, no method of transmission over the
-                internet is completely secure, and we cannot guarantee absolute
-                security.
+              <p className="text-lg text-white/50 leading-relaxed font-light">
+                We implement industry-standard encryption and isolation protocols to protect your information. 
+                Our infrastructure is audited regularly to ensure the highest standard of data residency and security.
               </p>
             </section>
 
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground">
-                4. Third-Party Services
+            <section className="space-y-6">
+              <h2 className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/20 flex items-center gap-4">
+                 <div className="w-8 h-px bg-white/10" />
+                 04. Entity_Rights
               </h2>
-              <p>
-                We may use third-party services for email delivery, analytics,
-                and hosting. These providers have access to your information
-                only as needed to perform their functions and are obligated to
-                maintain confidentiality.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground">
-                5. Your Rights
-              </h2>
-              <p>
-                You have the right to access, correct, or delete your personal
-                information. To exercise these rights, contact us at
-                hello@photonsecurity.com.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground">
-                6. GDPR Compliance
-              </h2>
-              <p>
-                For individuals in the EU, we comply with GDPR. You have the
-                right to request data portability, object to processing, and
-                withdraw consent. Contact us for requests.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground">
-                7. Policy Changes
-              </h2>
-              <p>
-                We may update this policy periodically. Changes will be
-                effective immediately upon posting to the website. Your
-                continued use constitutes acceptance of changes.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground">
-                8. Contact
-              </h2>
-              <p>
-                For privacy inquiries, contact:{" "}
-                <Link
-                  href="mailto:info@photonsecurity.in"
-                  className="text-sm text-foreground/60 hover:text-primary transition-colors"
-                >
-                  info@photonsecurity.in
-                </Link>
+              <p className="text-lg text-white/50 leading-relaxed font-light">
+                You maintain absolute control over your metadata. To request access, modification, or termination of your data, 
+                contact our Privacy Office at <Link href="mailto:info@photonsecurity.in" className="text-white hover:underline underline-offset-4 decoration-white/30">info@photonsecurity.in</Link>.
               </p>
             </section>
           </div>
-        </article>
-      </main>
-    </>
+        </div>
+
+        {/* Footer Support */}
+        <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-8 py-8 border-t border-white/5">
+           <p className="text-[10px] font-mono text-white/10 uppercase tracking-widest">
+             © 2025 Photon_Security_Systems // LEGAL_DEPT
+           </p>
+           <div className="flex gap-8">
+             <Link href="/legal/terms" className="text-[10px] font-mono text-white/20 hover:text-white transition-colors uppercase tracking-widest">Terms</Link>
+             <Link href="/legal/cookies" className="text-[10px] font-mono text-white/20 hover:text-white transition-colors uppercase tracking-widest">Cookies</Link>
+           </div>
+        </div>
+      </div>
+    </main>
   );
 }
+
