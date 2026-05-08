@@ -3,7 +3,6 @@ import { Resend } from "resend";
 import { PhotonSecurityEmail } from "@/emails/photon-security-email";
 import { ThankYouEmail } from "@/emails/thank-you-email";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 
@@ -184,6 +183,7 @@ export async function POST(request: Request) {
     });
 
     if (process.env.RESEND_API_KEY) {
+      const resend = new Resend(process.env.RESEND_API_KEY);
       try {
         const timestamp = new Date().toLocaleString("en-US", {
           dateStyle: "full",
