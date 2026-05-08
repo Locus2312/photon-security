@@ -1,19 +1,35 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 export function GsapCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
+    // Determine if we should enable the custom cursor
+    // 1. Must be a fine pointer (not touch)
+    // 2. Screen width must be at least 1024px (Desktop)
+    const checkEnabled = () => {
+      const isFinePointer = !window.matchMedia("(pointer: coarse)").matches;
+      const isLargeScreen = window.innerWidth >= 1024;
+      return isFinePointer && isLargeScreen;
+    };
+
+    if (!checkEnabled()) {
+      setEnabled(false);
+      return;
+    }
+
+    setEnabled(true);
+
     const dot = dotRef.current;
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-
+    // Hide default cursor
     document.body.style.cursor = "none";
 
     const mouse = { x: -100, y: -100 };
@@ -60,7 +76,9 @@ export function GsapCursor() {
         el.removeEventListener("mouseleave", contract);
       });
     };
-  }, []);
+  }, [enabled]); // Re-run if enabled state changes (unlikely but safe)
+
+  if (!enabled) return null;
 
   return (
     <>

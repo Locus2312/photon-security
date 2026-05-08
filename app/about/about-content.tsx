@@ -85,8 +85,7 @@ export default function AboutContent() {
              <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/50">Establishment Brief</span>
           </div>
           <h1 className="text-5xl md:text-7xl lg:text-[9vw] font-bold tracking-tighter leading-[0.95] md:leading-[0.85] mb-10 md:mb-12 about-title">
-            RESEARCH-FIRST<br className="md:hidden" />
-            <span className="md:hidden"> </span>
+            RESEARCH-FIRST<br className="md:hidden" />{" "}
             <span className="text-white/20 italic">ADVERSARIES.</span>
           </h1>
           <p className="text-lg md:text-2xl text-white/30 max-w-2xl mx-auto font-light leading-relaxed about-title px-4 md:px-0">

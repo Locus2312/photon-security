@@ -32,7 +32,7 @@ export function GsapPreloader({ onComplete }: PreloaderProps) {
           ease: "power2.inOut",
           onUpdate: () => setCount(Math.floor(obj.value)),
         },
-        0
+        0,
       );
 
       // Progress bar
@@ -40,24 +40,48 @@ export function GsapPreloader({ onComplete }: PreloaderProps) {
         barRef.current,
         { scaleX: 0, transformOrigin: "left center" },
         { scaleX: 1, duration: 2.4, ease: "power2.inOut" },
-        0
+        0,
       );
 
       // Fade in logo
-      tl.from(logoRef.current, { opacity: 0, scale: 0.92, duration: 0.8, ease: "power3.out" }, 0.2);
-      tl.from(labelRef.current, { opacity: 0, y: 10, duration: 0.6, ease: "power3.out" }, 0.5);
+      tl.from(
+        logoRef.current,
+        { opacity: 0, scale: 0.92, duration: 0.8, ease: "power3.out" },
+        0.2,
+      );
+      tl.from(
+        labelRef.current,
+        { opacity: 0, y: 10, duration: 0.6, ease: "power3.out" },
+        0.5,
+      );
 
       // Panels slide out
-      tl.to(topPanelRef.current, { yPercent: -100, duration: 1, ease: "power4.inOut" }, 2.5);
-      tl.to(bottomPanelRef.current, { yPercent: 100, duration: 1, ease: "power4.inOut" }, 2.5);
-      tl.to(overlayRef.current, { opacity: 0, pointerEvents: "none", duration: 0.2 }, 3.4);
+      tl.to(
+        topPanelRef.current,
+        { yPercent: -100, duration: 1, ease: "power4.inOut" },
+        2.5,
+      );
+      tl.to(
+        bottomPanelRef.current,
+        { yPercent: 100, duration: 1, ease: "power4.inOut" },
+        2.5,
+      );
+      tl.to(
+        overlayRef.current,
+        { opacity: 0, pointerEvents: "none", duration: 0.2 },
+        3.4,
+      );
     });
 
     return () => ctx.revert();
   }, [onComplete]);
 
   return (
-    <div ref={overlayRef} className="fixed inset-0 z-[9999]" style={{ pointerEvents: "all" }}>
+    <div
+      ref={overlayRef}
+      className="fixed inset-0 z-[9999]"
+      style={{ pointerEvents: "all" }}
+    >
       {/* Top panel */}
       <div
         ref={topPanelRef}
@@ -66,7 +90,7 @@ export function GsapPreloader({ onComplete }: PreloaderProps) {
       >
         <div ref={logoRef} className="flex flex-col items-center gap-4">
           <Image
-            src="/assets/eagle_dark_bg.png"
+            src="/assets/eagle_no_bg.png"
             alt="Photon Security"
             width={80}
             height={80}
@@ -98,7 +122,10 @@ export function GsapPreloader({ onComplete }: PreloaderProps) {
           >
             {String(count).padStart(3, "0")}
           </div>
-          <div ref={labelRef} className="text-xs font-mono text-white/30 tracking-[0.3em] uppercase mb-3">
+          <div
+            ref={labelRef}
+            className="text-xs font-mono text-white/30 tracking-[0.3em] uppercase mb-3"
+          >
             Loading
           </div>
         </div>
