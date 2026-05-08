@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "deploy.tar.gz"
-          target: "~/photon-security" # Adjust this to your server's project directory path
+          target: "~/photon-security"
 
       - name: Execute Deployment Scripts via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -50,24 +50,32 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd ~/photon-security
+            # 1. Navigate to project directory
+            cd ~/photon-security || mkdir -p ~/photon-security && cd ~/photon-security
             
-            # 1. Extract the uploaded files
+            # 2. Load shell environment (helps find pnpm/pm2)
+            export PATH=$PATH:$HOME/.local/bin:$HOME/bin
+            [ -f ~/.bashrc ] && source ~/.bashrc
+            [ -f ~/.zshrc ] && source ~/.zshrc
+            
+            # 3. Clean up old build to avoid tar 'File exists' errors
+            rm -rf .next
+            
+            # 4. Extract the uploaded files
             tar -xzf deploy.tar.gz
             
-            # 2. Install production dependencies only (saves RAM on 1GB Oracle instance)
+            # 5. Install production dependencies
             pnpm install --prod --frozen-lockfile
             
-            # 3. Clean up the compressed file
+            # 6. Clean up the compressed file
             rm deploy.tar.gz
             
-            # 4. Start or Restart PM2 process
-            # Check if PM2 is managing our app; if so, restart it. Otherwise, start it.
+            # 7. Start or Restart PM2 process
             if pm2 list | grep -q "photon-security"; then
               pm2 reload photon-security
             else
               pm2 start "pnpm start" --name "photon-security"
             fi
             
-            # 5. Save PM2 list so it restarts on server reboot
+            # 8. Save PM2 list
             pm2 save
