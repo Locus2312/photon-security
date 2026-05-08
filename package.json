@@ -57,6 +57,11 @@
     "overrides": {
       "uuid": "^14.0.0",
       "postcss": "^8.5.13"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "unrs-resolver"
+    ]
   }
 }
