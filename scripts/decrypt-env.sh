@@ -14,14 +14,27 @@ if [ ! -f .env.enc ]; then
     exit 0
 fi
 
+# Prevent accidental overwrite
+if [ -f .env.local ]; then
+    echo "⚠️  .env.local already exists. Refusing to overwrite."
+    exit 0
+fi
+
 KEY=$(cat .env-key)
 
-# Decrypt .env.enc to .env.local
-openssl enc -aes-256-cbc -d -in .env.enc -out .env.local -pass pass:"$KEY" -pbkdf2
+TMP_FILE=$(mktemp)
 
-if [ $? -eq 0 ]; then
+if openssl enc -aes-256-cbc -d \
+    -in .env.enc \
+    -out "$TMP_FILE" \
+    -pass pass:"$KEY" \
+    -pbkdf2; then
+
+    mv "$TMP_FILE" .env.local
     echo "✅ .env.enc decrypted successfully to .env.local"
+
 else
+    rm -f "$TMP_FILE"
     echo "❌ Decryption failed. Is your .env-key correct?"
     exit 1
 fi
