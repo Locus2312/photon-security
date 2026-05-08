@@ -71,7 +71,7 @@ function FaqItem({
         </div>
       </button>
       <div ref={bodyRef} style={{ height: 0, opacity: 0, overflow: "hidden" }}>
-        <p className="pb-6 pl-16 text-sm text-white/35 leading-relaxed font-light">
+        <p className="pb-6 pl-10 md:pl-16 text-sm text-white/35 leading-relaxed font-light">
           {faq.a}
         </p>
       </div>
@@ -109,7 +109,7 @@ export function FaqAccordion() {
     <section ref={sectionRef} className="w-full py-28" style={{ background: "#060606" }}>
       <div className="max-w-7xl mx-auto px-8 lg:px-12">
         {/* Header */}
-        <div ref={headingRef} className="flex items-end justify-between mb-16 border-b border-white/8 pb-8">
+        <div ref={headingRef} className="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-white/8 pb-8">
           <div>
             <p className="text-[11px] font-mono text-white/30 tracking-[0.3em] uppercase mb-3">FAQ</p>
             <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">Frequently Asked</h2>

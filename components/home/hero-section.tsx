@@ -71,8 +71,6 @@ export function HeroSection() {
         { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
         "-=0.4",
       );
-
-
     }, containerRef);
 
     return () => ctx.revert();
@@ -81,7 +79,7 @@ export function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden"
+      className="relative w-full min-h-[100dvh] flex items-center overflow-hidden"
       style={{ background: "#080808" }}
     >
       {/* Particle bg */}
@@ -101,14 +99,14 @@ export function HeroSection() {
       />
 
       {/* Content */}
-      <div className="absolute inset-0 flex flex-col items-start justify-center pl-12 md:pl-20 lg:pl-32 pr-4 max-w-6xl">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-20 lg:px-32 py-20 flex flex-col items-start justify-center">
         {/* Badge */}
         <div
           ref={badgeRef}
-          className="inline-flex items-center gap-2.5 mb-10 px-4 py-2 rounded-sm border border-white/12 bg-white/4"
+          className="inline-flex items-center gap-2.5 mb-8 px-4 py-2 rounded-sm border border-white/12 bg-white/4"
         >
           <ShieldCheck size={13} weight="bold" className="text-white/60" />
-          <span className="text-[11px] font-mono text-white/55 tracking-[0.25em] uppercase">
+          <span className="text-[10px] md:text-[11px] font-mono text-white/55 tracking-[0.25em] uppercase">
             Trusted by Indian Enterprises
           </span>
           <span className="relative flex h-1.5 w-1.5 ml-1">
@@ -121,13 +119,13 @@ export function HeroSection() {
         <h1 className="mb-8 font-bold leading-[1.04] tracking-tight">
           <span
             ref={h1Line1}
-            className="block text-[clamp(2.8rem,6vw,5.5rem)] text-white"
+            className="block text-[clamp(2.5rem,8vw,5.5rem)] text-white"
           >
             Energy of a Photon,
           </span>
           <span
             ref={h1Line2}
-            className="block text-[clamp(2.8rem,6vw,5.5rem)] text-white/40"
+            className="block text-[clamp(2.5rem,8vw,4.5rem)] text-white/40"
           >
             Strength of Security
           </span>
@@ -136,21 +134,20 @@ export function HeroSection() {
         {/* Description */}
         <p
           ref={descRef}
-          className="text-[15px] text-white/40 max-w-md leading-relaxed mb-10 font-light"
+          className="text-[14px] md:text-[15px] text-white/40 max-w-md leading-relaxed mb-10 font-light"
         >
           Next-generation cybersecurity for Indian enterprises.
-          <br />
+          <br className="hidden sm:block" />
           VAPT · Compliance · Managed Security Services.
         </p>
 
         {/* CTA buttons */}
-        <div ref={ctaRef} className="flex items-center gap-5 mb-16">
+        <div ref={ctaRef} className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-10 mb-16">
           <Link
             ref={magneticBtn}
             href="mailto:sales@photonsecurity.in"
             className="group relative overflow-hidden inline-flex items-center gap-3 px-8 py-4 text-[13px] font-bold text-black bg-white rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]"
           >
-            {/* Shimmer effect */}
             <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-shimmer" />
 
             <span className="relative z-10">Request Assessment</span>
@@ -162,20 +159,20 @@ export function HeroSection() {
           </Link>
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors font-light tracking-wide"
+            className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors font-light tracking-wide px-2"
           >
             View Services
           </Link>
         </div>
 
         {/* Stats */}
-        <div ref={statsRef} className="flex items-center gap-10 md:gap-16">
+        <div ref={statsRef} className="grid grid-cols-2 sm:flex items-center gap-8 md:gap-16">
           {STATS.map((s, i) => (
             <div key={i} className="text-left">
-              <div className="text-2xl font-bold text-white tabular-nums tracking-tight">
+              <div className="text-xl md:text-2xl font-bold text-white tabular-nums tracking-tight">
                 {s.value}
               </div>
-              <div className="text-[11px] text-white/30 tracking-[0.2em] uppercase mt-1 font-mono">
+              <div className="text-[10px] text-white/30 tracking-[0.2em] uppercase mt-1 font-mono">
                 {s.label}
               </div>
             </div>
