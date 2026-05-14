@@ -9,7 +9,7 @@ import {
   Preview,
   Section,
   Text,
-} from "@react-email/components";
+} from "react-email";
 
 interface ThankYouEmailProps {
   name: string;
@@ -94,7 +94,7 @@ export const ThankYouEmail = ({ name, company }: ThankYouEmailProps) => {
           <Section style={footer}>
             <Link href={baseUrl}>
               <Img
-                src={`${baseUrl}/assets/eagle_no_bg.png`}
+                src={`${baseUrl}/assets/eagle_no_bg.svg`}
                 alt="Photon Security Icon"
                 style={footerLogo}
                 width={100}

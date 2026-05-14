@@ -11,7 +11,7 @@ import {
   Text,
   Row,
   Column,
-} from "@react-email/components";
+} from "react-email";
 
 interface PhotonSecurityEmailProps {
   name: string;
@@ -104,7 +104,7 @@ export const PhotonSecurityEmail = ({
           {/* Footer Section */}
           <Section style={footer}>
             <Img
-              src={`${baseUrl}/assets/eagle_no_bg.png`}
+              src={`${baseUrl}/assets/eagle_no_bg.svg`}
               alt="Photon Security Icon"
               style={footerLogo}
             />
