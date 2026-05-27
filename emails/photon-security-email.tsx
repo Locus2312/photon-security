@@ -104,7 +104,7 @@ export const PhotonSecurityEmail = ({
           {/* Footer Section */}
           <Section style={footer}>
             <Img
-              src={`${baseUrl}/assets/eagle_no_bg.svg`}
+              src={`${baseUrl}/assets/falcon_no_bg.svg`}
               alt="Photon Security Icon"
               style={footerLogo}
             />

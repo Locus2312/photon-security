@@ -16,7 +16,7 @@ export function MarqueeCta() {
   const sectionRef  = useRef<HTMLElement>(null);
   const trackRef    = useRef<HTMLDivElement>(null);
   const ctaRef      = useRef<HTMLDivElement>(null);
-  const eagleRef    = useRef<HTMLDivElement>(null);
+  const falconRef    = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -31,9 +31,9 @@ export function MarqueeCta() {
     wrap?.addEventListener("mouseenter", pause);
     wrap?.addEventListener("mouseleave", play);
 
-    // Eagle parallax / float
-    if (eagleRef.current) {
-      gsap.to(eagleRef.current, { y: -20, duration: 6, ease: "sine.inOut", repeat: -1, yoyo: true });
+    // Falcon parallax / float
+    if (falconRef.current) {
+      gsap.to(falconRef.current, { y: -20, duration: 6, ease: "sine.inOut", repeat: -1, yoyo: true });
     }
 
     // CTA reveal
@@ -98,14 +98,14 @@ export function MarqueeCta() {
             </Link>
           </div>
 
-          {/* Right — eagle image */}
+          {/* Right — falcon image */}
           <div
-            ref={eagleRef}
+            ref={falconRef}
             className="hidden md:flex items-center justify-center"
             style={{ willChange: "transform" }}
           >
             <Image
-              src="/assets/eagle_no_bg.png"
+              src="/assets/falcon_no_bg.png"
               alt="Photon Security"
               width={360}
               height={360}

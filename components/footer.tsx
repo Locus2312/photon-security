@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { BRAND } from "@/lib/constants";
 import { useMagneticEffect } from "@/lib/gsap-hooks";
-import { GithubLogo, LinkedinLogo, TwitterLogo } from "@phosphor-icons/react";
+import {LinkedinLogoIcon, XLogoIcon } from "@phosphor-icons/react";
 
 const FOOTER_NAV = {
   matrix: [
@@ -12,6 +12,7 @@ const FOOTER_NAV = {
     { label: "About Us", href: "/about" },
     { label: "Services", href: "/services" },
     { label: "Careers", href: "/careers" },
+    { label: "Blog", href: "/blogs" },
   ],
   legal: [
     { label: "Privacy Policy", href: "/legal/privacy" },
@@ -19,9 +20,8 @@ const FOOTER_NAV = {
     { label: "Cookie Policy", href: "/legal/cookies" },
   ],
   connect: [
-    { icon: GithubLogo, href: "#" },
-    { icon: LinkedinLogo, href: "#" },
-    { icon: TwitterLogo, href: "#" },
+    { icon: LinkedinLogoIcon, href: "https://linkedin.com/company/photonsec/" },
+    { icon: XLogoIcon, href: "https://x.com/GoPhotonSec" },
   ]
 };
 
@@ -49,7 +49,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-xl text-white/30 font-light leading-relaxed max-w-sm">
-              {BRAND.tagline}. Leading the frontier of offensive research and defensive architecture.
+              {BRAND.tagline}. No silos. No noise. No guesswork.
             </p>
             <div className="flex gap-4">
                {FOOTER_NAV.connect.map((social, i) => (
@@ -113,7 +113,7 @@ export function Footer() {
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-6">
              <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em]">
-               © {new Date().getFullYear()} Photon_Security_Systems
+               © {new Date().getFullYear()} Photon Security
              </p>
              <div className="hidden md:block w-px h-4 bg-white/5" />
              <div className="flex gap-6">

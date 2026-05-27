@@ -12,6 +12,7 @@ import {
   ChatCircleDots,
   Info,
   Briefcase,
+  BookOpen,
 } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,7 @@ const NAVIGATION = [
   { label: "About", href: "/about", Icon: Info },
   { label: "Services", href: "/services", Icon: Gear },
   { label: "Careers", href: "/careers", Icon: Briefcase },
+  { label: "Blog", href: "/blogs", Icon: BookOpen },
   { label: "Contact", href: "/contact", Icon: ChatCircleDots },
 ];
 
@@ -60,7 +62,7 @@ export function Navbar() {
         >
           <div className="relative w-12 h-12 md:w-16 md:h-16 flex items-center justify-center transition-transform hover:scale-110">
             <Image
-              src="/assets/eagle_no_bg.png"
+              src="/assets/falcon_no_bg.png"
               alt="Logo"
               width={110}
               height={110}

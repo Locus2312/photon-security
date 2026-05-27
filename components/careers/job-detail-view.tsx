@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Buildings, MapPin, Clock, CurrencyInr } from "@phosphor-icons/react";
+import { ArrowLeft, MapPin, Clock } from "@phosphor-icons/react";
 import gsap from "gsap";
 import { useMagneticEffect } from "@/lib/gsap-hooks";
 import { Job } from "@/lib/jobs";

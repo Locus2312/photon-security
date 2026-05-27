@@ -94,7 +94,7 @@ export const ThankYouEmail = ({ name, company }: ThankYouEmailProps) => {
           <Section style={footer}>
             <Link href={baseUrl}>
               <Img
-                src={`${baseUrl}/assets/eagle_no_bg.svg`}
+                src={`${baseUrl}/assets/falcon_no_bg.svg`}
                 alt="Photon Security Icon"
                 style={footerLogo}
                 width={100}

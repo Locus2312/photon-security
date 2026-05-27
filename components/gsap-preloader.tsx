@@ -90,7 +90,7 @@ export function GsapPreloader({ onComplete }: PreloaderProps) {
       >
         <div ref={logoRef} className="flex flex-col items-center gap-4">
           <Image
-            src="/assets/eagle_no_bg.png"
+            src="/assets/falcon_no_bg.png"
             alt="Photon Security"
             width={80}
             height={80}

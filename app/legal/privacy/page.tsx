@@ -109,7 +109,7 @@ export default function PrivacyPage() {
         {/* Footer Support */}
         <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-8 py-8 border-t border-white/5">
            <p className="text-[10px] font-mono text-white/10 uppercase tracking-widest">
-             © 2025 Photon_Security_Systems // LEGAL_DEPT
+             © {new Date().getFullYear()} Photon_Security
            </p>
            <div className="flex gap-8">
              <Link href="/legal/terms" className="text-[10px] font-mono text-white/20 hover:text-white transition-colors uppercase tracking-widest">Terms</Link>

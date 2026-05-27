@@ -62,7 +62,7 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "Photon Security",
               "url": "https://www.photonsecurity.in",
-              "logo": "https://www.photonsecurity.in/assets/eagle_dark_bg.png",
+              "logo": "https://www.photonsecurity.in/assets/falcon_dark_bg.png",
               "sameAs": [
                 "https://www.linkedin.com/company/photon-security"
               ],
