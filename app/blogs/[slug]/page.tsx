@@ -34,6 +34,47 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
+const portableTextComponents = {
+  block: {
+    h1: ({ children }: any) => <h1 className="text-3xl md:text-4xl font-semibold text-white mt-12 mb-6 tracking-tight">{children}</h1>,
+    h2: ({ children }: any) => <h2 className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-5 tracking-tight">{children}</h2>,
+    h3: ({ children }: any) => <h3 className="text-xl md:text-2xl font-semibold text-white mt-8 mb-4 tracking-tight">{children}</h3>,
+    h4: ({ children }: any) => <h4 className="text-lg md:text-xl font-semibold text-white mt-6 mb-3 tracking-tight">{children}</h4>,
+    normal: ({ children }: any) => <p className="text-white/70 leading-relaxed text-base md:text-lg mb-6 font-light">{children}</p>,
+    blockquote: ({ children }: any) => (
+      <blockquote className="border-l-2 border-white/20 pl-6 my-8 italic text-white/90">
+        {children}
+      </blockquote>
+    ),
+  },
+  list: {
+    bullet: ({ children }: any) => <ul className="list-disc pl-6 mb-6 space-y-2 text-white/70 font-light text-base md:text-lg">{children}</ul>,
+    number: ({ children }: any) => <ol className="list-decimal pl-6 mb-6 space-y-2 text-white/70 font-light text-base md:text-lg">{children}</ol>,
+  },
+  listItem: {
+    bullet: ({ children }: any) => <li className="pl-1">{children}</li>,
+    number: ({ children }: any) => <li className="pl-1">{children}</li>,
+  },
+  marks: {
+    strong: ({ children }: any) => <strong className="font-semibold text-white">{children}</strong>,
+    em: ({ children }: any) => <em className="italic">{children}</em>,
+    code: ({ children }: any) => <code className="bg-white/5 border border-white/10 px-1.5 py-0.5 rounded font-mono text-sm text-white">{children}</code>,
+    link: ({ value, children }: any) => {
+      const target = (value?.href || '').startsWith('http') ? '_blank' : undefined
+      return (
+        <a 
+          href={value?.href} 
+          target={target} 
+          rel={target === '_blank' ? 'noindex nofollow' : undefined}
+          className="text-white underline underline-offset-4 decoration-white/30 hover:decoration-white transition-colors"
+        >
+          {children}
+        </a>
+      )
+    },
+  },
+}
+
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   const { slug } = await params;
   const post = await client.fetch(
@@ -98,9 +139,9 @@ export default async function BlogPost({ params }: { params: { slug: string } })
           </div>
         )}
 
-        <div className="prose prose-invert prose-lg max-w-none prose-p:text-white/60 prose-p:leading-relaxed prose-headings:text-white prose-a:text-white prose-a:underline hover:prose-a:text-white/70">
+        <div className="max-w-none">
           {post.body ? (
-            <PortableText value={post.body} />
+            <PortableText value={post.body} components={portableTextComponents} />
           ) : (
             <p className="text-white/40 font-mono tracking-wide text-sm">No content available.</p>
           )}
