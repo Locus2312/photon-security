@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 import { client, urlFor } from '@/lib/sanity'
 import Image from 'next/image'
-import { PortableText } from '@portabletext/react'
+import Link from 'next/link'
+import { PortableText, PortableTextComponents } from '@portabletext/react'
 
 export const revalidate = 0
 
-// This function dynamically generates the SEO tags for this specific blog
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const { slug } = await params;
   const post = await client.fetch(
@@ -26,40 +26,44 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: post.seoTitle || post.title,
     description: post.seoDescription,
     keywords: post.seoKeywords || [],
+    alternates: {
+      canonical: `https://www.photonsecurity.in/blogs/${slug}`,
+    },
     openGraph: {
       title: post.seoTitle || post.title,
       description: post.seoDescription,
+      url: `https://www.photonsecurity.in/blogs/${slug}`,
       type: 'article',
     }
   }
 }
 
-const portableTextComponents = {
+const portableTextComponents: PortableTextComponents = {
   block: {
-    h1: ({ children }: any) => <h1 className="text-3xl md:text-4xl font-semibold text-white mt-12 mb-6 tracking-tight">{children}</h1>,
-    h2: ({ children }: any) => <h2 className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-5 tracking-tight">{children}</h2>,
-    h3: ({ children }: any) => <h3 className="text-xl md:text-2xl font-semibold text-white mt-8 mb-4 tracking-tight">{children}</h3>,
-    h4: ({ children }: any) => <h4 className="text-lg md:text-xl font-semibold text-white mt-6 mb-3 tracking-tight">{children}</h4>,
-    normal: ({ children }: any) => <p className="text-white/70 leading-relaxed text-base md:text-lg mb-6 font-light">{children}</p>,
-    blockquote: ({ children }: any) => (
+    h1: ({ children }) => <h1 className="text-3xl md:text-4xl font-semibold text-white mt-12 mb-6 tracking-tight">{children}</h1>,
+    h2: ({ children }) => <h2 className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-5 tracking-tight">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-xl md:text-2xl font-semibold text-white mt-8 mb-4 tracking-tight">{children}</h3>,
+    h4: ({ children }) => <h4 className="text-lg md:text-xl font-semibold text-white mt-6 mb-3 tracking-tight">{children}</h4>,
+    normal: ({ children }) => <p className="text-white/70 leading-relaxed text-base md:text-lg mb-6 font-light">{children}</p>,
+    blockquote: ({ children }) => (
       <blockquote className="border-l-2 border-white/20 pl-6 my-8 italic text-white/90">
         {children}
       </blockquote>
     ),
   },
   list: {
-    bullet: ({ children }: any) => <ul className="list-disc pl-6 mb-6 space-y-2 text-white/70 font-light text-base md:text-lg">{children}</ul>,
-    number: ({ children }: any) => <ol className="list-decimal pl-6 mb-6 space-y-2 text-white/70 font-light text-base md:text-lg">{children}</ol>,
+    bullet: ({ children }) => <ul className="list-disc pl-6 mb-6 space-y-2 text-white/70 font-light text-base md:text-lg">{children}</ul>,
+    number: ({ children }) => <ol className="list-decimal pl-6 mb-6 space-y-2 text-white/70 font-light text-base md:text-lg">{children}</ol>,
   },
   listItem: {
-    bullet: ({ children }: any) => <li className="pl-1">{children}</li>,
-    number: ({ children }: any) => <li className="pl-1">{children}</li>,
+    bullet: ({ children }) => <li className="pl-1">{children}</li>,
+    number: ({ children }) => <li className="pl-1">{children}</li>,
   },
   marks: {
-    strong: ({ children }: any) => <strong className="font-semibold text-white">{children}</strong>,
-    em: ({ children }: any) => <em className="italic">{children}</em>,
-    code: ({ children }: any) => <code className="bg-white/5 border border-white/10 px-1.5 py-0.5 rounded font-mono text-sm text-white">{children}</code>,
-    link: ({ value, children }: any) => {
+    strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
+    em: ({ children }) => <em className="italic">{children}</em>,
+    code: ({ children }) => <code className="bg-white/5 border border-white/10 px-1.5 py-0.5 rounded font-mono text-sm text-white">{children}</code>,
+    link: ({ value, children }) => {
       const target = (value?.href || '').startsWith('http') ? '_blank' : undefined
       return (
         <a 
@@ -73,6 +77,62 @@ const portableTextComponents = {
       )
     },
   },
+  types: {
+    image: ({ value }: { value: any }) => {
+      if (!value || !value.asset) return null;
+      return (
+        <div className="my-10 w-full">
+          <div className="w-full aspect-[16/9] relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <Image
+              src={urlFor(value).width(1200).height(675).url()}
+              alt={value.alt || 'Blog image'}
+              fill
+              className="object-cover"
+            />
+          </div>
+          {value.caption && (
+            <p className="mt-3 text-center text-xs text-white/40 font-mono tracking-wide">
+              {value.caption}
+            </p>
+          )}
+        </div>
+      )
+    },
+    table: ({ value }: { value: any }) => {
+      if (!value || !value.rows || value.rows.length === 0) return null;
+      
+      const [headerRow, ...bodyRows] = value.rows;
+      
+      return (
+        <div className="my-8 w-full overflow-x-auto rounded-xl border border-white/10 bg-white/[0.02] shadow-xl">
+          <table className="w-full text-left border-collapse text-sm text-white/80">
+            {headerRow && (
+              <thead>
+                <tr className="border-b border-white/10 bg-white/5 font-semibold text-white">
+                  {headerRow.cells.map((cell: string, idx: number) => (
+                    <th key={idx} className="px-6 py-4 font-semibold">
+                      {cell}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+            )}
+            <tbody>
+              {bodyRows.map((row: any, rowIdx: number) => (
+                <tr key={rowIdx} className="border-b border-white/5 last:border-0 hover:bg-white/[0.01] transition-colors">
+                  {row.cells.map((cell: string, cellIdx: number) => (
+                    <td key={cellIdx} className="px-6 py-4 text-white/70 font-light">
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )
+    }
+  },
 }
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
@@ -80,6 +140,8 @@ export default async function BlogPost({ params }: { params: { slug: string } })
   const post = await client.fetch(
     `*[_type == "post" && slug.current == $slug][0]{
       title,
+      seoTitle,
+      seoDescription,
       mainImage,
       publishedAt,
       body,
@@ -97,8 +159,34 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     )
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.seoTitle || post.title,
+    description: post.seoDescription,
+    image: post.mainImage ? urlFor(post.mainImage).url() : undefined,
+    datePublished: post.publishedAt,
+    author: [{
+      '@type': 'Person',
+      name: post.authorName || 'Photon Security',
+    }],
+    publisher: {
+      '@type': 'Organization',
+      name: 'Photon Security',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.photonsecurity.in/icon.png',
+      },
+    },
+    url: `https://www.photonsecurity.in/blogs/${slug}`,
+  };
+
   return (
     <article className="min-h-screen bg-[#050505] text-white/70 pb-24 selection:bg-white/20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Subtle top gradient */}
       <div className="absolute top-0 inset-x-0 h-64 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
       
@@ -146,6 +234,82 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             <p className="text-white/40 font-mono tracking-wide text-sm">No content available.</p>
           )}
         </div>
+
+        {/* Dynamic Interactive Call-To-Action Card */}
+        {(() => {
+          const title = (post.title || '').toLowerCase();
+          const categories = (post.categories || []).map((c: any) => c.title.toLowerCase());
+          
+          let cta = {
+            title: "Secure Your Digital Infrastructure Today",
+            description: "Identify critical security loopholes and vulnerabilities before hackers do. Partner with our certified ethical hacking specialists for professional VAPT assessments.",
+            buttonText: "Request Security Assessment",
+            tag: "VAPT & TESTING"
+          };
+
+          if (title.includes('sebi') || title.includes('cscrf')) {
+            cta = {
+              title: "Ensure SEBI CSCRF Compliance Before the Deadline",
+              description: "Our certified security auditors hold OSCP, CISA, and CISSP credentials to deliver end-to-end CSCRF audits, gap analysis, and VAPT testing.",
+              buttonText: "Request SEBI CSCRF Pre-Audit",
+              tag: "SEBI CSCRF COMPLIANCE"
+            };
+          } else if (title.includes('ifsca') || title.includes('gift city') || title.includes('ifsc')) {
+            cta = {
+              title: "Prepare Your GIFT IFSC Entity for Audits",
+              description: "Get tailored regulatory guidance, mock audits, and vulnerability assessments designed specifically for IFSCA regulations.",
+              buttonText: "Get IFSCA Readiness Assessment",
+              tag: "IFSCA COMPLIANCE"
+            };
+          } else if (
+            title.includes('rbi') || 
+            title.includes('bank') || 
+            title.includes('compliance') || 
+            title.includes('audit') || 
+            categories.some((c: string) => c.includes('compliance') || c.includes('banking'))
+          ) {
+            cta = {
+              title: "Is Your Cooperative Bank RBI-Audit Ready?",
+              description: "Meet RBI's strict annual VAPT and IS Audit requirements. Access Board-ready reporting and rapid vulnerability remediation.",
+              buttonText: "Schedule UCB Audit Consulting",
+              tag: "RBI UCB MANDATES"
+            };
+          }
+
+          return (
+            <>
+              <div className="my-16 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+              <div className="relative group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-12 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04]">
+                {/* Glowing background blob */}
+                <div className="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-white/5 blur-3xl pointer-events-none group-hover:bg-white/10 transition-all duration-500" />
+                
+                <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+                  <div className="max-w-xl">
+                    <span className="inline-block px-3 py-1 border border-white/10 bg-white/5 text-[10px] font-mono text-white/50 uppercase tracking-[0.2em] mb-4">
+                      {cta.tag}
+                    </span>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">
+                      {cta.title}
+                    </h3>
+                    <p className="text-white/60 leading-relaxed text-sm md:text-base font-light">
+                      {cta.description}
+                    </p>
+                  </div>
+                  
+                  <div className="flex-shrink-0">
+                    <Link
+                      href={`/contact?subject=${encodeURIComponent(cta.title)}`}
+                      className="inline-flex items-center justify-center px-6 py-3.5 bg-white text-black font-semibold text-sm rounded-xl transition-all duration-300 hover:bg-neutral-200 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+                    >
+                      {cta.buttonText}
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </>
+          );
+        })()}
       </div>
     </article>
   )

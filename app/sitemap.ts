@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/services`, lastModified, changeFrequency: 'monthly' as const, priority: 0.8 },
     { url: `${baseUrl}/careers`, lastModified, changeFrequency: 'weekly' as const, priority: 0.8 },
     { url: `${baseUrl}/contact`, lastModified, changeFrequency: 'monthly' as const, priority: 0.8 },
-    { url: `${baseUrl}/blogs`, lastModified, changeFrequency: 'weekly' as const, priority: 0.9 },
+    { url: `${baseUrl}/blogs`, lastModified, changeFrequency: 'weekly' as const, priority: 0.7 },
     { url: `${baseUrl}/legal/privacy`, lastModified, changeFrequency: 'yearly' as const, priority: 0.3 },
     { url: `${baseUrl}/legal/terms`, lastModified, changeFrequency: 'yearly' as const, priority: 0.3 },
     { url: `${baseUrl}/legal/cookies`, lastModified, changeFrequency: 'yearly' as const, priority: 0.3 },
@@ -24,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}/blogs/${post.slug}`,
     lastModified: post.publishedAt ? new Date(post.publishedAt) : lastModified,
     changeFrequency: 'weekly' as const,
-    priority: 0.7,
+    priority: 0.9,
   }))
 
   return [...staticRoutes, ...blogRoutes]
