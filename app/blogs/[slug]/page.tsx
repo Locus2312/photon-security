@@ -98,6 +98,21 @@ const portableTextComponents: PortableTextComponents = {
         </div>
       )
     },
+    code: ({ value }: { value: any }) => {
+      if (!value || !value.code) return null;
+      return (
+        <div className="my-8 w-full">
+          {value.filename && (
+            <div className="bg-white/5 border-x border-t border-white/10 px-4 py-1.5 rounded-t-xl text-xs font-mono text-white/40 tracking-wider">
+              {value.filename}
+            </div>
+          )}
+          <pre className={`bg-[#0d0d0d] border border-white/10 p-6 ${value.filename ? 'rounded-b-xl' : 'rounded-xl'} overflow-x-auto text-sm font-mono text-emerald-400/90 shadow-2xl`}>
+            <code>{value.code}</code>
+          </pre>
+        </div>
+      )
+    },
     table: ({ value }: { value: any }) => {
       if (!value || !value.rows || value.rows.length === 0) return null;
       
@@ -131,6 +146,43 @@ const portableTextComponents: PortableTextComponents = {
           </table>
         </div>
       )
+    },
+    iocBlock: ({ value }: { value: any }) => {
+      if (!value || !value.indicators || value.indicators.length === 0) return null;
+      return (
+        <div className="my-8 rounded-xl border border-red-500/20 bg-red-500/5 p-6 shadow-xl">
+          <h4 className="text-red-400 font-mono text-sm tracking-wider uppercase mb-4 border-b border-red-500/20 pb-2">
+            IOC: {value.type || 'Indicator'}
+          </h4>
+          <ul className="space-y-2">
+            {value.indicators.map((ind: string, idx: number) => (
+              <li key={idx} className="font-mono text-white/80 text-sm bg-black/40 px-3 py-1.5 rounded flex justify-between items-center border border-white/5">
+                <span>{ind}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    },
+    attackTimeline: ({ value }: { value: any }) => {
+      if (!value || !value.events || value.events.length === 0) return null;
+      return (
+        <div className="my-12 relative border-l border-white/10 ml-4 pl-8 space-y-12">
+          {value.events.map((ev: any, idx: number) => (
+            <div key={idx} className="relative">
+              <div className="absolute -left-[41px] top-1 h-4 w-4 rounded-full bg-[#050505] border-2 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
+                <span className="font-mono text-xs text-emerald-400/80 uppercase tracking-widest">{ev.timestamp}</span>
+                {ev.mitreTechnique && (
+                  <span className="bg-white/10 px-2 py-0.5 rounded text-[10px] font-mono text-white/60">{ev.mitreTechnique}</span>
+                )}
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-2">{ev.title}</h4>
+              <p className="text-white/60 text-sm leading-relaxed font-light">{ev.description}</p>
+            </div>
+          ))}
+        </div>
+      )
     }
   },
 }
@@ -144,6 +196,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       seoDescription,
       mainImage,
       publishedAt,
+      tlp,
       body,
       "authorName": author->name,
       categories[]->{ title }
@@ -192,9 +245,19 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       
       <div className="max-w-3xl mx-auto px-4 pt-32 relative z-10">
         <header className="mb-16 text-center">
-          {post.categories && post.categories.length > 0 && (
-            <div className="flex justify-center gap-3 mb-8">
-              {post.categories.map((cat: { title: string }) => (
+          {(post.categories?.length > 0 || post.tlp) && (
+            <div className="flex justify-center items-center gap-3 mb-8 flex-wrap">
+              {post.tlp && (
+                <span className={`px-3 py-1 border text-[10px] font-mono uppercase tracking-[0.2em] ${
+                  post.tlp === 'red' ? 'border-red-500/30 bg-red-500/10 text-red-400' :
+                  post.tlp === 'amber' ? 'border-amber-500/30 bg-amber-500/10 text-amber-400' :
+                  post.tlp === 'green' ? 'border-green-500/30 bg-green-500/10 text-green-400' :
+                  'border-white/30 bg-white/10 text-white/80'
+                }`}>
+                  TLP:{post.tlp}
+                </span>
+              )}
+              {post.categories && post.categories.map((cat: { title: string }) => (
                 <span key={cat.title} className="px-3 py-1 border border-white/10 bg-white/5 text-[10px] font-mono text-white/50 uppercase tracking-[0.2em]">
                   {cat.title}
                 </span>
