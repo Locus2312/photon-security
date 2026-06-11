@@ -1,11 +1,16 @@
 "use client";
 
-import { useEffect, useRef, Suspense } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
-import dynamic from "next/dynamic";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import { ArrowRight, ShieldCheck } from "@phosphor-icons/react";
 import { useMagneticEffect } from "@/lib/gsap-hooks";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const STATS = [
   { value: "200+", label: "Assessments" },
@@ -50,6 +55,7 @@ export function HeroSection() {
 
   return (
     <section
+      id="hero-section"
       ref={containerRef}
       className="relative w-full min-h-[100dvh] flex overflow-hidden"
     >
@@ -63,7 +69,7 @@ export function HeroSection() {
       />
 
       {/* ── Left column: text content ─────────────────────────────────────── */}
-      <div className="relative z-10 flex flex-col justify-center px-6 md:px-14 lg:px-20 xl:px-28 py-28 w-full lg:w-[48%]">
+      <div className="relative z-10 flex flex-col justify-center px-6 md:px-14 lg:px-20 xl:px-28 py-28 w-full lg:w-[65%]">
 
         {/* Badge */}
         <div

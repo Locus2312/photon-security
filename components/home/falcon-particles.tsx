@@ -245,7 +245,7 @@ export default function FalconParticles() {
       });
     };
 
-    if (typeof window !== "undefined" && (window as any).__preloaderComplete) {
+    if (typeof window !== "undefined" && (window as Window & typeof globalThis & { __preloaderComplete?: boolean }).__preloaderComplete) {
       load();
     } else {
       const handleComplete = () => {

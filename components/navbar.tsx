@@ -33,7 +33,6 @@ export function Navbar() {
   const pathname = usePathname();
   
   const logoRef = useMagneticEffect<HTMLAnchorElement>(0.2);
-  const ctaRef = useMagneticEffect<HTMLDivElement>(0.3);
 
   useEffect(() => {
     const onScroll = () => {
@@ -49,30 +48,37 @@ export function Navbar() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         className={cn(
-          "flex items-center justify-between w-full max-w-5xl h-16 px-4 md:px-6 rounded-full transition-all duration-500",
+          "relative flex items-center justify-between lg:justify-center w-full max-w-5xl h-16 px-4 md:px-6 rounded-full transition-all duration-500",
           "bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]",
+          "lg:bg-transparent lg:backdrop-blur-none lg:border-transparent lg:shadow-none",
           scrolled ? "max-w-4xl border-white/15" : "max-w-5xl",
         )}
       >
-        {/* Left: Logo */}
+        {/* Left: Logo (visible only on mobile/tablet) */}
         <Link 
           ref={logoRef}
           href="/" 
-          className="flex items-center pl-2"
+          className="flex items-center pl-2 lg:hidden"
         >
-          <div className="relative w-12 h-12 md:w-16 md:h-16 flex items-center justify-center transition-transform hover:scale-110">
+          <div className="relative w-10 h-10 flex items-center justify-center transition-transform hover:scale-110">
             <Image
               src="/assets/falcon_no_bg.png"
               alt="Logo"
-              width={110}
-              height={110}
+              width={80}
+              height={80}
               className="object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
             />
           </div>
         </Link>
 
-        {/* Center: Navigation Icons */}
-        <div className="hidden lg:flex items-center gap-1 bg-white/[0.03] rounded-full p-1 border border-white/5">
+        {/* Center: Navigation Icons (Elongated main pill on Desktop) */}
+        <div 
+          className={cn(
+            "hidden lg:flex items-center rounded-full transition-all duration-500",
+            "bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]",
+            scrolled ? "gap-6 px-8 h-12" : "gap-10 px-12 h-14"
+          )}
+        >
           {NAVIGATION.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -80,11 +86,12 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative group flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300",
-                  isActive ? "bg-white text-black" : "text-white/40 hover:text-white hover:bg-white/10"
+                  "relative group flex items-center justify-center rounded-full transition-all duration-300",
+                  scrolled ? "w-8 h-8" : "w-10 h-10",
+                  isActive ? "text-black" : "text-white/40 hover:text-white hover:bg-white/10"
                 )}
               >
-                <item.Icon size={20} weight={isActive ? "bold" : "light"} />
+                <item.Icon size={scrolled ? 18 : 20} weight={isActive ? "bold" : "light"} />
                 <span className="absolute -bottom-10 opacity-0 group-hover:opacity-100 transition-opacity text-[9px] uppercase tracking-[0.3em] font-mono text-white/40 whitespace-nowrap pointer-events-none">
                   {item.label}
                 </span>
@@ -100,22 +107,8 @@ export function Navbar() {
           })}
         </div>
 
-        {/* Right: CTA */}
-        <div className="flex items-center gap-3">
-          <div ref={ctaRef}>
-            <Link
-              href="mailto:sales@photonsecurity.in"
-              className="hidden md:flex items-center gap-3 px-6 py-2.5 rounded-full text-[12px] font-bold uppercase tracking-widest text-white bg-white/10 hover:bg-white/20 border border-white/10 hover:border-white/30 transition-all duration-300 group shadow-lg relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-              </span>
-              Request Assessment
-            </Link>
-          </div>
-
+        {/* Right: Mobile Toggle */}
+        <div className="flex items-center gap-3 ml-auto lg:ml-0">
           {/* Mobile Toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -155,15 +148,6 @@ export function Navbar() {
                   </Link>
                 );
               })}
-              <hr className="border-white/5 my-2" />
-              <Link
-                href="mailto:sales@photonsecurity.in"
-                onClick={() => setMobileOpen(false)}
-                className="relative flex items-center justify-center gap-3 w-full py-4 rounded-2xl bg-white text-black font-bold text-xs uppercase tracking-widest overflow-hidden group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
-                Request Assessment
-              </Link>
             </div>
           </motion.div>
         )}

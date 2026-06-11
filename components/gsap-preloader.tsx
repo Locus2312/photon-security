@@ -23,7 +23,7 @@ export function GsapPreloader({ onComplete }: PreloaderProps) {
       const tl = gsap.timeline({
         onComplete: () => {
           if (typeof window !== "undefined") {
-            (window as any).__preloaderComplete = true;
+            (window as Window & typeof globalThis & { __preloaderComplete?: boolean }).__preloaderComplete = true;
             window.dispatchEvent(new Event("preloaderComplete"));
           }
           onComplete();

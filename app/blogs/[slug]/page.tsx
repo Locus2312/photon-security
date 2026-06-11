@@ -78,7 +78,7 @@ const portableTextComponents: PortableTextComponents = {
     },
   },
   types: {
-    image: ({ value }: { value: any }) => {
+    image: ({ value }: { value: { asset?: unknown; alt?: string; caption?: string } }) => {
       if (!value || !value.asset) return null;
       return (
         <div className="my-10 w-full">
@@ -98,7 +98,7 @@ const portableTextComponents: PortableTextComponents = {
         </div>
       )
     },
-    code: ({ value }: { value: any }) => {
+    code: ({ value }: { value: { code?: string; filename?: string } }) => {
       if (!value || !value.code) return null;
       return (
         <div className="my-8 w-full">
@@ -113,7 +113,7 @@ const portableTextComponents: PortableTextComponents = {
         </div>
       )
     },
-    table: ({ value }: { value: any }) => {
+    table: ({ value }: { value: { rows?: { cells: string[] }[] } }) => {
       if (!value || !value.rows || value.rows.length === 0) return null;
       
       const [headerRow, ...bodyRows] = value.rows;
@@ -133,7 +133,7 @@ const portableTextComponents: PortableTextComponents = {
               </thead>
             )}
             <tbody>
-              {bodyRows.map((row: any, rowIdx: number) => (
+              {bodyRows.map((row: { cells: string[] }, rowIdx: number) => (
                 <tr key={rowIdx} className="border-b border-white/5 last:border-0 hover:bg-white/[0.01] transition-colors">
                   {row.cells.map((cell: string, cellIdx: number) => (
                     <td key={cellIdx} className="px-6 py-4 text-white/70 font-light">
@@ -147,7 +147,7 @@ const portableTextComponents: PortableTextComponents = {
         </div>
       )
     },
-    iocBlock: ({ value }: { value: any }) => {
+    iocBlock: ({ value }: { value: { type?: string; indicators?: string[] } }) => {
       if (!value || !value.indicators || value.indicators.length === 0) return null;
       return (
         <div className="my-8 rounded-xl border border-red-500/20 bg-red-500/5 p-6 shadow-xl">
@@ -164,11 +164,11 @@ const portableTextComponents: PortableTextComponents = {
         </div>
       )
     },
-    attackTimeline: ({ value }: { value: any }) => {
+    attackTimeline: ({ value }: { value: { events?: { timestamp: string; mitreTechnique?: string; title: string; description: string }[] } }) => {
       if (!value || !value.events || value.events.length === 0) return null;
       return (
         <div className="my-12 relative border-l border-white/10 ml-4 pl-8 space-y-12">
-          {value.events.map((ev: any, idx: number) => (
+          {value.events.map((ev: { timestamp: string; mitreTechnique?: string; title: string; description: string }, idx: number) => (
             <div key={idx} className="relative">
               <div className="absolute -left-[41px] top-1 h-4 w-4 rounded-full bg-[#050505] border-2 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
               <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
@@ -301,7 +301,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         {/* Dynamic Interactive Call-To-Action Card */}
         {(() => {
           const title = (post.title || '').toLowerCase();
-          const categories = (post.categories || []).map((c: any) => c.title.toLowerCase());
+          const categories = (post.categories || []).map((c: { title: string }) => c.title.toLowerCase());
           
           let cta = {
             title: "Secure Your Digital Infrastructure Today",
