@@ -7,11 +7,6 @@ import dynamic from "next/dynamic";
 import { ArrowRight, ShieldCheck } from "@phosphor-icons/react";
 import { useMagneticEffect } from "@/lib/gsap-hooks";
 
-const FalconParticles = dynamic(
-  () => import("@/components/home/falcon-particles"),
-  { ssr: false }
-);
-
 const STATS = [
   { value: "200+", label: "Assessments" },
   { value: "99%",  label: "Retention"   },
@@ -57,7 +52,6 @@ export function HeroSection() {
     <section
       ref={containerRef}
       className="relative w-full min-h-[100dvh] flex overflow-hidden"
-      style={{ background: "#080808" }}
     >
       {/* Subtle film-grain noise */}
       <div
@@ -153,13 +147,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ── Right column: falcon particle cloud ──────────────────────────── */}
-      {/* Hidden on mobile, visible on lg+ */}
-      <div className="absolute right-0 top-0 w-[55%] h-full hidden lg:block">
-        <Suspense fallback={null}>
-          <FalconParticles />
-        </Suspense>
-      </div>
+
 
       {/* Bottom hairline */}
       <div className="absolute bottom-0 left-0 w-full h-px bg-white/6" />

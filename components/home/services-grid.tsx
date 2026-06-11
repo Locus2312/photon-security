@@ -46,7 +46,7 @@ export function ServicesGrid() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full py-28" style={{ background: "#0a0a0a" }}>
+    <section ref={sectionRef} className="w-full py-28">
       <div className="max-w-7xl mx-auto px-8 lg:px-12">
         {/* Section header */}
         <div ref={headingRef} className="flex items-end justify-between mb-16 border-b border-white/8 pb-8">
@@ -68,7 +68,7 @@ export function ServicesGrid() {
           {servicesData.map((cat, idx) => (
             <Link key={cat.id} href={`/services#${cat.id}`} className="svc-card block">
               <div
-                className="group h-full bg-[#0a0a0a] p-8 flex flex-col justify-between gap-8 transition-colors duration-200 hover:bg-white/4"
+                className="group h-full bg-black/40 backdrop-blur-sm p-8 flex flex-col justify-between gap-8 transition-colors duration-200 hover:bg-white/10"
                 style={{ minHeight: 240 }}
               >
                 {/* Top row */}

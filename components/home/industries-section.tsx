@@ -86,7 +86,7 @@ export function IndustriesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full py-28" style={{ background: "#0a0a0a" }}>
+    <section ref={sectionRef} className="w-full py-28">
       <div className="max-w-7xl mx-auto px-8 lg:px-12">
         {/* Header */}
         <div ref={headingRef} className="flex items-end justify-between mb-16 border-b border-white/8 pb-8">
@@ -106,7 +106,7 @@ export function IndustriesSection() {
         >
           {INDUSTRIES.map(({ Icon, name }) => (
             <div key={name} className="ind-item">
-              <div className="group flex flex-col items-center justify-center gap-3 py-8 px-4 bg-[#0a0a0a] hover:bg-white/4 transition-colors duration-200 cursor-default">
+              <div className="group flex flex-col items-center justify-center gap-3 py-8 px-4 bg-black/40 backdrop-blur-sm hover:bg-white/10 transition-colors duration-200 cursor-default">
                 <div className="w-12 h-12 rounded-sm border border-white/10 bg-white/3 flex items-center justify-center group-hover:border-white/20 transition-colors duration-200">
                   <Icon size={22} weight="light" className="text-white/45 group-hover:text-white/70 transition-colors duration-200" />
                 </div>
@@ -124,7 +124,7 @@ export function IndustriesSection() {
           className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/6"
         >
           {STATS.map((s) => (
-            <div key={s.label} className="bg-[#0a0a0a]">
+            <div key={s.label} className="bg-black/40 backdrop-blur-sm">
               <Stat end={s.end} suffix={s.suffix} label={s.label} />
             </div>
           ))}

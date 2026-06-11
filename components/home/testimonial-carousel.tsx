@@ -80,7 +80,7 @@ export function TestimonialCarousel() {
   const t = TESTIMONIALS[idx];
 
   return (
-    <section ref={sectionRef} className="w-full py-28" style={{ background: "#060606" }}>
+    <section ref={sectionRef} className="w-full py-28">
       <div className="max-w-7xl mx-auto px-8 lg:px-12">
         {/* Header */}
         <div className="flex items-end justify-between mb-16 border-b border-white/8 pb-8">
@@ -92,7 +92,7 @@ export function TestimonialCarousel() {
 
         <div ref={revealRef} className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/6">
           {/* Main card — 2 cols */}
-          <div ref={cardRef} className="md:col-span-2 bg-[#060606] p-10 md:p-14">
+          <div ref={cardRef} className="md:col-span-2 bg-black/40 backdrop-blur-sm p-10 md:p-14">
             <Quotes size={32} weight="fill" className="text-white/10 mb-6" />
             <p className="text-xl md:text-2xl text-white/65 leading-relaxed font-light mb-10">
               &ldquo;{t.text}&rdquo;
@@ -109,7 +109,7 @@ export function TestimonialCarousel() {
           </div>
 
           {/* Side panel — navigation */}
-          <div className="bg-[#060606] p-10 flex flex-col justify-between">
+          <div className="bg-black/40 backdrop-blur-sm p-10 flex flex-col justify-between">
             {/* Stars */}
             <div className="flex gap-1 mb-6">
               {Array.from({ length: t.rating }).map((_, i) => (
