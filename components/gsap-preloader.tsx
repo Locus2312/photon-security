@@ -20,7 +20,15 @@ export function GsapPreloader({ onComplete }: PreloaderProps) {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ onComplete });
+      const tl = gsap.timeline({
+        onComplete: () => {
+          if (typeof window !== "undefined") {
+            (window as any).__preloaderComplete = true;
+            window.dispatchEvent(new Event("preloaderComplete"));
+          }
+          onComplete();
+        }
+      });
 
       // Animate counter
       const obj = { value: 0 };
