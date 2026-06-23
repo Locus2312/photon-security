@@ -3,133 +3,168 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  Bank,
-  FirstAid,
-  Code,
-  Factory,
-  ShieldStar,
-  WifiHigh,
-} from "@phosphor-icons/react";
-import { useCountUp } from "@/lib/gsap-hooks";
+import { BankIcon, HeartbeatIcon, BracketsCurlyIcon, FactoryIcon, GavelIcon, BroadcastIcon } from "@phosphor-icons/react";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const COLORS = {
+  obsidian: { bg: "#0a0a0a", text: "#ffffff", muted: "rgba(255,255,255,0.5)", icon: "rgba(255,255,255,0.3)", selectionClass: "selection:bg-white selection:text-black", particleColor: "#ffffff" },
+  teal: { bg: "#2d6a6f", text: "#ffffff", muted: "rgba(255,255,255,0.7)", icon: "rgba(255,255,255,0.4)", selectionClass: "selection:bg-[#c85a3a] selection:text-white", particleColor: "#c85a3a" },
+  coral: { bg: "#c85a3a", text: "#ffffff", muted: "rgba(255,255,255,0.8)", icon: "rgba(255,255,255,0.4)", selectionClass: "selection:bg-[#2d6a6f] selection:text-white", particleColor: "#2d6a6f" },
+  ivory: { bg: "#ede8df", text: "#0a0a0a", muted: "rgba(10,10,10,0.6)", icon: "rgba(10,10,10,0.3)", selectionClass: "selection:bg-[#0a0a0a] selection:text-white", particleColor: "#0a0a0a" },
+};
 
 const INDUSTRIES = [
-  { Icon: Bank,       name: "BFSI" },
-  { Icon: FirstAid,   name: "Healthcare" },
-  { Icon: Code,       name: "SaaS" },
-  { Icon: Factory,    name: "Manufacturing" },
-  { Icon: ShieldStar, name: "Government" },
-  { Icon: WifiHigh,   name: "Telecom" },
+  {
+    id: "bfsi",
+    name: "BFSI",
+    desc: "Next-gen threat intelligence for high-frequency trading platforms and core banking systems.",
+    icon: BankIcon,
+    color: COLORS.obsidian
+  },
+  {
+    id: "healthcare",
+    name: "HEALTHCARE",
+    desc: "Securing PHI, medical IoT devices, and critical hospital infrastructure.",
+    icon: HeartbeatIcon,
+    color: COLORS.teal
+  },
+  {
+    id: "saas",
+    name: "SAAS & TECH",
+    desc: "Continuous CI/CD pipeline security and multi-tenant isolation testing.",
+    icon: BracketsCurlyIcon,
+    color: COLORS.coral
+  },
+  {
+    id: "manufacturing",
+    name: "MANUFACTURING",
+    desc: "Bridging the IT-OT gap. Securing SCADA systems and industrial control networks.",
+    icon: FactoryIcon,
+    color: COLORS.ivory
+  },
+  {
+    id: "government",
+    name: "GOVERNMENT",
+    desc: "Nation-state level defense strategies and classified network architecture reviews.",
+    icon: GavelIcon,
+    color: COLORS.teal
+  },
+  {
+    id: "telecom",
+    name: "TELECOM",
+    desc: "Securing 5G networks, edge computing nodes, and massive-scale signaling infrastructure.",
+    icon: BroadcastIcon,
+    color: COLORS.obsidian
+  }
 ];
-
-const STATS = [
-  { end: 200, suffix: "+", label: "Assessments" },
-  { end: 99,  suffix: "%", label: "Client Retention" },
-  { end: 50,  suffix: "+", label: "Critical CVEs" },
-  { end: 12,  suffix: "+", label: "Yrs Combined Exp." },
-];
-
-function Stat({ end, suffix, label }: { end: number; suffix: string; label: string }) {
-  const numRef = useCountUp(end, { suffix, duration: 2 });
-  return (
-    <div className="text-center py-6">
-      <div className="text-4xl font-bold text-white tabular-nums mb-1">
-        <span ref={numRef} />
-      </div>
-      <p className="text-[11px] font-mono text-white/30 tracking-[0.2em] uppercase">{label}</p>
-    </div>
-  );
-}
 
 export function IndustriesSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLDivElement>(null);
-  const gridRef    = useRef<HTMLDivElement>(null);
-  const statsRef   = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Heading
-      if (headingRef.current) {
-        gsap.set(headingRef.current, { opacity: 0, y: 30 });
-        ScrollTrigger.create({
-          trigger: headingRef.current, start: "top 85%", once: true,
-          onEnter: () => gsap.to(headingRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }),
-        });
-      }
+      const cards = gsap.utils.toArray<HTMLElement>('.industry-card');
 
-      // Industry icons bounce in
-      if (gridRef.current) {
-        const icons = gridRef.current.querySelectorAll(".ind-item");
-        if (icons?.length) {
-          gsap.set(icons, { opacity: 0, scale: 0.8 });
-          ScrollTrigger.create({
-            trigger: gridRef.current, start: "top 80%", once: true,
-            onEnter: () => gsap.to(icons, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)", stagger: 0.07 }),
+      cards.forEach((card, i) => {
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top 15%",
+          pin: true,
+          pinSpacing: false,
+          id: `pin-${i}`,
+        });
+
+        if (i !== cards.length - 1) {
+          const content = card.querySelector('.card-inner-content');
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: cards[i + 1],
+              start: "top 80%",
+              end: "top 20%",
+              scrub: true,
+            }
           });
-        }
-      }
 
-      // Stats
-      if (statsRef.current) {
-        gsap.set(statsRef.current, { opacity: 0, y: 30 });
-        ScrollTrigger.create({
-          trigger: statsRef.current, start: "top 85%", once: true,
-          onEnter: () => gsap.to(statsRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }),
-        });
-      }
+          tl.to(card, { scale: 0.95 }, 0);
+
+          if (content) {
+            tl.to(content, { opacity: 0 }, 0);
+          }
+        }
+      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full py-28">
-      <div className="max-w-7xl mx-auto px-8 lg:px-12">
-        {/* Header */}
-        <div ref={headingRef} className="flex items-end justify-between mb-16 border-b border-white/8 pb-8">
-          <div>
-            <p className="text-[11px] font-mono text-white/30 tracking-[0.3em] uppercase mb-3">Sectors</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">Industries We Serve</h2>
-          </div>
-          <p className="hidden md:block text-sm text-white/35 max-w-xs text-right leading-relaxed font-light">
-            Specialised expertise across regulated and critical-infrastructure sectors.
-          </p>
-        </div>
+    <section id="industries-section" ref={sectionRef} className="relative w-full bg-[#111111] text-white py-32 flex flex-col items-center overflow-x-hidden">
 
-        {/* Industry grid */}
-        <div
-          ref={gridRef}
-          className="grid grid-cols-3 md:grid-cols-6 gap-px bg-white/6 mb-px"
-        >
-          {INDUSTRIES.map(({ Icon, name }) => (
-            <div key={name} className="ind-item">
-              <div className="group flex flex-col items-center justify-center gap-3 py-8 px-4 bg-black/40 backdrop-blur-sm hover:bg-white/10 transition-colors duration-200 cursor-default">
-                <div className="w-12 h-12 rounded-sm border border-white/10 bg-white/3 flex items-center justify-center group-hover:border-white/20 transition-colors duration-200">
-                  <Icon size={22} weight="light" className="text-white/45 group-hover:text-white/70 transition-colors duration-200" />
+
+      {/* Header */}
+      <div className="max-w-[1500px] w-full px-6 md:px-12 lg:px-24 mb-20 z-10 text-center relative">
+        <p className="text-[11px] font-mono tracking-[0.3em] uppercase mb-4 opacity-50">
+          Sectors
+        </p>
+        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase leading-[0.9] max-w-4xl mx-auto">
+          Industries We Serve
+        </h2>
+      </div>
+
+      {/* Cards Container */}
+      <div className="w-full max-w-[1000px] mx-auto px-6 relative pb-[20vh] z-10">
+        {INDUSTRIES.map((ind, i) => {
+          const Icon = ind.icon;
+          return (
+            <div
+              key={ind.id}
+              className={`industry-card w-full min-h-[400px] md:min-h-[500px] rounded-[3rem] p-10 md:p-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] origin-top mb-[50vh] ${ind.color.selectionClass}`}
+              style={{
+                backgroundColor: ind.color.bg,
+                zIndex: i + 1,
+              }}
+            >
+              <div className="card-inner-content w-full h-full flex flex-col justify-between">
+
+                <div className="absolute top-8 left-8 w-6 h-6 border-t-2 border-l-2 opacity-30" style={{ borderColor: ind.color.text }}></div>
+                <div className="absolute top-8 right-8 w-6 h-6 border-t-2 border-r-2 opacity-30" style={{ borderColor: ind.color.text }}></div>
+                <div className="absolute bottom-8 left-8 w-6 h-6 border-b-2 border-l-2 opacity-30" style={{ borderColor: ind.color.text }}></div>
+                <div className="absolute bottom-8 right-8 w-6 h-6 border-b-2 border-r-2 opacity-30" style={{ borderColor: ind.color.text }}></div>
+
+                <div className="flex items-center justify-between mb-16 relative z-10">
+                  <span
+                    className="text-sm font-mono tracking-widest block"
+                    style={{ color: ind.color.icon }}
+                  >
+                    0{i + 1}
+                  </span>
+                  <Icon size={64} style={{ color: ind.color.icon }} weight="thin" />
                 </div>
-                <span className="text-[11px] font-mono text-white/35 tracking-widest uppercase group-hover:text-white/60 transition-colors duration-200">
-                  {name}
-                </span>
+
+                <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start md:items-end justify-between mt-auto w-full">
+                  <h3
+                    className="text-3xl sm:text-4xl md:text-6xl font-bold leading-none uppercase tracking-tight max-w-md w-full md:w-auto break-words"
+                    style={{ color: ind.color.text }}
+                  >
+                    {ind.name}
+                  </h3>
+                  <p
+                    className="text-base md:text-xl leading-relaxed font-light max-w-sm text-right self-end md:self-auto"
+                    style={{ color: ind.color.muted }}
+                  >
+                    {ind.desc}
+                  </p>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Stats strip */}
-        <div
-          ref={statsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/6"
-        >
-          {STATS.map((s) => (
-            <div key={s.label} className="bg-black/40 backdrop-blur-sm">
-              <Stat end={s.end} suffix={s.suffix} label={s.label} />
-            </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
+
     </section>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import Link from "next/link";
-import { ArrowLeft, MapPin, Clock } from "@phosphor-icons/react";
+import { ArrowLeftIcon, MapPinIcon, ClockIcon } from "@phosphor-icons/react";
 import gsap from "gsap";
 import { useMagneticEffect } from "@/lib/gsap-hooks";
 import { Job } from "@/lib/jobs";
@@ -38,11 +38,11 @@ export function JobDetailView({ job }: JobDetailViewProps) {
         </div>
 
         <div className="container max-w-5xl mx-auto px-6 relative z-10">
-          <Link 
-            href="/careers" 
+          <Link
+            href="/careers"
             className="inline-flex items-center gap-2 text-white/30 hover:text-white transition-colors mb-12 group job-reveal"
           >
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeftIcon size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span className="text-[10px] font-mono uppercase tracking-[0.2em]">Back to Transmissions</span>
           </Link>
 
@@ -53,11 +53,11 @@ export function JobDetailView({ job }: JobDetailViewProps) {
                   {job.department}
                 </div>
                 <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-white/30">
-                  <MapPin size={14} />
+                  <MapPinIcon size={14} />
                   {job.location}
                 </div>
                 <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-white/30">
-                  <Clock size={14} />
+                  <ClockIcon size={14} />
                   {job.employmentType}
                 </div>
               </div>
@@ -65,7 +65,7 @@ export function JobDetailView({ job }: JobDetailViewProps) {
               <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[0.9] mb-8 job-reveal">
                 {job.title}
               </h1>
-              
+
               <p className="text-xl md:text-2xl text-white/30 font-light leading-relaxed job-reveal">
                 {job.description}
               </p>
@@ -86,7 +86,7 @@ export function JobDetailView({ job }: JobDetailViewProps) {
       {/* Main Content */}
       <section className="py-24 max-w-5xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
-          
+
           {/* Requirements & Responsibilities */}
           <div className="lg:col-span-8 space-y-20">
             {job.requirements && (
@@ -153,10 +153,10 @@ export function JobDetailView({ job }: JobDetailViewProps) {
             )}
 
             <div className="bg-white/5 border border-white/10 p-8 rounded-3xl job-reveal">
-               <h3 className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/20 mb-6">Security Clearance</h3>
-               <p className="text-xs text-white/40 leading-relaxed font-light italic">
-                 All candidates must undergo a background verification and sign a non-disclosure agreement (NDA) before initialization.
-               </p>
+              <h3 className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/20 mb-6">Security Clearance</h3>
+              <p className="text-xs text-white/40 leading-relaxed font-light italic">
+                All candidates must undergo a background verification and sign a non-disclosure agreement (NDA) before initialization.
+              </p>
             </div>
           </div>
         </div>
@@ -185,9 +185,9 @@ export function JobDetailView({ job }: JobDetailViewProps) {
           </a>
 
           {job.contactEmail && (
-             <div className="mt-12 text-[10px] font-mono text-white/15 uppercase tracking-widest">
-               Direct Uplink: {job.contactEmail}
-             </div>
+            <div className="mt-12 text-[10px] font-mono text-white/15 uppercase tracking-widest">
+              Direct Uplink: {job.contactEmail}
+            </div>
           )}
         </div>
       </section>

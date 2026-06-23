@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
-const FalconParticles = dynamic(
-  () => import("@/components/home/falcon-particles"),
+const FalconStaticParticles = dynamic(
+  () => import("@/components/home/falcon-static-particles"),
   { ssr: false }
 );
 
-export function FalconParticlesWrapper() {
+export function FalconStaticParticlesWrapper() {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -20,9 +20,10 @@ export function FalconParticlesWrapper() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Return null on mobile or before detecting screen size to prevent flash/unnecessary load
   if (isMobile === null || isMobile) {
     return null;
   }
 
-  return <FalconParticles />;
+  return <FalconStaticParticles />;
 }

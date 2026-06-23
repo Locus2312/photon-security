@@ -1,24 +1,12 @@
 import type React from "react";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { BackToTop } from "@/components/back-to-top";
 import { ChatBot } from "@/components/chatBot";
 import { PageWrapper } from "@/components/page-wrapper";
 import "./globals.css";
 
-const farray = localFont({
-  src: [
-    {
-      path: "../public/fonts/farray/FARRAY.otf",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-farray",
-});
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const jetbrainsMono = JetBrains_Mono({
@@ -50,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark scroll-smooth ${farray.variable}`}>
+    <html lang="en" className={`dark scroll-smooth`}>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen bg-background text-foreground`}
       >
@@ -114,7 +102,6 @@ export default function RootLayout({
 
         <PageWrapper>
           <main className="pt-20">{children}</main>
-          <BackToTop />
           <ChatBot />
           <Footer />
         </PageWrapper>

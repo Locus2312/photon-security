@@ -2,14 +2,14 @@
 
 import { useRef, useEffect } from "react";
 import type { ServiceCategory } from "@/lib/types";
-import { 
-  ShieldCheck, 
-  Eye, 
-  Cloud, 
-  ClipboardText, 
-  Users, 
-  Target,
-  ArrowRight,
+import {
+  ShieldCheckIcon,
+  EyeIcon,
+  CloudIcon,
+  ClipboardTextIcon,
+  UsersIcon,
+  TargetIcon,
+  ArrowRightIcon,
   Icon as IconType
 } from "@phosphor-icons/react";
 import gsap from "gsap";
@@ -22,18 +22,18 @@ interface SectionProps {
 }
 
 const ICON_MAP: Record<string, IconType> = {
-  "vapt": ShieldCheck,
-  "mss": Eye,
-  "cloud-infra": Cloud,
-  "compliance": ClipboardText,
-  "awareness": Users,
-  "specialized": Target,
+  "vapt": ShieldCheckIcon,
+  "mss": EyeIcon,
+  "cloudIcon-infra": CloudIcon,
+  "compliance": ClipboardTextIcon,
+  "awareness": UsersIcon,
+  "specialized": TargetIcon,
 };
 
 export function ServiceCategorySection({ category }: SectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
-  const Icon = ICON_MAP[category.id] || ShieldCheck;
+  const Icon = ICON_MAP[category.id] || ShieldCheckIcon;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -63,8 +63,8 @@ export function ServiceCategorySection({ category }: SectionProps) {
 
 
   return (
-    <div 
-      id={category.id} 
+    <div
+      id={category.id}
       ref={containerRef}
       className="max-w-7xl mx-auto px-8 lg:px-12 py-32"
     >
@@ -90,7 +90,7 @@ export function ServiceCategorySection({ category }: SectionProps) {
         {/* Services Grid */}
         <div ref={cardsRef} className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           {category.services.map((service, idx) => (
-            <div 
+            <div
               key={service.id}
               className="service-cell group relative p-8 bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all duration-500 rounded-lg overflow-hidden"
             >
@@ -110,7 +110,7 @@ export function ServiceCategorySection({ category }: SectionProps) {
                   <span className="text-[9px] font-mono uppercase tracking-widest text-white/20 group-hover:text-white/40">
                     Technical Protocol
                   </span>
-                  <ArrowRight size={14} className="text-white/20 group-hover:translate-x-1 group-hover:text-white transition-all" />
+                  <ArrowRightIcon size={14} className="text-white/20 group-hover:translate-x-1 group-hover:text-white transition-all" />
                 </div>
               </div>
 

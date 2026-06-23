@@ -49,8 +49,8 @@ export function StatsStrip() {
                 {stat.label.includes("h")
                   ? "+"
                   : stat.label.includes("Years")
-                  ? ""
-                  : "+"}
+                    ? ""
+                    : "+"}
               </div>
               <p className="text-sm text-foreground/60">{stat.sublabel}</p>
             </div>

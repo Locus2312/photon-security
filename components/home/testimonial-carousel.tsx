@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Star, Quotes } from "@phosphor-icons/react";
+import { StarIcon, QuotesIcon } from "@phosphor-icons/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,10 +32,10 @@ const TESTIMONIALS = [
 ];
 
 export function TestimonialCarousel() {
-  const sectionRef  = useRef<HTMLElement>(null);
-  const revealRef   = useRef<HTMLDivElement>(null);
-  const cardRef     = useRef<HTMLDivElement>(null);
-  const [idx, setIdx]   = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const revealRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [idx, setIdx] = useState(0);
   const [busy, setBusy] = useState(false);
 
   const navigate = useCallback((next: number) => {
@@ -57,13 +57,11 @@ export function TestimonialCarousel() {
     });
   }, [busy]);
 
-  // Auto-advance
   useEffect(() => {
     const id = setInterval(() => navigate((idx + 1) % TESTIMONIALS.length), 6000);
     return () => clearInterval(id);
   }, [idx, navigate]);
 
-  // Section reveal
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (revealRef.current) {
@@ -82,7 +80,6 @@ export function TestimonialCarousel() {
   return (
     <section ref={sectionRef} className="w-full py-28">
       <div className="max-w-7xl mx-auto px-8 lg:px-12">
-        {/* Header */}
         <div className="flex items-end justify-between mb-16 border-b border-white/8 pb-8">
           <div>
             <p className="text-[11px] font-mono text-white/30 tracking-[0.3em] uppercase mb-3">Testimonials</p>
@@ -91,9 +88,8 @@ export function TestimonialCarousel() {
         </div>
 
         <div ref={revealRef} className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/6">
-          {/* Main card — 2 cols */}
           <div ref={cardRef} className="md:col-span-2 bg-black/40 backdrop-blur-sm p-10 md:p-14">
-            <Quotes size={32} weight="fill" className="text-white/10 mb-6" />
+            <QuotesIcon size={32} weight="fill" className="text-white/10 mb-6" />
             <p className="text-xl md:text-2xl text-white/65 leading-relaxed font-light mb-10">
               &ldquo;{t.text}&rdquo;
             </p>
@@ -108,24 +104,20 @@ export function TestimonialCarousel() {
             </div>
           </div>
 
-          {/* Side panel — navigation */}
           <div className="bg-black/40 backdrop-blur-sm p-10 flex flex-col justify-between">
-            {/* Stars */}
             <div className="flex gap-1 mb-6">
               {Array.from({ length: t.rating }).map((_, i) => (
-                <Star key={i} size={14} weight="fill" className="text-white/50" />
+                <StarIcon key={i} size={14} weight="fill" className="text-white/50" />
               ))}
             </div>
 
-            {/* Testimonial list */}
             <div className="flex flex-col gap-4 mb-10">
               {TESTIMONIALS.map((item, i) => (
                 <button
                   key={i}
                   onClick={() => navigate(i)}
-                  className={`text-left text-xs font-mono tracking-wide transition-all duration-200 ${
-                    i === idx ? "text-white/70" : "text-white/20 hover:text-white/40"
-                  }`}
+                  className={`text-left text-xs font-mono tracking-wide transition-all duration-200 ${i === idx ? "text-white/70" : "text-white/20 hover:text-white/40"
+                    }`}
                 >
                   <span className="mr-2 text-white/15">{String(i + 1).padStart(2, "0")}</span>
                   {item.author}
@@ -133,7 +125,6 @@ export function TestimonialCarousel() {
               ))}
             </div>
 
-            {/* Progress bars */}
             <div className="flex flex-col gap-2">
               {TESTIMONIALS.map((_, i) => (
                 <div key={i} className="h-px bg-white/8 w-full overflow-hidden">

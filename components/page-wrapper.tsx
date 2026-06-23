@@ -13,12 +13,12 @@ export function PageWrapper({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
-    
+
     // Bypass logic for 404s
     const validPaths = ["/", "/about", "/services", "/careers", "/contact", "/legal"];
     const currentPath = window.location.pathname;
     const isValid = validPaths.some(p => currentPath === p || currentPath.startsWith("/legal/") || currentPath.startsWith("/careers/"));
-    
+
     if (!isValid) {
       setShowPreloader(false);
     }
@@ -32,7 +32,7 @@ export function PageWrapper({ children }: { children: React.ReactNode }) {
   return (
     <>
       <GsapCursor />
-      
+
       {/* Cinematic Preloader Gatekeeper */}
       <AnimatePresence mode="wait">
         {showPreloader && (
@@ -47,7 +47,7 @@ export function PageWrapper({ children }: { children: React.ReactNode }) {
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* 
         Main Content Layout
         The key change between 'loading' and the actual 'pathname' forces a clean 

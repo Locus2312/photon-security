@@ -11,7 +11,7 @@ interface LocalMessage {
   id: string;
   role: string;
   content?: string;
-  parts?: Array<{ type: string; text?: string | unknown; [key: string]: unknown }>;
+  parts?: Array<{ type: string; text?: string | unknown;[key: string]: unknown }>;
 }
 
 export function ChatBot() {
@@ -149,16 +149,16 @@ export function ChatBot() {
                   )}
                 >
                   <div className="absolute top-0 opacity-20 pointer-events-none -translate-y-full mb-1">
-                     <span className="text-[8px] md:text-[9px] font-mono uppercase tracking-widest">{m.role}</span>
+                    <span className="text-[8px] md:text-[9px] font-mono uppercase tracking-widest">{m.role}</span>
                   </div>
                   {(() => {
                     const contentStr: string =
                       m.content ||
                       (m.parts
                         ? m.parts
-                            .filter((p) => p.type === "text")
-                            .map((p) => (p as { text: string }).text)
-                            .join("\n")
+                          .filter((p) => p.type === "text")
+                          .map((p) => (p as { text: string }).text)
+                          .join("\n")
                         : "");
 
                     return (
@@ -221,9 +221,9 @@ export function ChatBot() {
             </button>
           </form>
           <div className="flex items-center justify-center gap-2 mt-3 opacity-20 group">
-             <div className="h-px flex-1 bg-white/20" />
-             <span className="text-[8px] md:text-[9px] font-mono uppercase tracking-[0.3em]">End-to-End Encrypted</span>
-             <div className="h-px flex-1 bg-white/20" />
+            <div className="h-px flex-1 bg-white/20" />
+            <span className="text-[8px] md:text-[9px] font-mono uppercase tracking-[0.3em]">End-to-End Encrypted</span>
+            <div className="h-px flex-1 bg-white/20" />
           </div>
         </div>
       </div>

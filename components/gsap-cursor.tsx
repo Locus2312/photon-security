@@ -73,12 +73,12 @@ export function GsapCursor() {
       <div
         ref={dotRef}
         className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-white pointer-events-none z-[99999]"
-        style={{ willChange: "transform", display: "none" }}
+        style={{ willChange: "transform", display: "none", mixBlendMode: "difference" }}
       />
       <div
         ref={ringRef}
         className="fixed top-0 left-0 w-8 h-8 rounded-full border border-white/50 pointer-events-none z-[99998]"
-        style={{ willChange: "transform", display: "none" }}
+        style={{ willChange: "transform", display: "none", mixBlendMode: "difference" }}
       />
     </>
   );

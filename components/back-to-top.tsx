@@ -33,10 +33,9 @@ export function BackToTop() {
         transition-all duration-500 ease-out
         hover:scale-110
         hover:shadow-[0_0_20px_rgba(255,255,255,0.35)]
-        ${
-          visible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-4 pointer-events-none"
+        ${visible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-4 pointer-events-none"
         }
       `}
     >

@@ -181,9 +181,8 @@ export function QuoteWizard() {
             {steps.map((_, idx) => (
               <div
                 key={idx}
-                className={`h-2 grow rounded-full transition-colors ${
-                  idx <= currentStep ? "bg-primary" : "bg-border"
-                }`}
+                className={`h-2 grow rounded-full transition-colors ${idx <= currentStep ? "bg-primary" : "bg-border"
+                  }`}
               />
             ))}
           </div>
@@ -216,11 +215,10 @@ export function QuoteWizard() {
                 <button
                   key={option.value}
                   onClick={() => handleOptionSelect(option.value)}
-                  className={`p-4 rounded-lg border-2 transition-all text-left font-medium ${
-                    formData[step.key] === option.value
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-border/40 hover:border-primary/40"
-                  }`}
+                  className={`p-4 rounded-lg border-2 transition-all text-left font-medium ${formData[step.key] === option.value
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-border/40 hover:border-primary/40"
+                    }`}
                 >
                   {option.label}
                 </button>
@@ -246,8 +244,8 @@ export function QuoteWizard() {
             {loading
               ? "Generating..."
               : currentStep === steps.length - 1
-              ? "Get Quote"
-              : "Next"}
+                ? "Get Quote"
+                : "Next"}
             <ChevronRight size={18} />
           </Button>
         </div>

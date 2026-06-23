@@ -30,7 +30,6 @@ jobs:
         run: pnpm build
 
       - name: Compress Build Artifacts
-        # We compress only the files needed to run the Next.js production server
         run: |
           tar -czf deploy.tar.gz .next public package.json pnpm-lock.yaml next.config.ts
 

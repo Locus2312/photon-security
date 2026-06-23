@@ -5,14 +5,14 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { servicesData } from "@/lib/services-data";
 import {
-  ShieldCheck,
-  Eye,
-  Cloud,
-  ClipboardText,
-  Users,
-  Target,
-  ArrowRight,
-  Fingerprint,
+  ShieldCheckIcon,
+  EyeIcon,
+  CloudIcon,
+  ClipboardTextIcon,
+  UsersIcon,
+  TargetIcon,
+  ArrowRightIcon,
+  FingerprintIcon,
   Icon as IconType,
 } from "@phosphor-icons/react";
 import { useMagneticEffect } from "@/lib/gsap-hooks";
@@ -20,12 +20,12 @@ import { useMagneticEffect } from "@/lib/gsap-hooks";
 gsap.registerPlugin(ScrollTrigger);
 
 const ICON_MAP: Record<string, IconType> = {
-  vapt: ShieldCheck,
-  mss: Eye,
-  "cloud-infra": Cloud,
-  compliance: ClipboardText,
-  awareness: Users,
-  specialized: Target,
+  vapt: ShieldCheckIcon,
+  mss: EyeIcon,
+  "cloudIcon-infra": CloudIcon,
+  compliance: ClipboardTextIcon,
+  awareness: UsersIcon,
+  specialized: TargetIcon,
 };
 
 interface ServiceProps {
@@ -67,17 +67,17 @@ function ServiceCard({ service, index }: { service: ServiceProps; index: number 
             ))}
           </div>
           <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/5 group-hover:bg-white group-hover:text-black transition-all duration-500">
-            <ArrowRight
+            <ArrowRightIcon
               size={18}
               className="group-hover:translate-x-0.5 transition-transform"
             />
           </div>
         </div>
         <div className="flex items-center gap-2">
-           <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/40 group-hover:bg-emerald-500 transition-colors" />
-           <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-white/10 group-hover:text-white/30">
-             Active_Intelligence
-           </span>
+          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/40 group-hover:bg-emerald-500 transition-colors" />
+          <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-white/10 group-hover:text-white/30">
+            Active_Intelligence
+          </span>
         </div>
       </div>
 
@@ -93,7 +93,6 @@ export function HorizontalServices() {
   const finalCtaRef = useMagneticEffect<HTMLAnchorElement>(0.3);
 
   useLayoutEffect(() => {
-    // Disable smooth scrolling on HTML as it conflicts with ScrollTrigger pinning
     const html = document.documentElement;
     const originalScrollBehavior = html.style.scrollBehavior;
     html.style.scrollBehavior = "auto";
@@ -107,10 +106,8 @@ export function HorizontalServices() {
         const windowWidth = window.innerWidth;
         const scrollDistance = totalWidth - windowWidth;
 
-        // Ensure the container is exactly the viewport height
         gsap.set(containerRef.current, { height: "100vh" });
 
-        // The Main Horizontal Scroll + Pinning
         gsap.to(horizontalSection, {
           x: -scrollDistance,
           ease: "none",
@@ -126,7 +123,6 @@ export function HorizontalServices() {
           },
         });
 
-        // Parallax Background Labels
         gsap.utils.toArray<HTMLElement>(".bg-label").forEach((label) => {
           gsap.to(label, {
             x: -200,
@@ -140,7 +136,6 @@ export function HorizontalServices() {
           });
         });
 
-        // Skew on scroll effect
         const proxy = { skew: 0 },
           skewSetter = gsap.quickSetter(".service-card", "skewX", "deg"),
           clamp = gsap.utils.clamp(-5, 5);
@@ -173,7 +168,6 @@ export function HorizontalServices() {
   return (
     <div ref={containerRef} className="relative bg-[#050505] overflow-hidden w-full">
       <div ref={horizontalRef} className="flex h-[100dvh] w-fit will-change-transform">
-        {/* Slide 1: Welcome Hero */}
         <section className="w-screen h-full flex flex-col items-center justify-center relative flex-shrink-0 px-6 md:px-12 lg:px-24">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#ffffff15_0.5px,transparent_0.5px)] bg-[size:30px_30px]" />
@@ -205,21 +199,18 @@ export function HorizontalServices() {
           </div>
         </section>
 
-        {/* Dynamic Category Slides */}
         {servicesData.map((category) => {
-          const Icon = ICON_MAP[category.id] || ShieldCheck;
+          const Icon = ICON_MAP[category.id] || ShieldCheckIcon;
           return (
             <section
               key={category.id}
               className="w-fit h-full flex items-center relative flex-shrink-0 px-12 md:px-24 border-l border-white/5"
             >
-              {/* Massive Parallax Background Label */}
               <div className="bg-label absolute top-1/2 left-0 -translate-y-1/2 text-[30vh] md:text-[35vh] font-bold text-white/[0.01] pointer-events-none select-none uppercase tracking-tighter whitespace-nowrap leading-none">
                 {category.name}
               </div>
 
               <div className="relative z-10 flex flex-col md:flex-row gap-10 md:gap-16 items-center h-[85vh] md:h-[75vh] py-10">
-                {/* Category Info Header */}
                 <div className="w-full md:w-[450px] flex-shrink-0 space-y-6 md:space-y-10 text-center md:text-left">
                   <div className="w-16 h-16 md:w-24 md:h-24 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center shadow-inner mx-auto md:mx-0">
                     <Icon size={32} weight="light" className="md:hidden text-white/60" />
@@ -239,7 +230,6 @@ export function HorizontalServices() {
                   </div>
                 </div>
 
-                {/* Service Cards Horizontal Row */}
                 <div className="flex gap-6 md:gap-10 h-full py-2 md:py-6 overflow-visible">
                   {category.services.map((service, sIdx) => (
                     <ServiceCard key={service.id} service={service} index={sIdx} />
@@ -250,19 +240,18 @@ export function HorizontalServices() {
           );
         })}
 
-        {/* Slide Final: Contact / Outro */}
         <section className="w-screen h-full flex flex-col items-center justify-center relative flex-shrink-0 px-6 md:px-12 border-l border-white/5">
-           <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+          <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#ffffff15_0.5px,transparent_0.5px)] bg-[size:30px_30px]" />
           </div>
-          
+
           <div className="relative z-10 text-center">
-            <Fingerprint
+            <FingerprintIcon
               size={60}
               weight="thin"
               className="md:hidden mx-auto mb-6 text-white/10"
             />
-            <Fingerprint
+            <FingerprintIcon
               size={80}
               weight="thin"
               className="hidden md:block mx-auto mb-10 text-white/10"

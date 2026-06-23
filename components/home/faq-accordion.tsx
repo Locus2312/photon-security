@@ -3,9 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Plus } from "@phosphor-icons/react";
+import { PlusIcon } from "@phosphor-icons/react";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const FAQS = [
   {
@@ -40,38 +42,47 @@ function FaqItem({
 }) {
   const bodyRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = bodyRef.current;
     if (!el) return;
+
+    // Accordion expand/collapse
     if (open) {
       gsap.set(el, { height: "auto", opacity: 1 });
       const h = el.offsetHeight;
-      gsap.fromTo(el, { height: 0, opacity: 0 }, { height: h, opacity: 1, duration: 0.38, ease: "power3.out" });
+      gsap.fromTo(el, { height: 0, opacity: 0 }, { height: h, opacity: 1, duration: 0.4, ease: "power3.inOut" });
     } else {
-      gsap.to(el, { height: 0, opacity: 0, duration: 0.3, ease: "power2.in" });
+      gsap.to(el, { height: 0, opacity: 0, duration: 0.3, ease: "power3.inOut" });
     }
-    gsap.to(iconRef.current, { rotate: open ? 45 : 0, duration: 0.25, ease: "power2.out" });
+
+    // Icon rotate
+    gsap.to(iconRef.current, { rotate: open ? 45 : 0, duration: 0.3, ease: "power3.inOut" });
+
+    // Border highlight
+    gsap.to(wrapperRef.current, { borderColor: open ? "rgba(255,255,255,0.25)" : "rgba(255,255,255,0.05)", duration: 0.3 });
+
   }, [open]);
 
   return (
-    <div className="faq-item border-b border-white/6 last:border-0" style={{ overflow: "hidden" }}>
+    <div ref={wrapperRef} className="faq-card w-full border border-white/5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] transition-colors duration-300 overflow-hidden mb-4">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-6 text-left gap-6 group"
+        className="w-full flex items-center justify-between p-6 md:p-8 text-left gap-6 group"
       >
-        <div className="flex items-center gap-5">
-          <span className="text-[11px] font-mono text-white/20">{String(idx + 1).padStart(2, "0")}</span>
-          <span className="text-[15px] text-white/65 group-hover:text-white/85 transition-colors duration-200 font-light">
+        <div className="flex items-center gap-6">
+          <span className="text-[12px] font-mono text-white/30 hidden sm:block">{String(idx + 1).padStart(2, "0")}</span>
+          <span className="text-base md:text-lg text-white/80 group-hover:text-white transition-colors duration-200 font-medium tracking-tight">
             {faq.q}
           </span>
         </div>
-        <div ref={iconRef} className="flex-shrink-0 w-7 h-7 border border-white/12 flex items-center justify-center rounded-sm">
-          <Plus size={13} weight="bold" className="text-white/40" />
+        <div ref={iconRef} className="flex-shrink-0 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors">
+          <PlusIcon size={14} weight="bold" className="text-white/70" />
         </div>
       </button>
       <div ref={bodyRef} style={{ height: 0, opacity: 0, overflow: "hidden" }}>
-        <p className="pb-6 pl-10 md:pl-16 text-sm text-white/35 leading-relaxed font-light">
+        <p className="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base text-white/50 leading-relaxed font-light sm:ml-12">
           {faq.a}
         </p>
       </div>
@@ -81,53 +92,100 @@ function FaqItem({
 
 export function FaqAccordion() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLDivElement>(null);
-  const listRef    = useRef<HTMLDivElement>(null);
+  const headingContainerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const [openIdx, setOpen] = useState<number | null>(null);
 
   useEffect(() => {
+    const mm = gsap.matchMedia();
+
     const ctx = gsap.context(() => {
-      gsap.set(headingRef.current, { opacity: 0, y: 30 });
-      ScrollTrigger.create({
-        trigger: headingRef.current, start: "top 85%", once: true,
-        onEnter: () => gsap.to(headingRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }),
+
+      // Responsive stagger and scroll triggers
+      mm.add("(min-width: 1024px)", () => { // Desktop layout
+        // Sticky Header Fade
+        gsap.fromTo(headingContainerRef.current,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, duration: 1, ease: "power3.out",
+            scrollTrigger: { trigger: sectionRef.current, start: "top 70%", once: true }
+          }
+        );
+
+        // Stagger Cards
+        const cards = listRef.current?.querySelectorAll(".faq-card");
+        if (cards?.length) {
+          gsap.fromTo(cards,
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.1,
+              scrollTrigger: { trigger: listRef.current, start: "top 75%", once: true }
+            }
+          );
+        }
       });
 
-      const items = listRef.current?.querySelectorAll(".faq-item");
-      if (items?.length) {
-        gsap.set(items, { opacity: 0, x: -20 });
-        ScrollTrigger.create({
-          trigger: listRef.current, start: "top 82%", once: true,
-          onEnter: () => gsap.to(items, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out", stagger: 0.07 }),
-        });
-      }
+      mm.add("(max-width: 1023px)", () => { // Mobile & Tablet
+        gsap.fromTo(headingContainerRef.current,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+            scrollTrigger: { trigger: sectionRef.current, start: "top 85%", once: true }
+          }
+        );
+
+        const cards = listRef.current?.querySelectorAll(".faq-card");
+        if (cards?.length) {
+          gsap.fromTo(cards,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.05,
+              scrollTrigger: { trigger: listRef.current, start: "top 85%", once: true }
+            }
+          );
+        }
+      });
+
     }, sectionRef);
-    return () => ctx.revert();
+
+    return () => {
+      ctx.revert();
+      mm.revert();
+    };
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full py-28" style={{ background: "#060606" }}>
-      <div className="max-w-7xl mx-auto px-8 lg:px-12">
-        {/* Header */}
-        <div ref={headingRef} className="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-white/8 pb-8">
-          <div>
-            <p className="text-[11px] font-mono text-white/30 tracking-[0.3em] uppercase mb-3">FAQ</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">Frequently Asked</h2>
+    <section ref={sectionRef} className="w-full py-24 md:py-32 lg:py-40 relative z-30 rounded-t-[3rem] md:rounded-t-[4rem] -mt-16 pt-32 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]" style={{ background: "#060606" }}>
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-24">
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+          {/* Left Column - Sticky Heading */}
+          <div className="lg:col-span-5 relative">
+            <div ref={headingContainerRef} className="lg:sticky lg:top-40">
+              <p className="text-[11px] md:text-xs font-mono text-white/30 tracking-[0.3em] uppercase mb-4">Support & FAQ</p>
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[0.9] tracking-tighter uppercase mb-6">
+                Frequently<br />Asked.
+              </h2>
+              <p className="text-base md:text-lg text-white/40 leading-relaxed font-light max-w-md">
+                Common questions regarding our engagement model, execution methodologies, and compliance delivery.
+              </p>
+            </div>
           </div>
-          <p className="hidden md:block text-sm text-white/35 max-w-xs text-right leading-relaxed font-light">
-            Common questions about our methodology and engagement model.
-          </p>
+
+          {/* Right Column - FAQ List */}
+          <div ref={listRef} className="lg:col-span-7">
+            <div className="flex flex-col">
+              {FAQS.map((faq, i) => (
+                <FaqItem
+                  key={i} faq={faq} idx={i}
+                  open={openIdx === i}
+                  onToggle={() => setOpen(openIdx === i ? null : i)}
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div ref={listRef} className="max-w-3xl">
-          {FAQS.map((faq, i) => (
-            <FaqItem
-              key={i} faq={faq} idx={i}
-              open={openIdx === i}
-              onToggle={() => setOpen(openIdx === i ? null : i)}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );
