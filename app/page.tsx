@@ -18,7 +18,8 @@ export default function Home() {
         <div className="relative z-10">
           <HeroSection />
           <ServicesGrid />
-          <div className="hidden md:block h-[100vh] w-full pointer-events-none" />
+          {/* Spacer to absorb the overlapping -mt-16 of the next section without leaving a transparent gap */}
+          <div className="w-full h-16 bg-[#050505]"></div>
         </div>
 
         <div className="relative z-20 bg-[#ede8df] rounded-t-[4rem] overflow-hidden -mt-16 pt-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
