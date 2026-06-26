@@ -21,7 +21,7 @@ export function FalconStaticParticlesWrapper() {
   }, []);
 
   // Return null on mobile or before detecting screen size to prevent flash/unnecessary load
-  if (isMobile === null || isMobile) {
+  if (isMobile === null) {
     return null;
   }
 

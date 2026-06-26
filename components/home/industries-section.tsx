@@ -71,7 +71,7 @@ export function IndustriesSection() {
       cards.forEach((card, i) => {
         ScrollTrigger.create({
           trigger: card,
-          start: "top 15%",
+          start: "center center",
           pin: true,
           pinSpacing: false,
           id: `pin-${i}`,
@@ -84,7 +84,7 @@ export function IndustriesSection() {
             scrollTrigger: {
               trigger: cards[i + 1],
               start: "top 80%",
-              end: "top 20%",
+              end: "center center",
               scrub: true,
             }
           });
@@ -105,7 +105,6 @@ export function IndustriesSection() {
     <section id="industries-section" ref={sectionRef} className="relative w-full bg-[#111111] text-white py-32 flex flex-col items-center overflow-x-hidden">
 
 
-      {/* Header */}
       <div className="max-w-[1500px] w-full px-6 md:px-12 lg:px-24 mb-20 z-10 text-center relative">
         <p className="text-[11px] font-mono tracking-[0.3em] uppercase mb-4 opacity-50">
           Sectors
@@ -115,7 +114,6 @@ export function IndustriesSection() {
         </h2>
       </div>
 
-      {/* Cards Container */}
       <div className="w-full max-w-[1000px] mx-auto px-6 relative pb-[20vh] z-10">
         {INDUSTRIES.map((ind, i) => {
           const Icon = ind.icon;
@@ -147,7 +145,7 @@ export function IndustriesSection() {
 
                 <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start md:items-end justify-between mt-auto w-full">
                   <h3
-                    className="text-3xl sm:text-4xl md:text-6xl font-bold leading-none uppercase tracking-tight max-w-md w-full md:w-auto break-words"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-none uppercase tracking-tight w-full md:w-auto shrink-0"
                     style={{ color: ind.color.text }}
                   >
                     {ind.name}

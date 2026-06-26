@@ -20,7 +20,7 @@ export function FalconParticlesWrapper() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  if (isMobile === null || isMobile) {
+  if (isMobile === null) {
     return null;
   }
 

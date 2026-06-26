@@ -180,7 +180,7 @@ function Cloud({ targets, mouse, introProgress, staticMode }: CloudProps) {
 
     const isMobile = aspect < 1.0;
     const fShiftX = isMobile ? 0.0 : (staticMode ? 0 : 3.0);
-    const fShiftY = isMobile ? 1.5 : 0.0;
+    const fShiftY = isMobile ? 0.0 : 0.0;
 
     if (isFirstFrameRef.current) {
       for (let i = 0; i < N; i++) {
@@ -234,15 +234,35 @@ function Cloud({ targets, mouse, introProgress, staticMode }: CloudProps) {
 
       let lx = 0, ly = 0, lz = 0;
       if (targets) {
-        const fScale = isMobile ? 0.8 : 1.0;
+        let targetX = 0, targetY = 0, targetZ = 0;
+        
+        if (isMobile) {
+          // Fibonacci sphere energy orb
+          const phi = Math.acos(1 - 2 * (i + 0.5) / N);
+          const theta = Math.PI * (1 + Math.sqrt(5)) * (i + 0.5);
+          
+          const waveT = t * 0.8;
+          const d1 = Math.sin(phi * 4.0 + waveT);
+          const d2 = Math.cos(theta * 5.0 - waveT * 0.7);
+          const d3 = Math.sin(phi * 8.0 + theta * 3.0 + waveT * 1.2);
+          
+          const r = 2.2 + (d1 * d2 * 0.6) + (d3 * 0.2);
+          
+          const rotTheta = theta + t * 0.15;
 
-        const falconX = targets[xi] * fScale + fShiftX;
-        const falconY = targets[yi] * fScale + fShiftY;
-        const falconZ = targets[zi] * fScale;
+          targetX = r * Math.sin(phi) * Math.cos(rotTheta);
+          targetY = r * Math.cos(phi); 
+          targetZ = r * Math.sin(phi) * Math.sin(rotTheta) - 2.0;
+        } else {
+          const fScale = 1.0;
+          targetX = targets[xi] * fScale + fShiftX;
+          targetY = targets[yi] * fScale + fShiftY;
+          targetZ = targets[zi] * fScale;
+        }
 
-        lx = falconX;
-        ly = falconY;
-        lz = falconZ;
+        lx = targetX;
+        ly = targetY;
+        lz = targetZ;
       } else {
         lx = oX;
         ly = oY;

@@ -189,17 +189,35 @@ function Cloud({ targets, progress }: CloudProps) {
         const sY = currentOriginY + (radius + scatter * (0.5 + Math.abs(pseudoRand))) * Math.sin(angle + spin);
         const sZ = currentOriginZ + t_layer * 20.0 + pseudoRand * scatter * 1.5;
 
-        const fScale = isMobile ? 0.8 : 1.0;
-        const fShiftX = isMobile ? 0.0 : 3.5;
-        const fShiftY = isMobile ? 1.5 : 0.0;
+        let targetX = 0, targetY = 0, targetZ = 0;
+        if (isMobile) {
+          const phi = Math.acos(1 - 2 * (i + 0.5) / N);
+          const theta = Math.PI * (1 + Math.sqrt(5)) * (i + 0.5);
+          
+          const waveT = state.clock.getElapsedTime() * 0.8;
+          const d1 = Math.sin(phi * 4.0 + waveT);
+          const d2 = Math.cos(theta * 5.0 - waveT * 0.7);
+          const d3 = Math.sin(phi * 8.0 + theta * 3.0 + waveT * 1.2);
+          
+          const r = 2.2 + (d1 * d2 * 0.6) + (d3 * 0.2);
+          
+          const rotTheta = theta + state.clock.getElapsedTime() * 0.15;
 
-        const falconX = targets[xi] * fScale + fShiftX;
-        const falconY = targets[yi] * fScale + fShiftY;
-        const falconZ = targets[zi] * fScale;
+          targetX = r * Math.sin(phi) * Math.cos(rotTheta);
+          targetY = r * Math.cos(phi); 
+          targetZ = r * Math.sin(phi) * Math.sin(rotTheta) - 2.0;
+        } else {
+          const fScale = 1.0;
+          const fShiftX = 3.5;
+          const fShiftY = 0.0;
+          targetX = targets[xi] * fScale + fShiftX;
+          targetY = targets[yi] * fScale + fShiftY;
+          targetZ = targets[zi] * fScale;
+        }
 
-        tx = sX * (1 - easeMorph) + falconX * easeMorph;
-        ty = sY * (1 - easeMorph) + falconY * easeMorph;
-        tz = sZ * (1 - easeMorph) + falconZ * easeMorph;
+        tx = sX * (1 - easeMorph) + targetX * easeMorph;
+        ty = sY * (1 - easeMorph) + targetY * easeMorph;
+        tz = sZ * (1 - easeMorph) + targetZ * easeMorph;
       }
 
       const dx = _pos[xi] - ptrWX;

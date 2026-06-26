@@ -1,10 +1,16 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const COLORS = {
   obsidian: { bg: "#0a0a0a", text: "#ffffff", muted: "rgba(255,255,255,0.5)", num: "rgba(255,255,255,0.2)" },
   teal: { bg: "#2d6a6f", text: "#ffffff", muted: "rgba(255,255,255,0.7)", num: "rgba(255,255,255,0.3)" },
   coral: { bg: "#c85a3a", text: "#ffffff", muted: "rgba(255,255,255,0.8)", num: "rgba(255,255,255,0.3)" },
-  ivory: { bg: "#ffffff", text: "#0a0a0a", muted: "rgba(10,10,10,0.6)", num: "rgba(10,10,10,0.2)" }, // Used white here so it contrasts against the ivory container
+  ivory: { bg: "#ffffff", text: "#0a0a0a", muted: "rgba(10,10,10,0.6)", num: "rgba(10,10,10,0.2)" },
 };
 
 const STEPS = [
@@ -35,8 +41,37 @@ const STEPS = [
 ];
 
 export function ProcessTimeline() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray(".timeline-card");
+      if (cards.length) {
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: "top 90%",
+              once: true,
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="how-we-work" data-theme="light" className="relative w-full min-h-screen bg-[#ede8df] text-[#0a0a0a] flex flex-col justify-between pt-32">
+    <section ref={sectionRef} id="how-we-work" data-theme="light" className="relative w-full min-h-screen bg-[#ede8df] text-[#0a0a0a] flex flex-col justify-between pt-32">
       {/* Top Header Section */}
       <div className="max-w-[1500px] mx-auto px-6 md:px-12 lg:px-24 w-full flex-1">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 mb-16 h-full items-center">
@@ -44,7 +79,7 @@ export function ProcessTimeline() {
             <p className="text-[11px] font-mono tracking-[0.3em] uppercase mb-6 opacity-50 font-bold">
               Our Methodology
             </p>
-            <h2 className="text-5xl md:text-6xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9]">
+            <h2 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold tracking-tighter uppercase leading-[0.9]">
               Methodology.<br />
               Zero Friction.
             </h2>
@@ -71,11 +106,11 @@ export function ProcessTimeline() {
       </div>
 
       {/* Edge-to-Edge Cards */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 lg:rounded-t-[2rem] overflow-hidden">
+      <div ref={cardsRef} className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 lg:rounded-t-[2rem] overflow-hidden">
         {STEPS.map((step) => (
           <div
             key={step.num}
-            className="p-10 lg:p-12 xl:p-16 flex flex-col justify-between min-h-[400px] xl:min-h-[500px]"
+            className="timeline-card opacity-0 p-10 lg:p-12 xl:p-16 flex flex-col justify-between min-h-[400px] xl:min-h-[500px]"
             style={{ backgroundColor: step.color.bg }}
           >
             <div className="flex flex-col h-full">
@@ -86,7 +121,6 @@ export function ProcessTimeline() {
                 {step.title}
               </h3>
 
-              {/* Graphic pattern using the number */}
               <div
                 className="flex-1 flex items-center justify-center text-[10rem] font-bold tracking-tighter leading-none select-none opacity-40 overflow-hidden"
                 style={{ color: step.color.num }}

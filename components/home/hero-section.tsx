@@ -99,7 +99,10 @@ export function HeroSection() {
         </div>
 
         {/* Headline */}
-        <h1 className="mb-16 md:mb-24 font-bold leading-[1.05] tracking-tight max-w-[900px] md:w-[70%] lg:w-[60%]">
+        <h1 
+          className="mb-16 md:mb-24 font-bold leading-[1.05] tracking-tight max-w-[900px] md:w-[70%] lg:w-[60%]"
+          style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8), 0 0 100px rgba(0,0,0,1)" }}
+        >
           <span ref={h1Line1} className="block text-[clamp(2.2rem,4.5vw,4.5rem)] text-white">
             Energy of a Photon,
           </span>
@@ -111,7 +114,11 @@ export function HeroSection() {
         <div className="flex flex-col gap-10 items-start mt-4 max-w-[900px] md:w-[70%] lg:w-[60%]">
 
           {/* Description */}
-          <p ref={descRef} className="text-[15px] md:text-[17px] text-white/40 max-w-lg leading-relaxed font-light">
+          <p 
+            ref={descRef} 
+            className="text-[15px] md:text-[17px] text-white/40 max-w-lg leading-relaxed font-light"
+            style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,1)" }}
+          >
             Next-generation cybersecurity for enterprises globally.<br className="hidden sm:block" />
             VAPT · Compliance · Managed Security Services.
           </p>
