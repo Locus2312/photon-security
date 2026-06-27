@@ -322,7 +322,7 @@ export default function FalconParticles() {
         introProgress.current = 1.0;
         gsap.to(introProgress, {
           current: 0.0,
-          duration: 4.0,
+          duration: 2.0,
           ease: "power2.inOut",
           delay: 0.8,
         });

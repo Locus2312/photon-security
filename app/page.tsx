@@ -18,7 +18,6 @@ export default function Home() {
         <div className="relative z-10">
           <HeroSection />
           <ServicesGrid />
-          {/* Spacer to absorb the overlapping -mt-16 of the next section without leaving a transparent gap */}
           <div className="w-full h-16 bg-[#050505]"></div>
         </div>
 

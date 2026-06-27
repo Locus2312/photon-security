@@ -14,18 +14,20 @@ export function PageWrapper({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
 
-    // Bypass logic for 404s
     const validPaths = ["/", "/about", "/services", "/careers", "/contact", "/legal"];
     const currentPath = window.location.pathname;
     const isValid = validPaths.some(p => currentPath === p || currentPath.startsWith("/legal/") || currentPath.startsWith("/careers/"));
 
     if (!isValid) {
       setShowPreloader(false);
+      if (typeof window !== "undefined") {
+        (window as Window & typeof globalThis & { __preloaderComplete?: boolean }).__preloaderComplete = true;
+        window.dispatchEvent(new Event("preloaderComplete"));
+      }
     }
   }, []);
 
   if (!mounted) {
-    // SSR Fallback: Render content hidden to preserve SEO but prevent flashes
     return <div className="opacity-0">{children}</div>;
   }
 
@@ -33,7 +35,6 @@ export function PageWrapper({ children }: { children: React.ReactNode }) {
     <>
       <GsapCursor />
 
-      {/* Cinematic Preloader Gatekeeper */}
       <AnimatePresence mode="wait">
         {showPreloader && (
           <motion.div
@@ -47,12 +48,6 @@ export function PageWrapper({ children }: { children: React.ReactNode }) {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* 
-        Main Content Layout
-        The key change between 'loading' and the actual 'pathname' forces a clean 
-        remount of animations exactly when the preloader finishes.
-      */}
       <motion.div
         key={showPreloader ? "loading-cloak" : pathname}
         initial={{ opacity: 0 }}

@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 
 export function GsapCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+
+  const pathname = usePathname();
 
   useEffect(() => {
     const isFinePointer = !window.matchMedia("(pointer: coarse)").matches;
@@ -16,10 +19,8 @@ export function GsapCursor() {
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
-    // Show custom cursor elements
     gsap.set([dot, ring], { display: "block" });
 
-    // Hide default cursor
     document.body.style.cursor = "none";
 
     const mouse = { x: -100, y: -100 };
@@ -51,22 +52,40 @@ export function GsapCursor() {
       gsap.to(dot, { scale: 1, duration: 0.2 });
     };
 
-    const targets = document.querySelectorAll("a, button, [role='button']");
-    targets.forEach((el) => {
-      el.addEventListener("mouseenter", expand);
-      el.addEventListener("mouseleave", contract);
-    });
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("a, button, [role='button']")) {
+        expand();
+      }
+    };
+
+    const handleMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("a, button, [role='button']")) {
+        contract();
+      }
+    };
+
+    document.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseout", handleMouseOut);
 
     return () => {
       document.body.style.cursor = "";
       cancelAnimationFrame(raf);
       window.removeEventListener("mousemove", onMove);
-      targets.forEach((el) => {
-        el.removeEventListener("mouseenter", expand);
-        el.removeEventListener("mouseleave", contract);
-      });
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseout", handleMouseOut);
     };
   }, []);
+
+  useEffect(() => {
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    if (!dot || !ring) return;
+
+    gsap.to(ring, { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" });
+    gsap.to(dot, { scale: 1, duration: 0.2 });
+  }, [pathname]);
 
   return (
     <>

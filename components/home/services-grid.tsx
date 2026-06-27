@@ -46,10 +46,26 @@ export function ServicesGrid() {
         trigger: containerRef.current,
         start: "top center",
         end: "bottom center",
-        onEnter: () => gsap.to("#particles-container", { opacity: 0.1, duration: 0.5 }),
-        onLeave: () => gsap.to("#particles-container", { opacity: 0.85, duration: 0.5 }),
-        onEnterBack: () => gsap.to("#particles-container", { opacity: 0.1, duration: 0.5 }),
-        onLeaveBack: () => gsap.to("#particles-container", { opacity: 0.85, duration: 0.5 }),
+        onEnter: () => {
+          if (window.innerWidth >= 768) {
+            gsap.to("#particles-container", { opacity: 0.1, duration: 0.5 });
+          }
+        },
+        onLeave: () => {
+          if (window.innerWidth >= 768) {
+            gsap.to("#particles-container", { opacity: 0.85, duration: 0.5 });
+          }
+        },
+        onEnterBack: () => {
+          if (window.innerWidth >= 768) {
+            gsap.to("#particles-container", { opacity: 0.1, duration: 0.5 });
+          }
+        },
+        onLeaveBack: () => {
+          if (window.innerWidth >= 768) {
+            gsap.to("#particles-container", { opacity: 0.85, duration: 0.5 });
+          }
+        },
       });
 
       let currentActive = -2;
@@ -59,9 +75,14 @@ export function ServicesGrid() {
         currentActive = visualIndex;
 
         const colorIndex = visualIndex;
+        let targetBg = SECTION_COLORS[colorIndex].bg;
+
+        if (window.innerWidth < 768) {
+          targetBg = targetBg.slice(0, 7) + "66";
+        }
 
         gsap.to(containerRef.current, {
-          backgroundColor: SECTION_COLORS[colorIndex].bg,
+          backgroundColor: targetBg,
           duration: 0.5,
           ease: "power2.out",
           overwrite: "auto"
@@ -119,15 +140,15 @@ export function ServicesGrid() {
   return (
     <section id="services-grid" ref={containerRef} className="relative w-full z-10 transition-colors duration-500 border-t border-white/10" style={{ backgroundColor: SECTION_COLORS[0].bg }}>
       <div className="max-w-[1600px] mx-auto w-full lg:flex relative items-start">
-        
+
         {/* Mobile Static Header */}
         <div className="lg:hidden relative pt-16 px-6 z-30 pointer-events-none">
-           <p className="text-[10px] font-mono tracking-[0.3em] uppercase mb-2 opacity-50 font-bold text-white">
-             Our Focus
-           </p>
-           <h2 className="text-3xl font-bold tracking-tighter uppercase leading-[0.9] text-white drop-shadow-md">
-             Services We Offer.
-           </h2>
+          <p className="text-[10px] font-mono tracking-[0.3em] uppercase mb-2 opacity-50 font-bold text-white">
+            Our Focus
+          </p>
+          <h2 className="text-3xl font-bold tracking-tighter uppercase leading-[0.9] text-white drop-shadow-md">
+            Services We Offer.
+          </h2>
         </div>
 
         {/* Mobile Dynamic Gradients */}
@@ -152,12 +173,12 @@ export function ServicesGrid() {
         >
           {/* Static Header */}
           <div className="absolute top-24 left-12 xl:left-20 z-20">
-             <p className="text-[11px] font-mono tracking-[0.3em] uppercase mb-4 opacity-50 font-bold text-white">
-               Our Focus
-             </p>
-             <h2 className="text-4xl md:text-5xl font-bold tracking-tighter uppercase leading-[0.9] text-white drop-shadow-md">
-               Services We Offer.
-             </h2>
+            <p className="text-[11px] font-mono tracking-[0.3em] uppercase mb-4 opacity-50 font-bold text-white">
+              Our Focus
+            </p>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter uppercase leading-[0.9] text-white drop-shadow-md">
+              Services We Offer.
+            </h2>
           </div>
 
           {servicesData.map((cat, i) => (

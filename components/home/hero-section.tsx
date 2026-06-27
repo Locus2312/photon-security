@@ -23,7 +23,9 @@ export function HeroSection() {
 
   useEffect(() => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-    if (typeof window !== "undefined" && !isMobile) {
+    const isPreloaderComplete = typeof window !== "undefined" && (window as Window & typeof globalThis & { __preloaderComplete?: boolean }).__preloaderComplete;
+
+    if (typeof window !== "undefined" && !isMobile && !isPreloaderComplete) {
       document.body.style.overflow = "hidden";
       window.scrollTo(0, 0);
     }
@@ -31,15 +33,11 @@ export function HeroSection() {
     const unlockScroll = () => {
       setTimeout(() => {
         document.body.style.overflow = "";
-      }, 2800);
+      }, 2000);
     };
 
-    if (typeof window !== "undefined" && !isMobile) {
-      if ((window as Window & typeof globalThis & { __preloaderComplete?: boolean }).__preloaderComplete) {
-        unlockScroll();
-      } else {
-        window.addEventListener("preloaderComplete", unlockScroll);
-      }
+    if (typeof window !== "undefined" && !isMobile && !isPreloaderComplete) {
+      window.addEventListener("preloaderComplete", unlockScroll);
     }
 
     const ctx = gsap.context(() => {
@@ -84,9 +82,10 @@ export function HeroSection() {
         }}
       />
 
+      <div className="absolute bottom-0 left-0 w-full h-[70vh] pointer-events-none z-[5] md:hidden bg-gradient-to-t from-transparent via-black/90 to-transparent" />
+
       <div className="container mx-auto relative z-10 flex flex-col justify-end pb-[15vh] md:pb-[20vh] h-full px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24">
 
-        {/* Badge */}
         <div ref={badgeRef} className="inline-flex items-center gap-2.5 mb-8 px-4 py-2 rounded-sm border border-white/12 bg-white/4 w-fit">
           <ShieldCheckIcon size={13} weight="bold" className="text-white/60" />
           <span className="text-[10px] md:text-[11px] font-mono text-white/55 tracking-[0.25em] uppercase">
@@ -99,7 +98,7 @@ export function HeroSection() {
         </div>
 
         {/* Headline */}
-        <h1 
+        <h1
           className="mb-16 md:mb-24 font-bold leading-[1.05] tracking-tight max-w-[900px] md:w-[70%] lg:w-[60%]"
           style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8), 0 0 100px rgba(0,0,0,1)" }}
         >
@@ -114,8 +113,8 @@ export function HeroSection() {
         <div className="flex flex-col gap-10 items-start mt-4 max-w-[900px] md:w-[70%] lg:w-[60%]">
 
           {/* Description */}
-          <p 
-            ref={descRef} 
+          <p
+            ref={descRef}
             className="text-[15px] md:text-[17px] text-white/40 max-w-lg leading-relaxed font-light"
             style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,1)" }}
           >
