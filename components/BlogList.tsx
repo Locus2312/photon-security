@@ -115,9 +115,9 @@ export default function BlogList({ posts, allCategories }: BlogListProps) {
               <div className="p-8 relative">
                 {/* Categories Badge */}
                 {post.categories && post.categories.length > 0 && (
-                  <div className="flex gap-2 mb-5">
+                  <div className="flex flex-wrap gap-2 mb-5">
                     {post.categories.map((cat) => (
-                      <span key={cat.title} className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/50 border border-white/10 bg-white/5 px-2 py-1 rounded-sm group-hover:text-white group-hover:border-white/30 transition-all">
+                      <span key={cat.title} className="text-[9px] md:text-[10px] whitespace-nowrap font-mono uppercase tracking-[0.2em] text-white/50 border border-white/10 bg-white/5 px-2 py-1 rounded-sm group-hover:text-white group-hover:border-white/30 transition-all">
                         {cat.title}
                       </span>
                     ))}

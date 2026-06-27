@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import {
   ListIcon,
@@ -30,14 +30,25 @@ const NAVIGATION = [
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [isLightTheme, setIsLightTheme] = useState(false);
   const pathname = usePathname();
+  const lastScrollY = useRef(0);
 
   const logoRef = useMagneticEffect<HTMLAnchorElement>(0.2);
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 40);
+      const currentScrollY = window.scrollY;
+
+      setScrolled(currentScrollY > 40);
+
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+      lastScrollY.current = currentScrollY;
 
       const navEl = document.getElementById('main-nav');
       if (navEl) navEl.style.pointerEvents = 'none';
@@ -56,7 +67,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <nav id="main-nav" className="fixed top-6 left-0 right-0 z-[100] flex justify-center px-6 transition-colors duration-200">
+    <nav id="main-nav" className={`fixed top-6 left-0 right-0 z-[100] flex justify-center px-6 transition-all duration-300 ease-in-out ${hidden ? '-translate-y-32 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}>
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

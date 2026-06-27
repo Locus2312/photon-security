@@ -40,7 +40,6 @@ export function ServicesGrid() {
       });
 
       const sections = gsap.utils.toArray(".service-scroll-section") as HTMLElement[];
-      const totalSections = sections.length;
 
       ScrollTrigger.create({
         trigger: containerRef.current,
