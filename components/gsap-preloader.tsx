@@ -36,7 +36,7 @@ export function GsapPreloader({ onComplete }: PreloaderProps) {
         obj,
         {
           value: 100,
-          duration: 2.4,
+          duration: 0.8,
           ease: "power2.inOut",
           onUpdate: () => setCount(Math.floor(obj.value)),
         },
@@ -47,37 +47,37 @@ export function GsapPreloader({ onComplete }: PreloaderProps) {
       tl.fromTo(
         barRef.current,
         { scaleX: 0, transformOrigin: "left center" },
-        { scaleX: 1, duration: 2.4, ease: "power2.inOut" },
+        { scaleX: 1, duration: 0.8, ease: "power2.inOut" },
         0,
       );
 
       // Fade in logo
       tl.from(
         logoRef.current,
-        { opacity: 0, scale: 0.92, duration: 0.8, ease: "power3.out" },
-        0.2,
+        { opacity: 0, scale: 0.92, duration: 0.4, ease: "power3.out" },
+        0.1,
       );
       tl.from(
         labelRef.current,
-        { opacity: 0, y: 10, duration: 0.6, ease: "power3.out" },
-        0.5,
+        { opacity: 0, y: 10, duration: 0.4, ease: "power3.out" },
+        0.2,
       );
 
       // Panels slide out
       tl.to(
         topPanelRef.current,
-        { yPercent: -100, duration: 1, ease: "power4.inOut" },
-        2.5,
+        { yPercent: -100, duration: 0.6, ease: "power4.inOut" },
+        0.9,
       );
       tl.to(
         bottomPanelRef.current,
-        { yPercent: 100, duration: 1, ease: "power4.inOut" },
-        2.5,
+        { yPercent: 100, duration: 0.6, ease: "power4.inOut" },
+        0.9,
       );
       tl.to(
         overlayRef.current,
         { opacity: 0, pointerEvents: "none", duration: 0.2 },
-        3.4,
+        1.4,
       );
     });
 

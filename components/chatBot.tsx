@@ -93,25 +93,37 @@ export function ChatBot() {
       <div
         ref={chatRef}
         className={cn(
-          "fixed bottom-6 right-6 md:bottom-8 md:right-8 w-[calc(100vw-48px)] md:w-[400px] h-[550px] md:h-[600px] max-h-[85vh] flex flex-col z-50 overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]/90 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]",
+          "fixed bottom-6 right-6 md:bottom-8 md:right-8 w-[calc(100vw-48px)] md:w-[400px] h-[550px] md:h-[600px] max-h-[85vh] flex flex-col z-50 overflow-hidden rounded-2xl border border-white/10 bg-[#050505]/95 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]",
           !isOpen && "hidden opacity-0"
         )}
       >
+        {/* Background Effects */}
+        <div
+          className="absolute inset-0 pointer-events-none z-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+            backgroundSize: "128px",
+          }}
+        />
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+          <div className="absolute -top-[20%] -left-[20%] w-[140%] h-[140%] bg-gradient-to-br from-teal-500/10 via-transparent to-blue-500/10 mix-blend-screen blur-[80px] opacity-60" />
+        </div>
+
         {/* Header */}
-        <div className="flex items-center justify-between p-4 md:p-5 border-b border-white/5 bg-white/[0.02]">
+        <div className="relative z-10 flex items-center justify-between p-4 md:p-5 border-b border-white/5 bg-white/[0.02]">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="p-2 md:p-2.5 bg-white/5 rounded-xl border border-white/10">
+              <div className="p-2 md:p-2.5 bg-white/5 rounded-xl border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
                 <Terminal size={16} className="md:size-[18px] text-white/80" />
               </div>
-              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 md:w-3 md:h-3 bg-emerald-500 border-2 border-[#0a0a0a] rounded-full animate-pulse" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 md:w-3 md:h-3 bg-emerald-500 border-2 border-[#050505] rounded-full animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-[12px] md:text-sm text-white tracking-wide">ELECTRO</h3>
-                <span className="text-[8px] md:text-[10px] font-mono px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-white/40 uppercase tracking-tighter">v2.0</span>
+                <span className="text-[8px] md:text-[9px] font-mono px-1.5 py-0.5 bg-white/10 border border-white/12 rounded text-white/60 uppercase tracking-widest">v2.0</span>
               </div>
-              <p className="text-[9px] md:text-[10px] font-mono text-white/30 uppercase tracking-[0.2em]">Security Protocol Active</p>
+              <p className="text-[9px] md:text-[10px] font-mono text-white/40 uppercase tracking-[0.25em] mt-0.5">Security Protocol Active</p>
             </div>
           </div>
           <button
@@ -123,15 +135,16 @@ export function ChatBot() {
         </div>
 
         {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 scrollbar-hide">
+        <div className="relative z-10 flex-1 overflow-y-auto p-4 md:p-6 space-y-6 scrollbar-hide">
           {messages.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full text-center space-y-4">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/10">
-                <Bot className="size-7 md:size-8" />
+            <div className="flex flex-col items-center justify-center h-full text-center space-y-5">
+              <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent rounded-2xl" />
+                <Bot className="size-8 md:size-10 relative z-10" />
               </div>
-              <div className="space-y-1 px-4">
-                <p className="text-[13px] md:text-sm text-white/60 font-medium">Encrypted Session Initialized</p>
-                <p className="text-[10px] md:text-[11px] text-white/25 font-mono uppercase tracking-widest">Awaiting Command...</p>
+              <div className="space-y-2 px-4">
+                <p className="text-[11px] md:text-[12px] font-mono text-white/60 tracking-[0.2em] uppercase">Encrypted Session Initialized</p>
+                <p className="text-[9px] md:text-[10px] text-white/30 font-mono uppercase tracking-[0.3em]">Awaiting Command...</p>
               </div>
             </div>
           ) : (
@@ -142,10 +155,10 @@ export function ChatBot() {
               >
                 <div
                   className={cn(
-                    "relative p-3 md:p-4 rounded-xl max-w-[90%] md:max-w-[85%] text-[12px] md:text-[13px] leading-relaxed transition-all",
+                    "relative p-3 md:p-4 rounded-2xl max-w-[90%] md:max-w-[85%] text-[12px] md:text-[13px] leading-relaxed transition-all",
                     m.role === "user"
-                      ? "bg-white text-black font-semibold rounded-tr-none shadow-xl"
-                      : "bg-white/5 border border-white/10 text-white/80 rounded-tl-none font-light"
+                      ? "bg-white text-black font-semibold rounded-tr-sm shadow-[0_5px_20px_rgba(255,255,255,0.15)]"
+                      : "bg-gradient-to-br from-white/10 to-transparent border border-white/10 text-white/80 rounded-tl-sm font-light backdrop-blur-sm"
                   )}
                 >
                   <div className="absolute top-0 opacity-20 pointer-events-none -translate-y-full mb-1">
@@ -200,30 +213,30 @@ export function ChatBot() {
         </div>
 
         {/* Input Area */}
-        <div className="p-4 md:p-5 border-t border-white/5 bg-white/[0.01]">
+        <div className="relative z-10 p-4 md:p-5 border-t border-white/5 bg-[#050505]/80 backdrop-blur-md">
           <form
             onSubmit={handleSubmit}
-            className="flex items-center gap-2 md:gap-3 bg-white/5 rounded-xl p-1 md:p-1.5 pl-3 md:pl-4 border border-white/10 focus-within:border-white/30 transition-all shadow-inner"
+            className="flex items-center gap-2 md:gap-3 bg-white/5 rounded-xl p-1 md:p-1.5 pl-3 md:pl-4 border border-white/10 focus-within:border-white/30 focus-within:bg-white/[0.07] focus-within:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all"
           >
             <input
               value={input}
               onChange={handleInputChange}
               placeholder="Query Photon..."
-              className="flex-1 bg-transparent border-none outline-none text-[11px] md:text-xs py-2 md:py-2.5 text-white placeholder:text-white/20 disabled:opacity-50"
+              className="flex-1 bg-transparent border-none outline-none text-[11px] md:text-xs py-2 md:py-2.5 text-white placeholder:text-white/30 disabled:opacity-50 font-light tracking-wide"
               disabled={isLoading}
             />
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="p-2 md:p-2.5 rounded-lg bg-white text-black disabled:opacity-50 hover:bg-white/90 transition-all flex items-center justify-center"
+              className="p-2 md:p-2.5 rounded-lg bg-white text-black disabled:opacity-50 hover:bg-white/90 transition-all flex items-center justify-center hover:shadow-[0_0_15px_rgba(255,255,255,0.4)]"
             >
               <Send size={14} strokeWidth={2.5} />
             </button>
           </form>
-          <div className="flex items-center justify-center gap-2 mt-3 opacity-20 group">
-            <div className="h-px flex-1 bg-white/20" />
-            <span className="text-[8px] md:text-[9px] font-mono uppercase tracking-[0.3em]">End-to-End Encrypted</span>
-            <div className="h-px flex-1 bg-white/20" />
+          <div className="flex items-center justify-center gap-3 mt-4 opacity-30 group">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/30" />
+            <span className="text-[8px] md:text-[9px] font-mono uppercase tracking-[0.35em] text-white">End-to-End Encrypted</span>
+            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/30" />
           </div>
         </div>
       </div>
