@@ -69,7 +69,7 @@ export function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-[#0a0a0a] text-white relative z-50 rounded-t-[3rem] md:rounded-t-[4rem] -mt-16 pt-24 md:pt-32 pb-12 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
+    <footer ref={footerRef} className="bg-[#0a0a0a] text-white relative z-50 pt-16 md:pt-24 pb-12 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
 
       {/* Background radial pattern */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none">

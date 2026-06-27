@@ -1,11 +1,14 @@
 import { FalconParticlesWrapper } from "@/components/home/falcon-particles-wrapper";
 import { HeroSection } from "@/components/home/hero-section";
-import { ServicesGrid } from "@/components/home/services-grid";
-import { ProcessTimeline } from "@/components/home/process-timeline";
-import { IndustriesSection } from "@/components/home/industries-section";
-import { TestimonialCarousel } from "@/components/home/testimonial-carousel";
-import { MarqueeCta } from "@/components/home/marquee-cta";
-import { FaqAccordion } from "@/components/home/faq-accordion";
+import dynamic from "next/dynamic";
+import { SectionSkeleton } from "@/components/home/section-skeleton";
+
+const ServicesGrid = dynamic(() => import("@/components/home/services-grid").then(mod => mod.ServicesGrid), { loading: () => <SectionSkeleton /> });
+const ProcessTimeline = dynamic(() => import("@/components/home/process-timeline").then(mod => mod.ProcessTimeline), { loading: () => <SectionSkeleton /> });
+const IndustriesSection = dynamic(() => import("@/components/home/industries-section").then(mod => mod.IndustriesSection), { loading: () => <SectionSkeleton /> });
+const TestimonialCarousel = dynamic(() => import("@/components/home/testimonial-carousel").then(mod => mod.TestimonialCarousel), { loading: () => <SectionSkeleton /> });
+const MarqueeCta = dynamic(() => import("@/components/home/marquee-cta").then(mod => mod.MarqueeCta), { loading: () => <SectionSkeleton /> });
+const FaqAccordion = dynamic(() => import("@/components/home/faq-accordion").then(mod => mod.FaqAccordion), { loading: () => <SectionSkeleton /> });
 
 export default function Home() {
   return (

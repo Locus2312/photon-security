@@ -56,7 +56,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <nav id="main-nav" className="fixed top-6 left-0 right-0 z-50 flex justify-center px-6 transition-colors duration-200">
+    <nav id="main-nav" className="fixed top-6 left-0 right-0 z-[100] flex justify-center px-6 transition-colors duration-200">
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -88,9 +88,10 @@ export function Navbar() {
           </div>
         </Link>
 
-        <div
+        <motion.div
+          layoutRoot
           className={cn(
-            "hidden lg:flex items-center rounded-full transition-all duration-200",
+            "hidden lg:flex items-center rounded-full transition-all duration-200 relative",
             isLightTheme
               ? "bg-black/5 backdrop-blur-2xl border border-black/10 shadow-xl"
               : "bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]",
@@ -99,6 +100,7 @@ export function Navbar() {
         >
           {NAVIGATION.map((item) => {
             const isActive = pathname === item.href;
+
             return (
               <Link
                 key={item.href}
@@ -131,7 +133,7 @@ export function Navbar() {
               </Link>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Right: Mobile Toggle */}
         <div className="flex items-center gap-3 ml-auto lg:ml-0">
