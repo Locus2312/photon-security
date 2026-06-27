@@ -65,7 +65,9 @@ export function IndustriesSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1024px)", () => {
       const cards = gsap.utils.toArray<HTMLElement>('.industry-card');
 
       cards.forEach((card, i) => {
@@ -96,9 +98,9 @@ export function IndustriesSection() {
           }
         }
       });
-    }, sectionRef);
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
@@ -114,13 +116,13 @@ export function IndustriesSection() {
         </h2>
       </div>
 
-      <div className="w-full max-w-[1000px] mx-auto px-6 relative pb-[20vh] z-10">
+      <div className="w-full max-w-[1000px] mx-auto px-6 relative pb-10 lg:pb-[20vh] z-10">
         {INDUSTRIES.map((ind, i) => {
           const Icon = ind.icon;
           return (
             <div
               key={ind.id}
-              className={`industry-card w-full min-h-[400px] md:min-h-[500px] rounded-[3rem] p-10 md:p-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] origin-top mb-[50vh] ${ind.color.selectionClass}`}
+              className={`industry-card w-full min-h-[400px] md:min-h-[500px] rounded-[3rem] p-10 md:p-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] origin-top mb-8 lg:mb-[50vh] ${ind.color.selectionClass}`}
               style={{
                 backgroundColor: ind.color.bg,
                 zIndex: i + 1,

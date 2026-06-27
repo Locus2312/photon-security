@@ -210,7 +210,7 @@ export function ServicesGrid() {
             {servicesData.map((cat, i) => (
               <div
                 key={cat.id}
-                className="service-scroll-section h-screen w-full px-6 md:px-12 lg:px-20 flex flex-col justify-center pt-32 lg:pt-0 border-t border-white/10 lg:border-none"
+                className="service-scroll-section min-h-screen lg:h-screen w-full px-6 md:px-12 lg:px-20 flex flex-col justify-center pt-32 pb-16 lg:pt-0 lg:pb-0 border-t border-white/10 lg:border-none"
               >
                 <div className="flex flex-col items-start gap-2 mb-8 lg:hidden content-reveal opacity-0">
                   <span className="text-5xl font-black text-white/10 font-mono">
