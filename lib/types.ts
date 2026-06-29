@@ -1,3 +1,8 @@
+export interface ServiceDetailItem {
+  title: string;
+  description: string;
+}
+
 export interface Service {
   id: string;
   slug: string;
@@ -8,6 +13,11 @@ export interface Service {
   icon?: string;
   tags?: string[];
   features?: string[];
+  headline?: string;
+  subheadline?: string;
+  serviceOverview?: string;
+  whatWeTest?: ServiceDetailItem[];
+  deliverables?: ServiceDetailItem[];
 }
 
 export interface ServiceCategory {

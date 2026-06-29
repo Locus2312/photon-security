@@ -16,6 +16,20 @@ export const servicesData: ServiceCategory[] = [
           "Test websites, e-commerce platforms, and portals for security flaws.",
         description:
           "Identify vulnerabilities in web applications through manual and automated testing, including OWASP Top 10 risks.",
+        headline: "Secure Your Web Applications Before Attackers Exploit Them.",
+        subheadline: "Deep manual and automated testing to eliminate logic flaws, vulnerabilities, and data leak vectors in your web platforms.",
+        serviceOverview: "Custom web applications are the primary target for modern cyberattacks. Our Web Application Penetration Testing service simulates real-world adversary tactics to uncover hidden critical bugs in your web perimeter. We don't just rely on automated scanners; our experts perform heavy manual testing to locate complex business logic flaws.",
+        whatWeTest: [
+          { title: "OWASP Top 10 Risks", description: "Injection flaws (SQLi), Cross-Site Scripting (XSS), and Broken Authentication." },
+          { title: "Business Logic Vulnerabilities", description: "Finding flaws in workflows that automated tools routinely miss." },
+          { title: "Session Management", description: "Verifying cookie security, session timeouts, and token security." },
+          { title: "Access Control Mechanics", description: "Ensuring users cannot escalate privileges or view other clients' data." }
+        ],
+        deliverables: [
+          { title: "Regulatory Compliance", description: "Instantly satisfies compliance mandates for PCI DSS, SOC 2, and HIPAA." },
+          { title: "Detailed Remediation Report", description: "Comprehensive developer-friendly proof of concepts to patch bugs quickly." },
+          { title: "Executive Summary", description: "Clear, high-level risk overview tailored for C-suite decision-makers." }
+        ]
       },
       {
         id: "api-vapt",
@@ -25,6 +39,20 @@ export const servicesData: ServiceCategory[] = [
         shortDescription: "Identify weaknesses in REST and GraphQL APIs.",
         description:
           "Comprehensive API security assessment covering authentication, authorization, and data exposure.",
+        headline: "Secure the Data Exchange Layer Connecting Your Digital Ecosystem.",
+        subheadline: "Specialized security assessments for REST, GraphQL, and SOAP endpoints to block unauthorized data extraction.",
+        serviceOverview: "Modern apps rely on APIs, making them high-value targets for attackers seeking back-door access to backend data. Our API Penetration Testing isolates your endpoints, analyzes authentication handshakes, and stress-tests your microservices infrastructure. We ensure that your data pipelines remain strictly locked down against unauthorized exposure.",
+        whatWeTest: [
+          { title: "OWASP API Security Top 10", description: "Targeting BOLA (Broken Object Level Authorization) and mass assignment flaws." },
+          { title: "Authentication & Authorization", description: "Breaking down JWT, OAuth, and API key mechanics." },
+          { title: "Rate Limiting & DoS Protection", description: "Testing server resilience against endpoint flooding and heavy payloads." },
+          { title: "Data Input Validation", description: "Injecting malicious payloads directly into endpoint processing layers." }
+        ],
+        deliverables: [
+          { title: "Safe Ecosystem Integrations", description: "Builds trust for third-party vendors and partners connecting to your network." },
+          { title: "Data Leak Mitigation", description: "Directly blocks automated scrapers and attackers trying to harvest database records." },
+          { title: "Post-Remediation Verification", description: "Complimentary re-test to confirm all API patches were successfully implemented." }
+        ]
       },
       {
         id: "network-vapt",
@@ -34,6 +62,20 @@ export const servicesData: ServiceCategory[] = [
         shortDescription: "Assess internal and external network security.",
         description:
           "Simulate real-world attacks to identify network-level vulnerabilities and lateral movement risks.",
+        headline: "Fortify Your Corporate Network Boundaries and Internal Assets.",
+        subheadline: "Advanced internal and external infrastructure assessments to locate and block exploit pathways.",
+        serviceOverview: "A single unpatched server or misconfigured router can compromise your entire business network. Our Network Penetration Testing service comprehensively maps out your infrastructure attack surface. We identify outdated software, default system credentials, and architecture weak spots, providing a blueprint to completely close entry points.",
+        whatWeTest: [
+          { title: "External Perimeter Security", description: "Firewalls, external IPs, routers, and remote access gateways (VPNs)." },
+          { title: "Internal Network Architecture", description: "Lateral movement pathways, Active Directory security, and network segregation." },
+          { title: "Wireless Network Security", description: "Testing rogue access points, weak encryption protocols, and guest network isolation." },
+          { title: "Patch & Configuration Management", description: "Locating unpatched systems and insecure default configurations." }
+        ],
+        deliverables: [
+          { title: "Ransomware Prevention", description: "Stops attackers from gaining initial network footholds and spreading malicious software." },
+          { title: "Validated Network Security Stance", description: "Confirms your infrastructure defense can withstand modern automated network attacks." },
+          { title: "Strategic IT Roadmap", description: "Prioritized list of technical remediation tasks ordered by real-world business impact risk." }
+        ]
       },
       {
         id: "mobile-vapt",
@@ -43,6 +85,20 @@ export const servicesData: ServiceCategory[] = [
         shortDescription: "Security testing for Android and iOS applications.",
         description:
           "Detect vulnerabilities in mobile apps including insecure storage, weak encryption, and API misuse.",
+        headline: "Complete Security Testing for iOS and Android Applications.",
+        subheadline: "Protecting your client-side mobile applications, stored on-device data, and cellular network transmissions.",
+        serviceOverview: "Mobile applications run directly on untrusted user devices, creating high exposure to code reverse-engineering and local data harvesting. Our Mobile Application Security Testing combines static code analysis (SAST) with dynamic runtime analysis (DAST). We pinpoint flaws hidden inside binaries, device storage, and transit layers.",
+        whatWeTest: [
+          { title: "OWASP Mobile Top 10", description: "Pinpointing insecure data storage, weak cryptography, and client-side code injection." },
+          { title: "Reverse-Engineering Resilience", description: "Evaluating code obfuscation strength and binary modification defenses." },
+          { title: "Local Data Storage Audit", description: "Scanning device storage, logs, and caches for leaked PII or access tokens." },
+          { title: "API Communication Integrity", description: "Inspecting SSL/TLS implementation and verifying certificate pinning security." }
+        ],
+        deliverables: [
+          { title: "App Store Trust", description: "Ensures your code clears stringent Google Play and Apple App Store compliance reviews." },
+          { title: "Intellectual Property Protection", description: "Safeguards your core business logic and proprietary mobile code from competitors." },
+          { title: "End-User Privacy", description: "Protects your customer base from local device data theft through compromised phones." }
+        ]
       },
       {
         id: "cloud-vapt",
@@ -52,6 +108,20 @@ export const servicesData: ServiceCategory[] = [
         shortDescription: "Assess AWS, Azure, and GCP security.",
         description:
           "Identify misconfigurations, IAM issues, and data exposure risks in cloud environments.",
+        headline: "Eliminate Complex Misconfigurations Across Cloud Architectures.",
+        subheadline: "Deep security auditing and exploitation analysis for AWS, Microsoft Azure, and GCP environments.",
+        serviceOverview: "Cloud breaches are almost always caused by simple configuration oversights rather than architecture design flaws. Our Cloud Security Testing service evaluates your exact multi-tenant posture. We blend deep configuration auditing with active platform threat emulation to ensure your cloud workloads, data storage, and access keys are perfectly defended.",
+        whatWeTest: [
+          { title: "Cloud Infrastructure Architecture", description: "Auditing misconfigured AWS S3 buckets, Azure Blobs, and exposed public assets." },
+          { title: "Identity & Access Management (IAM)", description: "Pinpointing over-privileged roles, weak MFA policies, and privilege escalation vulnerabilities." },
+          { title: "Container & Kubernetes Deployments", description: "Evaluating Docker images, orchestration rules, and microservice cluster boundaries." },
+          { title: "Secret & Key Management", description: "Locating exposed programmatic keys, hardcoded passwords, and unencrypted parameters." }
+        ],
+        deliverables: [
+          { title: "Devastating Breach Prevention", description: "Blocks attackers from accessing or downloading sensitive cloud-hosted databases." },
+          { title: "Cloud Governance Alignment", description: "Instantly maps cloud infrastructure to industry frameworks like CIS Benchmarks." },
+          { title: "Optimized Defense Spend", description: "Simplifies visibility so your team spends engineering time only on critical infrastructure vulnerabilities." }
+        ]
       },
       {
         id: "redteam",
@@ -61,7 +131,21 @@ export const servicesData: ServiceCategory[] = [
         shortDescription: "Simulated attacks and defense training.",
         description:
           "Comprehensive adversarial simulations to test detection, response, and remediation capabilities.",
-      },
+        headline: "Ultimate Adversarial Simulations to Mature Your Incident Response.",
+        subheadline: "Testing real-world operational readiness by pitting offensive simulation experts against active defenses.",
+        serviceOverview: "Real threat actors do not follow narrow scoping rules. Our Red Team & Blue Team exercises provide the highest tier of security validation. We launch stealthy, multi-vector attacks against your company (Red Teaming) while actively working with or measuring your internal IT defense speed, detection mechanics, and containment capabilities (Blue Teaming).",
+        whatWeTest: [
+          { title: "Full-Scale Attack Emulation", description: "Executing stealthy multi-month cyber campaigns mimicking specific advanced persistence threats (APTs)." },
+          { title: "Social Engineering & Phishing", description: "Stress-testing employee training with spear-phishing, vishing, or physical tailgating." },
+          { title: "Detection & Alerting Optimization", description: "Auditing SIEM, EDR, and SOC setups to ensure malicious activity triggers warnings." },
+          { title: "Incident Containment Timelines", description: "Measuring the exact minutes taken to identify, triage, and completely isolate active network attacks." }
+        ],
+        deliverables: [
+          { title: "Validated Crisis Readiness", description: "Proves exactly how your organization will handle a real, full-scale breach scenario." },
+          { title: "SOC & Blue Team Upgrades", description: "Concrete feedback data allowing internal defenders to tune detection thresholds immediately." },
+          { title: "Maximized Security ROI", description: "Identifies whether highly expensive security software is actually working under real battlefield stress." }
+        ]
+      }
     ],
   },
 

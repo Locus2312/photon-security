@@ -40,10 +40,6 @@ const STATS = [
   { label: "Threat Response", value: "<15", suffix: "min" },
 ];
 
-const TEAM = [
-  { name: "Het Patel", role: "Chief Operating Officer", bio: "Lead digital forensics investigator handling company operations." }
-];
-
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
@@ -184,76 +180,40 @@ export default function AboutContent() {
           viewport={{ once: true, margin: "-100px" }}
           className="py-20 md:py-24"
         >
-          <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-            <motion.div variants={fadeInUp} className="mb-12 md:mb-16">
-              <div className="text-[10px] font-mono uppercase tracking-[0.5em] text-black/50 mb-6">Executive Team</div>
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Our <span className="text-black/40">Leadership</span></h2>
-              <p className="max-w-md mx-auto text-black/60 text-sm leading-relaxed">
-                Guided by industry veterans with deep expertise in adversarial simulation.
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="group bg-white/40 backdrop-blur-sm border border-black/5 rounded-3xl p-10 md:p-16 hover:bg-white/60 transition-colors max-w-2xl mx-auto"
-            >
-              <h4 className="text-3xl md:text-4xl font-black mb-3 text-black">{TEAM[0].name}</h4>
-              <div className="text-xs md:text-sm font-mono uppercase tracking-widest text-[#c85a3a] font-bold mb-6">{TEAM[0].role}</div>
-              <p className="text-base md:text-lg text-black/70 leading-relaxed font-light">{TEAM[0].bio}</p>
-            </motion.div>
-          </div>
-        </motion.section>
-        <div className="w-full h-16 bg-[#ede8df]"></div>
-      </div>
-
-      <div className="relative z-50 bg-[#061012] text-white rounded-t-[4rem] overflow-hidden -mt-16 pt-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
-        <motion.section
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="py-20 md:py-24"
-        >
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             <motion.div variants={fadeInUp} className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
               <div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.5em] text-teal-400/50 mb-6">Internal Framework</div>
-                <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Core <span className="text-white/40">Protocols</span></h2>
+                <div className="text-[10px] font-mono uppercase tracking-[0.5em] text-black/50 mb-6">Internal Framework</div>
+                <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Core <span className="text-black/40">Protocols</span></h2>
               </div>
-              <p className="max-w-sm text-white/50 text-sm leading-relaxed">
+              <p className="max-w-sm text-black/60 text-sm leading-relaxed">
                 The foundational principles that guide every operation, every assessment, and every client partnership.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 min-h-[200px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 min-h-[200px]">
               {VALUES.map((val) => (
                 <motion.div
                   key={val.code}
                   variants={fadeInUp}
-                  whileHover={{ y: -10 }}
-                  className="group p-8 md:p-10 bg-white/[0.02] border border-white/5 hover:border-teal-500/30 transition-all duration-500 rounded-2xl relative overflow-hidden cursor-default"
+                  className="group p-8 md:p-10 bg-white/40 border border-black/5 hover:border-black/10 transition-all duration-500 rounded-3xl relative overflow-hidden cursor-default backdrop-blur-sm hover:bg-white hover:-translate-y-2 hover:shadow-xl"
                 >
-                  <div className="text-[9px] font-mono text-white/20 group-hover:text-teal-400/70 mb-8 md:mb-12 tracking-[0.2em] transition-colors uppercase">
+                  <div className="text-[10px] font-mono text-black/30 group-hover:text-[#c85a3a] mb-8 md:mb-12 tracking-[0.2em] transition-colors uppercase font-semibold">
                     {val.code}
                   </div>
-                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 md:mb-8 group-hover:bg-teal-500 group-hover:text-white group-hover:border-teal-400 transition-all duration-500">
-                    <val.icon size={24} weight="light" />
+                  <div className="w-14 h-14 rounded-2xl bg-white border border-black/5 flex items-center justify-center mb-6 md:mb-8 group-hover:bg-[#c85a3a] group-hover:text-white group-hover:border-[#c85a3a] group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500 text-black shadow-sm group-hover:shadow-md">
+                    <val.icon size={28} weight="light" />
                   </div>
-                  <h4 className="text-lg md:text-xl font-bold mb-4">{val.title}</h4>
-                  <p className="text-sm text-white/40 leading-relaxed group-hover:text-white/70 transition-colors">
+                  <h4 className="text-xl md:text-2xl font-bold mb-4 text-black">{val.title}</h4>
+                  <p className="text-sm text-black/60 leading-relaxed group-hover:text-black/80 transition-colors">
                     {val.description}
                   </p>
-
-                  {/* Corner Accent */}
-                  <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none">
-                    <div className="absolute top-4 right-4 w-1 h-1 bg-teal-500/40 rounded-full" />
-                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
         </motion.section>
+        <div className="w-full h-16 bg-[#ede8df]"></div>
       </div>
 
       <div className="relative z-[60] bg-background text-foreground rounded-t-[4rem] overflow-hidden -mt-16 pt-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/5">

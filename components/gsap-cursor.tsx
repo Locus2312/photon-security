@@ -54,14 +54,22 @@ export function GsapCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest("a, button, [role='button']")) {
+      const related = e.relatedTarget as HTMLElement | null;
+      const link = target.closest("a, button, [role='button']");
+      
+      if (link) {
+        if (related && link.contains(related)) return;
         expand();
       }
     };
 
     const handleMouseOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest("a, button, [role='button']")) {
+      const related = e.relatedTarget as HTMLElement | null;
+      const link = target.closest("a, button, [role='button']");
+      
+      if (link) {
+        if (related && link.contains(related)) return;
         contract();
       }
     };
