@@ -5,7 +5,7 @@ import { EnvelopeIcon, WarningCircleIcon, CheckCircleIcon } from "@phosphor-icon
 
 export function AwarenessVisual() {
   return (
-    <div className="w-full h-full min-h-[400px] md:min-h-[600px] bg-[#0f0f13] rounded-3xl overflow-hidden relative flex flex-col items-center justify-center p-8 border border-white/5">
+    <div className="w-full h-full min-h-[400px] md:min-h-[600px] bg-[#050505] rounded-3xl overflow-hidden relative flex flex-col items-center justify-center p-8 border border-white/5">
 
       <div className="absolute inset-0 opacity-10 flex items-center justify-center">
         {[1, 2, 3].map((i) => (

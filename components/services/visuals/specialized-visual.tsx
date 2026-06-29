@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function SpecializedVisual() {
   return (
-    <div className="w-full h-full min-h-[400px] md:min-h-[600px] bg-[#020202] rounded-3xl overflow-hidden relative flex items-center justify-center p-8 border border-white/5">
+    <div className="w-full h-full min-h-[400px] md:min-h-[600px] bg-[#050505] rounded-3xl overflow-hidden relative flex items-center justify-center p-8 border border-white/5">
       
       {/* Dark Web Grime Background */}
       <div className="absolute inset-0 opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />

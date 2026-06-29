@@ -50,12 +50,12 @@ function ServiceCard({ category, index, isEven }: { category: ServiceCategory, i
       const markerTop = markerRef.current.getBoundingClientRect().top;
       const vh = window.innerHeight;
       const isDesktop = window.innerWidth >= 1024;
-      
+
       // Calculate the distance to the next card based on CSS classes:
       // Desktop: h-[90vh] + gap (which we replaced with 50vh spacer) = 140vh
       // Mobile: h-[85vh] + gap (which we replaced with 20vh spacer) = 105vh
       const cardTotalSpace = isDesktop ? vh * 1.4 : vh * 1.05;
-      
+
       // When the next card is fully covering this one, the marker is pushed up by exactly cardTotalSpace.
       // We trigger the reset when it is fully covered (markerTop < -cardTotalSpace + a small 10vh buffer)
       // or when it is pushed fully below the viewport (markerTop > vh).

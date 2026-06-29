@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function VaptVisual() {
   return (
-    <div className="w-full h-full min-h-[400px] md:min-h-[600px] bg-[#0a0a0a] rounded-3xl overflow-hidden relative flex items-center justify-center p-8 border border-white/10">
+    <div className="w-full h-full min-h-[400px] md:min-h-[600px] bg-[#050505] rounded-3xl overflow-hidden relative flex items-center justify-center p-8 border border-white/5">
       {/* Grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
       
