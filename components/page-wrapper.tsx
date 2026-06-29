@@ -49,7 +49,7 @@ export function PageWrapper({ children }: { children: React.ReactNode }) {
         )}
       </AnimatePresence>
       <motion.div
-        key={showPreloader ? "loading-cloak" : pathname}
+        key={pathname}
         initial={{ opacity: 0 }}
         animate={{ opacity: showPreloader ? 0 : 1 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}

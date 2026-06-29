@@ -73,8 +73,12 @@ export default function ContactContent() {
             animate="visible"
             className="relative z-10 max-w-4xl"
           >
-            <motion.div variants={fadeInUp} className="inline-block px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-10">
-              <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/50">We&apos;re here to help</span>
+            <motion.div variants={fadeInUp} className="inline-flex items-center gap-3 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-10">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-50" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+              </span>
+              <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/50 font-bold">We&apos;re here to help</span>
             </motion.div>
             <motion.h1 variants={fadeInUp} className="text-7xl md:text-9xl font-bold tracking-tighter leading-none mb-10">
               GET IN<br />

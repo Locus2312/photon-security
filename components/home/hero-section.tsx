@@ -40,7 +40,9 @@ export function HeroSection() {
       window.addEventListener("preloaderComplete", unlockScroll);
     }
 
-    const ctx = gsap.context(() => {
+    let playAnimation: () => void;
+
+    const ctx = gsap.context((self) => {
       const els = [
         badgeRef.current,
         h1Line1.current,
@@ -51,19 +53,32 @@ export function HeroSection() {
 
       gsap.set(els, { opacity: 0, y: 36 });
 
-      const tl = gsap.timeline({ delay: 0.15 });
-      tl.to(badgeRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.8");
-      tl.to(h1Line1.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.5");
-      tl.to(h1Line2.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.6");
-      tl.to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.5");
-      tl.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "back.out(1.2)" }, "-=0.5");
+      self.add("play", () => {
+        const tl = gsap.timeline({ delay: 0.15 });
+        tl.to(badgeRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.8");
+        tl.to(h1Line1.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.5");
+        tl.to(h1Line2.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.6");
+        tl.to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.5");
+        tl.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "back.out(1.2)" }, "-=0.5");
+      });
+
+      playAnimation = () => self.play();
     }, containerRef);
+
+    if (isPreloaderComplete) {
+      playAnimation!();
+    } else {
+      window.addEventListener("preloaderComplete", playAnimation!, { once: true });
+    }
 
     return () => {
       ctx.revert();
       if (typeof window !== "undefined") {
         document.body.style.overflow = "";
         window.removeEventListener("preloaderComplete", unlockScroll);
+        if (playAnimation) {
+          window.removeEventListener("preloaderComplete", playAnimation);
+        }
       }
     };
   }, []);

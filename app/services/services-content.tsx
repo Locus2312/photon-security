@@ -75,10 +75,10 @@ function ServiceCard({ category, index, isEven }: { category: ServiceCategory, i
     <>
       <span ref={markerRef} className="block w-full h-0 pointer-events-none" />
       <div
-        className="sticky top-6 md:top-8 pt-14 lg:pt-20 flex flex-col lg:flex-row bg-[#f5f3ef] border border-black/5 rounded-[2rem] shadow-2xl overflow-hidden h-[85vh] lg:h-[90vh]"
+        className="sticky top-4 md:top-8 pt-6 md:pt-14 lg:pt-20 flex flex-col lg:flex-row bg-[#f5f3ef] border border-black/5 rounded-[2rem] shadow-2xl overflow-hidden h-[85vh] lg:h-[90vh]"
       >
         {/* Image/Visual Component Side */}
-        <div className={`w-full lg:w-1/2 p-4 md:p-6 flex items-stretch justify-center min-h-[300px] lg:min-h-0 shrink-0 ${!isEven ? 'lg:order-2' : ''}`}>
+        <div className={`hidden lg:flex w-full lg:w-1/2 p-2 md:p-6 items-stretch justify-center min-h-[180px] max-h-[25vh] lg:max-h-none lg:min-h-0 shrink-0 ${!isEven ? 'lg:order-2' : ''}`}>
           <div className="w-full h-full flex items-center justify-center">
             {getVisualComponent(category.id)}
           </div>
@@ -87,10 +87,10 @@ function ServiceCard({ category, index, isEven }: { category: ServiceCategory, i
         {/* Content Side */}
         <div
           ref={scrollRef}
-          className={`w-full lg:w-1/2 p-6 md:p-10 lg:p-12 flex flex-col overflow-y-auto no-scrollbar ${!isEven ? 'lg:order-1' : ''}`}
+          className={`w-full lg:w-1/2 p-5 md:p-10 lg:p-12 flex flex-col overflow-y-auto no-scrollbar ${!isEven ? 'lg:order-1' : ''}`}
         >
-          <div className="my-auto py-4">
-            <div className="text-[10px] font-mono uppercase tracking-[0.5em] text-black/40 font-bold mb-4 shrink-0">
+          <div className="my-auto py-2 md:py-4">
+            <div className="text-[10px] font-mono uppercase tracking-[0.5em] text-black/40 font-bold mb-3 md:mb-4 shrink-0">
               Domain 0{index + 1}
             </div>
 
@@ -148,7 +148,10 @@ export default function ServicesContent() {
             className="relative z-10 max-w-5xl"
           >
             <motion.div variants={fadeInUp} className="inline-flex items-center gap-3 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-10">
-              <div className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-50" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
+              </span>
               <span className="text-[9px] font-mono uppercase tracking-[0.4em] text-white/50 font-bold">
                 Capabilities Matrix
               </span>

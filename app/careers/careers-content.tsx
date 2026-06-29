@@ -30,7 +30,7 @@ export default function CareersContent() {
       <main ref={containerRef} className="relative flex flex-col min-h-screen bg-transparent selection:bg-white selection:text-black">
         {/* Cinematic Hero */}
         <div className="relative z-10 bg-[#050505] text-white">
-          <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-8 overflow-hidden py-20 pb-32">
+          <section className="relative min-h-[75vh] md:h-[85vh] flex flex-col items-center justify-center text-center px-8 overflow-hidden py-20 pb-32">
             <div className="absolute inset-0 opacity-[0.02] pointer-events-none select-none">
               <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:30px_30px]" />
             </div>
@@ -44,8 +44,12 @@ export default function CareersContent() {
               animate="visible"
               className="relative z-10 max-w-4xl"
             >
-              <motion.div variants={fadeInUp} className="inline-block px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-10">
-                <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/50">
+              <motion.div variants={fadeInUp} className="inline-flex items-center gap-3 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-10">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-50" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
+                </span>
+                <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/50 font-bold">
                   Human Capital initialization
                 </span>
               </motion.div>
