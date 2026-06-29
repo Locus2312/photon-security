@@ -3,10 +3,10 @@ import type { NextRequest } from "next/server";
 import { rateLimit, getClientIP } from "./lib/rate-limit";
 
 const RATE_LIMITS = {
-  api: { limit: 60, windowMs: 60000 },
-  auth: { limit: 5, windowMs: 60000 },
-  chat: { limit: 10, windowMs: 60000 },
-  page: { limit: 100, windowMs: 60000 },
+  api: { limit: 120, windowMs: 60000 },
+  auth: { limit: 10, windowMs: 60000 },
+  chat: { limit: 20, windowMs: 60000 },
+  page: { limit: 300, windowMs: 60000 },
 };
 
 export function proxy(request: NextRequest) {
@@ -64,6 +64,15 @@ export function proxy(request: NextRequest) {
   }
 
   // Rate Limiting for Pages (Home page, about, etc.)
+  // Skip rate limiting for Next.js background prefetching (RSC payloads)
+  // because Next.js automatically prefetches EVERY link on the screen in the background,
+  // which can instantly burn a user's rate limit quota without them doing anything.
+  const isPrefetch = request.headers.get("Next-Router-Prefetch") || request.headers.get("RSC");
+  
+  if (isPrefetch) {
+    return NextResponse.next();
+  }
+
   const { success, limit, remaining, reset } = rateLimit(
     `page_${ip}`,
     RATE_LIMITS.page.limit,
