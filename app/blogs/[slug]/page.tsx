@@ -267,7 +267,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
               </div>
             )}
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-10 text-foreground leading-[1.1] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-10 text-foreground leading-[1.1] tracking-tight">
               {post.title}
             </h1>
             

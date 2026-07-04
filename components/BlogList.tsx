@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity'
@@ -28,14 +28,47 @@ interface BlogListProps {
 
 export default function BlogList({ posts, allCategories }: BlogListProps) {
   const [activeCategory, setActiveCategory] = useState<string>('All')
+  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [showLeftArrow, setShowLeftArrow] = useState(false)
+  const [showRightArrow, setShowRightArrow] = useState(true)
   const container = useRef<HTMLDivElement>(null)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
-  // Filter posts based on category
-  const filteredPosts = activeCategory === 'All'
-    ? posts
-    : posts.filter(post =>
-      post.categories?.some(cat => cat.title === activeCategory)
-    )
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current
+      setShowLeftArrow(scrollLeft > 0)
+      // Use a small threshold (e.g. 5px) for rounding errors
+      setShowRightArrow(Math.ceil(scrollLeft) < scrollWidth - clientWidth - 5)
+    }
+  }
+
+  // Initialize arrow visibility on mount and handle resize
+  useEffect(() => {
+    handleScroll()
+    window.addEventListener('resize', handleScroll)
+    return () => window.removeEventListener('resize', handleScroll)
+  }, [allCategories])
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -250, behavior: 'smooth' })
+    }
+  }
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 250, behavior: 'smooth' })
+    }
+  }
+
+  // Filter posts based on category and search query
+  const filteredPosts = posts.filter(post => {
+    const matchesCategory = activeCategory === 'All' || post.categories?.some(cat => cat.title === activeCategory)
+    const matchesSearch = !searchQuery || 
+                          post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          post.seoDescription?.toLowerCase().includes(searchQuery.toLowerCase())
+    return matchesCategory && matchesSearch
+  })
 
   // GSAP Animation for filtering
   useGSAP(() => {
@@ -56,35 +89,69 @@ export default function BlogList({ posts, allCategories }: BlogListProps) {
           Security Insights
         </h1>
 
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-white/5">
-          {/* Category Links */}
-          <div className="flex flex-wrap items-center gap-6">
-            {allCategories.map(category => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`text-[15px] transition-colors duration-300 ${activeCategory === category
-                  ? 'text-white font-medium'
-                  : 'text-white/40 hover:text-white/80'
-                  }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
-          {/* Search Bar */}
-          <div className="relative group">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg className="w-4 h-4 text-white/30 group-focus-within:text-white/60 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="flex flex-col gap-8">
+          {/* Search Bar - Full width on mobile like Medium */}
+          <div className="relative group max-w-2xl">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+              <svg className="w-5 h-5 text-white/40 group-focus-within:text-white/80 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
             <input
               type="text"
-              placeholder="Search..."
-              className="bg-[#0a0a0a] border border-white/5 rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-white/30 focus:outline-none focus:border-white/20 focus:bg-[#111] transition-all w-full md:w-64"
+              placeholder="Search all topics..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-white/5 border border-white/10 rounded-full pl-12 pr-4 py-3 text-base text-white placeholder-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all w-full"
             />
+          </div>
+
+          {/* Categories - Horizontally Scrollable Pill Buttons (Medium Style) */}
+          <div className="relative flex items-center pb-4 border-b border-white/5">
+            
+            {/* Left Scroll Button */}
+            <div className={`absolute left-0 top-0 bottom-4 w-20 bg-gradient-to-r from-[#050505] via-[#050505]/90 to-transparent flex items-center justify-start z-10 transition-opacity duration-300 ${showLeftArrow ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+              <button 
+                onClick={scrollLeft}
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center backdrop-blur-sm border border-white/10 transition-colors"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            </div>
+
+            <div 
+              ref={scrollContainerRef}
+              onScroll={handleScroll}
+              className="flex overflow-x-auto gap-3 w-full snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-2"
+            >
+              {allCategories.map(category => (
+                <button
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className={`flex-shrink-0 snap-start rounded-full px-5 py-2.5 text-sm transition-all duration-300 border ${
+                    activeCategory === category
+                      ? 'bg-white text-black border-white font-medium'
+                      : 'bg-[#111] text-white/70 border-white/10 hover:border-white/30 hover:text-white hover:bg-[#1a1a1a]'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+
+            {/* Right Scroll Button */}
+            <div className={`absolute right-0 top-0 bottom-4 w-24 bg-gradient-to-l from-[#050505] via-[#050505]/90 to-transparent flex items-center justify-end z-10 transition-opacity duration-300 ${showRightArrow ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+              <button 
+                onClick={scrollRight}
+                className="w-8 h-8 rounded-full bg-[#111] hover:bg-[#222] text-white flex items-center justify-center border border-white/20 shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-colors mr-1"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>

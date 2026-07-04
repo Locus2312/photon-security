@@ -91,7 +91,7 @@ export function BlogThemeWrapper({ children }: { children: React.ReactNode }) {
       <button
         ref={buttonRef}
         onClick={toggleTheme}
-        className={`fixed top-24 right-4 md:top-28 md:right-8 z-50 p-4 rounded-full bg-primary text-primary-foreground shadow-[0_0_20px_rgba(var(--primary),0.3)] transition-all duration-300 ease-in-out ${hidden ? '-translate-y-32 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100 hover:scale-105 active:scale-95'}`}
+        className={`fixed bottom-6 left-6 md:bottom-auto md:left-auto md:top-28 md:right-8 z-50 p-4 rounded-full bg-primary text-primary-foreground shadow-[0_0_20px_rgba(var(--primary),0.3)] transition-all duration-300 ease-in-out ${hidden ? 'translate-y-32 md:-translate-y-32 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100 hover:scale-105 active:scale-95'}`}
         title="Toggle Reading Theme"
       >
         <div className="relative w-6 h-6 overflow-hidden">
