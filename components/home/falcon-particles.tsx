@@ -354,15 +354,13 @@ export default function FalconParticles() {
     if (typeof window !== "undefined" && (window as Window & typeof globalThis & { __preloaderComplete?: boolean }).__preloaderComplete) {
       load();
     } else {
-      let fallback: ReturnType<typeof setTimeout>;
+      const fallback = setTimeout(load, 4000);
       const handleComplete = () => {
         setTimeout(load, 250);
         window.removeEventListener("preloaderComplete", handleComplete);
         clearTimeout(fallback);
       };
       window.addEventListener("preloaderComplete", handleComplete);
-
-      fallback = setTimeout(load, 4000);
 
       return () => {
         window.removeEventListener("preloaderComplete", handleComplete);
