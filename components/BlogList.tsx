@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity'
@@ -24,11 +25,25 @@ type Post = {
 interface BlogListProps {
   posts: Post[]
   allCategories: string[]
+  currentPage: number
+  totalPages: number
+  currentCategory: string
+  currentSearch: string
 }
 
-export default function BlogList({ posts, allCategories }: BlogListProps) {
-  const [activeCategory, setActiveCategory] = useState<string>('All')
-  const [searchQuery, setSearchQuery] = useState<string>('')
+export default function BlogList({ 
+  posts, 
+  allCategories, 
+  currentPage, 
+  totalPages, 
+  currentCategory, 
+  currentSearch 
+}: BlogListProps) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const [localSearch, setLocalSearch] = useState(currentSearch)
   const [showLeftArrow, setShowLeftArrow] = useState(false)
   const [showRightArrow, setShowRightArrow] = useState(true)
   const container = useRef<HTMLDivElement>(null)
@@ -61,14 +76,27 @@ export default function BlogList({ posts, allCategories }: BlogListProps) {
     }
   }
 
-  // Filter posts based on category and search query
-  const filteredPosts = posts.filter(post => {
-    const matchesCategory = activeCategory === 'All' || post.categories?.some(cat => cat.title === activeCategory)
-    const matchesSearch = !searchQuery || 
-                          post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          post.seoDescription?.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesCategory && matchesSearch
-  })
+  const updateQueryParams = useCallback((updates: Record<string, string>) => {
+    const params = new URLSearchParams(searchParams.toString())
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value === '' || (key === 'category' && value === 'All')) {
+        params.delete(key)
+      } else {
+        params.set(key, value)
+      }
+    })
+    router.push(`${pathname}?${params.toString()}`, { scroll: false })
+  }, [searchParams, pathname, router])
+
+  // Debounce search update
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      if (localSearch !== currentSearch) {
+        updateQueryParams({ q: localSearch, page: '1' })
+      }
+    }, 500)
+    return () => clearTimeout(delay)
+  }, [localSearch, currentSearch, updateQueryParams])
 
   // GSAP Animation for filtering
   useGSAP(() => {
@@ -79,7 +107,20 @@ export default function BlogList({ posts, allCategories }: BlogListProps) {
         { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out', overwrite: true }
       )
     }
-  }, { dependencies: [activeCategory], scope: container })
+  }, { dependencies: [currentCategory, currentSearch, currentPage], scope: container })
+
+  const pageNumbers = []
+  if (totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i++) pageNumbers.push(i)
+  } else {
+    if (currentPage <= 4) {
+      pageNumbers.push(1, 2, 3, 4, 5, '...', totalPages)
+    } else if (currentPage >= totalPages - 3) {
+      pageNumbers.push(1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages)
+    } else {
+      pageNumbers.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages)
+    }
+  }
 
   return (
     <div className="max-w-6xl mx-auto px-4" ref={container}>
@@ -100,8 +141,8 @@ export default function BlogList({ posts, allCategories }: BlogListProps) {
             <input
               type="text"
               placeholder="Search all topics..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              value={localSearch}
+              onChange={(e) => setLocalSearch(e.target.value)}
               className="bg-white/5 border border-white/10 rounded-full pl-12 pr-4 py-3 text-base text-white placeholder-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all w-full"
             />
           </div>
@@ -129,9 +170,9 @@ export default function BlogList({ posts, allCategories }: BlogListProps) {
               {allCategories.map(category => (
                 <button
                   key={category}
-                  onClick={() => setActiveCategory(category)}
+                  onClick={() => updateQueryParams({ category, page: '1' })}
                   className={`flex-shrink-0 snap-start rounded-full px-5 py-2.5 text-sm transition-all duration-300 border ${
-                    activeCategory === category
+                    currentCategory === category
                       ? 'bg-white text-black border-white font-medium'
                       : 'bg-[#111] text-white/70 border-white/10 hover:border-white/30 hover:text-white hover:bg-[#1a1a1a]'
                   }`}
@@ -157,11 +198,11 @@ export default function BlogList({ posts, allCategories }: BlogListProps) {
       </div>
 
       {/* Grid */}
-      {filteredPosts.length === 0 ? (
+      {posts.length === 0 ? (
         <div className="text-center text-white/40 mt-20 text-lg font-mono tracking-wide">No posts found in this category.</div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post) => (
+          {posts.map((post) => (
             <Link
               key={post._id}
               href={`/blogs/${post.slug}`}
@@ -209,6 +250,47 @@ export default function BlogList({ posts, allCategories }: BlogListProps) {
               </div>
             </Link>
           ))}
+        </div>
+      )}
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="mt-16 flex justify-center items-center gap-2 md:gap-4">
+          <button
+            onClick={() => updateQueryParams({ page: (currentPage - 1).toString() })}
+            disabled={currentPage <= 1}
+            className="hidden md:flex px-6 py-2.5 rounded-full border border-white/10 text-white/80 hover:text-white hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+          >
+            Previous
+          </button>
+          
+          <div className="flex items-center gap-1.5 md:gap-2">
+            {pageNumbers.map((p, idx) => (
+              p === '...' ? (
+                <span key={`ellipsis-${idx}`} className="text-white/40 px-1 md:px-2">...</span>
+              ) : (
+                <button
+                  key={`page-${p}`}
+                  onClick={() => updateQueryParams({ page: p.toString() })}
+                  className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center text-sm transition-all ${
+                    currentPage === p
+                      ? 'bg-white text-black font-medium'
+                      : 'border border-white/10 text-white/80 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  {p}
+                </button>
+              )
+            ))}
+          </div>
+
+          <button
+            onClick={() => updateQueryParams({ page: (currentPage + 1).toString() })}
+            disabled={currentPage >= totalPages}
+            className="hidden md:flex px-6 py-2.5 rounded-full border border-white/10 text-white/80 hover:text-white hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+          >
+            Next
+          </button>
         </div>
       )}
     </div>
