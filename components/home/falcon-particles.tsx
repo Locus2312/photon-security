@@ -170,16 +170,29 @@ const REPEL_STR = 0.006;
 function Cloud({ targets, mouse, introProgress, staticMode }: CloudProps) {
   const meshRef = useRef<THREE.Points>(null);
   const isFirstFrameRef = useRef(true);
+  const activeTimeRef = useRef(0);
+  const lastTimeRef = useRef(0);
 
   useFrame((state) => {
     const mesh = meshRef.current;
     if (!mesh) return;
 
-    const t = state.clock.getElapsedTime();
+    const rawT = state.clock.getElapsedTime();
+    if (isFirstFrameRef.current) {
+      lastTimeRef.current = rawT;
+    }
+    const dt = rawT - lastTimeRef.current;
+    lastTimeRef.current = rawT;
+
+    if (!staticMode) {
+      activeTimeRef.current += dt;
+    }
+    const t = activeTimeRef.current;
+
     const aspect = state.size.width / state.size.height;
 
     const isMobile = aspect < 1.0;
-    const fShiftX = isMobile ? 0.0 : (staticMode ? 0 : 3.0);
+    const fShiftX = isMobile ? 0.0 : 3.0;
     const fShiftY = isMobile ? 0.0 : 0.0;
 
     if (isFirstFrameRef.current) {
@@ -205,8 +218,8 @@ function Cloud({ targets, mouse, introProgress, staticMode }: CloudProps) {
       isFirstFrameRef.current = false;
     }
 
-    const ptrWX = mouse.current.active ? mouse.current.x * HALF_H * aspect : -9999;
-    const ptrWY = mouse.current.active ? mouse.current.y * HALF_H : -9999;
+    const ptrWX = (!staticMode && mouse.current.active) ? mouse.current.x * HALF_H * aspect : -9999;
+    const ptrWY = (!staticMode && mouse.current.active) ? mouse.current.y * HALF_H : -9999;
 
     const blend = introProgress.current;
 
@@ -235,23 +248,22 @@ function Cloud({ targets, mouse, introProgress, staticMode }: CloudProps) {
       let lx = 0, ly = 0, lz = 0;
       if (targets) {
         let targetX = 0, targetY = 0, targetZ = 0;
-        
+
         if (isMobile) {
-          // Fibonacci sphere energy orb
           const phi = Math.acos(1 - 2 * (i + 0.5) / N);
           const theta = Math.PI * (1 + Math.sqrt(5)) * (i + 0.5);
-          
+
           const waveT = t * 0.8;
           const d1 = Math.sin(phi * 4.0 + waveT);
           const d2 = Math.cos(theta * 5.0 - waveT * 0.7);
           const d3 = Math.sin(phi * 8.0 + theta * 3.0 + waveT * 1.2);
-          
+
           const r = 2.2 + (d1 * d2 * 0.6) + (d3 * 0.2);
-          
+
           const rotTheta = theta + t * 0.15;
 
           targetX = r * Math.sin(phi) * Math.cos(rotTheta);
-          targetY = r * Math.cos(phi); 
+          targetY = r * Math.cos(phi);
           targetZ = r * Math.sin(phi) * Math.sin(rotTheta) - 2.0;
         } else {
           const fScale = 1.0;
@@ -300,8 +312,18 @@ function Cloud({ targets, mouse, introProgress, staticMode }: CloudProps) {
 
 export default function FalconParticles() {
   const [targets, setTargets] = useState<Float32Array | null>(null);
+  const [isStatic, setIsStatic] = useState(false);
   const mouse = useRef({ x: -9999, y: -9999, active: false });
   const introProgress = useRef(1.0);
+
+  useEffect(() => {
+    const handleMode = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      setIsStatic(customEvent.detail === "static");
+    };
+    window.addEventListener("particles-mode", handleMode);
+    return () => window.removeEventListener("particles-mode", handleMode);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -322,9 +344,9 @@ export default function FalconParticles() {
         introProgress.current = 1.0;
         gsap.to(introProgress, {
           current: 0.0,
-          duration: 2.0,
+          duration: 2.5,
           ease: "power2.inOut",
-          delay: 0.8,
+          delay: 0.2,
         });
       });
     };
@@ -332,13 +354,15 @@ export default function FalconParticles() {
     if (typeof window !== "undefined" && (window as Window & typeof globalThis & { __preloaderComplete?: boolean }).__preloaderComplete) {
       load();
     } else {
+      let fallback: ReturnType<typeof setTimeout>;
       const handleComplete = () => {
         setTimeout(load, 250);
         window.removeEventListener("preloaderComplete", handleComplete);
+        clearTimeout(fallback);
       };
       window.addEventListener("preloaderComplete", handleComplete);
 
-      const fallback = setTimeout(load, 4000);
+      fallback = setTimeout(load, 4000);
 
       return () => {
         window.removeEventListener("preloaderComplete", handleComplete);
@@ -356,7 +380,7 @@ export default function FalconParticles() {
         style={{ background: "transparent" }}
         className="w-full h-full"
       >
-        <Cloud targets={targets} mouse={mouse} introProgress={introProgress} />
+        <Cloud targets={targets} mouse={mouse} introProgress={introProgress} staticMode={isStatic} />
       </Canvas>
     </div>
   );

@@ -46,21 +46,25 @@ export function ServicesGrid() {
         start: "top center",
         end: "bottom center",
         onEnter: () => {
+          window.dispatchEvent(new CustomEvent("particles-mode", { detail: "static" }));
           if (window.innerWidth >= 768) {
-            gsap.to("#particles-container", { opacity: 0.1, duration: 0.5 });
+            gsap.to("#particles-container", { opacity: 0.04, duration: 0.5 });
           }
         },
         onLeave: () => {
+          window.dispatchEvent(new CustomEvent("particles-mode", { detail: "active" }));
           if (window.innerWidth >= 768) {
             gsap.to("#particles-container", { opacity: 0.85, duration: 0.5 });
           }
         },
         onEnterBack: () => {
+          window.dispatchEvent(new CustomEvent("particles-mode", { detail: "static" }));
           if (window.innerWidth >= 768) {
-            gsap.to("#particles-container", { opacity: 0.1, duration: 0.5 });
+            gsap.to("#particles-container", { opacity: 0.04, duration: 0.5 });
           }
         },
         onLeaveBack: () => {
+          window.dispatchEvent(new CustomEvent("particles-mode", { detail: "active" }));
           if (window.innerWidth >= 768) {
             gsap.to("#particles-container", { opacity: 0.85, duration: 0.5 });
           }
@@ -109,7 +113,6 @@ export function ServicesGrid() {
           onEnterBack: () => activateVisual(i),
         });
 
-        // Content reveal animation
         const contentElements = sec.querySelectorAll(".content-reveal");
         if (contentElements.length) {
           gsap.fromTo(
@@ -201,11 +204,9 @@ export function ServicesGrid() {
           ))}
         </div>
 
-        {/* Right Scrollable Column (moves up naturally via scroll) */}
         <div className="w-full lg:w-1/2 relative">
           <div ref={rightContentRef} className="w-full flex flex-col">
 
-            {/* Service Blocks */}
             {servicesData.map((cat, i) => (
               <div
                 key={cat.id}
@@ -220,32 +221,33 @@ export function ServicesGrid() {
                   </h3>
                 </div>
 
-                <p className="service-desc content-reveal opacity-0 text-lg md:text-xl leading-relaxed text-white/70 mb-6 max-w-2xl">
+                <p className="service-desc content-reveal opacity-0 text-lg md:text-xl leading-relaxed text-white/90 mb-6 max-w-2xl drop-shadow-md">
                   {cat.description}
                 </p>
 
-                <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
+                <div className="grid gap-x-12 gap-y-10 md:grid-cols-2">
                   {cat.services.map(s => (
-                    <div key={s.id} className="service-item content-reveal opacity-0 flex flex-col gap-1 group cursor-default">
-                      <div className="flex items-start justify-between gap-4">
-                        <strong className="font-bold tracking-wide uppercase text-sm text-white group-hover:text-white transition-colors border-b border-transparent group-hover:border-white/30 pb-1 inline-block">
+                    <div key={s.id} className="service-item content-reveal opacity-0 flex flex-col gap-3 group cursor-default">
+                      <div className="flex items-center gap-4">
+                        <div className="w-6 h-[1px] bg-white/40 group-hover:bg-white group-hover:w-10 transition-all duration-300 shadow-[0_0_8px_rgba(0,0,0,1)]"></div>
+                        <strong className="font-bold tracking-[0.15em] uppercase text-[11px] text-white/90 group-hover:text-white transition-colors mt-0.5 drop-shadow-md">
                           {s.name}
                         </strong>
                       </div>
-                      <span className="text-white/50 text-sm leading-relaxed">
+                      <span className="text-white/70 text-[13px] leading-relaxed pl-10 group-hover:text-white/90 transition-colors drop-shadow-md">
                         {s.shortDescription}
                       </span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-16 pt-8 border-t border-white/5 service-link content-reveal opacity-0">
+                <div className="mt-20 pt-10 border-t border-white/10 service-link content-reveal opacity-0">
                   <Link
                     href={`/services#${cat.id}`}
-                    className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-white hover:text-white/70 transition-colors group"
+                    className="inline-flex items-center gap-3 px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] text-white border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-300 group drop-shadow-lg"
                   >
                     Explore {cat.name}
-                    <ArrowUpRightIcon size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <ArrowUpRightIcon size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </Link>
                 </div>
               </div>

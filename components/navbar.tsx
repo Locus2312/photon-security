@@ -126,7 +126,7 @@ export function Navbar() {
               >
                 <item.Icon size={scrolled ? 18 : 20} weight={isActive ? "bold" : "light"} />
                 <span className={cn(
-                  "absolute -bottom-10 opacity-0 group-hover:opacity-100 transition-opacity text-[9px] uppercase tracking-[0.3em] font-mono whitespace-nowrap pointer-events-none",
+                  "absolute -bottom-10 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-[0.3em] font-mono whitespace-nowrap pointer-events-none",
                   isLightTheme ? "text-black/60" : "text-white/40"
                 )}>
                   {item.label}

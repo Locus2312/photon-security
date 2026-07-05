@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
+import { ArrowRightIcon } from "@phosphor-icons/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,16 +92,18 @@ export function ProcessTimeline() {
               A proven four-phase approach that delivers actionable security outcomes. We integrate directly with your engineering workflows to secure code at the speed of modern deployment.
             </p>
 
-            <div className="mt-12 relative isolate overflow-hidden group border border-[#0a0a0a]/20 w-[180px] h-[50px] flex items-center justify-center">
-              <span className="relative z-10 text-[11px] font-mono tracking-widest font-bold uppercase transition-colors duration-300 group-hover:text-white">
+            <div className="mt-12">
+              <Link
+                href="/about"
+                className="group inline-flex items-center gap-4 px-10 py-5 bg-[#0a0a0a] text-white rounded-full font-mono uppercase tracking-widest text-sm font-bold hover:scale-105 transition-transform shadow-xl"
+              >
                 Learn More
-              </span>
-              <div className="absolute inset-0 bg-[#0a0a0a] translate-y-[101%] transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0" />
-              {/* Corner Accents */}
-              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#0a0a0a] group-hover:border-white transition-colors duration-300" />
-              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#0a0a0a] group-hover:border-white transition-colors duration-300" />
-              <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#0a0a0a] group-hover:border-white transition-colors duration-300" />
-              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#0a0a0a] group-hover:border-white transition-colors duration-300" />
+                <ArrowRightIcon
+                  size={20}
+                  weight="bold"
+                  className="transition-transform duration-300 group-hover:translate-x-2"
+                />
+              </Link>
             </div>
           </div>
         </div>
