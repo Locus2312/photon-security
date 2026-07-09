@@ -227,7 +227,7 @@ export function ServicesGrid() {
 
                 <div className="grid gap-x-12 gap-y-10 md:grid-cols-2">
                   {cat.services.map(s => (
-                    <div key={s.id} className="service-item content-reveal opacity-0 flex flex-col gap-3 group cursor-default">
+                    <Link key={s.id} href={`/services/${s.slug}`} className="service-item content-reveal opacity-0 flex flex-col gap-3 group cursor-pointer block">
                       <div className="flex items-center gap-4">
                         <div className="w-6 h-[1px] bg-white/40 group-hover:bg-white group-hover:w-10 transition-all duration-300 shadow-[0_0_8px_rgba(0,0,0,1)]"></div>
                         <strong className="font-bold tracking-[0.15em] uppercase text-[11px] text-white/90 group-hover:text-white transition-colors mt-0.5 drop-shadow-md">
@@ -237,7 +237,7 @@ export function ServicesGrid() {
                       <span className="text-white/70 text-[13px] leading-relaxed pl-10 group-hover:text-white/90 transition-colors drop-shadow-md">
                         {s.shortDescription}
                       </span>
-                    </div>
+                    </Link>
                   ))}
                 </div>
 

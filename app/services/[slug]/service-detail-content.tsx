@@ -1,8 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeftIcon, TargetIcon, CheckCircleIcon } from "@phosphor-icons/react";
+import { ArrowLeftIcon, TargetIcon, CodeIcon, BugIcon, ChartLineUpIcon } from "@phosphor-icons/react";
 import { motion, Variants } from "framer-motion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface ServiceProps {
   id: string;
@@ -17,6 +23,10 @@ interface ServiceProps {
   serviceOverview?: string;
   whatWeTest?: { title: string; description: string }[];
   deliverables?: { title: string; description: string }[];
+  technologiesCovered?: string;
+  commonVulnerabilities?: string;
+  methodology?: { title: string; description: string }[];
+  faqs?: { question: string; answer: string }[];
 }
 
 const fadeInUp: Variants = {
@@ -43,7 +53,6 @@ export default function ServiceDetailContent({ service }: { service: ServiceProp
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
           </div>
 
-          {/* Background massive text */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-bold text-white/[0.015] tracking-tighter pointer-events-none select-none uppercase whitespace-nowrap">
             {service.slug.replace(/-/g, '_').substring(0, 10)}
           </div>
@@ -163,7 +172,89 @@ export default function ServiceDetailContent({ service }: { service: ServiceProp
         </div>
       ) : null}
 
-      {/* DELIVERABLES & CTA */}
+      {/* METHODOLOGY SECTION */}
+      {service.methodology && service.methodology.length > 0 && (
+        <div data-theme="light" className="relative z-40 bg-[#ede8df] text-black rounded-t-[4rem] overflow-hidden -mt-16 pt-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] selection:bg-[#0a0a0a] selection:text-white">
+          <motion.section
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="py-20 md:py-32 max-w-7xl mx-auto px-6 md:px-12"
+          >
+            <motion.div variants={fadeInUp} className="mb-16 md:mb-24 text-center">
+              <div className="text-[10px] font-mono uppercase tracking-[0.5em] text-black/40 mb-6">Process</div>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase">Testing Methodology</h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {service.methodology.map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={fadeInUp}
+                  className="relative pl-6 md:pl-8 border-l border-black/10 hover:border-black/50 transition-colors"
+                >
+                  <div className="absolute top-0 left-0 -translate-x-1/2 w-4 h-4 rounded-full bg-[#ede8df] border-2 border-black/20" />
+                  <div className="text-4xl font-bold text-black/10 mb-4">{String(idx + 1).padStart(2, '0')}</div>
+                  <h4 className="text-xl font-bold mb-3">{item.title}</h4>
+                  <p className="text-sm text-black/60 leading-relaxed font-light">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+          <div className="w-full h-16 bg-[#ede8df]"></div>
+        </div>
+      )}
+
+      {/* TECHNOLOGIES & VULNERABILITIES */}
+      {(service.technologiesCovered || service.commonVulnerabilities) && (
+        <div className="relative z-50 bg-[#111111] text-white rounded-t-[4rem] overflow-hidden -mt-16 pt-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+          <motion.section
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="py-20 md:py-24 max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16"
+          >
+            {service.technologiesCovered && (
+              <motion.div variants={fadeInUp}>
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-8 text-[#3b49f4]">
+                  <CodeIcon size={24} weight="light" />
+                </div>
+                <h3 className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/40 mb-6">Technologies Covered</h3>
+                <h4 className="text-2xl md:text-3xl font-bold mb-6 leading-tight">We analyze the full spectrum of modern stacks.</h4>
+                <div className="flex flex-wrap gap-3">
+                  {service.technologiesCovered.split(',').map((tech, idx) => (
+                    <span key={idx} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-white/70">
+                      {tech.trim()}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {service.commonVulnerabilities && (
+              <motion.div variants={fadeInUp}>
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-8 text-[#c85a3a]">
+                  <BugIcon size={24} weight="light" />
+                </div>
+                <h3 className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/40 mb-6">Vulnerabilities</h3>
+                <h4 className="text-2xl md:text-3xl font-bold mb-6 leading-tight">Common issues we identify and neutralize.</h4>
+                <div className="flex flex-wrap gap-3">
+                  {service.commonVulnerabilities.split(',').map((vuln, idx) => (
+                    <span key={idx} className="px-4 py-2 bg-[#c85a3a]/10 border border-[#c85a3a]/30 rounded-full text-xs font-mono text-[#c85a3a]">
+                      {vuln.trim()}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </motion.section>
+          <div className="w-full h-16 bg-[#111111]"></div>
+        </div>
+      )}
+
+      {/* DELIVERABLES & CTA & FAQS */}
       <div className="relative z-[60] bg-[#050505] text-white rounded-t-[4rem] overflow-hidden -mt-16 pt-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/5">
         <motion.section
           variants={staggerContainer}
@@ -173,13 +264,13 @@ export default function ServiceDetailContent({ service }: { service: ServiceProp
           className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto"
         >
           {service.deliverables && service.deliverables.length > 0 && (
-            <div className="mb-24">
+            <div className="mb-32">
               <motion.div variants={fadeInUp} className="text-center mb-16">
                 <div className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/40 mb-6">Business Value</div>
-                <h2 className="text-3xl md:text-5xl font-bold tracking-tight">DELIVERABLES</h2>
+                <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase">Deliverables</h2>
               </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {service.deliverables.map((item, idx) => (
                   <motion.div
                     key={idx}
@@ -187,13 +278,36 @@ export default function ServiceDetailContent({ service }: { service: ServiceProp
                     className="group p-8 rounded-3xl bg-white/5 border border-white/10 flex flex-col items-center text-center hover:bg-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 cursor-default"
                   >
                     <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 group-hover:bg-[#3b49f4] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                      <CheckCircleIcon size={32} weight="light" className="text-[#3b49f4] group-hover:text-white transition-colors duration-500" />
+                      <ChartLineUpIcon size={32} weight="light" className="text-[#3b49f4] group-hover:text-white transition-colors duration-500" />
                     </div>
                     <h4 className="text-xl font-bold mb-4 group-hover:text-white transition-colors">{item.title}</h4>
                     <p className="text-sm text-white/50 leading-relaxed group-hover:text-white/70 transition-colors">{item.description}</p>
                   </motion.div>
                 ))}
               </div>
+            </div>
+          )}
+
+          {service.faqs && service.faqs.length > 0 && (
+            <div className="mb-32 max-w-4xl mx-auto">
+              <motion.div variants={fadeInUp} className="text-center mb-16">
+                <div className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/40 mb-6">Clarifications</div>
+                <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase">FAQ</h2>
+              </motion.div>
+              <motion.div variants={fadeInUp}>
+                <Accordion type="single" collapsible className="w-full">
+                  {service.faqs.map((faq, idx) => (
+                    <AccordionItem key={idx} value={`item-${idx}`} className="border-white/10">
+                      <AccordionTrigger className="text-left text-lg md:text-xl font-medium text-white hover:text-white/80 py-6 data-[state=open]:text-[#3b49f4] transition-colors">
+                        {faq.question}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-white/50 text-sm md:text-base leading-relaxed pb-6 pr-8">
+                        {faq.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </motion.div>
             </div>
           )}
 

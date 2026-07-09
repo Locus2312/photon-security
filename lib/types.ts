@@ -18,6 +18,10 @@ export interface Service {
   serviceOverview?: string;
   whatWeTest?: ServiceDetailItem[];
   deliverables?: ServiceDetailItem[];
+  technologiesCovered?: string;
+  commonVulnerabilities?: string;
+  methodology?: ServiceDetailItem[];
+  faqs?: { question: string; answer: string }[];
 }
 
 export interface ServiceCategory {

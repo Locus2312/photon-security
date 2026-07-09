@@ -10,10 +10,10 @@ if (typeof window !== "undefined") {
 }
 
 const COLORS = {
-  obsidian: { bg: "#0a0a0a", text: "#ffffff", muted: "rgba(255,255,255,0.5)", icon: "rgba(255,255,255,0.3)", selectionClass: "selection:bg-white selection:text-black", particleColor: "#ffffff" },
-  teal: { bg: "#2d6a6f", text: "#ffffff", muted: "rgba(255,255,255,0.7)", icon: "rgba(255,255,255,0.4)", selectionClass: "selection:bg-[#c85a3a] selection:text-white", particleColor: "#c85a3a" },
-  coral: { bg: "#c85a3a", text: "#ffffff", muted: "rgba(255,255,255,0.8)", icon: "rgba(255,255,255,0.4)", selectionClass: "selection:bg-[#2d6a6f] selection:text-white", particleColor: "#2d6a6f" },
-  ivory: { bg: "#ede8df", text: "#0a0a0a", muted: "rgba(10,10,10,0.6)", icon: "rgba(10,10,10,0.3)", selectionClass: "selection:bg-[#0a0a0a] selection:text-white", particleColor: "#0a0a0a" },
+  obsidian: { bg: "#0a0a0a", text: "#ffffff", muted: "rgba(255,255,255,0.5)", icon: "rgba(255,255,255,0.3)", selectionClass: "selection:bg-white selection:text-black", particleColor: "#ffffff", theme: "dark" },
+  teal: { bg: "#2d6a6f", text: "#ffffff", muted: "rgba(255,255,255,0.7)", icon: "rgba(255,255,255,0.4)", selectionClass: "selection:bg-[#c85a3a] selection:text-white", particleColor: "#c85a3a", theme: "dark" },
+  coral: { bg: "#c85a3a", text: "#ffffff", muted: "rgba(255,255,255,0.8)", icon: "rgba(255,255,255,0.4)", selectionClass: "selection:bg-[#2d6a6f] selection:text-white", particleColor: "#2d6a6f", theme: "dark" },
+  ivory: { bg: "#ede8df", text: "#0a0a0a", muted: "rgba(10,10,10,0.6)", icon: "rgba(10,10,10,0.3)", selectionClass: "selection:bg-[#0a0a0a] selection:text-white", particleColor: "#0a0a0a", theme: "light" },
 };
 
 const INDUSTRIES = [
@@ -122,6 +122,7 @@ export function IndustriesSection() {
           return (
             <div
               key={ind.id}
+              data-theme={ind.color.theme}
               className={`industry-card w-full min-h-[400px] md:min-h-[500px] rounded-[3rem] p-10 md:p-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] origin-top mb-8 lg:mb-[50vh] ${ind.color.selectionClass}`}
               style={{
                 backgroundColor: ind.color.bg,
