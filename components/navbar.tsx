@@ -38,18 +38,7 @@ export function Navbar() {
   const logoRef = useMagneticEffect<HTMLAnchorElement>(0.2);
 
   useEffect(() => {
-    const onScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      setScrolled(currentScrollY > 40);
-
-      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-      lastScrollY.current = currentScrollY;
-
+    const checkTheme = () => {
       const navEl = document.getElementById('main-nav');
       if (navEl) navEl.style.pointerEvents = 'none';
 
@@ -61,13 +50,56 @@ export function Navbar() {
       setIsLightTheme(isLight);
     };
 
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      setScrolled(currentScrollY > 40);
+
+      if (currentScrollY < 0) return;
+
+      if (window.innerWidth >= 1024) {
+        if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+          setHidden(true);
+        } else {
+          setHidden(false);
+        }
+      } else {
+        setHidden(false);
+      }
+
+      lastScrollY.current = currentScrollY;
+
+      checkTheme();
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+          const target = mutation.target as Element;
+          const newTheme = target.getAttribute('data-theme');
+          if (newTheme === 'light' || newTheme === 'dark') {
+            setIsLightTheme(newTheme === 'light');
+          }
+        }
+      }
+    });
+
+    observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['data-theme'] });
+
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      observer.disconnect();
+    };
   }, []);
 
+  const isNavHidden = hidden && !mobileOpen;
+
   return (
-    <nav id="main-nav" className={`fixed top-6 left-0 right-0 z-[100] flex justify-center px-6 transition-all duration-300 ease-in-out ${hidden ? '-translate-y-32 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}>
+    <nav id="main-nav" className={`fixed top-6 left-0 right-0 z-[100] flex justify-center px-6 transition-all duration-300 ease-in-out ${isNavHidden ? '-translate-y-32 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}>
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
