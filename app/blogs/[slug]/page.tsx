@@ -355,27 +355,27 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             <>
               <div className="my-20 h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
 
-              <div className="relative group overflow-hidden rounded-3xl border border-border bg-card p-10 md:p-14 transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5">
+              <div className="relative group overflow-hidden rounded-3xl border border-transparent dark:border-white/10 bg-foreground dark:bg-card p-10 md:p-14 transition-all duration-500 hover:border-foreground/50 dark:hover:border-primary/50 shadow-2xl shadow-foreground/20 dark:shadow-none hover:shadow-foreground/30 dark:hover:shadow-2xl dark:hover:shadow-primary/5">
                 {/* Glowing background blob */}
-                <div className="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-primary/10 blur-3xl pointer-events-none group-hover:bg-primary/20 transition-all duration-500" />
+                <div className="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-gradient-to-bl from-background/10 to-transparent dark:from-primary/20 dark:to-transparent blur-3xl pointer-events-none group-hover:scale-110 group-hover:from-background/20 dark:group-hover:from-primary/30 transition-transform duration-700 ease-out" />
                 
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-10">
                   <div className="max-w-xl">
-                    <span className="inline-block px-3 py-1.5 rounded-md border border-primary/20 bg-primary/10 text-[11px] font-mono text-primary uppercase tracking-[0.2em] mb-6">
+                    <span className="inline-block px-3 py-1.5 rounded-md border border-background/20 dark:border-primary/20 bg-background/10 dark:bg-primary/10 text-[11px] font-bold text-background/90 dark:text-primary uppercase tracking-[0.2em] mb-6">
                       {cta.tag}
                     </span>
-                    <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-5 tracking-tight">
+                    <h3 className="text-3xl md:text-4xl font-bold text-background dark:text-foreground mb-5 tracking-tight">
                       {cta.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed text-lg font-light">
+                    <p className="text-background/80 dark:text-muted-foreground leading-relaxed text-lg font-light">
                       {cta.description}
                     </p>
                   </div>
                   
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 relative z-10 mt-6 md:mt-0">
                     <Link
                       href={`/contact?subject=${encodeURIComponent(cta.title)}`}
-                      className="inline-flex items-center justify-center px-8 py-4 bg-foreground text-background font-semibold text-base rounded-xl transition-all duration-300 hover:bg-foreground/80 active:scale-95 shadow-xl"
+                      className="inline-flex items-center justify-center px-8 py-4 bg-background text-foreground dark:bg-foreground dark:text-background font-semibold text-base rounded-xl transition-all duration-300 hover:bg-background/90 dark:hover:bg-foreground/90 active:scale-95 shadow-xl hover:shadow-2xl hover:-translate-y-1 ring-1 ring-transparent hover:ring-background/20 dark:hover:ring-foreground/20"
                     >
                       {cta.buttonText}
                     </Link>
