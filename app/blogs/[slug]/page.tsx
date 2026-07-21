@@ -199,6 +199,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       publishedAt,
       tlp,
       body,
+      cta,
       "authorName": author->name,
       categories[]->{ title }
     }`,
@@ -338,6 +339,15 @@ export default async function BlogPost({ params }: { params: { slug: string } })
               description: "Meet RBI's strict annual VAPT and IS Audit requirements. Access Board-ready reporting and rapid vulnerability remediation.",
               buttonText: "Schedule UCB Audit Consulting",
               tag: "RBI UCB MANDATES"
+            };
+          }
+
+          if (post.cta?.title && post.cta?.description) {
+            cta = {
+              title: post.cta.title,
+              description: post.cta.description,
+              buttonText: post.cta.buttonText || cta.buttonText || "Request Security Assessment",
+              tag: post.cta.tag || cta.tag || "VAPT & TESTING"
             };
           }
 
