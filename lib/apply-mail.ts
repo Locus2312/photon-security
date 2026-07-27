@@ -17,7 +17,8 @@ Details:
 • Phone Number:
 • Current Location:
 • Years of Experience:
-• LinkedIn / Portfolio (if any):
+• LinkedIn / GitHub / Portfolio (if any):
+• Short Introduction (Why I'd like to join):
 
 Looking forward to hearing from you.
 

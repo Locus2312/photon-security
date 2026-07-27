@@ -23,42 +23,6 @@ export type Job = {
 
 export const jobs: Job[] = [
   {
-    id: "SDI-001",
-    slug: "software-developer-intern",
-    title: "Software Developer Intern",
-    department: "Engineering",
-    location: "Remote",
-
-    employmentType: "Internship",
-    compensationType: "Unpaid (Performance-based Stipend)",
-
-    description:
-      "Photon Security is seeking a Software Developer Intern to support automation, AI-driven experimentation, and VAPT research initiatives.",
-    requirements: [
-      "Undergraduate students or recent graduates from any technical background",
-      "Basic proficiency in one or more programming languages (Python, JavaScript, etc.)",
-      "Strong interest in automation, AI, or cybersecurity",
-      "Good analytical and problem-solving skills",
-      "Ability to work independently in a remote setup",
-    ],
-    responsibilities: [
-      "Develop automation scripts and internal tools",
-      "Assist in VAPT research and security experimentation",
-      "Contribute to software development and tooling initiatives",
-      "Document technical work and findings",
-    ],
-    benefits: [
-      "100% remote work environment",
-      "Hands-on industry experience",
-      "Mentorship from security professionals",
-      "Performance-based stipend after evaluation",
-    ],
-    applicationNote:
-      "This is an unpaid internship initially. Compensation will be introduced based on performance and contribution.",
-    contactEmail: "careers@photonsecurity.in",
-  },
-
-  {
     id: "BDE-001",
     slug: "business-development-executive",
     title: "Business Development Executive",
@@ -90,6 +54,46 @@ export const jobs: Job[] = [
     ],
     applicationNote:
       "This role starts on an incentive-only basis. A fixed salary will be introduced after consistent deal closures.",
+    contactEmail: "careers@photonsecurity.in",
+  },
+
+  {
+    id: "AOSI-001",
+    slug: "ai-offensive-security-intern",
+    title: "AI Offensive Security Intern",
+    department: "Research & Development",
+    location: "Remote",
+
+    employmentType: "Internship",
+    compensationType: "Research & Learning Internship",
+
+    description:
+      "Photon Security is seeking motivated individuals for our R&D Team to help build our AI Autonomous Offensive Security Platform. You'll contribute to automating security assessments using AI agents and modern offensive techniques.",
+    requirements: [
+      "Basic knowledge of Web & Network Security",
+      "Familiarity with Python",
+      "Interest in AI/LLMs (OpenAI, Ollama, LangChain, MCP, etc.)",
+      "Understanding of Linux and Git",
+      "Curiosity to learn offensive security methodologies",
+      "Builders, researchers, and problem solvers who want to shape the future of AI-powered offensive security",
+    ],
+    responsibilities: [
+      "Research and develop AI-driven offensive security techniques",
+      "Build AI agents for penetration testing and Attack Surface Management (ASM)",
+      "Integrate LLMs with cybersecurity workflows",
+      "Develop autonomous vulnerability discovery and exploitation pipelines",
+      "Work with modern offensive security tools and automation frameworks",
+      "Contribute to real-world cybersecurity product development",
+    ],
+    benefits: [
+      "Hands-on experience with AI cybersecurity products",
+      "Mentorship from experienced security professionals",
+      "Exposure to autonomous pentesting and AI agents",
+      "Opportunity to build GitHub-worthy projects",
+      "Letter of Recommendation and Internship Certificate",
+    ],
+    applicationNote:
+      "Duration: 6 Months. High-performing interns may be considered for future paid opportunities as the team grows.",
     contactEmail: "careers@photonsecurity.in",
   },
 ];
