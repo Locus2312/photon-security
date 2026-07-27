@@ -102,6 +102,22 @@ export function Footer() {
             <p className="text-lg md:text-xl text-white/40 font-light leading-relaxed max-w-sm">
               {BRAND.tagline}. No silos. No noise. No guesswork.
             </p>
+            
+            <div className="flex flex-col gap-3 pt-2">
+              <span className="text-[10px] md:text-[11px] font-mono uppercase tracking-[0.2em] text-white/60 font-semibold">
+                We are certified
+              </span>
+              <div className="flex items-center gap-4">
+                <Image
+                  src="/assets/dpiit-startup-india.png"
+                  alt="DPIIT Startup India Certification"
+                  width={150}
+                  height={50}
+                  className="h-10 md:h-12 w-auto object-contain bg-white rounded-sm p-1.5 shadow-sm"
+                />
+              </div>
+            </div>
+
             <div className="flex gap-4">
               {FOOTER_NAV.connect.map((social, i) => (
                 <a
