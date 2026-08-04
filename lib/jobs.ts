@@ -23,6 +23,38 @@ export type Job = {
 
 export const jobs: Job[] = [
   {
+    id: "DPDPA-001",
+    slug: "dpdpa-audit-freelancer",
+    title: "DPDPA Audit Freelancer",
+    department: "Compliance & Privacy",
+    location: "Remote (India)",
+
+    employmentType: "Contract",
+    compensationType: "Freelance / Project-Based",
+
+    description:
+      "As organizations across India prepare for compliance with the Digital Personal Data Protection Act (DPDPA), 2023, the demand for experienced privacy and compliance professionals is growing rapidly. Photon Security is expanding its network of freelance experts to support upcoming DPDPA assessment and compliance engagements.",
+    requirements: [
+      "Freelance Information Security Consultants",
+      "Privacy Consultants",
+      "Compliance Auditors",
+      "ISO 27001/27701 Professionals",
+      "Cybersecurity Consultants with DPDPA knowledge",
+    ],
+    responsibilities: [
+      "DPDPA Gap Assessments",
+      "Privacy & Data Protection Compliance",
+      "Data Inventory & Data Mapping",
+      "Privacy Policy & Consent Management Reviews",
+      "Risk Assessments",
+      "ISO/IEC 27001, ISO 27701, or related privacy frameworks (preferred)",
+      "Security and Compliance Consulting",
+    ],
+    applicationNote:
+      "Please share your profile, certifications, and relevant experience. Let's work together to help organizations build strong privacy and compliance programs.",
+    contactEmail: "hr@photonsecurity.in",
+  },
+  {
     id: "BDE-001",
     slug: "business-development-executive",
     title: "Business Development Executive",
