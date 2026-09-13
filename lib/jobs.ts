@@ -23,109 +23,35 @@ export type Job = {
 
 export const jobs: Job[] = [
   {
-    id: "DPDPA-001",
-    slug: "dpdpa-audit-freelancer",
-    title: "DPDPA Audit Freelancer",
-    department: "Compliance & Privacy",
-    location: "Remote (India)",
-
-    employmentType: "Contract",
-    compensationType: "Freelance / Project-Based",
-
-    description:
-      "As organizations across India prepare for compliance with the Digital Personal Data Protection Act (DPDPA), 2023, the demand for experienced privacy and compliance professionals is growing rapidly. Photon Security is expanding its network of freelance experts to support upcoming DPDPA assessment and compliance engagements.",
-    requirements: [
-      "Freelance Information Security Consultants",
-      "Privacy Consultants",
-      "Compliance Auditors",
-      "ISO 27001/27701 Professionals",
-      "Cybersecurity Consultants with DPDPA knowledge",
-    ],
-    responsibilities: [
-      "DPDPA Gap Assessments",
-      "Privacy & Data Protection Compliance",
-      "Data Inventory & Data Mapping",
-      "Privacy Policy & Consent Management Reviews",
-      "Risk Assessments",
-      "ISO/IEC 27001, ISO 27701, or related privacy frameworks (preferred)",
-      "Security and Compliance Consulting",
-    ],
-    applicationNote:
-      "Please share your profile, certifications, and relevant experience. Let's work together to help organizations build strong privacy and compliance programs.",
-    contactEmail: "hr@photonsecurity.in",
-  },
-  {
-    id: "BDE-001",
-    slug: "business-development-executive",
-    title: "Business Development Executive",
-    department: "Business Development",
-    location: "Hybrid",
-
-    employmentType: "Full-time",
-    compensationType: "Incentive-Based | Salary After Performance Review",
-
-    description:
-      "Photon Security is looking for a Business Development Executive to drive client acquisition and sales growth.",
-    requirements: [
-      "Strong communication and negotiation skills",
-      "Experience or interest in sales, business development, or client management",
-      "Ability to pitch, present, and close deals effectively",
-      "Self-driven and target-oriented mindset",
-    ],
-    responsibilities: [
-      "Lead generation and prospect outreach",
-      "Client meetings, pitching, and requirement gathering",
-      "Deal negotiation and closure",
-      "Ongoing client communication and relationship management",
-    ],
-    benefits: [
-      "Incentive-based earnings from day one",
-      "Salary structure introduced after successful deal closures",
-      "Hybrid work model",
-      "Direct exposure to leadership and decision-making",
-    ],
-    applicationNote:
-      "This role starts on an incentive-only basis. A fixed salary will be introduced after consistent deal closures.",
-    contactEmail: "careers@photonsecurity.in",
-  },
-
-  {
-    id: "AOSI-001",
-    slug: "ai-offensive-security-intern",
-    title: "AI Offensive Security Intern",
-    department: "Research & Development",
+    id: "DMI-001",
+    slug: "digital-marketing-intern",
+    title: "Digital Marketing Intern",
+    department: "Marketing",
     location: "Remote",
 
     employmentType: "Internship",
-    compensationType: "Research & Learning Internship",
+    compensationType: "Unpaid",
 
     description:
-      "Photon Security is seeking motivated individuals for our R&D Team to help build our AI Autonomous Offensive Security Platform. You'll contribute to automating security assessments using AI agents and modern offensive techniques.",
+      "Photon Security is looking for a Digital Marketing Intern to help grow our online presence across social media, content, and outreach.",
     requirements: [
-      "Basic knowledge of Web & Network Security",
-      "Familiarity with Python",
-      "Interest in AI/LLMs (OpenAI, Ollama, LangChain, MCP, etc.)",
-      "Understanding of Linux and Git",
-      "Curiosity to learn offensive security methodologies",
-      "Builders, researchers, and problem solvers who want to shape the future of AI-powered offensive security",
+      "Basic understanding of social media platforms and content trends",
+      "Good written communication skills",
+      "Familiarity with tools like Canva is a plus",
+      "Self-motivated and willing to learn",
     ],
     responsibilities: [
-      "Research and develop AI-driven offensive security techniques",
-      "Build AI agents for penetration testing and Attack Surface Management (ASM)",
-      "Integrate LLMs with cybersecurity workflows",
-      "Develop autonomous vulnerability discovery and exploitation pipelines",
-      "Work with modern offensive security tools and automation frameworks",
-      "Contribute to real-world cybersecurity product development",
+      "Create and schedule content for social media",
+      "Assist with SEO and content marketing efforts",
+      "Support email and outreach campaigns",
+      "Track basic marketing metrics",
     ],
     benefits: [
-      "Hands-on experience with AI cybersecurity products",
-      "Mentorship from experienced security professionals",
-      "Exposure to autonomous pentesting and AI agents",
-      "Opportunity to build GitHub-worthy projects",
-      "Letter of Recommendation and Internship Certificate",
+      "Hands-on marketing experience in cybersecurity",
+      "Mentorship from the marketing team",
+      "Internship Certificate on completion",
     ],
-    applicationNote:
-      "Duration: 6 Months. High-performing interns may be considered for future paid opportunities as the team grows.",
+    applicationNote: "This is an unpaid internship.",
     contactEmail: "careers@photonsecurity.in",
   },
 ];
