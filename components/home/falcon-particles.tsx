@@ -198,9 +198,8 @@ function Cloud({ targets, mouse, introProgress, staticMode, pausedRef }: CloudPr
 
     const isMobile = aspect < 1.0;
     const fShiftX = isMobile ? 0.0 : 3.0;
-    // Lift the falcon into the upper-right so its lower edge clears the
-    // hero capability strip instead of dipping below the button.
-    const fShiftY = isMobile ? 0.0 : 0.6;
+    // Center the falcon vertically so it aligns with the hero text block.
+    const fShiftY = isMobile ? 0.0 : 0.1;
 
     if (isFirstFrameRef.current) {
       for (let i = 0; i < N; i++) {
