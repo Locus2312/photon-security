@@ -29,7 +29,7 @@ export default function CareersContent() {
     <JobDetailWrapper>
       <main ref={containerRef} className="relative flex flex-col min-h-screen bg-transparent selection:bg-white selection:text-black">
         {/* Cinematic Hero */}
-        <div className="relative z-10 bg-[#050505] text-white">
+        <div className="relative z-10 bg-black text-white">
           <section className="relative min-h-[75vh] md:h-[85vh] flex flex-col items-center justify-center text-center px-8 overflow-hidden py-20 pb-32">
             <div className="absolute inset-0 opacity-[0.02] pointer-events-none select-none">
               <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:30px_30px]" />

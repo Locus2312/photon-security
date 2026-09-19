@@ -47,7 +47,7 @@ export default function ServiceDetailContent({ service }: { service: ServiceProp
     <main className="relative flex flex-col min-h-screen bg-transparent selection:bg-white selection:text-black">
 
       {/* HERO SECTION */}
-      <div className="relative z-10 bg-[#050505] text-white">
+        <div className="relative z-10 bg-black text-white">
         <section className="relative min-h-[75vh] md:h-[85vh] flex flex-col items-center justify-center text-center px-6 md:px-8 overflow-hidden py-20 pb-32">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
@@ -255,7 +255,7 @@ export default function ServiceDetailContent({ service }: { service: ServiceProp
       )}
 
       {/* DELIVERABLES & CTA & FAQS */}
-      <div className="relative z-[60] bg-[#050505] text-white rounded-t-[4rem] overflow-hidden -mt-16 pt-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/5">
+        <div className="relative z-[60] bg-black text-white rounded-t-[4rem] overflow-hidden -mt-16 pt-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/5">
         <motion.section
           variants={staggerContainer}
           initial="hidden"

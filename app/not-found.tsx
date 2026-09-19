@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-[#050505] flex flex-col items-center justify-center relative overflow-hidden px-6 text-white">
+    <main className="min-h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden px-6 text-white">
       {/* Subtle Background Accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[100px] pointer-events-none" />
 

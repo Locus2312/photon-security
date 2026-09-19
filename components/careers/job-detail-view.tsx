@@ -30,7 +30,7 @@ export function JobDetailView({ job }: JobDetailViewProps) {
   return (
     <main className="relative flex flex-col min-h-screen bg-transparent selection:bg-white selection:text-black">
       {/* Header Section (Dark Cinematic) */}
-      <div className="relative z-10 bg-[#050505] text-white">
+      <div className="relative z-10 bg-black text-white">
         <section className="relative pt-32 pb-32 overflow-hidden">
           <div className="absolute inset-0 opacity-[0.02] pointer-events-none select-none">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />

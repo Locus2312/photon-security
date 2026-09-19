@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function CookiePolicyPage() {
   return (
-    <main className="bg-[#050505] min-h-screen pt-32 pb-24 px-8">
+    <main className="bg-black min-h-screen pt-32 pb-24 px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header Metadata */}
         <div className="mb-20">

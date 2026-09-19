@@ -32,7 +32,7 @@ export function MarqueeCta() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full pt-32 overflow-hidden relative" style={{ background: "#0a0a0a" }}>
+    <section ref={sectionRef} className="w-full pt-32 overflow-hidden relative" style={{ background: "#000000" }}>
 
       <div data-theme="light" ref={ctaRef} className="relative z-20 bg-[#ede8df] text-[#0a0a0a] rounded-t-[4rem] min-h-screen flex flex-col justify-center py-24 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] w-full opacity-0 overflow-hidden">
 
