@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
@@ -90,11 +89,11 @@ export function ContactForm() {
       {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold mb-2">Name</label>
+          <label className="block text-sm font-semibold mb-2 text-black/70">Name</label>
           <Input
             {...register("name")}
             placeholder="Your name"
-            className="bg-card border-border/40"
+            className="bg-white border-black/10 text-black placeholder:text-black/30 focus-visible:border-[#c85a3a] focus-visible:ring-[#c85a3a]/10"
           />
           {errors.name && (
             <p className="text-destructive text-sm mt-1">
@@ -104,12 +103,12 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold mb-2">Email</label>
+          <label className="block text-sm font-semibold mb-2 text-black/70">Email</label>
           <Input
             {...register("email")}
             type="email"
             placeholder="your.email@company.com"
-            className="bg-card border-border/40"
+            className="bg-white border-black/10 text-black placeholder:text-black/30 focus-visible:border-[#c85a3a] focus-visible:ring-[#c85a3a]/10"
           />
           {errors.email && (
             <p className="text-destructive text-sm mt-1">
@@ -119,11 +118,11 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold mb-2">Company</label>
+          <label className="block text-sm font-semibold mb-2 text-black/70">Company</label>
           <Input
             {...register("company")}
             placeholder="Your organization"
-            className="bg-card border-border/40"
+            className="bg-white border-black/10 text-black placeholder:text-black/30 focus-visible:border-[#c85a3a] focus-visible:ring-[#c85a3a]/10"
           />
           {errors.company && (
             <p className="text-destructive text-sm mt-1">
@@ -133,12 +132,12 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold mb-2">Message</label>
+          <label className="block text-sm font-semibold mb-2 text-black/70">Message</label>
           <Textarea
             {...register("message")}
             placeholder="Tell us about your security inquiry..."
             rows={5}
-            className="bg-card border-border/40"
+            className="bg-white border-black/10 text-black placeholder:text-black/30 focus-visible:border-[#c85a3a] focus-visible:ring-[#c85a3a]/10 resize-none"
           />
           {errors.message && (
             <p className="text-destructive text-sm mt-1">
@@ -150,9 +149,17 @@ export function ContactForm() {
         {/* Honeypot field (hidden from users) */}
         <input {...register("honeypot")} type="hidden" />
 
-        <Button type="submit" size="lg" className="w-full" disabled={loading}>
-          {loading ? "Sending..." : "Send Message"}
-        </Button>
+        <button
+          type="submit"
+          disabled={loading}
+          className="group relative w-full inline-flex items-center justify-center px-16 py-5 bg-black text-white font-bold uppercase tracking-[0.3em] text-xs overflow-hidden transition-all duration-500 rounded-full hover:shadow-[0_0_40px_rgba(0,0,0,0.2)] disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <div className="absolute inset-0 bg-[#c85a3a] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
+          <span className="relative z-10 transition-colors duration-500">
+            {loading ? "Sending..." : "Send Message"}
+          </span>
+        </button>
       </form>
     </div>
   );

@@ -87,8 +87,8 @@ export default function AboutContent() {
               </span>
               <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/50 font-bold">Establishment Brief</span>
             </motion.div>
-            <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl lg:text-[9vw] font-bold tracking-tighter leading-[0.95] md:leading-[0.85] mb-10 md:mb-12">
-              RESEARCH-FIRST<br className="md:hidden" />{" "}
+            <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl lg:text-[9vw] font-bold tracking-tighter leading-[0.95] md:leading-[0.85] mb-10 md:mb-12 flex flex-col items-center justify-center">
+              <span>RESEARCH FIRST</span>
               <span className="text-white/20 italic">ADVERSARIES.</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className="text-lg md:text-2xl text-white/30 max-w-2xl mx-auto font-light leading-relaxed px-4 md:px-0">

@@ -142,11 +142,11 @@ export default function ContactContent() {
             <motion.div variants={fadeInUp} className="lg:col-span-7">
               <div
                 data-theme="light"
-                className="bg-[#ede8df] text-black border border-black/10 rounded-[2.5rem] p-10 md:p-16 relative overflow-hidden shadow-2xl"
+                className="bg-[#ede8df] text-black border border-black/5 rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden shadow-2xl"
               >
                 <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-12">
-                    <div className="w-12 h-12 rounded-2xl bg-[#c85a3a]/10 border border-[#c85a3a]/20 flex items-center justify-center">
+                  <div className="flex items-center gap-4 mb-10">
+                    <div className="w-12 h-12 rounded-2xl bg-white border border-black/5 flex items-center justify-center shadow-sm">
                       <ChatCircleTextIcon size={24} weight="light" className="text-[#c85a3a]" />
                     </div>
                     <div>
