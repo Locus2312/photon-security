@@ -70,7 +70,7 @@ export default function AboutContent() {
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
           </div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-bold text-white/[0.015] tracking-tighter pointer-events-none select-none uppercase">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-bold text-white/[0.015] tracking-tighter pointer-events-none select-none uppercase whitespace-nowrap leading-none">
             HUMAN_INT
           </div>
 

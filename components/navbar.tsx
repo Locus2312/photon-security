@@ -148,6 +148,9 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-label={item.label}
+                aria-current={isActive ? "page" : undefined}
+                title={item.label}
                 className={cn(
                   "relative group flex items-center justify-center rounded-full transition-all duration-200",
                   scrolled ? "w-8 h-8" : "w-10 h-10",
@@ -156,7 +159,7 @@ export function Navbar() {
                     : (isLightTheme ? "text-black/40 hover:text-black hover:bg-black/5" : "text-white/40 hover:text-white hover:bg-white/10")
                 )}
               >
-                <item.Icon size={scrolled ? 18 : 20} weight={isActive ? "bold" : "light"} />
+                <item.Icon size={scrolled ? 18 : 20} weight={isActive ? "bold" : "light"} aria-hidden="true" />
                 <span className={cn(
                   "absolute -bottom-10 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-[0.3em] font-mono whitespace-nowrap pointer-events-none",
                   isLightTheme ? "text-black/60" : "text-white/40"
@@ -183,6 +186,8 @@ export function Navbar() {
           {/* Mobile Toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
             className={cn(
               "lg:hidden flex items-center justify-center w-10 h-10 rounded-full transition-all",
               isLightTheme
@@ -190,7 +195,7 @@ export function Navbar() {
                 : "bg-white/5 text-white/50 hover:text-white"
             )}
           >
-            {mobileOpen ? <XIcon size={20} /> : <ListIcon size={20} />}
+            {mobileOpen ? <XIcon size={20} aria-hidden="true" /> : <ListIcon size={20} aria-hidden="true" />}
           </button>
         </div>
       </motion.div>

@@ -159,6 +159,7 @@ interface CloudProps {
   mouse: React.RefObject<{ x: number; y: number; active: boolean }>;
   introProgress: React.RefObject<number>;
   staticMode?: boolean;
+  pausedRef?: React.RefObject<boolean>;
 }
 
 const CAM_Z = 7;
@@ -167,7 +168,7 @@ const HALF_H = Math.tan((FOV_DEG / 2) * (Math.PI / 180)) * CAM_Z;
 const REPEL_R = 0.45;
 const REPEL_STR = 0.006;
 
-function Cloud({ targets, mouse, introProgress, staticMode }: CloudProps) {
+function Cloud({ targets, mouse, introProgress, staticMode, pausedRef }: CloudProps) {
   const meshRef = useRef<THREE.Points>(null);
   const isFirstFrameRef = useRef(true);
   const activeTimeRef = useRef(0);
@@ -183,6 +184,10 @@ function Cloud({ targets, mouse, introProgress, staticMode }: CloudProps) {
     }
     const dt = rawT - lastTimeRef.current;
     lastTimeRef.current = rawT;
+
+    // Skip the expensive per-particle simulation when the tab is hidden or
+    // the cloud is fully scrolled past (covered by opaque sections below).
+    if (pausedRef?.current) return;
 
     if (!staticMode) {
       activeTimeRef.current += dt;
@@ -317,6 +322,7 @@ export default function FalconParticles() {
   const [isStatic, setIsStatic] = useState(false);
   const mouse = useRef({ x: -9999, y: -9999, active: false });
   const introProgress = useRef(1.0);
+  const pausedRef = useRef(false);
   // Cap the pixel ratio lower on phones to keep the animation smooth.
   const [maxDpr] = useState(() =>
     typeof window !== "undefined" && window.innerWidth < 768 ? 1.5 : 2
@@ -329,6 +335,20 @@ export default function FalconParticles() {
     };
     window.addEventListener("particles-mode", handleMode);
     return () => window.removeEventListener("particles-mode", handleMode);
+  }, []);
+
+  useEffect(() => {
+    const updatePaused = () => {
+      const covered = window.scrollY > window.innerHeight * 2.2;
+      pausedRef.current = document.hidden || covered;
+    };
+    updatePaused();
+    window.addEventListener("scroll", updatePaused, { passive: true });
+    document.addEventListener("visibilitychange", updatePaused);
+    return () => {
+      window.removeEventListener("scroll", updatePaused);
+      document.removeEventListener("visibilitychange", updatePaused);
+    };
   }, []);
 
   useEffect(() => {
@@ -385,7 +405,7 @@ export default function FalconParticles() {
         className="w-full h-full"
         resize={{ scroll: false, debounce: { scroll: 0, resize: 200 } }}
       >
-        <Cloud targets={targets} mouse={mouse} introProgress={introProgress} staticMode={isStatic} />
+        <Cloud targets={targets} mouse={mouse} introProgress={introProgress} staticMode={isStatic} pausedRef={pausedRef} />
       </Canvas>
     </div>
   );

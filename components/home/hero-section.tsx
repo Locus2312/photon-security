@@ -12,24 +12,6 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const CAPABILITIES = [
-  {
-    index: "01",
-    title: "VAPT",
-    desc: "Offensive testing that surfaces exploitable, real-world risk.",
-  },
-  {
-    index: "02",
-    title: "Compliance",
-    desc: "Audit-ready frameworks, mapped and continuously maintained.",
-  },
-  {
-    index: "03",
-    title: "Managed Security",
-    desc: "24/7 monitored defense, operated by a specialist team.",
-  },
-];
-
 export function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
@@ -37,7 +19,6 @@ export function HeroSection() {
   const h1Line2 = useRef<HTMLSpanElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const stripRef = useRef<HTMLDivElement>(null);
   const magneticBtn = useMagneticEffect<HTMLAnchorElement>(0.3);
 
   useEffect(() => {
@@ -67,14 +48,12 @@ export function HeroSection() {
     let playAnimation: () => void;
 
     const ctx = gsap.context((self) => {
-      const stripItems = self.selector?.(".hero-cap") ?? [];
       const els = [
         eyebrowRef.current,
         h1Line1.current,
         h1Line2.current,
         descRef.current,
         ctaRef.current,
-        ...stripItems,
       ].filter(Boolean);
 
       if (prefersReduced) {
@@ -92,11 +71,6 @@ export function HeroSection() {
         tl.to(h1Line2.current, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.65");
         tl.to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.55");
         tl.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "back.out(1.2)" }, "-=0.45");
-        tl.to(
-          stripItems,
-          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12 },
-          "-=0.5"
-        );
       });
 
       playAnimation = () => self.play();
@@ -193,7 +167,7 @@ export function HeroSection() {
         </p>
 
         {/* CTA */}
-        <div ref={ctaRef} className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8 mb-14 md:mb-20">
+        <div ref={ctaRef} className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8">
           <Link
             ref={magneticBtn}
             href="mailto:sales@photonsecurity.in"
@@ -214,31 +188,6 @@ export function HeroSection() {
             View Services
             <span aria-hidden="true" className="inline-block w-6 h-px bg-white/30 group-hover:w-9 group-hover:bg-white transition-all duration-300" />
           </Link>
-        </div>
-
-        {/* Capability strip */}
-        <div
-          ref={stripRef}
-          className="grid grid-cols-1 sm:grid-cols-3 max-w-3xl border-t border-white/10"
-        >
-          {CAPABILITIES.map((cap) => (
-            <div
-              key={cap.title}
-              className="hero-cap flex flex-col gap-2 py-6 sm:px-6 first:sm:pl-0 sm:border-l border-white/10 border-b sm:border-b-0"
-            >
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-[10px] text-white/30 tracking-[0.2em]">
-                  {cap.index}
-                </span>
-                <span className="font-mono text-[11px] md:text-xs tracking-[0.2em] uppercase text-white/80">
-                  {cap.title}
-                </span>
-              </div>
-              <p className="text-[12px] md:text-[13px] leading-relaxed text-white/40 font-light max-w-[24ch]">
-                {cap.desc}
-              </p>
-            </div>
-          ))}
         </div>
 
       </div>
