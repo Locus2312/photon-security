@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <article className="min-h-screen bg-[#050505] pb-24">
+    <article className="min-h-screen bg-black pb-24">
       {/* Subtle top gradient */}
       <div className="absolute top-0 inset-x-0 h-64 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
       

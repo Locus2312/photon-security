@@ -58,7 +58,7 @@ export default function ContactContent() {
   return (
     <main className="bg-transparent selection:bg-black selection:text-white min-h-screen">
       {/* Cinematic Hero */}
-      <div className="relative z-10 bg-[#050505] text-white selection:bg-white selection:text-black">
+      <div className="relative z-10 bg-black text-white selection:bg-white selection:text-black">
         <section className="relative min-h-[85vh] flex flex-col items-center justify-center text-center px-8 overflow-hidden py-20 pb-32">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
