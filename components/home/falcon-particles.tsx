@@ -193,7 +193,9 @@ function Cloud({ targets, mouse, introProgress, staticMode }: CloudProps) {
 
     const isMobile = aspect < 1.0;
     const fShiftX = isMobile ? 0.0 : 3.0;
-    const fShiftY = isMobile ? 0.0 : 0.0;
+    // Lift the falcon into the upper-right so its lower edge clears the
+    // hero capability strip instead of dipping below the button.
+    const fShiftY = isMobile ? 0.0 : 0.6;
 
     if (isFirstFrameRef.current) {
       for (let i = 0; i < N; i++) {
@@ -315,6 +317,10 @@ export default function FalconParticles() {
   const [isStatic, setIsStatic] = useState(false);
   const mouse = useRef({ x: -9999, y: -9999, active: false });
   const introProgress = useRef(1.0);
+  // Cap the pixel ratio lower on phones to keep the animation smooth.
+  const [maxDpr] = useState(() =>
+    typeof window !== "undefined" && window.innerWidth < 768 ? 1.5 : 2
+  );
 
   useEffect(() => {
     const handleMode = (e: Event) => {
@@ -373,7 +379,7 @@ export default function FalconParticles() {
     <div className="w-full h-full">
       <Canvas
         camera={{ position: [0, 0, CAM_Z], fov: FOV_DEG }}
-        dpr={[1, 2]}
+        dpr={[1, maxDpr]}
         gl={{ antialias: true, alpha: true }}
         style={{ background: "transparent" }}
         className="w-full h-full"

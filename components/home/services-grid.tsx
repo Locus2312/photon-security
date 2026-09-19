@@ -28,16 +28,26 @@ export function ServicesGrid() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.to("#hero-section", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "top 20%",
-          scrub: true,
-        },
-        opacity: 0,
-        ease: "none",
-      });
+      const setParticlesOpacity = (opacity: number, duration: number) => {
+        const el = document.querySelector("#particles-container");
+        if (el && window.innerWidth >= 768) {
+          gsap.to(el, { opacity, duration });
+        }
+      };
+
+      const heroEl = document.querySelector("#hero-section");
+      if (heroEl) {
+        gsap.to(heroEl, {
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "top 20%",
+            scrub: true,
+          },
+          opacity: 0,
+          ease: "none",
+        });
+      }
 
       const sections = gsap.utils.toArray(".service-scroll-section") as HTMLElement[];
 
@@ -47,27 +57,19 @@ export function ServicesGrid() {
         end: "bottom center",
         onEnter: () => {
           window.dispatchEvent(new CustomEvent("particles-mode", { detail: "static" }));
-          if (window.innerWidth >= 768) {
-            gsap.to("#particles-container", { opacity: 0.04, duration: 0.5 });
-          }
+          setParticlesOpacity(0.04, 0.5);
         },
         onLeave: () => {
           window.dispatchEvent(new CustomEvent("particles-mode", { detail: "active" }));
-          if (window.innerWidth >= 768) {
-            gsap.to("#particles-container", { opacity: 0.85, duration: 0.5 });
-          }
+          setParticlesOpacity(0.85, 0.5);
         },
         onEnterBack: () => {
           window.dispatchEvent(new CustomEvent("particles-mode", { detail: "static" }));
-          if (window.innerWidth >= 768) {
-            gsap.to("#particles-container", { opacity: 0.04, duration: 0.5 });
-          }
+          setParticlesOpacity(0.04, 0.5);
         },
         onLeaveBack: () => {
           window.dispatchEvent(new CustomEvent("particles-mode", { detail: "active" }));
-          if (window.innerWidth >= 768) {
-            gsap.to("#particles-container", { opacity: 0.85, duration: 0.5 });
-          }
+          setParticlesOpacity(0.85, 0.5);
         },
       });
 
