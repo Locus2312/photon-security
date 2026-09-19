@@ -113,29 +113,57 @@ export function HeroSection() {
         </div>
 
         {/* Headline */}
-        <h1
-          className="mb-16 md:mb-24 font-bold leading-[1.05] tracking-tight max-w-[900px] md:w-[70%] lg:w-[60%]"
-          style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8), 0 0 100px rgba(0,0,0,1)" }}
-        >
-          <span ref={h1Line1} className="block text-[clamp(2.2rem,4.5vw,4.5rem)] text-white">
-            Energy of a Photon,
-          </span>
-          <span ref={h1Line2} className="block text-[clamp(1.8rem,4vw,3.5rem)] text-white/40">
-            Strength of Security.
-          </span>
-        </h1>
+        <div className="relative mb-16 md:mb-24 max-w-[900px] md:w-[70%] lg:w-[60%]">
+          {/* Soft luminous glow behind the headline */}
+          <div
+            aria-hidden="true"
+            className="absolute -inset-x-8 -inset-y-6 -z-[1] pointer-events-none blur-3xl opacity-60"
+            style={{
+              background:
+                "radial-gradient(60% 55% at 25% 40%, rgba(255,255,255,0.10), transparent 70%)",
+            }}
+          />
+          <h1 className="font-bold leading-[1.05] tracking-tight">
+            <span
+              ref={h1Line1}
+              className="block text-[clamp(2.2rem,4.5vw,4.5rem)] bg-gradient-to-b from-white via-white to-white/70 bg-clip-text text-transparent"
+              style={{ filter: "drop-shadow(0 4px 30px rgba(0,0,0,0.8))" }}
+            >
+              Energy of a Photon,
+            </span>
+            <span
+              ref={h1Line2}
+              className="block text-[clamp(1.8rem,4vw,3.5rem)] bg-gradient-to-b from-white/55 to-white/20 bg-clip-text text-transparent"
+            >
+              Strength of Security.
+            </span>
+          </h1>
+        </div>
 
         <div className="flex flex-col gap-10 items-start mt-4 max-w-[900px] md:w-[70%] lg:w-[60%]">
 
           {/* Description */}
-          <p
-            ref={descRef}
-            className="text-[15px] md:text-[17px] text-white/40 max-w-lg leading-relaxed font-light"
-            style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,1)" }}
-          >
-            Next-generation cybersecurity for enterprises globally.<br className="hidden sm:block" />
-            VAPT · Compliance · Managed Security Services.
-          </p>
+          <div ref={descRef} className="flex flex-col gap-5">
+            <div className="flex gap-4">
+              <span aria-hidden="true" className="mt-1 w-px shrink-0 bg-gradient-to-b from-white/40 via-white/15 to-transparent" />
+              <p
+                className="text-[15px] md:text-[17px] text-white/45 max-w-lg leading-relaxed font-light"
+                style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,1)" }}
+              >
+                Next-generation cybersecurity for enterprises globally.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2.5">
+              {["VAPT", "Compliance", "Managed Security Services"].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1.5 rounded-sm border border-white/12 bg-white/[0.03] text-[10px] md:text-[11px] font-mono text-white/55 tracking-[0.2em] uppercase"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
 
           {/* CTA buttons */}
           <div ref={ctaRef} className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-10">
