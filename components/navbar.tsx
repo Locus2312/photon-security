@@ -9,7 +9,7 @@ import {
   XIcon,
   HouseIcon,
   GearIcon,
-  ChatCircleDotsIcon,
+  EnvelopeSimpleIcon,
   InfoIcon,
   BriefcaseIcon,
   ArticleIcon,
@@ -24,7 +24,7 @@ const NAVIGATION = [
   { label: "Services", href: "/services", Icon: GearIcon },
   { label: "Careers", href: "/careers", Icon: BriefcaseIcon },
   { label: "Blog", href: "/blogs", Icon: ArticleIcon },
-  { label: "Contact", href: "/contact", Icon: ChatCircleDotsIcon },
+  { label: "Contact", href: "/contact", Icon: EnvelopeSimpleIcon },
 ];
 
 export function Navbar() {
@@ -132,7 +132,6 @@ export function Navbar() {
         </Link>
 
         <motion.div
-          layoutRoot
           className={cn(
             "hidden lg:flex items-center rounded-full transition-all duration-200 relative",
             isLightTheme
@@ -168,12 +167,14 @@ export function Navbar() {
                 </span>
                 {isActive && (
                   <motion.div
-                    layoutId="nav-active"
+                    key={item.href}
+                    initial={{ opacity: 0, scale: 0.6 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 32 }}
                     className={cn(
                       "absolute inset-0 rounded-full -z-10",
                       isLightTheme ? "bg-black" : "bg-white"
                     )}
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
               </Link>
