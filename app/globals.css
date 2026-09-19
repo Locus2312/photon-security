@@ -243,6 +243,22 @@
   animation: shimmer 2.5s infinite;
 }
 
+@keyframes scrollHint {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(400%); }
+}
+
+.animate-scroll-hint {
+  animation: scrollHint 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-shimmer,
+  .animate-scroll-hint {
+    animation: none;
+  }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 5px;

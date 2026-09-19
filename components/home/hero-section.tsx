@@ -5,25 +5,49 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { ArrowRightIcon, ShieldCheckIcon } from "@phosphor-icons/react";
+import { ArrowRightIcon } from "@phosphor-icons/react";
 import { useMagneticEffect } from "@/lib/gsap-hooks";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const CAPABILITIES = [
+  {
+    index: "01",
+    title: "VAPT",
+    desc: "Offensive testing that surfaces exploitable, real-world risk.",
+  },
+  {
+    index: "02",
+    title: "Compliance",
+    desc: "Audit-ready frameworks, mapped and continuously maintained.",
+  },
+  {
+    index: "03",
+    title: "Managed Security",
+    desc: "24/7 monitored defense, operated by a specialist team.",
+  },
+];
+
 export function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
+  const eyebrowRef = useRef<HTMLDivElement>(null);
   const h1Line1 = useRef<HTMLSpanElement>(null);
   const h1Line2 = useRef<HTMLSpanElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const stripRef = useRef<HTMLDivElement>(null);
   const magneticBtn = useMagneticEffect<HTMLAnchorElement>(0.3);
 
   useEffect(() => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-    const isPreloaderComplete = typeof window !== "undefined" && (window as Window & typeof globalThis & { __preloaderComplete?: boolean }).__preloaderComplete;
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isPreloaderComplete =
+      typeof window !== "undefined" &&
+      (window as Window & typeof globalThis & { __preloaderComplete?: boolean }).__preloaderComplete;
 
     if (typeof window !== "undefined" && !isMobile && !isPreloaderComplete) {
       document.body.style.overflow = "hidden";
@@ -43,23 +67,36 @@ export function HeroSection() {
     let playAnimation: () => void;
 
     const ctx = gsap.context((self) => {
+      const stripItems = self.selector?.(".hero-cap") ?? [];
       const els = [
-        badgeRef.current,
+        eyebrowRef.current,
         h1Line1.current,
         h1Line2.current,
         descRef.current,
         ctaRef.current,
+        ...stripItems,
       ].filter(Boolean);
+
+      if (prefersReduced) {
+        gsap.set(els, { opacity: 1, y: 0 });
+        playAnimation = () => {};
+        return;
+      }
 
       gsap.set(els, { opacity: 0, y: 36 });
 
       self.add("play", () => {
         const tl = gsap.timeline({ delay: 0.15 });
-        tl.to(badgeRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.8");
-        tl.to(h1Line1.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.5");
-        tl.to(h1Line2.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.6");
-        tl.to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.5");
-        tl.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "back.out(1.2)" }, "-=0.5");
+        tl.to(eyebrowRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.8");
+        tl.to(h1Line1.current, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.45");
+        tl.to(h1Line2.current, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.65");
+        tl.to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.55");
+        tl.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "back.out(1.2)" }, "-=0.45");
+        tl.to(
+          stripItems,
+          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12 },
+          "-=0.5"
+        );
       });
 
       playAnimation = () => self.play();
@@ -89,6 +126,7 @@ export function HeroSection() {
       ref={containerRef}
       className="relative w-full min-h-[100dvh] flex flex-col justify-center overflow-hidden"
     >
+      {/* Grain */}
       <div
         className="absolute inset-0 pointer-events-none z-0 opacity-[0.025]"
         style={{
@@ -97,100 +135,121 @@ export function HeroSection() {
         }}
       />
 
-      <div className="absolute bottom-0 left-0 w-full h-[70vh] pointer-events-none z-[5] md:hidden bg-gradient-to-t from-transparent via-black/90 to-transparent" />
+      {/* Mobile legibility scrim */}
+      <div className="absolute inset-0 w-full pointer-events-none z-[5] md:hidden bg-gradient-to-t from-black via-black/80 to-black/60" />
 
-      <div className="container mx-auto relative z-10 flex flex-col justify-end pb-[15vh] md:pb-[20vh] h-full px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24">
+      <div className="container mx-auto relative z-10 flex flex-col justify-end pb-[10vh] md:pb-[12vh] h-full px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24">
 
-        <div ref={badgeRef} className="inline-flex items-center gap-2.5 mb-8 px-4 py-2 rounded-sm border border-white/12 bg-white/4 w-fit">
-          <ShieldCheckIcon size={13} weight="bold" className="text-white/60" />
-          <span className="text-[10px] md:text-[11px] font-mono text-white/55 tracking-[0.25em] uppercase">
-            Trusted by Enterprises Globally
+        {/* Eyebrow */}
+        <div ref={eyebrowRef} className="flex items-center gap-4 mb-8">
+          <span aria-hidden="true" className="h-px w-8 md:w-12 bg-gradient-to-r from-white/50 to-white/10" />
+          <span className="font-mono text-[10px] md:text-[11px] tracking-[0.3em] uppercase text-white/55">
+            Photon Security
           </span>
-          <span className="relative flex h-1.5 w-1.5 ml-1">
+          <span className="relative flex h-1.5 w-1.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-50" />
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+          </span>
+          <span className="hidden sm:inline font-mono text-[10px] md:text-[11px] tracking-[0.3em] uppercase text-white/35">
+            Trusted by Enterprises Globally
           </span>
         </div>
 
         {/* Headline */}
-        <div className="relative mb-16 md:mb-24 max-w-[900px] md:w-[70%] lg:w-[60%]">
-          {/* Soft luminous glow behind the headline */}
+        <div className="relative mb-8 md:mb-10 max-w-[900px] md:w-[75%] lg:w-[62%]">
           <div
             aria-hidden="true"
             className="absolute -inset-x-8 -inset-y-6 -z-[1] pointer-events-none blur-3xl opacity-60"
             style={{
               background:
-                "radial-gradient(60% 55% at 25% 40%, rgba(255,255,255,0.10), transparent 70%)",
+                "radial-gradient(60% 55% at 22% 45%, rgba(255,255,255,0.10), transparent 70%)",
             }}
           />
-          <h1 className="font-bold leading-[1.05] tracking-tight">
+          <h1 className="font-bold leading-[1.02] tracking-[-0.02em]">
             <span
               ref={h1Line1}
-              className="block text-[clamp(2.2rem,4.5vw,4.5rem)] bg-gradient-to-b from-white via-white to-white/70 bg-clip-text text-transparent"
-              style={{ filter: "drop-shadow(0 4px 30px rgba(0,0,0,0.8))" }}
+              className="block text-[clamp(2.4rem,5vw,4.75rem)] bg-gradient-to-b from-white via-white to-white/70 bg-clip-text text-transparent"
+              style={{ filter: "drop-shadow(0 4px 30px rgba(0,0,0,0.85))" }}
             >
               Energy of a Photon,
             </span>
             <span
               ref={h1Line2}
-              className="block text-[clamp(1.8rem,4vw,3.5rem)] bg-gradient-to-b from-white/55 to-white/20 bg-clip-text text-transparent"
+              className="block text-[clamp(1.9rem,4.2vw,3.6rem)] bg-gradient-to-b from-white/55 to-white/20 bg-clip-text text-transparent"
             >
               Strength of Security.
             </span>
           </h1>
         </div>
 
-        <div className="flex flex-col gap-10 items-start mt-4 max-w-[900px] md:w-[70%] lg:w-[60%]">
+        {/* Subcopy */}
+        <p
+          ref={descRef}
+          className="text-[15px] md:text-[18px] text-white/55 max-w-md leading-relaxed font-light mb-10 md:mb-12"
+          style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,1)" }}
+        >
+          Next-generation cybersecurity for enterprises globally — offensive testing,
+          compliance, and managed defense under one roof.
+        </p>
 
-          {/* Description */}
-          <div ref={descRef} className="flex flex-col gap-5">
-            <div className="flex gap-4">
-              <span aria-hidden="true" className="mt-1 w-px shrink-0 bg-gradient-to-b from-white/40 via-white/15 to-transparent" />
-              <p
-                className="text-[15px] md:text-[17px] text-white/45 max-w-lg leading-relaxed font-light"
-                style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,1)" }}
-              >
-                Next-generation cybersecurity for enterprises globally.
+        {/* CTA */}
+        <div ref={ctaRef} className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8 mb-14 md:mb-20">
+          <Link
+            ref={magneticBtn}
+            href="mailto:sales@photonsecurity.in"
+            className="group relative overflow-hidden inline-flex items-center gap-3 px-8 py-4 text-[13px] font-bold text-black bg-white rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]"
+          >
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-shimmer" />
+            <span className="relative z-10">Request Assessment</span>
+            <ArrowRightIcon
+              size={18}
+              weight="bold"
+              className="relative z-10 transition-transform duration-500 group-hover:translate-x-1.5"
+            />
+          </Link>
+          <Link
+            href="/services"
+            className="group inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors font-light tracking-wide"
+          >
+            View Services
+            <span aria-hidden="true" className="inline-block w-6 h-px bg-white/30 group-hover:w-9 group-hover:bg-white transition-all duration-300" />
+          </Link>
+        </div>
+
+        {/* Capability strip */}
+        <div
+          ref={stripRef}
+          className="grid grid-cols-1 sm:grid-cols-3 max-w-3xl border-t border-white/10"
+        >
+          {CAPABILITIES.map((cap) => (
+            <div
+              key={cap.title}
+              className="hero-cap flex flex-col gap-2 py-6 sm:px-6 first:sm:pl-0 sm:border-l border-white/10 border-b sm:border-b-0"
+            >
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-[10px] text-white/30 tracking-[0.2em]">
+                  {cap.index}
+                </span>
+                <span className="font-mono text-[11px] md:text-xs tracking-[0.2em] uppercase text-white/80">
+                  {cap.title}
+                </span>
+              </div>
+              <p className="text-[12px] md:text-[13px] leading-relaxed text-white/40 font-light max-w-[24ch]">
+                {cap.desc}
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-2.5">
-              {["VAPT", "Compliance", "Managed Security Services"].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1.5 rounded-sm border border-white/12 bg-white/[0.03] text-[10px] md:text-[11px] font-mono text-white/55 tracking-[0.2em] uppercase"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* CTA buttons */}
-          <div ref={ctaRef} className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-10">
-            <Link
-              ref={magneticBtn}
-              href="mailto:sales@photonsecurity.in"
-              className="group relative overflow-hidden inline-flex items-center gap-3 px-8 py-4 text-[13px] font-bold text-black bg-white rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]"
-            >
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-shimmer" />
-              <span className="relative z-10">Request Assessment</span>
-              <ArrowRightIcon
-                size={18}
-                weight="bold"
-                className="relative z-10 transition-transform duration-500 group-hover:translate-x-1.5"
-              />
-            </Link>
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors font-light tracking-wide px-2"
-            >
-              View Services
-            </Link>
-          </div>
+          ))}
         </div>
 
       </div>
 
+      {/* Scroll cue */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2 pointer-events-none">
+        <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-white/30">Scroll</span>
+        <span className="relative flex h-8 w-px overflow-hidden bg-white/10">
+          <span className="absolute top-0 left-0 h-3 w-full bg-white/60 animate-scroll-hint" />
+        </span>
+      </div>
     </section>
   );
 }

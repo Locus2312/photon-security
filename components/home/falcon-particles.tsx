@@ -377,6 +377,7 @@ export default function FalconParticles() {
         gl={{ antialias: true, alpha: true }}
         style={{ background: "transparent" }}
         className="w-full h-full"
+        resize={{ scroll: false, debounce: { scroll: 0, resize: 200 } }}
       >
         <Cloud targets={targets} mouse={mouse} introProgress={introProgress} staticMode={isStatic} />
       </Canvas>

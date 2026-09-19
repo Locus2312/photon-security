@@ -13,7 +13,7 @@ const FaqAccordion = dynamic(() => import("@/components/home/faq-accordion").the
 export default function Home() {
   return (
     <>
-      <div id="particles-container" className="fixed inset-0 z-0 pointer-events-none opacity-85">
+      <div id="particles-container" className="fixed top-0 left-0 w-screen h-[100lvh] z-0 pointer-events-none opacity-85">
         <FalconParticlesWrapper />
       </div>
       <main className="relative flex flex-col min-h-screen bg-transparent">
