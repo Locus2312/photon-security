@@ -130,7 +130,7 @@ export function HeroSection() {
         </div>
 
         {/* Headline */}
-        <div className="relative mb-8 md:mb-10 max-w-[900px] md:w-[75%] lg:w-[62%]">
+        <div className="relative mb-8 md:mb-10">
           <div
             aria-hidden="true"
             className="absolute -inset-x-8 -inset-y-6 -z-[1] pointer-events-none blur-3xl opacity-60"
@@ -142,14 +142,14 @@ export function HeroSection() {
           <h1 className="font-bold leading-[1.02] tracking-[-0.02em]">
             <span
               ref={h1Line1}
-              className="block text-[clamp(2.4rem,5vw,4.75rem)] bg-gradient-to-b from-white via-white to-white/70 bg-clip-text text-transparent"
+              className="block whitespace-nowrap text-[clamp(2rem,4vw,4.25rem)] bg-gradient-to-b from-white via-white to-white/70 bg-clip-text text-transparent"
               style={{ filter: "drop-shadow(0 4px 30px rgba(0,0,0,0.85))" }}
             >
               Energy of a Photon,
             </span>
             <span
               ref={h1Line2}
-              className="block text-[clamp(1.9rem,4.2vw,3.6rem)] bg-gradient-to-b from-white/55 to-white/20 bg-clip-text text-transparent"
+              className="block whitespace-nowrap text-[clamp(1.6rem,3.3vw,3.25rem)] bg-gradient-to-b from-white/55 to-white/20 bg-clip-text text-transparent"
             >
               Strength of Security.
             </span>
