@@ -18,6 +18,7 @@ const FOOTER_NAV = {
     { label: "Home", href: "/" },
     { label: "About Us", href: "/about" },
     { label: "Services", href: "/services" },
+    { label: "Parallax", href: "/parallax" },
     { label: "Careers", href: "/careers" },
     { label: "Blog", href: "/blogs" },
   ],

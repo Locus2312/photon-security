@@ -6,6 +6,7 @@ import { SectionSkeleton } from "@/components/home/section-skeleton";
 const ServicesGrid = dynamic(() => import("@/components/home/services-grid").then(mod => mod.ServicesGrid), { loading: () => <SectionSkeleton /> });
 const ProcessTimeline = dynamic(() => import("@/components/home/process-timeline").then(mod => mod.ProcessTimeline), { loading: () => <SectionSkeleton /> });
 const IndustriesSection = dynamic(() => import("@/components/home/industries-section").then(mod => mod.IndustriesSection), { loading: () => <SectionSkeleton /> });
+const ParallaxSpotlight = dynamic(() => import("@/components/home/parallax-spotlight").then(mod => mod.ParallaxSpotlight), { loading: () => <SectionSkeleton /> });
 const TestimonialCarousel = dynamic(() => import("@/components/home/testimonial-carousel").then(mod => mod.TestimonialCarousel), { loading: () => <SectionSkeleton /> });
 const MarqueeCta = dynamic(() => import("@/components/home/marquee-cta").then(mod => mod.MarqueeCta), { loading: () => <SectionSkeleton /> });
 const FaqAccordion = dynamic(() => import("@/components/home/faq-accordion").then(mod => mod.FaqAccordion), { loading: () => <SectionSkeleton /> });
@@ -28,6 +29,11 @@ export default function Home() {
 
         <div className="relative z-30 bg-[#111111] rounded-t-[4rem] overflow-hidden -mt-16 pt-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
           <IndustriesSection />
+        </div>
+
+        <div className="relative z-[35] bg-[#121214] rounded-t-[4rem] overflow-hidden -mt-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+          <ParallaxSpotlight />
+          <div className="w-full h-16 bg-[#121214]"></div>
         </div>
 
         <div className="relative z-40 bg-background rounded-t-[4rem] overflow-hidden -mt-16 pt-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">

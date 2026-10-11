@@ -1129,55 +1129,57 @@ export const servicesData: ServiceCategory[] = [
     description: "Niche security solutions for emerging threats.",
     services: [
       {
-        id: "asm",
-        slug: "attack-surface-management",
-        name: "Attack Surface Management (ASM)",
+        id: "ctem",
+        slug: "continuous-threat-exposure-management",
+        href: "/parallax",
+        name: "Continuous Threat Exposure Management (CTEM)",
         category: "specialized",
-        shortDescription: "Continuous monitoring of external assets.",
-        description: "Continuous discovery and monitoring of every internet-facing asset your organization owns — including the ones nobody remembers deploying.",
-        headline: "Map Your Attack Surface",
-        subheadline: "Continuous discovery and monitoring of every internet-facing asset your organization owns.",
-        serviceOverview: "You can't secure what you don't know exists. Forgotten subdomains, staging environments left publicly accessible, cloud storage spun up by a marketing team, an old API still responding on a decommissioned server — these are exactly the assets attackers find first, because they're outside the scope of what your internal team is actively watching. Our Attack Surface Management service continuously discovers, monitors, and assesses every internet-facing asset associated with your organization, giving you visibility into your real, current exposure rather than the exposure you assume you have.",
+        shortDescription: "Find, prioritise and fix exposures, continuously.",
+        description: "A continuous programme that finds every exposure an attacker could use, ranks it by real risk, and drives it to a fix, delivered on Parallax, our CTEM platform.",
+        headline: "Take Control of Your Threat Exposure",
+        subheadline: "Find, prioritise and fix the exposures attackers would use first, continuously, not once a year.",
+        serviceOverview: "You can't secure what you don't know exists, and you can't fix everything at once. Forgotten subdomains, staging environments left publicly accessible, lookalike domains, leaked credentials, an old API still responding on a decommissioned server: these are exactly the exposures attackers find first. Our Continuous Threat Exposure Management (CTEM) service runs the full CTEM cycle for you, scoping what matters to your business, discovering every internet-facing asset and leak, prioritising by real-world risk, validating what is actually exploitable, and mobilising your teams to fix it. It is delivered on Parallax, Photon Security's CTEM platform, so you always see your real, current exposure rather than the exposure you assume you have.",
         whatWeTest: [
-          { title: "Continuous discovery", description: "Of domains, subdomains, and internet-facing assets." },
+          { title: "Continuous discovery", description: "Of domains, subdomains, IPs and internet-facing assets." },
           { title: "Shadow IT detection", description: "And forgotten infrastructure still publicly accessible." },
           { title: "Exposure monitoring", description: "For open ports, misconfigured services, and exposed admin panels." },
-          { title: "SSL/TLS certificate monitoring", description: "For expiry and misconfiguration." },
-          { title: "Cloud asset discovery", description: "Across known and unknown provider accounts." },
-          { title: "Third-party exposure tracking", description: "Where relevant to your supply chain." },
-          { title: "Real-time alerting", description: "When new exposed assets or changes are detected." }
+          { title: "SSL/TLS and email security", description: "Certificate expiry, weak encryption, and spoofing gaps." },
+          { title: "Brand and impersonation", description: "Lookalike domains, phishing sites and fake mobile apps." },
+          { title: "Leak and dark web exposure", description: "Leaked credentials, secrets in public code, and dark web mentions." },
+          { title: "Risk-based prioritisation", description: "Every exposure ranked by real-world risk, rolled up into an A-to-F exposure grade." }
         ],
-        technologiesCovered: "DNS Reconnaissance Tools, Port Scanners, Web Crawlers, Cloud Discovery Tools, Certificate Transparency Monitors, Asset Inventory Platforms",
-        commonVulnerabilities: "Exposed Subdomains & DNS Records, Forgotten Staging & Development Environments, Open Ports & Exposed Services, Misconfigured Cloud Storage, Exposed Admin & Management Interfaces, Expired or Misconfigured SSL/TLS Certificates, Leaked API Keys Found in Public Repositories",
+        technologiesCovered: "Parallax CTEM Platform, DNS Reconnaissance, Port & Service Scanning, Certificate Transparency Monitoring, Web & API Crawling, Lookalike Domain Detection, Leak & Dark Web Intelligence",
+        commonVulnerabilities: "Exposed Subdomains & DNS Records, Forgotten Staging & Development Environments, Open Ports & Exposed Services, Misconfigured Cloud Storage, Exposed Admin & Management Interfaces, Expired or Misconfigured SSL/TLS Certificates, Lookalike & Phishing Domains, Leaked Credentials & API Keys",
         methodology: [
-          { title: "Initial Discovery Sweep", description: "Map your organization's known and unknown internet-facing footprint using passive and active reconnaissance techniques." },
-          { title: "Asset Verification", description: "Confirm ownership and relevance of discovered assets, filtering out false positives." },
-          { title: "Baseline Exposure Assessment", description: "Identify current-state risks across all confirmed assets." },
-          { title: "Continuous Monitoring Setup", description: "Establish ongoing scanning to detect new assets and changes to existing ones." },
-          { title: "Real-Time Alerting", description: "Notify your team immediately when new exposure or a newly discovered risky asset appears." },
-          { title: "Prioritized Reporting", description: "Regular reporting ranking exposures by real-world risk, not just raw count." },
-          { title: "Ongoing Review", description: "Periodic check-ins to refine monitoring scope as your infrastructure evolves." }
+          { title: "Scoping", description: "Agree the business-critical assets, brands and domains that matter most, so effort goes where risk is." },
+          { title: "Discovery", description: "Map your known and unknown internet-facing footprint, brand impersonation and leaked data." },
+          { title: "Prioritisation", description: "Rank every exposure by real-world risk, not raw count, and track it in a single exposure grade." },
+          { title: "Validation", description: "Confirm which exposures are genuinely exploitable, filtering out noise and false positives." },
+          { title: "Mobilisation", description: "Route each fix to the right owner with clear remediation guidance and agreed timelines." },
+          { title: "Continuous Monitoring", description: "Detect new assets, changes and leaks as they appear, with real-time alerting." },
+          { title: "Ongoing Review", description: "Regular reporting and check-ins to refine scope as your business and infrastructure evolve." }
         ],
         deliverables: [
-          { title: "Eliminates Blind Spots", description: "Eliminates blind spots created by shadow IT and forgotten infrastructure." },
-          { title: "Provides Continuous Visibility", description: "Provides continuous visibility instead of a stale, point-in-time asset inventory." },
-          { title: "Reduces Exposure Window", description: "Reduces the window between an asset becoming exposed and someone noticing." },
-          { title: "Agentless Discovery", description: "Requires no agents or internal deployment — visibility built entirely from the outside-in, attacker's perspective." }
+          { title: "Eliminates Blind Spots", description: "Eliminates blind spots created by shadow IT, forgotten infrastructure and leaked data." },
+          { title: "Focuses Effort on Real Risk", description: "Prioritises the exposures attackers would actually use, so teams fix what matters first." },
+          { title: "Board-Ready Reporting", description: "One exposure grade that shows where you stand and whether you're getting safer over time." },
+          { title: "Agentless Discovery", description: "Requires no agents or internal deployment, with visibility built from the outside in, the attacker's perspective." }
         ],
         faqs: [
-          { question: "Do we need to install any agents or software for this service?", answer: "No, Attack Surface Management is entirely external and agentless — we discover and monitor your footprint the same way an attacker would, from the outside." },
+          { question: "What is CTEM?", answer: "Continuous Threat Exposure Management (CTEM) is an ongoing programme for scoping, discovering, prioritising, validating and fixing the exposures an attacker could use. It replaces point-in-time snapshots with a continuous cycle." },
+          { question: "Do we need to install any agents or software for this service?", answer: "No, our CTEM service is entirely external and agentless. We discover and monitor your footprint the same way an attacker would, from the outside." },
           { question: "How do you find assets we don't already know about?", answer: "We use a combination of passive reconnaissance (DNS records, certificate transparency logs, public data sources) and active discovery techniques to build a comprehensive map of your organization's internet-facing presence." },
           { question: "What happens when you discover a newly exposed asset?", answer: "You're alerted in real time with details of the asset, what's exposed, and the associated risk level, so your team can investigate and remediate quickly." },
-          { question: "Can this help us catch shadow IT created by other departments?", answer: "Yes, this is one of the most common and valuable findings — infrastructure spun up outside of IT's visibility, such as marketing microsites or unofficial cloud storage, is frequently surfaced through this service." },
-          { question: "Do you monitor third-party or vendor infrastructure connected to us?", answer: "Where relevant to your supply chain risk, we can extend monitoring to include known vendor-related exposure, though primary focus remains on assets under your direct ownership." },
-          { question: "How is this different from a one-time external network penetration test?", answer: "A penetration test is a scoped, point-in-time assessment against known assets. Attack Surface Management is continuous and specifically designed to discover assets you may not even know exist." },
-          { question: "Will you actively exploit any exposed assets you find?", answer: "No, this service is focused on discovery, exposure assessment, and alerting — active exploitation, where needed, is scoped separately as a penetration testing engagement." },
-          { question: "How quickly are we alerted to a new exposure?", answer: "Our monitoring operates continuously, with alerts typically generated within hours of a new asset or exposure appearing, depending on the specific change and detection method involved." }
+          { question: "Can this help us catch shadow IT created by other departments?", answer: "Yes, this is one of the most common and valuable findings. Infrastructure spun up outside of IT's visibility, such as marketing microsites or unofficial cloud storage, is frequently surfaced through this service." },
+          { question: "How is this different from a one-time external network penetration test?", answer: "A penetration test is a scoped, point-in-time assessment against known assets. CTEM is continuous, discovers assets you may not even know exist, and prioritises what to fix first. The two work well together." },
+          { question: "Will you actively exploit any exposed assets you find?", answer: "Validation confirms whether an exposure is genuinely reachable and risky. Full exploitation, where needed, is scoped separately as a penetration testing engagement." },
+          { question: "What is Parallax?", answer: "Parallax is Photon Security's CTEM platform. It powers this service and gives your team a live view of your exposure, findings and exposure grade." }
         ]
       },
       {
         id: "darkweb",
         slug: "dark-web-monitoring",
+        href: "/parallax",
         name: "Dark Web Monitoring",
         category: "specialized",
         shortDescription: "Detect credential leaks and breaches.",
@@ -1225,6 +1227,7 @@ export const servicesData: ServiceCategory[] = [
       {
         id: "antiphish",
         slug: "anti-phishing-anti-rogue",
+        href: "/parallax",
         name: "Anti-Phishing & Anti-Rogue",
         category: "specialized",
         shortDescription: "Protect against phishing and rogue apps.",

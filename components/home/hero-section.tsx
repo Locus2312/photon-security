@@ -14,6 +14,7 @@ if (typeof window !== "undefined") {
 
 export function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
+  const announceRef = useRef<HTMLAnchorElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
   const h1Line1 = useRef<HTMLSpanElement>(null);
   const h1Line2 = useRef<HTMLSpanElement>(null);
@@ -49,6 +50,7 @@ export function HeroSection() {
 
     const ctx = gsap.context((self) => {
       const els = [
+        announceRef.current,
         eyebrowRef.current,
         h1Line1.current,
         h1Line2.current,
@@ -66,7 +68,8 @@ export function HeroSection() {
 
       self.add("play", () => {
         const tl = gsap.timeline({ delay: 0.15 });
-        tl.to(eyebrowRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.8");
+        tl.to(announceRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.8");
+        tl.to(eyebrowRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.55");
         tl.to(h1Line1.current, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.45");
         tl.to(h1Line2.current, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.65");
         tl.to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.55");
@@ -113,6 +116,21 @@ export function HeroSection() {
       <div className="absolute inset-0 w-full pointer-events-none z-[5] md:hidden bg-gradient-to-t from-black via-black/80 to-black/60" />
 
       <div className="container mx-auto relative z-10 flex flex-col justify-end pb-[10vh] md:pb-[12vh] h-full px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24">
+
+        {/* Product announcement */}
+        <Link
+          ref={announceRef}
+          href="/parallax"
+          className="group self-start inline-flex items-center gap-3 mb-10 pl-1.5 pr-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md hover:bg-white/[0.08] hover:border-white/20 transition-colors"
+        >
+          <span className="px-2.5 py-0.5 rounded-full bg-violet-500/20 border border-violet-400/30 text-violet-200 font-mono text-[9px] md:text-[10px] tracking-[0.25em] uppercase">
+            New
+          </span>
+          <span className="text-[12px] md:text-[13px] text-white/70 group-hover:text-white transition-colors">
+            Parallax <span className="hidden sm:inline text-white/40">— CTEM by Photon Security</span>
+          </span>
+          <ArrowRightIcon size={14} className="text-white/50 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+        </Link>
 
         {/* Eyebrow */}
         <div ref={eyebrowRef} className="flex items-center gap-4 mb-8">

@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "env:encrypt": "./scripts/encrypt-env.sh",
-    "env:decrypt": "./scripts/decrypt-env.sh",
-    "env:setup": "./scripts/setup-hooks.sh",
+    "env:encrypt": "bash ./scripts/encrypt-env.sh",
+    "env:decrypt": "bash ./scripts/decrypt-env.sh",
+    "env:setup": "bash ./scripts/setup-hooks.sh",
     "email": "email dev"
   },
   "dependencies": {

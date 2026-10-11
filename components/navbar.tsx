@@ -13,6 +13,7 @@ import {
   InfoIcon,
   BriefcaseIcon,
   ArticleIcon,
+  CrosshairIcon,
 } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,7 @@ const NAVIGATION = [
   { label: "Home", href: "/", Icon: HouseIcon },
   { label: "About", href: "/about", Icon: InfoIcon },
   { label: "Services", href: "/services", Icon: GearIcon },
+  { label: "Parallax", href: "/parallax", Icon: CrosshairIcon, isNew: true },
   { label: "Careers", href: "/careers", Icon: BriefcaseIcon },
   { label: "Blog", href: "/blogs", Icon: ArticleIcon },
   { label: "Contact", href: "/contact", Icon: EnvelopeSimpleIcon },
@@ -159,11 +161,17 @@ export function Navbar() {
                 )}
               >
                 <item.Icon size={scrolled ? 18 : 20} weight={isActive ? "bold" : "light"} aria-hidden="true" />
+                {"isNew" in item && item.isNew && !isActive && (
+                  <span aria-hidden="true" className="absolute top-1 right-1 flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-60" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-violet-400" />
+                  </span>
+                )}
                 <span className={cn(
                   "absolute -bottom-10 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-[0.3em] font-mono whitespace-nowrap pointer-events-none",
                   isLightTheme ? "text-black/60" : "text-white/40"
                 )}>
-                  {item.label}
+                  {item.label}{"isNew" in item && item.isNew ? " · New" : ""}
                 </span>
                 {isActive && (
                   <motion.div
@@ -227,6 +235,11 @@ export function Navbar() {
                     <span className="text-lg font-light tracking-wide">
                       {item.label}
                     </span>
+                    {"isNew" in item && item.isNew && (
+                      <span className="ml-auto px-2.5 py-1 rounded-full bg-violet-500/15 border border-violet-400/30 text-violet-300 text-[10px] font-mono uppercase tracking-[0.2em]">
+                        New
+                      </span>
+                    )}
                   </Link>
                 );
               })}

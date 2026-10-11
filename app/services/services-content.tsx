@@ -106,7 +106,7 @@ function ServiceCard({ category, index, isEven }: { category: ServiceCategory, i
               {category.services.map((service) => (
                 <Link
                   key={service.id}
-                  href={`/services/${service.slug}`}
+                  href={service.href ?? `/services/${service.slug}`}
                   className="group flex items-center justify-between p-3 lg:p-4 rounded-xl border border-black/5 hover:border-black/10 hover:bg-white/50 transition-all shrink-0"
                 >
                   <div>

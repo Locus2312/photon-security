@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   description:
-    "Modern, research-driven cybersecurity services for Indian enterprises. VAPT, audits, MSS, and compliance advisory.",
+    "Modern, research-driven cybersecurity services for Indian enterprises. VAPT, audits, MSS, compliance advisory, and Parallax continuous threat exposure management (CTEM).",
   robots: { index: true, follow: true },
 };
 
@@ -85,12 +85,18 @@ export default function RootLayout({
                 {
                   "@type": "SiteNavigationElement",
                   "position": 3,
+                  "name": "Parallax — CTEM Platform",
+                  "url": "https://www.photonsecurity.in/parallax"
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  "position": 4,
                   "name": "Careers",
                   "url": "https://www.photonsecurity.in/careers"
                 },
                 {
                   "@type": "SiteNavigationElement",
-                  "position": 4,
+                  "position": 5,
                   "name": "Contact Us",
                   "url": "https://www.photonsecurity.in/contact"
                 }

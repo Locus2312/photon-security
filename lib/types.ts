@@ -22,6 +22,8 @@ export interface Service {
   commonVulnerabilities?: string;
   methodology?: ServiceDetailItem[];
   faqs?: { question: string; answer: string }[];
+  /** Where service links point, when not the service's own detail page (e.g. "/parallax"). */
+  href?: string;
 }
 
 export interface ServiceCategory {
